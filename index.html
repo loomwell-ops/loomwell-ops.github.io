@@ -177,6 +177,22 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 .btn.lnk:hover{border-color:var(--accent)}
 .photo{object-position:50% 25%}
 @media (min-width:40.01rem){#stick{display:none}}
+
+/* ---- contact card ---- */
+footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
+.cta-card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.5rem 2rem;align-items:center;padding:2.25rem;border-radius:1rem;border:1px solid var(--line);background:var(--surface);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 18%,var(--surface)),var(--surface) 62%);overflow:hidden;box-shadow:0 18px 50px var(--glow,rgba(75,63,214,.18))}
+.cta-card::before{content:"";position:absolute;right:-5rem;top:-5rem;width:18rem;height:18rem;border-radius:50%;background:radial-gradient(circle,var(--glow,rgba(75,63,214,.18)),transparent 70%);pointer-events:none}
+.cta-card>*{position:relative}
+.cta-photo{width:7rem;height:7rem;border-radius:50%;object-fit:cover;object-position:50% 25%;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent),0 0 40px var(--glow,rgba(75,63,214,.18))}
+.cta-card h2{font-size:clamp(1.7rem,4.5vw,2.6rem);line-height:1.1;margin-bottom:.8rem;max-width:20ch}
+.cta-card h2::after{display:none}
+.cta-card p{margin:0 0 1.25rem;max-width:54ch;color:var(--muted)}
+.cta-card .pill{margin-bottom:.9rem}
+.contact-row{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem 1.75rem;margin:1.5rem 0 0;padding:0}
+.contact-row a{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;color:var(--ink);text-decoration:none}
+.contact-row a:hover{color:var(--accent);text-decoration:underline}
+.contact-row svg{color:var(--accent);flex:none}
+@media (max-width:40rem){.cta-card{grid-template-columns:1fr;padding:1.5rem}.cta-photo{width:5.5rem;height:5.5rem}}
 </style>
 </head>
 <body>
@@ -188,7 +204,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <main id="main" tabindex="-1">
 <header class="hero">
 <div>
-<span class="pill" id="avail">Open to new roles and clients · Philippines (PHT) · overlaps US hours</span>
+<span class="pill" id="avail">Open to new roles and clients · Philippines (PHT) · adjusts to your time zone</span>
 <h1>I build the follow-up systems that <span class="grad">turn leads into booked customers.</span></h1>
 <p>Executive Assistant and Operations Support with GoHighLevel funnels and automation. Running my own business since 2012 and supporting US-based clients remotely for three years.</p>
 <div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a call ↗</a><a class="btn lnk" href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="resume-download">Download resume</a><a class="btn lnk" href="mailto:loomwellops@gmail.com" data-goatcounter-click="hero-email">Email me</a></div>
@@ -311,7 +327,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <section id="how">
 <h2>How I work</h2>
 <div class="grid">
-<div><h3>Time zone and response time</h3><p>I’m in the Philippines (PHT). I take calls in your late afternoon and evening (about 4–8pm Pacific, 5–9pm Mountain). I reply to email and WhatsApp within one business day, and flag anything urgent the same day.</p></div>
+<div><h3>Your time zone</h3><p>I’m based in the Philippines (PHT) and I adjust my working hours to your time zone, wherever you are. We agree on overlap hours up front. I reply to email and WhatsApp within one business day, and flag anything urgent the same day.</p></div>
 <div><h3>Communication</h3><p>I work in email, Slack, Google Workspace and Microsoft 365, and send notes and follow-ups after meetings.</p></div>
 <div><h3>Reporting</h3><p>Weekly and monthly performance reports, with calls and leads tracked in Google Sheets.</p><p><a href="sample-weekly-report.pdf" target="_blank" rel="noopener">See a sample weekly report (PDF)</a></p></div>
 <div><h3>Documentation</h3><p>I write handbooks and checklists so the work can be repeated, as I did for 5 stores in 4 states.</p></div>
@@ -347,7 +363,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 
 <section id="faq" class="faq">
 <h2>FAQ</h2>
-<details><summary>What time zone do you work in?</summary><p>Philippine Time (PHT). For US clients, I take calls in your late afternoon and evening, about 4–8pm Pacific and 5–9pm Mountain, Monday to Friday. Messages get a reply within one business day.</p></details>
+<details><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
 <details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
 <details><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
 <details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
@@ -356,19 +372,21 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 
 <section id="book" class="book">
 <h2>Book a call</h2>
-<p class="gd">A free 30-minute intro call, no prep needed. Calls run Monday to Friday, about 4–8pm Pacific (5–9pm Mountain).</p>
+<p class="gd">A free 30-minute intro call, no prep needed. Times show in your own time zone, and I can adjust my hours to yours.</p>
 <p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="book-section">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="book-email">Email instead</a></p>
 </section>
 
 <footer id="contact">
-<h2>Let’s talk</h2>
-<p>Based in the Philippines (PHT) and able to overlap US business hours.</p>
-<div class="btns" style="margin:1.25rem 0 1rem">
-<a class="btn main" href="mailto:loomwellops@gmail.com" data-goatcounter-click="footer-email">Email me</a>
-<a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a>
+<div class="cta-card">
+<img class="cta-photo" src="profile.png" width="112" height="112" alt="" loading="lazy" onerror="this.style.display='none'">
+<div>
+<span class="pill">Open to new roles and clients</span>
+<h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
+<p>Tell me how leads reach you today and I’ll tell you what I would fix first. I’m based in the Philippines (PHT) and I adjust my hours to your time zone, wherever you are.</p>
+<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a><a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="footer-email">Email me</a><a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener" data-goatcounter-click="footer-linkedin">LinkedIn</a></div>
 </div>
-<p><a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></p>
-<p><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">linkedin.com/in/japhette-alec-pulido</a> · <a href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></p>
+</div>
+<ul class="contact-row"><li><a href="mailto:loomwellops@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>loomwellops@gmail.com</a></li><li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13a3 3 0 0 1 6 0v4"/></svg>linkedin.com/in/japhette-alec-pulido</a></li><li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume (PDF)</a></li></ul>
 <p class="more"><a href="design.html">Design work</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
 <p class="up"><a href="#top">Back to top</a></p>
 </footer>
