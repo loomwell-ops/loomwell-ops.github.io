@@ -162,20 +162,28 @@ html{scroll-padding-top:1rem}
 .callout p{margin:0;max-width:52ch;color:var(--muted);font-size:.97rem}
 #clients{padding:1.75rem 0 0}
 #clients .tg{margin:0 0 .6rem}
-#clients .logos{grid-template-columns:repeat(6,1fr);gap:.6rem}
-#clients .logos li{height:3.8rem;padding:.4rem}
+#clients .lgs{display:grid;grid-template-columns:2fr 4fr;gap:1.25rem}
+#clients .logos{gap:.6rem}
+#clients .lg:first-child .logos{grid-template-columns:repeat(2,1fr)}
+#clients .lg:last-child .logos{grid-template-columns:repeat(4,1fr)}
+#clients .logos li{height:4.5rem;padding:.5rem}
+#clients .logos img{max-height:3.5rem}
 .book{padding-bottom:1rem}
 nav a.cta{background:var(--accent);color:var(--accent-ink);padding:.3rem .95rem;border-radius:2rem}
 nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 @media (min-width:40.01rem){html{scroll-padding-top:4.5rem}nav{position:sticky;top:0;z-index:25;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent}}
-@media (max-width:40rem){#clients .logos{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:40rem){#clients .lgs{grid-template-columns:1fr}#clients .lg:last-child .logos{grid-template-columns:repeat(2,1fr)}}
+.btn.lnk{border-color:transparent;padding-left:.5rem;padding-right:.5rem;text-decoration:underline;text-underline-offset:.2em}
+.btn.lnk:hover{border-color:var(--accent)}
+.photo{object-position:50% 25%}
+@media (min-width:40.01rem){#stick{display:none}}
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap" id="top">
-<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="cta" href="#book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
+<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="cta" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
 
 <main id="main" tabindex="-1">
 <header class="hero">
@@ -183,7 +191,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <span class="pill" id="avail">Open to new roles and clients · Philippines (PHT) · overlaps US hours</span>
 <h1>I build the follow-up systems that <span class="grad">turn leads into booked customers.</span></h1>
 <p>Executive Assistant and Operations Support with GoHighLevel funnels and automation. Running my own business since 2012 and supporting US-based clients remotely for three years.</p>
-<div class="btns"><a class="btn main" href="mailto:loomwellops@gmail.com">Email me</a><a class="btn alt" href="resume.pdf" target="_blank" rel="noopener">Download resume</a><a class="btn alt" href="#book" id="bookbtn">Book a call</a></div>
+<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a call ↗</a><a class="btn lnk" href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="resume-download">Download resume</a><a class="btn lnk" href="mailto:loomwellops@gmail.com" data-goatcounter-click="hero-email">Email me</a></div>
 </div>
 <img class="photo" src="profile.png" width="176" height="176" fetchpriority="high" alt="Portrait of Japhette Alec Pulido" onerror="this.style.display='none'">
 </header>
@@ -193,9 +201,11 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 </ol>
 <p class="cap">A pipeline I built in GoHighLevel at Fit Body Boot Camp, with automated follow-up at every stage.</p>
 
-<section id="clients" aria-label="Businesses I have supported">
-<p class="tg">Businesses I have supported</p>
-<ul class="logos" aria-label="Business logos"><li style="background:rgb(255, 255, 255)"><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="235" height="90"></li><li style="background:rgb(255, 203, 4)"><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="420" height="94"></li><li style="background:rgb(253, 253, 253)"><img src="work/clients/client-3.jpg" alt="WJ Construction and Engineering Services logo" loading="lazy" width="420" height="325"></li><li style="background:rgb(9, 9, 10)"><img src="work/clients/client-4.jpg" alt="Elusive Wraps logo" loading="lazy" width="420" height="140"></li><li style="background:rgb(0, 0, 0)"><img src="work/clients/client-5.jpg" alt="Zapatos logo" loading="lazy" width="420" height="420"></li><li style="background:rgb(1, 1, 1)"><img src="work/clients/client-6.jpg" alt="DR.PPF logo" loading="lazy" width="420" height="399"></li></ul>
+<section id="clients" aria-label="Brands I have worked on">
+<div class="lgs">
+<div class="lg"><p class="tg">Clients</p><ul class="logos" aria-label="Client logos"><li style="background:rgb(255, 255, 255)"><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="235" height="90"></li><li style="background:rgb(255, 203, 4)"><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="420" height="94"></li></ul></div>
+<div class="lg"><p class="tg">My own and concept brands</p><ul class="logos" aria-label="Own and concept brand logos"><li style="background:rgb(253, 253, 253)"><img src="work/clients/client-3.jpg" alt="WJ Construction and Engineering Services logo" loading="lazy" width="420" height="325"></li><li style="background:rgb(9, 9, 10)"><img src="work/clients/client-4.jpg" alt="Elusive Wraps logo" loading="lazy" width="420" height="140"></li><li style="background:rgb(0, 0, 0)"><img src="work/clients/client-5.jpg" alt="Zapatos logo" loading="lazy" width="420" height="420"></li><li style="background:rgb(1, 1, 1)"><img src="work/clients/client-6.jpg" alt="DR.PPF logo" loading="lazy" width="420" height="399"></li></ul></div>
+</div>
 </section>
 
 <section id="intro" hidden>
@@ -246,7 +256,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <div class="proj soon" style="margin-top:1rem">
 <h3>Lead and booking system <span class="badge">Coming soon</span></h3>
 <p>I’m planning my own lightweight lead and booking tool, built from what I have learned running pipelines, follow-up, and reminders in GoHighLevel. It is in development. Tell me what you would want it to do on an intro call.</p>
-<a class="btn main" href="#book">Book a call</a>
+<a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-book">Book a call</a>
 </div>
 </section>
 
@@ -294,7 +304,7 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <div><h3>Social media management</h3><p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p><p class="price">From $350 a month</p></div>
 <div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $7 an hour</p></div>
 </div>
-<p style="margin-top:1.25rem"><a class="btn main" href="#book">Book a free intro call</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
+<p style="margin-top:1.25rem"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="services-book">Book a free intro call</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
 <div class="callout"><div><h3>Free mini audit</h3><p>Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p></div><a class="btn main" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Request a free audit</a></div>
 </section>
 
@@ -347,14 +357,14 @@ nav a.cta:hover{color:var(--accent-ink);opacity:.9}
 <section id="book" class="book">
 <h2>Book a call</h2>
 <p class="gd">A free 30-minute intro call, no prep needed. Calls run Monday to Friday, about 4–8pm Pacific (5–9pm Mountain).</p>
-<p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com">Email instead</a></p>
+<p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="book-section">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="book-email">Email instead</a></p>
 </section>
 
 <footer id="contact">
 <h2>Let’s talk</h2>
 <p>Based in the Philippines (PHT) and able to overlap US business hours.</p>
 <div class="btns" style="margin:1.25rem 0 1rem">
-<a class="btn main" href="mailto:loomwellops@gmail.com">Email me</a>
+<a class="btn main" href="mailto:loomwellops@gmail.com" data-goatcounter-click="footer-email">Email me</a>
 <a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a>
 </div>
 <p><a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></p>
@@ -405,7 +415,6 @@ if(!("IntersectionObserver" in window)){return}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.05,rootMargin:"0px 0px -4% 0px"});
 s.forEach(function(x){x.classList.add("rv");io.observe(x)});})();
 </script>
-<script data-goatcounter="https://jap-portfolio.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
