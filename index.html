@@ -124,8 +124,6 @@ main{display:block}
 .faq details{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.2rem 1.1rem;margin:.6rem 0;max-width:46rem}
 .faq summary{cursor:pointer;font-weight:500;padding:.8rem 0}
 .faq details p{margin:0 0 1rem;color:var(--muted)}
-.book .calendly-inline-widget{width:100%;max-width:60rem;min-width:320px;height:1050px;border:1px solid var(--line);border-radius:.75rem;background:#fff}
-.book .calendly-inline-widget iframe{width:100%;height:100%;border:0}
 #stick{position:fixed;right:1rem;bottom:1rem;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .2s}
 #stick.off{opacity:0;pointer-events:none}
 .up{font-size:.92rem}
@@ -152,13 +150,32 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 @media (max-width:640px){.bg{opacity:.55}.bg::after{background:linear-gradient(90deg,var(--bg) 0,transparent 80%)}}
 @media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.grid>div:hover,.stats li:hover,.quotes blockquote:hover{transform:none}}
 @media (max-width:640px){nav div{gap:.4rem .85rem}nav a{font-size:.95rem}#theme{padding:.1rem .65rem}}
+
+/* ---- compact layout layer ---- */
+html{scroll-padding-top:1rem}
+.fold{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.2rem 1.1rem;margin:1.25rem 0 0}
+.fold summary{cursor:pointer;font-weight:500;padding:.8rem 0}
+.fold[open] summary{margin-bottom:.4rem}
+.fold>.job:first-of-type{border-top:0}
+.callout{display:flex;gap:1rem 1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.1rem 1.25rem;margin-top:1.25rem}
+.callout h3{font-size:1.15rem;margin-bottom:.3rem}
+.callout p{margin:0;max-width:52ch;color:var(--muted);font-size:.97rem}
+#clients{padding:1.75rem 0 0}
+#clients .tg{margin:0 0 .6rem}
+#clients .logos{grid-template-columns:repeat(6,1fr);gap:.6rem}
+#clients .logos li{height:3.8rem;padding:.4rem}
+.book{padding-bottom:1rem}
+nav a.cta{background:var(--accent);color:var(--accent-ink);padding:.3rem .95rem;border-radius:2rem}
+nav a.cta:hover{color:var(--accent-ink);opacity:.9}
+@media (min-width:40.01rem){html{scroll-padding-top:4.5rem}nav{position:sticky;top:0;z-index:25;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent}}
+@media (max-width:40rem){#clients .logos{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap" id="top">
-<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#book">Book a call</a><a href="#contact">Contact</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
+<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="cta" href="#book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
 
 <main id="main" tabindex="-1">
 <header class="hero">
@@ -175,6 +192,11 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <li>New Lead</li><li>Contacted</li><li>Trial Booked</li><li>Showed Up</li><li>Member</li>
 </ol>
 <p class="cap">A pipeline I built in GoHighLevel at Fit Body Boot Camp, with automated follow-up at every stage.</p>
+
+<section id="clients" aria-label="Businesses I have supported">
+<p class="tg">Businesses I have supported</p>
+<ul class="logos" aria-label="Business logos"><li style="background:rgb(255, 255, 255)"><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="235" height="90"></li><li style="background:rgb(255, 203, 4)"><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="420" height="94"></li><li style="background:rgb(253, 253, 253)"><img src="work/clients/client-3.jpg" alt="WJ Construction and Engineering Services logo" loading="lazy" width="420" height="325"></li><li style="background:rgb(9, 9, 10)"><img src="work/clients/client-4.jpg" alt="Elusive Wraps logo" loading="lazy" width="420" height="140"></li><li style="background:rgb(0, 0, 0)"><img src="work/clients/client-5.jpg" alt="Zapatos logo" loading="lazy" width="420" height="420"></li><li style="background:rgb(1, 1, 1)"><img src="work/clients/client-6.jpg" alt="DR.PPF logo" loading="lazy" width="420" height="399"></li></ul>
+</section>
 
 <section id="intro" hidden>
 <h2>Meet me</h2>
@@ -208,10 +230,6 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <p class="gd" style="margin-top:1.25rem">I tracked lead sources, show rates, and trial-to-member conversion, and sent weekly and monthly reports. Alongside the automation, I made and took about 100 calls a day, logged in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</p>
 </section>
 
-<section id="clients">
-<h2>Businesses I have supported</h2>
-<ul class="logos" aria-label="Business logos"><li style="background:rgb(255, 255, 255)"><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="235" height="90"></li><li style="background:rgb(255, 203, 4)"><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="420" height="94"></li><li style="background:rgb(253, 253, 253)"><img src="work/clients/client-3.jpg" alt="WJ Construction and Engineering Services logo" loading="lazy" width="420" height="325"></li><li style="background:rgb(9, 9, 10)"><img src="work/clients/client-4.jpg" alt="Elusive Wraps logo" loading="lazy" width="420" height="140"></li><li style="background:rgb(0, 0, 0)"><img src="work/clients/client-5.jpg" alt="Zapatos logo" loading="lazy" width="420" height="420"></li><li style="background:rgb(1, 1, 1)"><img src="work/clients/client-6.jpg" alt="DR.PPF logo" loading="lazy" width="420" height="399"></li></ul>
-</section>
 
 <section id="proof">
 <h2>What clients say</h2>
@@ -255,15 +273,17 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <li>Built GoHighLevel funnels and automations: call follow-up sequences, email blasts, and contact tagging.</li>
 <li>Prepared weekly and monthly performance reports.</li>
 <li>Handled billing, refund, and cancellation requests.</li></ul></div></article>
-<article class="job"><time>Mar 2024 – Jan 2026</time><div><h3>Social Media Creative</h3><div class="co">Chicken Chingu (project-based)</div><ul>
-<li>Created and delivered social media content on a project basis.</li></ul></div></article>
 <article class="job"><time>Sep 2012 – present</time><div><h3>Owner and Operations Manager</h3><div class="co">WJ Construction and Engr. Services</div><ul>
 <li>Run every part of the business, part-time alongside remote work since 2020.</li></ul></div></article>
+<details class="fold"><summary>Earlier roles and education</summary>
+<article class="job"><time>Mar 2024 – Jan 2026</time><div><h3>Social Media Creative</h3><div class="co">Chicken Chingu (project-based)</div><ul>
+<li>Created and delivered social media content on a project basis.</li></ul></div></article>
 <article class="job"><time>2019 – 2023</time><div><h3>Earlier roles</h3><div class="co">Samsung, TikTok, 1-800-Flowers (via Inspiro)</div><ul>
 <li>Technical Support at Samsung (Feb 2019 – Mar 2020).</li>
 <li>Content Moderator at TikTok (Mar 2020 – Apr 2023).</li>
 <li>Customer Service at 1-800-Flowers via Inspiro (Apr – Aug 2023).</li></ul></div></article>
 <article class="job"><time>2008 – 2012</time><div><h3>BS Information Technology, Major in System Engineering</h3><div class="co">Colegio de San Juan de Letran</div></div></article>
+</details>
 </section>
 
 <section id="services">
@@ -275,17 +295,7 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $7 an hour</p></div>
 </div>
 <p style="margin-top:1.25rem"><a class="btn main" href="#book">Book a free intro call</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
-</section>
-
-<section id="audit">
-<h2>Free mini audit</h2>
-<p class="gd">Send me how you handle leads today and I will send back 3 specific fixes, free.</p>
-<div class="grid">
-<div><h3>1. You send</h3><p>Your lead sources, what happens after someone fills a form, and how you handle bookings and reminders.</p></div>
-<div><h3>2. I review</h3><p>I look for slow replies, missed follow-ups, missing reminders, and leads that go cold.</p></div>
-<div><h3>3. You get 3 fixes</h3><p>A short note with the 3 changes that matter most, in order, and how long each takes.</p></div>
-</div>
-<p style="margin-top:1.25rem"><a class="btn main" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Request a free audit</a></p>
+<div class="callout"><div><h3>Free mini audit</h3><p>Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p></div><a class="btn main" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Request a free audit</a></div>
 </section>
 
 <section id="how">
@@ -296,10 +306,7 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <div><h3>Reporting</h3><p>Weekly and monthly performance reports, with calls and leads tracked in Google Sheets.</p><p><a href="sample-weekly-report.pdf" target="_blank" rel="noopener">See a sample weekly report (PDF)</a></p></div>
 <div><h3>Documentation</h3><p>I write handbooks and checklists so the work can be repeated, as I did for 5 stores in 4 states.</p></div>
 </div>
-</section>
-
-<section id="first-weeks">
-<h2>Your first two weeks</h2>
+<details class="fold"><summary>Your first two weeks</summary>
 <p class="gd">What working together looks like at the start, so you know what to expect.</p>
 <div class="grid steps">
 <div><span class="n">1</span><h3>Days 1–2: Intake and access</h3><p>One call to learn your goals and how leads, bookings, and customers move today. You share access to your calendar, inbox, CRM, and shared files.</p></div>
@@ -307,20 +314,24 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <div><span class="n">3</span><h3>Week 2: Build and document</h3><p>I build the pipeline stages and follow-up sequences, test them with real leads, and write the checklist or handbook for everything I set up.</p></div>
 <div><span class="n">4</span><h3>End of week 2: Report and review</h3><p>You get a first report on lead sources, response, and bookings, and we agree on priorities and a weekly check-in.</p></div>
 </div>
-<p style="margin-top:1.25rem"><a class="btn alt" href="client-onboarding-checklist.pdf" target="_blank" rel="noopener">See the client onboarding checklist (PDF)</a></p>
+<p style="margin:1rem 0"><a class="btn alt" href="client-onboarding-checklist.pdf" target="_blank" rel="noopener">See the client onboarding checklist (PDF)</a></p>
+</details>
 </section>
 
 <section id="skills" class="skills">
 <h2>Skills and tools</h2>
 <h3>Skills</h3>
 <ul class="chips"><li>GoHighLevel funnels and automation</li><li>Cold calling</li><li>Customer support</li><li>Calendar and inbox management</li><li>Reporting</li><li>Social media management</li><li>Operations documentation</li><li>Workflow automation</li><li>Email marketing</li></ul>
-<h3>Tools</h3>
+<h3>Key tools</h3>
+<ul class="chips"><li>GoHighLevel</li><li>HubSpot</li><li>Zapier</li><li>Google Workspace</li><li>Canva</li><li>Slack</li></ul>
+<details class="fold"><summary>See all 30 tools</summary>
 <h4 class="tg">CRM and automation</h4><ul class="chips tools"><li><a href="https://www.gohighlevel.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gohighlevel.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>GoHighLevel</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.salesforce.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=salesforce.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Salesforce</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.zendesk.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zendesk.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zendesk</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.hubspot.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=hubspot.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>HubSpot</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://mailchimp.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=mailchimp.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Mailchimp</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://zapier.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zapier.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zapier</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.make.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=make.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Make</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 <h4 class="tg">Payments and booking</h4><ul class="chips tools"><li><a href="https://stripe.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=stripe.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Stripe</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=paypal.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>PayPal</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://calendly.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=calendly.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Calendly</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 <h4 class="tg">Productivity and communication</h4><ul class="chips tools"><li><a href="https://workspace.google.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=workspace.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Workspace</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://workspace.google.com/products/sheets/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=sheets.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Sheets</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://workspace.google.com/products/meet/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=meet.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Meet</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://zoom.us" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zoom.us&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zoom</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.loom.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=loom.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Loom</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Microsoft 365</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.notion.so" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=notion.so&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Notion</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://asana.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=asana.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Asana</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://trello.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=trello.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Trello</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://slack.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=slack.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Slack</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 <h4 class="tg">Social media and design</h4><ul class="chips tools"><li><a href="https://business.facebook.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=facebook.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Meta Business Suite</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://buffer.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=buffer.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Buffer</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.canva.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Canva</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.capcut.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=capcut.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>CapCut</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 <h4 class="tg">Web and data</h4><ul class="chips tools"><li><a href="https://github.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>GitHub</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://supabase.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=supabase.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Supabase</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 <h4 class="tg">AI</h4><ul class="chips tools"><li><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>ChatGPT</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Claude</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Gemini</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://higgsfield.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Higgsfield AI</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+</details>
 <div id="certs" hidden><h3>Certifications</h3><ul class="chips" id="certlist"></ul></div>
 </section>
 
@@ -329,20 +340,14 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 <details><summary>What time zone do you work in?</summary><p>Philippine Time (PHT). For US clients, I take calls in your late afternoon and evening, about 4–8pm Pacific and 5–9pm Mountain, Monday to Friday. Messages get a reply within one business day.</p></details>
 <details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
 <details><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
-<details><summary>Which tools do you use?</summary><p>GoHighLevel, HubSpot, Salesforce, Zendesk, Zapier, Make, Mailchimp, Google Workspace, Zoom, Loom, Microsoft 365, Notion, Asana, Trello, Slack, Meta Business Suite, Buffer, Canva, CapCut, and AI tools such as ChatGPT, Claude, and Gemini. The full list is under Skills.</p></details>
-<details><summary>How do you handle client information?</summary><p>I keep client and customer details out of public work. For example, I blurred customer names on package labels in this portfolio.</p></details>
-<details><summary>Are you available for new roles?</summary><p>Yes. Email me or message me on LinkedIn to talk about hours and a start date.</p></details>
 <details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
 <details><summary>How does pricing work?</summary><p>I quote after the intro call, based on the size of the work. You get the scope and price in writing before we start.</p></details>
-<details><summary>Do you have certifications?</summary><p>No. I’m self-taught and learned by doing the work across gyms, a DHL Express partner shop network, and an engineering business. The case study and work samples on this page show what I have done.</p></details>
-<details><summary>Can you work in the tools I already use?</summary><p>Yes. I work in your existing CRM, calendar, and communication tools, and I can set up GoHighLevel if you don’t have a system yet.</p></details>
 </section>
 
 <section id="book" class="book">
 <h2>Book a call</h2>
-<p class="gd">Pick a time that works for you. Calls run Monday to Friday, about 4–8pm Pacific (5–9pm Mountain).</p>
-<div class="calendly-inline-widget" data-url="https://calendly.com/loomwellops/30min?hide_gdpr_banner=1"></div>
-<p class="cap" style="margin-top:.75rem">Calendar not loading? <a href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener">Open the booking page directly ↗</a> · Prefer email? <a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></p>
+<p class="gd">A free 30-minute intro call, no prep needed. Calls run Monday to Friday, about 4–8pm Pacific (5–9pm Mountain).</p>
+<p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com">Email instead</a></p>
 </section>
 
 <footer id="contact">
@@ -354,7 +359,7 @@ h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margi
 </div>
 <p><a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></p>
 <p><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">linkedin.com/in/japhette-alec-pulido</a> · <a href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></p>
-<p class="more"><a href="design.html">Design work</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#first-weeks">First two weeks</a><a href="#audit">Free mini audit</a><a href="#faq">FAQ</a></p>
+<p class="more"><a href="design.html">Design work</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
 <p class="up"><a href="#top">Back to top</a></p>
 </footer>
 </main>
@@ -400,7 +405,6 @@ if(!("IntersectionObserver" in window)){return}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.05,rootMargin:"0px 0px -4% 0px"});
 s.forEach(function(x){x.classList.add("rv");io.observe(x)});})();
 </script>
-<script async src="https://assets.calendly.com/external/widget.js"></script>
 <script data-goatcounter="https://jap-portfolio.goatcounter.com/count"
         async src="https://gc.zgo.at/count.js"></script>
 </body>

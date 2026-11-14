@@ -24,163 +24,114 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e}}
 :root[data-theme="dark"]{--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e}
 :root[data-theme="light"]{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--mark:#f3c76b}
-#theme{font:inherit;font-weight:500;cursor:pointer;background:transparent;color:var(--ink);border:2px solid var(--accent);border-radius:2rem;padding:.25rem .85rem}
-#theme:hover{color:var(--accent)}
+:root{--g2:#c24e17;--glow:rgba(75,63,214,.18);--bgimg:url(bg-light.webp)}
+:root[data-theme="dark"]{--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(bg.jpg)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "IBM Plex Sans",system-ui,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:1rem}
+body{margin:0;position:relative;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "IBM Plex Sans",system-ui,sans-serif}
 h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.12;margin:0}
 a{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[hidden]{display:none!important}
 .wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--accent-ink);padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:30}.skip:focus{left:0}
+#theme{font:inherit;font-weight:500;cursor:pointer;background:transparent;color:var(--ink);border:2px solid var(--accent);border-radius:2rem;padding:.25rem .85rem}
+#theme:hover{color:var(--accent)}
 nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;gap:1rem;flex-wrap:wrap}
 nav b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.1rem}
-nav div{display:flex;gap:1.25rem;flex-wrap:wrap}
+nav div{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
 nav a{color:var(--ink);text-decoration:none;font-weight:500}
 nav a:hover{color:var(--accent)}
-.hero{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;padding:3.5rem 0 2rem}
-.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:700;max-width:16ch}
-.hero p{max-width:46ch;color:var(--muted);margin:1.25rem 0 1.75rem}
-.photo{width:11rem;height:11rem;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent)}
-.btns{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:.5rem;font-weight:500;text-decoration:none;border:2px solid var(--accent)}
-.btn.main{background:var(--accent);color:var(--accent-ink)}
-.btn.alt{color:var(--accent)}
-.pipe{list-style:none;margin:1rem 0 0;padding:1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
-.pipe li{padding:.45rem .9rem;border-radius:2rem;background:var(--bg);border:1px solid var(--line);font-weight:500;font-size:.95rem}
-.pipe li:not(:last-child)::after{content:"›";margin-left:.9rem;color:var(--muted)}
-.pipe li:last-child{background:var(--mark);color:#1a1840;border-color:var(--mark)}
-.cap{color:var(--muted);font-size:.9rem;margin:.6rem 0 0}
-section{padding:3.5rem 0 .5rem}
-h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:1.5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
-.grid>div{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:1.25rem}
-.grid h3{font-size:1.15rem;margin-bottom:.4rem}
-.grid p{margin:0;color:var(--muted);font-size:.97rem}
-.job{display:grid;grid-template-columns:11rem 1fr;gap:1rem 2rem;padding:1.5rem 0;border-top:1px solid var(--line)}
-.job time{color:var(--muted);font-size:.95rem}
-.job h3{font-size:1.2rem}
-.job .co{color:var(--accent);font-weight:500;margin:.15rem 0 .6rem}
-.job ul{margin:0;padding-left:1.1rem;max-width:62ch}
-.job li{margin-bottom:.35rem}
-.proj{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.5rem;max-width:44rem}
-.proj h3{font-size:1.35rem;margin-bottom:.5rem}
-.proj p{margin:0 0 1.1rem;color:var(--muted)}
-.group[hidden]{display:none}
-.group h3{font-size:1.4rem}
-.group h4{font-size:1.05rem;margin:1.5rem 0 .6rem}
-.gd{color:var(--muted);max-width:60ch;margin:.3rem 0 1rem}
-.tabs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1.25rem}
-.tabs button{font:inherit;font-weight:500;padding:.5rem 1rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap}
-.tabs button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink)}
-.strip{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:.7rem}
-.th{all:unset;cursor:zoom-in;flex:none;scroll-snap-align:start}
-.th:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.th img{height:20rem;width:auto;display:block;border-radius:.5rem;border:1px solid var(--line)}
-.strip figure{margin:0;flex:none;scroll-snap-align:start}
-.strip video{height:20rem;display:block;background:#000;border-radius:.5rem}
-figcaption{font-size:.9rem;color:var(--muted);margin-top:.3rem}
-#lb{max-width:96vw;max-height:96vh;padding:0;border:0;background:transparent}
-#lb img{max-width:96vw;max-height:92vh;display:block;border-radius:.5rem}
-#lb::backdrop{background:rgba(0,0,0,.82)}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;list-style:none;margin:0}
-.chips li{padding:.3rem .8rem;border:1px solid var(--line);background:var(--surface);border-radius:.4rem;font-size:.95rem}
-.skills h3{font-size:1.05rem;margin:1.5rem 0 .6rem}
-.steps{counter-reset:s}.steps>div{position:relative}.n{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:.9rem;margin-bottom:.5rem}
-.tg{font-size:.95rem;color:var(--muted);font-weight:500;margin:1rem 0 .4rem;font-family:"IBM Plex Sans",sans-serif}
-#lb .x{position:absolute;top:.5rem;right:.5rem;width:2.5rem;height:2.5rem;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
-footer{margin-top:4rem;padding:2.5rem 0 3rem;border-top:1px solid var(--line)}
-footer p{margin:.3rem 0;color:var(--muted)}
-@media (max-width:640px){.hero{grid-template-columns:1fr}.photo{order:-1;width:8rem;height:8rem}.job{grid-template-columns:1fr;gap:.3rem}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-[hidden]{display:none!important}
-.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--accent-ink);padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:30}.skip:focus{left:0}
-.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:500;padding:.3rem .85rem;border:1px solid var(--line);background:var(--surface);border-radius:2rem;margin-bottom:1rem}
-.pill::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:#2fb36b}
-.hero{padding:2rem 0 1.25rem}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.75rem;margin:1.5rem 0 0;padding:0;list-style:none}
-.stats li{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.9rem 1rem}
-.stats b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.6rem;line-height:1.15;color:var(--accent)}
-.stats span{font-size:.92rem;color:var(--muted)}
-.shot{margin:1.25rem 0 0;max-width:44rem}.shot img{width:100%;height:auto;border-radius:.6rem;border:1px solid var(--line)}
-.vid{max-width:44rem}.vid video{width:100%;border-radius:.75rem;background:#000;display:block}
-.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
-.quotes blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.25rem}
-.quotes p{margin:0 0 .75rem}.quotes cite{font-style:normal;font-size:.92rem;color:var(--muted)}
-.faq details{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.2rem 1.1rem;margin:.6rem 0;max-width:46rem}
-.faq summary{cursor:pointer;font-weight:500;padding:.8rem 0}
-.faq details p{margin:0 0 1rem;color:var(--muted)}
-.book iframe{width:100%;max-width:46rem;height:44rem;border:1px solid var(--line);border-radius:.75rem;background:#fff}
-#stick{position:fixed;right:1rem;bottom:1rem;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .2s}
-#stick.off{opacity:0;pointer-events:none}
-.up{font-size:.92rem}
-@media (max-width:40rem){.hero{padding:1.25rem 0 1rem;grid-template-columns:1fr}.hero .photo{width:7rem;height:7rem;order:-1}}
-@media (prefers-reduced-motion:reduce){#stick{transition:none}}
-
-/* ---- beautification layer ---- */
-:root{--g2:#d9622b;--glow:rgba(75,63,214,.18);--bgimg:url(bg-light.webp)}
-:root[data-theme="dark"]{--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(bg.jpg)}
-body{position:relative}
-.bg{position:absolute;inset:0 0 auto 0;height:max(100svh,42rem);z-index:-1;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+nav a.cta{background:var(--accent);color:var(--accent-ink);padding:.3rem .95rem;border-radius:2rem}
+nav a.cta:hover{color:var(--accent-ink);opacity:.9}
+@media (min-width:40.01rem){html{scroll-padding-top:4.5rem}nav{position:sticky;top:0;z-index:25;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}}
+.bg{position:absolute;inset:0 0 auto 0;height:max(70svh,30rem);z-index:-1;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
 .bg::before{content:"";position:absolute;inset:0;background:var(--bgimg) right top/cover no-repeat}
 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,transparent 55%)}
-.grad{background:linear-gradient(90deg,var(--accent),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad{color:var(--accent)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.grad{background:linear-gradient(90deg,var(--accent),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:500;padding:.3rem .85rem;border:1px solid var(--line);background:var(--surface);border-radius:2rem;margin-bottom:.8rem}
+.hero{padding:1.5rem 0 .5rem}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;max-width:22ch}
+.hero p{max-width:50ch;color:var(--muted);margin:1rem 0 1.25rem}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:.5rem;font-weight:500;text-decoration:none;border:2px solid var(--accent)}
+.btn.main{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 22px var(--glow)}
+.btn.alt{color:var(--accent)}
+section{padding:2rem 0 .5rem}
+h2{font-size:clamp(1.5rem,4vw,2rem);margin-bottom:.5rem}
 h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),var(--g2))}
-.photo{box-shadow:0 0 0 2px var(--accent),0 0 48px var(--glow)}
-.pill,.pipe,.stats li{background:var(--surface);background:color-mix(in srgb,var(--surface) 76%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.grid>div,.stats li,.quotes blockquote,.proj,.faq details{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
-@media (hover:hover){.grid>div:hover,.stats li:hover,.quotes blockquote:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 28px var(--glow)}}
-.btn.main{box-shadow:0 6px 22px var(--glow)}
-.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-.js .rv.in{opacity:1;transform:none}
-@media (max-width:640px){.bg{opacity:.55}.bg::after{background:linear-gradient(90deg,var(--bg) 0,transparent 80%)}}
-@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.grid>div:hover,.stats li:hover,.quotes blockquote:hover{transform:none}}
-@media (max-width:640px){nav div{gap:.4rem .85rem}nav a{font-size:.95rem}#theme{padding:.1rem .65rem}}
-
+.gd{color:var(--muted);max-width:60ch;margin:.8rem 0 1rem}
+.group h3{font-size:1.05rem;margin:1.5rem 0 .6rem}
+.tabs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1rem}
+.tabs button{font:inherit;font-weight:500;padding:.5rem 1rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink)}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.gal.cut .th:nth-child(n+7){display:none}
+.th{all:unset;box-sizing:border-box;cursor:zoom-in;display:grid;place-items:center;aspect-ratio:4/3;padding:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:.6rem;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease}
+.th:hover{border-color:var(--accent);box-shadow:0 8px 24px var(--glow)}
+.th:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.th img{width:100%;height:100%;object-fit:contain;display:block}
+.more-btn{font:inherit;font-weight:500;margin-top:.8rem;padding:.5rem 1.1rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.more-btn:hover{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:40rem){.gal{grid-template-columns:repeat(2,1fr)}.hero{padding-top:1rem}nav div{gap:.4rem .85rem}nav a{font-size:.95rem}#theme{padding:.1rem .65rem}}
+#lb{max-width:96vw;max-height:96vh;padding:0;border:0;background:transparent;overflow:visible}
+#lb img{max-width:92vw;max-height:80vh;display:block;margin:0 auto;border-radius:.5rem;background:#000}
+#lb .lbc{margin:.7rem 0 0;color:#fff;text-align:center;font-size:.95rem;text-shadow:0 1px 3px #000}
+#lb::backdrop{background:rgba(0,0,0,.86)}
+#lb .x,#lb .nv{position:fixed;border:0;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;line-height:1;cursor:pointer;width:2.75rem;height:2.75rem;font-size:1.5rem}
+#lb .x{top:.75rem;right:.75rem}
+#lb .nv{top:50%;transform:translateY(-50%);font-size:2rem;padding-bottom:.2rem}
+#lb .pv{left:.5rem}#lb .nx{right:.5rem}
+footer{margin-top:3rem;padding:2.5rem 0 3rem;border-top:1px solid var(--line)}
+footer h2::after{display:none}
+footer p{margin:.3rem 0;color:var(--muted)}
+.up{font-size:.92rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.th{transition:none}}
+@media print{.bg,#theme,.tabs,.more-btn{display:none!important}.gal.cut .th:nth-child(n+7){display:grid}body{background:#fff;color:#000}}
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
 <a class="skip" href="#design">Skip to content</a>
 <div class="wrap" id="top">
-<nav><b><a href="index.html" style="color:inherit;text-decoration:none">Japhette Alec Pulido</a></b><div><a href="index.html">Portfolio</a><a href="index.html#my-work">Social media work</a><a href="index.html#contact">Contact</a><button id="theme" type="button" aria-pressed="false">Noir</button></div></nav>
-<header class="hero">
-<div>
-<span class="pill">Design work</span>
-<h1>Logos and brand design, <span class="grad">built from a brief.</span></h1>
-<p>Logo and brand board concepts for DR.PPF and Elusive Wraps, two wraps, PPF, and tint businesses. Tap any image to enlarge it.</p>
-<div class="btns"><a class="btn main" href="index.html#contact">Work with me</a><a class="btn alt" href="index.html">Back to portfolio</a></div>
+<nav aria-label="Primary"><b><a href="index.html" style="color:inherit;text-decoration:none">Japhette Alec Pulido</a></b><div><a href="index.html">Portfolio</a><a href="index.html#my-work">Social media work</a><a href="index.html#services">Services</a><a href="#contact">Contact</a><a class="cta" href="index.html#book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
+<header class="hero"><span class="pill">Design work</span><h1>Logos and brand design, <span class="grad">built from a brief.</span></h1><p>Concept logos and brand boards for two wraps, PPF, and tint businesses. Tap any image to enlarge it.</p><div class="btns"><a class="btn main" href="index.html#book">Work with me</a><a class="btn alt" href="index.html">Back to portfolio</a></div></header>
+<main id="design"><section>
+<div class="tabs" role="group" aria-label="Choose a client"><button type="button" data-g="g-drppf" aria-pressed="false">DR.PPF (20)</button><button type="button" data-g="g-elusive" aria-pressed="false">Elusive Wraps (17)</button></div>
+<div class="group" id="g-drppf"><h2>DR.PPF brand concepts</h2><p class="gd">Logo and brand explorations for DR.PPF, a Sydney paint protection film, wraps, and tint business. These are concept work, and the visuals are AI-assisted.</p><h3>Logos (17)</h3><div class="gal" id="g-drppf-0"><button type="button" class="th"><img src="work/t/drppf-1.jpg" data-full="work/drppf-1.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chrome blackletter wordmark on black with gold frame" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-2.jpg" data-full="work/drppf-2.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Orange graffiti sticker wordmark with peeling corner" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-3.jpg" data-full="work/drppf-3.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl record shield emblem" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-4.jpg" data-full="work/drppf-4.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Yellow and black graffiti wordmark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-5.jpg" data-full="work/drppf-5.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stacked wordmark with car icon in black, white and gold" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-6.jpg" data-full="work/drppf-6.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Retro enamel sign with classic car" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-7.jpg" data-full="work/drppf-7.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Geometric panther head over car outline" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-8.jpg" data-full="work/drppf-8.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Layered translucent film shield icon" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-9.jpg" data-full="work/drppf-9.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stethoscope and steering wheel shield mark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-10.jpg" data-full="work/drppf-10.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Split D monogram with copper accent" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-11.jpg" data-full="work/drppf-11.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="D tile with peeling film corner" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-12.jpg" data-full="work/drppf-12.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Line-art shield with car silhouette" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-13.jpg" data-full="work/drppf-13.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="DR monogram in gold and black with icon-only versions" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-14.jpg" data-full="work/drppf-14.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Orange and black angular D mark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-17.jpg" data-full="work/drppf-17.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Winged caduceus crest with car, film roll and droplet" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-18.jpg" data-full="work/drppf-18.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Holographic glass D on black" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-19.jpg" data-full="work/drppf-19.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Heartbeat line forming a car outline" loading="lazy" width="880" height="480"></button></div><button type="button" class="more-btn" data-for="g-drppf-0" aria-expanded="false" hidden>Show all 17</button><h3>Brand boards and mockups (3)</h3><div class="gal" id="g-drppf-1"><button type="button" class="th"><img src="work/t/drppf-15.jpg" data-full="work/drppf-15.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Brand board in blue: logo, car decal, shop sign, polo and business cards" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-16.jpg" data-full="work/drppf-16.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Brand board with carbon-fibre shield emblem and mockups" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-21.jpg" data-full="work/drppf-21.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Construction grid for a D mark with peel accent" loading="lazy" width="880" height="480"></button></div></div>
+<div class="group" id="g-elusive"><h2>Elusive Wraps brand concepts</h2><p class="gd">Logo and brand board explorations for a Sydney wraps, PPF, and tint business. These are concept work, and the visuals are AI-assisted.</p><h3>Logos (8)</h3><div class="gal" id="g-elusive-0"><button type="button" class="th"><img src="work/t/elusive-59.jpg" data-full="work/elusive-59.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Hex badge logo" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/elusive-60.jpg" data-full="work/elusive-60.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed wordmark with blue accents" loading="lazy" width="1100" height="550"></button><button type="button" class="th"><img src="work/t/elusive-61.jpg" data-full="work/elusive-61.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Angular fox logo" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-62.jpg" data-full="work/elusive-62.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chameleon logo" loading="lazy" width="1100" height="550"></button><button type="button" class="th"><img src="work/t/elusive-63.jpg" data-full="work/elusive-63.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Panther emblem" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-64.jpg" data-full="work/elusive-64.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Red speed emblem" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-65.jpg" data-full="work/elusive-65.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl peel logo" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-66.jpg" data-full="work/elusive-66.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Carbon fiber wordmark" loading="lazy" width="1100" height="550"></button></div><button type="button" class="more-btn" data-for="g-elusive-0" aria-expanded="false" hidden>Show all 8</button><h3>Brand boards (9)</h3><div class="gal" id="g-elusive-1"><button type="button" class="th"><img src="work/t/elusive-67.jpg" data-full="work/elusive-67.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Hex badge brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-68.jpg" data-full="work/elusive-68.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed brand board in blue" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-69.jpg" data-full="work/elusive-69.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed brand board in red" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-70.jpg" data-full="work/elusive-70.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Geometric fox brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-71.jpg" data-full="work/elusive-71.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Panther brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-72.jpg" data-full="work/elusive-72.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chameleon brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-73.jpg" data-full="work/elusive-73.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl peel brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-74.jpg" data-full="work/elusive-74.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Color-shift brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-75.jpg" data-full="work/elusive-75.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stealth brand board" loading="lazy" width="1100" height="733"></button></div><button type="button" class="more-btn" data-for="g-elusive-1" aria-expanded="false" hidden>Show all 9</button></div>
+</section></main>
+<footer id="contact"><h2>Let’s talk</h2><p>Based in the Philippines (PHT) and able to overlap US business hours.</p><div class="btns" style="margin:1.25rem 0 1rem"><a class="btn main" href="mailto:loomwellops@gmail.com">Email me</a><a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a></div><p class="up"><a href="#top">Back to top</a> · <a href="index.html">Portfolio</a></p></footer>
 </div>
-</header>
-<section id="design" class="work">
-<div id="g-drppf"><h2>DR.PPF brand concepts</h2><p class="gd">Logo and brand explorations for DR.PPF, a Sydney paint protection film, wraps, and tint business. These are concept work, and the visuals are AI-assisted.</p><h4>Logos (17)</h4><div class="strip" tabindex="0" role="region" aria-label="DR.PPF brand concepts: Logos"><button type="button" class="th"><img src="work/t/drppf-1.jpg" data-full="work/drppf-1.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chrome blackletter wordmark on black with gold frame" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-2.jpg" data-full="work/drppf-2.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Orange graffiti sticker wordmark with peeling corner" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-3.jpg" data-full="work/drppf-3.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl record shield emblem" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-4.jpg" data-full="work/drppf-4.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Yellow and black graffiti wordmark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-5.jpg" data-full="work/drppf-5.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stacked wordmark with car icon in black, white and gold" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-6.jpg" data-full="work/drppf-6.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Retro enamel sign with classic car" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-7.jpg" data-full="work/drppf-7.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Geometric panther head over car outline" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-8.jpg" data-full="work/drppf-8.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Layered translucent film shield icon" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-9.jpg" data-full="work/drppf-9.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stethoscope and steering wheel shield mark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-10.jpg" data-full="work/drppf-10.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Split D monogram with copper accent" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-11.jpg" data-full="work/drppf-11.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="D tile with peeling film corner" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-12.jpg" data-full="work/drppf-12.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Line-art shield with car silhouette" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-13.jpg" data-full="work/drppf-13.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="DR monogram in gold and black with icon-only versions" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-14.jpg" data-full="work/drppf-14.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Orange and black angular D mark" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-17.jpg" data-full="work/drppf-17.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Winged caduceus crest with car, film roll and droplet" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-18.jpg" data-full="work/drppf-18.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Holographic glass D on black" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-19.jpg" data-full="work/drppf-19.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Heartbeat line forming a car outline" loading="lazy" width="880" height="480"></button></div><h4>Brand boards and mockups (3)</h4><div class="strip" tabindex="0" role="region" aria-label="DR.PPF brand concepts: Brand boards and mockups"><button type="button" class="th"><img src="work/t/drppf-15.jpg" data-full="work/drppf-15.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Brand board in blue: logo, car decal, shop sign, polo and business cards" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-16.jpg" data-full="work/drppf-16.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Brand board with carbon-fibre shield emblem and mockups" loading="lazy" width="880" height="480"></button><button type="button" class="th"><img src="work/t/drppf-21.jpg" data-full="work/drppf-21.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Construction grid for a D mark with peel accent" loading="lazy" width="880" height="480"></button></div></div>
-<div id="g-elusive"><h2>Elusive Wraps brand concepts</h2><p class="gd">Logo and brand board explorations for a Sydney wraps, PPF, and tint business. These are concept work, and the visuals are AI-assisted.</p><h4>Logos (8)</h4><div class="strip" tabindex="0" role="region" aria-label="Elusive Wraps (brand concepts): Logos"><button type="button" class="th"><img src="work/t/elusive-59.jpg" data-full="work/elusive-59.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Hex badge logo" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/elusive-60.jpg" data-full="work/elusive-60.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed wordmark with blue accents" loading="lazy" width="1100" height="550"></button><button type="button" class="th"><img src="work/t/elusive-61.jpg" data-full="work/elusive-61.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Angular fox logo" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-62.jpg" data-full="work/elusive-62.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chameleon logo" loading="lazy" width="1100" height="550"></button><button type="button" class="th"><img src="work/t/elusive-63.jpg" data-full="work/elusive-63.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Panther emblem" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-64.jpg" data-full="work/elusive-64.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Red speed emblem" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-65.jpg" data-full="work/elusive-65.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl peel logo" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-66.jpg" data-full="work/elusive-66.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Carbon fiber wordmark" loading="lazy" width="1100" height="550"></button></div><h4>Brand boards (9)</h4><div class="strip" tabindex="0" role="region" aria-label="Elusive Wraps (brand concepts): Brand boards"><button type="button" class="th"><img src="work/t/elusive-67.jpg" data-full="work/elusive-67.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Hex badge brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-68.jpg" data-full="work/elusive-68.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed brand board in blue" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-69.jpg" data-full="work/elusive-69.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Speed brand board in red" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-70.jpg" data-full="work/elusive-70.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Geometric fox brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-71.jpg" data-full="work/elusive-71.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Panther brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-72.jpg" data-full="work/elusive-72.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Chameleon brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-73.jpg" data-full="work/elusive-73.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vinyl peel brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-74.jpg" data-full="work/elusive-74.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Color-shift brand board" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/elusive-75.jpg" data-full="work/elusive-75.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Stealth brand board" loading="lazy" width="1100" height="733"></button></div></div>
-
-</section>
-<footer id="contact">
-<h2>Let’s talk</h2>
-<p>Based in the Philippines (PHT) and able to overlap US business hours.</p>
-<div class="btns" style="margin:1.25rem 0 1rem">
-<a class="btn main" href="mailto:loomwellops@gmail.com">Email me</a>
-<a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a>
-</div>
-<p class="up"><a href="#top">Back to top</a> · <a href="index.html">Portfolio</a></p>
-</footer>
-</div>
-<dialog id="lb" aria-label="Enlarged image"><img alt=""><button type="button" class="x" aria-label="Close">×</button></dialog>
+<dialog id="lb" aria-label="Enlarged image"><img alt=""><p class="lbc" aria-live="polite"><span id="lbn"></span> · <span id="lbt"></span></p><button type="button" class="x" aria-label="Close">×</button><button type="button" class="nv pv" aria-label="Previous image">‹</button><button type="button" class="nv nx" aria-label="Next image">›</button></dialog>
 <script>
-(function(){var w=document.getElementById("design");var d=document.getElementById("lb"),i=d.querySelector("img");
-w.addEventListener("click",function(e){var t=e.target.closest(".th img");if(t){i.src=t.dataset.full||t.src;i.alt=t.alt;d.showModal()}});
-d.addEventListener("click",function(){d.close()});})();
+(function(){
+var tabs=[].slice.call(document.querySelectorAll(".tabs button")),groups=[].slice.call(document.querySelectorAll(".group"));
+function show(id){tabs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.g===id)});groups.forEach(function(g){g.hidden=g.id!==id})}
+tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.g)})});
+var h=(location.hash||"").slice(1);show(groups.some(function(g){return g.id===h})?h:groups[0].id);
+[].forEach.call(document.querySelectorAll(".more-btn"),function(b){var g=document.getElementById(b.dataset["for"]),n=g.querySelectorAll(".th").length;b.hidden=false;g.classList.add("cut");
+b.addEventListener("click",function(){var c=g.classList.toggle("cut");b.textContent=c?"Show all "+n:"Show fewer";b.setAttribute("aria-expanded",String(!c))})});
+var d=document.getElementById("lb"),im=d.querySelector("img"),nn=document.getElementById("lbn"),tt=document.getElementById("lbt"),pv=d.querySelector(".pv"),nx=d.querySelector(".nx"),list=[],k=0;
+function render(){var a=list[k].querySelector("img");im.removeAttribute("src");im.src=a.dataset.full||a.src;im.alt=a.alt;nn.textContent=(k+1)+" of "+list.length;tt.textContent=a.alt;pv.hidden=nx.hidden=list.length<2}
+function step(s){k=(k+s+list.length)%list.length;render()}
+document.getElementById("design").addEventListener("click",function(e){var t=e.target.closest(".th");if(!t)return;list=[].slice.call(t.closest(".group").querySelectorAll(".th"));k=list.indexOf(t);render();d.showModal()});
+pv.addEventListener("click",function(){step(-1)});nx.addEventListener("click",function(){step(1)});
+d.querySelector(".x").addEventListener("click",function(){d.close()});
+d.addEventListener("click",function(e){if(e.target===d)d.close()});
+d.addEventListener("keydown",function(e){if(e.key==="ArrowLeft"){step(-1)}else if(e.key==="ArrowRight"){step(1)}});
+d.addEventListener("close",function(){im.removeAttribute("src")});
+})();
 </script>
 <script>
 (function(){var r=document.documentElement,b=document.getElementById("theme");
-function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Bright":"Noir";b.setAttribute("aria-pressed",t==="dark");b.setAttribute("aria-label",t==="dark"?"Switch to Bright mode":"Switch to Noir mode")}
-apply(r.getAttribute("data-theme")||"light");
+function sys(){return window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}
+function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Light":"Dark";b.setAttribute("aria-pressed",t==="dark");b.setAttribute("aria-label",t==="dark"?"Switch to light mode":"Switch to dark mode")}
+var s=null;try{s=localStorage.getItem("theme")}catch(e){}
+apply(s==="dark"||s==="light"?s:sys());
 b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";apply(t);try{localStorage.setItem("theme",t)}catch(e){}});})();
 </script>
-<script data-goatcounter="https://jap-portfolio.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://jap-portfolio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
