@@ -1,342 +1,539 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LoomwellOps™ Job Tracker</title>
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#4b3fd6"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="description" content="LoomwellOps™ Job Tracker: track applications, tailor resumes and write cover letters."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%234b3fd6%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2750%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27bold%27%3ELW%3C/text%3E%3C/svg%3E"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japhette Alec Pulido | Executive Assistant &amp; GoHighLevel Automation</title>
+<meta name="theme-color" content="#4b3fd6">
+<script>(function(){var r=document.documentElement;r.className+=" js";var s=null;try{s=localStorage.getItem("theme")}catch(e){}if(s!=="dark"&&s!=="light"){s=window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}r.setAttribute("data-theme",s)})();</script>
+<meta name="description" content="GoHighLevel automation and executive assistant support. I build the follow-up systems that turn leads into booked customers. Philippines-based, US hours.">
+<meta property="og:title" content="Japhette Alec Pulido | Executive Assistant &amp; GoHighLevel Automation">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loomwell-ops.github.io/">
+<meta property="og:description" content="GoHighLevel automation and executive assistant support. I build the follow-up systems that turn leads into booked customers. Philippines-based, US hours.">
+<meta property="og:image" content="https://loomwell-ops.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Japhette Alec Pulido, Executive Assistant and GoHighLevel automation">
+<meta property="og:site_name" content="Japhette Alec Pulido">
+<link rel="canonical" href="https://loomwell-ops.github.io/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Japhette Alec Pulido", "jobTitle": "Executive Assistant & GoHighLevel Automation Specialist", "description": "GoHighLevel automation and executive assistant support. I build the follow-up systems that turn leads into booked customers. Philippines-based, US hours.", "url": "https://loomwell-ops.github.io/", "email": "loomwellops@gmail.com", "image": "https://loomwell-ops.github.io/profile.jpg", "address": {"@type": "PostalAddress", "addressCountry": "PH"}, "sameAs": ["https://www.linkedin.com/in/japhette-alec-pulido"], "knowsAbout": ["Executive Assistance", "Operations Support", "GoHighLevel", "Funnels and Automation", "Lead Follow-up", "Cold Calling", "Customer Support", "Performance Reporting", "Social Media Management", "Workflow Automation", "Email Marketing", "Zapier", "Make", "HubSpot"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Colegio de San Juan de Letran"}}</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://loomwell-ops.github.io/og-image.jpg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%234b3fd6%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2756%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27bold%27%3EJP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--mark:#f3c76b;--g2:#c24e17;--glow:rgba(75,63,214,.18);--bgimg:url(bg-light.webp)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e;--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(bg.jpg)}}
-:root[data-theme="dark"]{--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e;--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(bg.jpg)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at 90% -8%,var(--glow),transparent 42%);background-repeat:no-repeat;color:var(--ink);font:400 1rem/1.55 "IBM Plex Sans",system-ui,sans-serif}
-h1,h2,h3,h4,.chip b{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.15;margin:0}
+:root{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--mark:#f3c76b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e}}
+:root[data-theme="dark"]{--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e}
+:root[data-theme="light"]{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--mark:#f3c76b}
+#theme{font:inherit;font-weight:500;cursor:pointer;background:transparent;color:var(--ink);border:2px solid var(--accent);border-radius:2rem;padding:.25rem .85rem}
+#theme:hover{color:var(--accent)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.12;margin:0}
 a{color:var(--accent)}
-main{max-width:1060px;margin:0 auto;padding:14px 16px 40px}
-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 14px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;gap:1rem;flex-wrap:wrap}
 nav b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.1rem}
-h1{font-size:clamp(1.7rem,4vw,2.4rem)}
-.grad{color:var(--accent);background:linear-gradient(90deg,var(--accent),var(--g2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-h2::after,h1::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margin-top:.5rem;background:linear-gradient(90deg,var(--accent),var(--g2))}
-h2{font-size:1.2rem;margin:22px 0 12px}
-input,select,textarea,button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:.5rem;padding:.45rem .7rem}
-textarea{width:100%;resize:vertical}
-button{cursor:pointer;border:2px solid var(--accent);border-radius:2rem;background:transparent;color:var(--accent);font-weight:500;padding:.35rem 1rem}
-button:hover{opacity:.85}button[aria-pressed=true],button.p{background:var(--accent);color:var(--accent-ink)}
-button.p{box-shadow:0 6px 22px var(--glow)}button.s{padding:.15rem .75rem;font-size:.85rem}button:disabled{opacity:.5}
-.stats{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-.chip{background:color-mix(in srgb,var(--surface) 76%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:.6rem;padding:.7rem 1rem;min-width:100px;transition:transform .2s,border-color .2s,box-shadow .2s}
-.chip b{display:block;font-size:1.6rem;color:var(--accent)}.chip span{color:var(--muted);font-size:.88rem}
-.chip input{width:3.4rem;padding:.1rem .3rem}
-@media (hover:hover){.chip:hover,.card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 28px var(--glow)}}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
-.bar input[type=search]{flex:1;min-width:150px}
-.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:1rem}
-.panel h4{margin-bottom:8px;font-size:1rem}
-.br{display:grid;grid-template-columns:5.5rem 1fr 1.6rem;gap:8px;align-items:center;font-size:.85rem;margin:4px 0;color:var(--muted)}
-.br i{display:block;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--g2));min-width:3px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;transition:transform .2s,border-color .2s,box-shadow .2s}
-.card h3{font-size:1rem}.card small{color:var(--muted)}
-.act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
-.tag{border-radius:2rem;padding:0 .6rem;font-size:.72rem;font-weight:700;margin-left:6px;border:1px solid var(--accent);color:var(--accent);white-space:nowrap}
-.tag.w{background:var(--mark);border-color:var(--mark);color:#1a1840}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g2);margin-left:6px}
-.kb{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;align-items:flex-start}
-.col{min-width:220px;flex:1 0 220px;background:color-mix(in srgb,var(--accent) 6%,var(--bg));border:1px solid var(--line);border-radius:.7rem;padding:8px;min-height:120px}
-.col h4{font-size:.9rem;padding:2px 4px 8px;display:flex;justify-content:space-between}
-.col .card{grid-template-columns:1fr;cursor:grab}.col.over{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
-dialog{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:1rem;width:min(780px,94vw);padding:18px;max-height:92vh}
-#dr.drag textarea{outline:2px dashed var(--accent,#9c93ff)}dialog::backdrop{background:#0009}dialog h3{font-size:1.2rem;margin-bottom:4px}
-dialog label{display:block;margin:10px 0 4px;font-weight:500;font-size:.88rem}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
-.note{color:var(--muted);font-size:.88rem}
-.bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
-.bg::before{content:"";position:absolute;inset:0;background:var(--bgimg) right top/cover no-repeat}
-.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,transparent 60%),linear-gradient(0deg,var(--bg) 0,transparent 35%)}
-@media(max-width:640px){.bg{opacity:.5}}
+nav div{display:flex;gap:1.25rem;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-weight:500}
+nav a:hover{color:var(--accent)}
+.hero{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;padding:3.5rem 0 2rem}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:700;max-width:16ch}
+.hero p{max-width:46ch;color:var(--muted);margin:1.25rem 0 1.75rem}
+.photo{width:11rem;height:11rem;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent)}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:.5rem;font-weight:500;text-decoration:none;border:2px solid var(--accent)}
+.btn.main{background:var(--accent);color:var(--accent-ink)}
+.btn.alt{color:var(--accent)}
+.pipe{list-style:none;margin:1rem 0 0;padding:1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.pipe li{padding:.45rem .9rem;border-radius:2rem;background:var(--bg);border:1px solid var(--line);font-weight:500;font-size:.95rem}
+.pipe li:not(:last-child)::after{content:"›";margin-left:.9rem;color:var(--muted)}
+.pipe li:last-child{background:var(--mark);color:#1a1840;border-color:var(--mark)}
+.cap{color:var(--muted);font-size:.9rem;margin:.6rem 0 0}
+section{padding:3.5rem 0 .5rem}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:1.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.grid>div{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:1.25rem}
+.grid h3{font-size:1.15rem;margin-bottom:.4rem}
+.grid p{margin:0;color:var(--muted);font-size:.97rem}.grid p+p{margin-top:.6rem}.logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.8rem}.logos li{display:grid;place-items:center;height:5.2rem;padding:.6rem;border-radius:.7rem;border:1px solid var(--line);overflow:hidden}.logos img{max-width:100%;max-height:4rem;width:auto;height:auto;object-fit:contain}.grid .price{color:var(--ink,inherit);font-weight:700}
+.job{display:grid;grid-template-columns:11rem 1fr;gap:1rem 2rem;padding:1.5rem 0;border-top:1px solid var(--line)}
+.job time{color:var(--muted);font-size:.95rem}
+.job h3{font-size:1.2rem}
+.job .co{color:var(--accent);font-weight:500;margin:.15rem 0 .6rem}
+.job ul{margin:0;padding-left:1.1rem;max-width:62ch}
+.job li{margin-bottom:.35rem}
+.proj{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.5rem;max-width:44rem}
+.proj h3{font-size:1.35rem;margin-bottom:.5rem}.badge{display:inline-block;vertical-align:middle;margin-left:.4rem;padding:.15rem .6rem;border-radius:999px;border:1px solid var(--accent);color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.proj p{margin:0 0 1.1rem;color:var(--muted)}
+.group[hidden]{display:none}
+.group h3{font-size:1.4rem}
+.group h4{font-size:1.05rem;margin:1.5rem 0 .6rem}
+.gd{color:var(--muted);max-width:60ch;margin:.3rem 0 1rem}
+.tabs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1.25rem}
+.tabs button{font:inherit;font-weight:500;padding:.5rem 1rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink)}
+.strip{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:.7rem}
+.th{all:unset;cursor:zoom-in;flex:none;scroll-snap-align:start}
+.th:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.th img{height:20rem;width:auto;display:block;border-radius:.5rem;border:1px solid var(--line)}
+.strip figure{margin:0;flex:none;scroll-snap-align:start}
+.strip video{height:20rem;max-width:85vw;object-fit:contain;display:block;background:#000;border-radius:.5rem}
+.strip video.land{aspect-ratio:16/9}
+.strip video.port{aspect-ratio:9/16}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:.3rem}
+#lb{max-width:96vw;max-height:96vh;padding:0;border:0;background:transparent}
+#lb img{max-width:96vw;max-height:92vh;display:block;border-radius:.5rem}
+#lb::backdrop{background:rgba(0,0,0,.82)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;list-style:none;margin:0}
+.chips li{padding:.3rem .8rem;border:1px solid var(--line);background:var(--surface);border-radius:.4rem;font-size:.95rem}
+.skills h3{font-size:1.05rem;margin:1.5rem 0 .6rem}
+.tools li{padding:0;transition:border-color .2s}.tools li:hover{border-color:var(--accent)}.tools a{display:flex;align-items:center;gap:.55rem;padding:.3rem .8rem .3rem .45rem;color:var(--ink);text-decoration:none;border-radius:.4rem}.tools a:hover{color:var(--accent)}.tools img{width:24px;height:24px;flex:none;padding:2px;border-radius:6px;background:#fff;object-fit:contain}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.steps{counter-reset:s}.steps>div{position:relative}.n{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:.9rem;margin-bottom:.5rem}
+.tg{font-size:.95rem;color:var(--muted);font-weight:500;margin:1rem 0 .4rem;font-family:"IBM Plex Sans",sans-serif}
+#lb .x{position:absolute;top:.5rem;right:.5rem;width:2.5rem;height:2.5rem;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+footer{margin-top:4rem;padding:2.5rem 0 3rem;border-top:1px solid var(--line)}
+footer p{margin:.3rem 0;color:var(--muted)}
+.more{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:1.25rem 0 0}.more a{font-weight:500}
+main{display:block}
+@media print{.bg,#stick,#theme,.tabs,.book{display:none!important}.js .rv{opacity:1!important;transform:none!important}body{background:#fff;color:#000}}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.photo{order:-1;width:8rem;height:8rem}.job{grid-template-columns:1fr;gap:.3rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 [hidden]{display:none!important}
-#auth{max-width:440px;margin:6vh auto}.brand{font-size:1.25rem}
-footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line)}
-@media print{nav,.bar,.kb,.bg{display:none}}
-#demobar{padding:.6rem 1rem;background:color-mix(in srgb,var(--accent,#9c93ff) 20%,var(--bg));border-bottom:1px solid var(--line);font-size:.9rem;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}#demobar[hidden]{display:none}#msg:not(:empty){position:fixed;left:50%;transform:translateX(-50%);bottom:1.2rem;max-width:90vw;background:var(--surface);color:var(--ink);border:1px solid var(--accent,#9c93ff);padding:.6rem 1rem;border-radius:.7rem;box-shadow:0 8px 24px #0006;z-index:60}
-.empty{padding:1.2rem;border:1px dashed var(--line);border-radius:.8rem;color:var(--muted)}.empty b{color:var(--ink)}
-</style></head><body><div class="bg" aria-hidden="true"></div><main>
-<nav><b class="brand grad">LoomwellOps™</b><span class="act"><span class="note" id="who"></span><button id="so" class="s" hidden>Sign out</button><button id="th" class="s" type="button">Theme</button></span></nav>
-<section id="auth" hidden><div class="panel"><h2>Welcome to LoomwellOps™</h2><p class="note">Sign in to track your job applications, tailor resumes and write cover letters. Your data is saved to your account.</p>
-<label>Email</label><input id="ae" type="email" autocomplete="email" style="width:100%">
-<label>Password (8+ characters)</label><input id="ap" type="password" autocomplete="current-password" style="width:100%">
-<label class="note" style="display:flex;gap:.4rem;align-items:center"><input type="checkbox" id="spw"> Show password</label>
-<div class="row"><button class="p" id="ain">Sign in</button><button id="aup">Create account</button><button class="s" id="afg">Forgot password</button><button type="button" id="demo">Try the demo</button></div><p class="note" id="am" role="status"></p><p class="note">New here? The demo shows sample data. Nothing is saved and the AI tools are off.</p></div></section>
-<div id="demobar" hidden role="status">Demo mode: sample data only, nothing is saved, and the AI tools are off. <button type="button" id="demox">Exit demo</button></div>
-<div id="app">
-<h1><span class="grad">Job Tracker</span> + Resume Tailor</h1>
-<div class="stats" id="stats"></div>
-<div class="charts" id="ch"></div>
-<h2>Applications</h2>
-<div class="bar">
-<input type="search" id="q" placeholder="Search title, company or notes"><select id="f"></select>
-<button id="vl" aria-pressed="true">List</button><button id="vb" aria-pressed="false">Board</button><button id="vc" aria-pressed="false">Calendar</button>
-<button class="p" id="add">+ Add job</button><button id="mr">Master resume</button>
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--accent-ink);padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:30}.skip:focus{left:0}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:500;padding:.3rem .85rem;border:1px solid var(--line);background:var(--surface);border-radius:2rem;margin-bottom:1rem}
+.pill::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:#2fb36b}
+.hero{padding:2rem 0 1.25rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.75rem;margin:1.5rem 0 0;padding:0;list-style:none}
+.stats li{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.9rem 1rem}
+.stats b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.6rem;line-height:1.15;color:var(--accent)}
+.stats span{font-size:.92rem;color:var(--muted)}
+.shot{margin:1.25rem 0 0;max-width:44rem}.shot img{width:100%;height:auto;border-radius:.6rem;border:1px solid var(--line)}
+.vid{max-width:44rem}.vid video{width:100%;border-radius:.75rem;background:#000;display:block}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.quotes blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.25rem}
+.quotes p{margin:0 0 .75rem}.quotes cite{font-style:normal;font-size:.92rem;color:var(--muted)}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.2rem 1.1rem;margin:.6rem 0;max-width:46rem}
+.faq summary{cursor:pointer;font-weight:500;padding:.8rem 0}
+.faq details p{margin:0 0 1rem;color:var(--muted)}
+#stick{position:fixed;right:1rem;bottom:1rem;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .2s}
+#stick.off{opacity:0;pointer-events:none}
+.up{font-size:.92rem}
+@media (max-width:40rem){.hero{padding:1.25rem 0 1rem;grid-template-columns:1fr}.hero .photo{width:7rem;height:7rem;order:-1}}
+@media (prefers-reduced-motion:reduce){#stick{transition:none}}
+
+/* ---- beautification layer ---- */
+:root{--g2:#c24e17;--glow:rgba(75,63,214,.18);--bgimg:url(bg-light.webp)}
+:root[data-theme="dark"]{--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(bg.jpg)}
+body{position:relative}
+.bg{position:absolute;inset:0 0 auto 0;height:max(100svh,42rem);z-index:-1;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.bg::before{content:"";position:absolute;inset:0;background:var(--bgimg) right top/cover no-repeat}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,transparent 55%)}
+.grad{color:var(--accent)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.grad{background:linear-gradient(90deg,var(--accent),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}}
+h2::after{content:"";display:block;width:3rem;height:4px;border-radius:2px;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),var(--g2))}
+.photo{box-shadow:0 0 0 2px var(--accent),0 0 48px var(--glow)}
+.pill,.pipe,.stats li{background:var(--surface);background:color-mix(in srgb,var(--surface) 76%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.grid>div,.stats li,.quotes blockquote,.proj,.faq details{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+@media (hover:hover){.grid>div:hover,.stats li:hover,.quotes blockquote:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 28px var(--glow)}}
+.btn.main{box-shadow:0 6px 22px var(--glow)}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.js .rv.in{opacity:1;transform:none}
+@media (max-width:640px){.bg{opacity:.55}.bg::after{background:linear-gradient(90deg,var(--bg) 0,transparent 80%)}}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.grid>div:hover,.stats li:hover,.quotes blockquote:hover{transform:none}}
+@media (max-width:640px){nav div{gap:.4rem .85rem}nav a{font-size:.95rem}#theme{padding:.1rem .65rem}}
+
+/* ---- compact layout layer ---- */
+html{scroll-padding-top:1rem}
+.fold{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.2rem 1.1rem;margin:1.25rem 0 0}
+.fold summary{cursor:pointer;font-weight:500;padding:.8rem 0}
+.fold[open] summary{margin-bottom:.4rem}
+.fold>.job:first-of-type{border-top:0}
+.callout{display:flex;gap:1rem 1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:.6rem;padding:1.1rem 1.25rem;margin-top:1.25rem}
+.callout h3{font-size:1.15rem;margin-bottom:.3rem}
+.callout p{margin:0;max-width:52ch;color:var(--muted);font-size:.97rem}
+#clients{padding:1.75rem 0 0}
+#clients .tg{margin:0 0 .6rem}
+#clients .lgs{display:grid;grid-template-columns:2fr 4fr;gap:1.25rem}
+#clients .logos{gap:.6rem}
+#clients .lg:first-child .logos{grid-template-columns:repeat(2,1fr)}
+#clients .lg:last-child .logos{grid-template-columns:repeat(4,1fr)}
+#clients .logos li{height:4.5rem;padding:.5rem}
+#clients .logos img{max-height:3.5rem}
+.book{padding-bottom:1rem}
+nav a.cta{background:var(--accent);color:var(--accent-ink);padding:.3rem .95rem;border-radius:2rem}
+nav a.cta:hover{color:var(--accent-ink);opacity:.9}
+@media (min-width:40.01rem){html{scroll-padding-top:4.5rem}nav{position:sticky;top:0;z-index:25;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent}}
+@media (max-width:40rem){#clients .lgs{grid-template-columns:1fr}#clients .lg:last-child .logos{grid-template-columns:repeat(2,1fr)}}
+.btn.lnk{border-color:transparent;padding-left:.5rem;padding-right:.5rem;text-decoration:underline;text-underline-offset:.2em}
+.btn.lnk:hover{border-color:var(--accent)}
+.photo{object-position:50% 25%}
+@media (min-width:40.01rem){#stick{display:none}}
+
+/* ---- contact card ---- */
+footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
+.cta-card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.5rem 2rem;align-items:center;padding:2.25rem;border-radius:1rem;border:1px solid var(--line);background:var(--surface);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 18%,var(--surface)),var(--surface) 62%);overflow:hidden;box-shadow:0 18px 50px var(--glow,rgba(75,63,214,.18))}
+.cta-card::before{content:"";position:absolute;right:-5rem;top:-5rem;width:18rem;height:18rem;border-radius:50%;background:radial-gradient(circle,var(--glow,rgba(75,63,214,.18)),transparent 70%);pointer-events:none}
+.cta-card>*{position:relative}
+.cta-photo{width:7rem;height:7rem;border-radius:50%;object-fit:cover;object-position:50% 25%;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent),0 0 40px var(--glow,rgba(75,63,214,.18))}
+.cta-card h2{font-size:clamp(1.7rem,4.5vw,2.6rem);line-height:1.1;margin-bottom:.8rem;max-width:20ch}
+.cta-card h2::after{display:none}
+.cta-card p{margin:0 0 1.25rem;max-width:54ch;color:var(--muted)}
+.cta-card .pill{margin-bottom:.9rem}
+.contact-row{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem 1.75rem;margin:1.5rem 0 0;padding:0}
+.contact-row a{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;color:var(--ink);text-decoration:none}
+.contact-row a:hover{color:var(--accent);text-decoration:underline}
+.contact-row svg{color:var(--accent);flex:none}
+@media (max-width:40rem){.cta-card{grid-template-columns:1fr;padding:1.5rem}.cta-photo{width:5.5rem;height:5.5rem}}
+.mock{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:.6rem;max-width:44rem}.mock li{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:.8rem}.mock b{display:block;font-size:1.6rem;color:var(--accent)}.mock span{font-size:.85rem;color:var(--muted)}.proofline{font-weight:600;margin:0 0 1.1rem}.pkg li{margin:.3rem 0}.note{font-size:.85rem;color:var(--muted);margin:.5rem 0 0}.demo{width:100%;height:600px;border:1px solid var(--line);border-radius:.6rem;margin:.4rem 0 .6rem;background:var(--surface)}
+.funnel{list-style:none;margin:1rem 0 0;padding:0;max-width:44rem;display:grid;gap:.45rem}.funnel li{display:grid;grid-template-columns:7rem 1fr;align-items:center;gap:.7rem;font-size:.9rem}.funnel .fb{display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-width:4.6rem;padding:.45rem .7rem;border-radius:.5rem;border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 22%,var(--surface))}.funnel b{font-size:1rem}.funnel small{opacity:.85}nav a.on{color:var(--accent)}.demo{box-shadow:0 12px 32px var(--glow)}@media print{nav,#stick,iframe,.btns{display:none!important}body{background:#fff!important;color:#000!important}}
+.aud{display:flex;flex-direction:column;align-items:flex-start;gap:.45rem}.aud .note{margin:0}.linkbtn{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;font:inherit;cursor:pointer}.about{display:flex;gap:1.25rem;align-items:center;max-width:44rem;margin:1.75rem 0}.about img{width:7.5rem;height:7.5rem;border-radius:1rem;object-fit:cover;object-position:50% 25%;border:1px solid var(--line);flex:none}.about h2{font-size:1.15rem;margin:0 0 .3rem}.about p{margin:0;color:var(--muted)}.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.6rem;max-width:44rem;margin:.8rem 0}.dgrid img{width:100%;aspect-ratio:11/6;object-fit:cover;border-radius:.6rem;border:1px solid var(--line);transition:transform .2s}@media(hover:hover){.dgrid:hover img{transform:scale(1.02)}}@media(max-width:40rem){.about{flex-direction:column;align-items:flex-start}}
+.flow{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem;max-width:44rem;counter-reset:st}.flow li{flex:1 1 7.5rem;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:.6rem;padding:.7rem}.flow li::before{counter-increment:st;content:counter(st);color:var(--accent);font-weight:700;display:block}.flow b{display:block}.flow span{font-size:.85rem;color:var(--muted)}.fit{max-width:44rem;margin:1.5rem 0}.fit h2{font-size:1.15rem;margin:0 0 .5rem}.fit ul{margin:0 0 .5rem;padding-left:1.2rem}.fit li{margin:.3rem 0}
+.tiers{list-style:none;padding:0;margin:.8rem 0 1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.8rem;max-width:56rem}.tiers li{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:.7rem;padding:1rem}.tiers b{display:block;font-size:1.05rem}.tiers p{margin:.2rem 0 0;color:var(--muted);font-size:.92rem}.tiers .price{color:var(--accent);font-weight:700}
+.calc{max-width:44rem;margin:1.75rem 0}.cgrid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}.calc label{display:grid;gap:.3rem;font-size:.9rem}.calc input[type=number]{padding:.55rem .65rem;border-radius:.5rem;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit}.calc input[type=range]{width:100%}.cres{margin-top:1rem;padding:1rem;border:1px solid var(--line);border-radius:.7rem;background:var(--surface);display:grid;gap:.4rem}.cres b{color:var(--accent)}.cres .big{font-size:1.2rem}
+.sim{max-width:44rem;margin:.8rem 0}.simb{display:flex;flex-wrap:wrap;gap:.4rem}.simb button{padding:.5rem .8rem;border-radius:2rem;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;cursor:pointer}.simb button[aria-pressed=true]{border-color:var(--accent);color:var(--accent);font-weight:600}.sim ol{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.5rem}.sim li{display:grid;gap:.15rem;padding:.6rem .8rem;border-left:4px solid var(--accent);border-radius:.5rem;background:var(--surface);animation:fu .4s both}.sim li small{color:var(--muted)}@keyframes fu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.sim li{animation:none}}
+.pipe li{cursor:pointer}.pipe button{background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer}.pipe li:hover,.pipe li.on{border-color:var(--accent)}.pd-i{display:none}.pd{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);min-height:1.5em}
+@media(max-width:40rem){.pipe{flex-direction:column;align-items:stretch;gap:.4rem}.pipe li:not(:last-child)::after{content:none}.pipe li button{width:100%;text-align:left;display:flex;justify-content:space-between}.pipe li button::after{content:"+";color:var(--muted)}.pipe li.on button::after{content:"–"}.pipe li.on .pd-i{display:block;margin:.35rem 0 0;font-weight:400;font-size:.88rem;color:var(--muted)}.pd{display:none}}
+.phone{max-width:24rem;margin:.8rem 0 0;border:1px solid var(--line);border-radius:1.5rem;background:var(--surface);padding:.6rem .8rem .9rem;box-shadow:0 10px 28px var(--glow)}.ph-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted);padding:.2rem .2rem .6rem;border-bottom:1px solid var(--line)}.ph-badge{font-size:.7rem;padding:.15rem .5rem;border-radius:2rem;border:1px solid var(--accent);color:var(--accent)}.phone ol{margin:.7rem 0 0}.phone li{border-left:0;max-width:92%;border-radius:1rem 1rem 1rem .3rem;background:color-mix(in srgb,var(--accent) 16%,var(--bg))}.phone li.em{border-radius:.6rem}.phone li.sys{max-width:100%;background:none;border:1px dashed var(--line);border-radius:.6rem;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="top">
+<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#design">Design</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="cta" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
+
+<main id="main" tabindex="-1">
+<header class="hero">
+<div>
+<span class="pill" id="avail">Open to new roles and clients · Philippines (PHT) · adjusts to your time zone</span>
+<h1>I build the follow-up systems that <span class="grad">turn leads into booked customers.</span></h1>
+<p>Executive Assistant and Operations Support with GoHighLevel funnels and automation. Running my own business since 2012 and supporting US-based clients remotely for three years.</p>
+<p class="proofline">I booked about 50 gym appointments a month, around 90% of quota, with GoHighLevel follow-up.</p>
+<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a call ↗</a><a class="btn lnk" href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="resume-download">Download resume</a><a class="btn lnk" href="mailto:loomwellops@gmail.com" data-goatcounter-click="hero-email">Email me</a></div>
 </div>
-<div class="bar"><button id="bk" class="s">Backup (JSON)</button><button id="cv" class="s">Export CSV</button><button id="im" class="s">Import backup</button><button id="dd" class="s" hidden>Delete my cloud data</button><input type="file" id="fi" accept=".json" hidden><span class="note" id="msg"></span></div>
-<div id="list"></div>
+</header>
 
+<ol class="pipe" aria-label="Example lead pipeline I have built in GoHighLevel"><li><button type="button" aria-expanded="false">New Lead</button><span class="pd-i">Typically, the lead is tagged by source and gets a quick first reply.</span></li><li><button type="button" aria-expanded="false">Contacted</button><span class="pd-i">Typically, calls and messages are logged, and quiet leads get a nudge.</span></li><li><button type="button" aria-expanded="false">Trial Booked</button><span class="pd-i">Typically, a confirmation goes out, then reminders before the visit.</span></li><li><button type="button" aria-expanded="false">Showed Up</button><span class="pd-i">Typically, the visit is marked and the lead moves on to a membership follow-up.</span></li><li><button type="button" aria-expanded="false">Member</button><span class="pd-i">Typically, the new member is tagged and moved to the member list.</span></li></ol>
+<p class="pd" id="pd" data-d="Hover or tap a stage to see what typically happens there."></p>
+<p class="cap">A pipeline I built in GoHighLevel at Fit Body Boot Camp, with automated follow-up at every stage.</p>
+
+<section id="clients" aria-label="Brands I have worked on">
+<div class="lgs">
+<div class="lg"><p class="tg">Clients</p><ul class="logos" aria-label="Client logos"><li style="background:rgb(255, 255, 255)"><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="235" height="90"></li><li style="background:rgb(255, 203, 4)"><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="420" height="94"></li></ul></div>
+<div class="lg"><p class="tg">My own and concept brands</p><ul class="logos" aria-label="Own and concept brand logos"><li style="background:rgb(253, 253, 253)"><img src="work/clients/client-3.jpg" alt="WJ Construction and Engineering Services logo" loading="lazy" width="420" height="325"></li><li style="background:rgb(9, 9, 10)"><img src="work/clients/client-4.jpg" alt="Elusive Wraps logo" loading="lazy" width="420" height="140"></li><li style="background:rgb(0, 0, 0)"><img src="work/clients/client-5.jpg" alt="Zapatos logo" loading="lazy" width="420" height="420"></li><li style="background:rgb(1, 1, 1)"><img src="work/clients/client-6.jpg" alt="DR.PPF logo" loading="lazy" width="420" height="399"></li></ul></div>
 </div>
-<dialog id="dj"><h3 id="djt">Add job</h3>
-<label>Job title</label><input id="jt" style="width:100%">
-<label>Company</label><input id="jc" style="width:100%">
-<div class="row"><div><label>Pay (optional)</label><input id="jp"></div><div><label>Date applied</label><input id="jd" type="date"></div><div><label>Follow up on</label><input id="jf" type="date"></div></div>
-<label>Posting link</label><div class="row"><input id="jl" style="flex:1;min-width:0"><button type="button" id="jaf">Auto-fill from link</button></div><span class="note" id="jam"></span>
-<label>Contact person / recruiter</label><input id="jk" style="width:100%">
-<label>Interview date and time (shows in Calendar)</label><input id="ji" type="datetime-local">
-<label>Contact log (who you spoke to, what was said)</label><textarea id="jlg" rows="4"></textarea><div class="row"><button type="button" id="jla">+ Add dated entry</button></div>
-<label>Notes, next steps, interview prep</label><textarea id="jn" rows="4"></textarea>
-<div class="row"><button class="p" id="js">Save</button><button id="jx">Cancel</button><button id="jdel" hidden>Delete</button></div></dialog>
+</section>
 
-<dialog id="dr"><h3>Master resume</h3>
-<div class="row"><select id="rsel"></select><input id="rnm" placeholder="Version name"><button type="button" id="rnw">New version</button><button type="button" id="rdl">Delete</button></div>
-<p class="note">Paste your full resume once with every role, skill and achievement, or drop a PDF, Word (.docx), or text file onto the box. Tailored versions only use what is written here. Stored in this browser only. Files are read in your browser and are not uploaded.</p>
-<textarea id="rt" rows="16"></textarea>
-<div class="row"><button type="button" id="rf">Choose a file</button><input type="file" id="rff" accept=".pdf,.docx,.txt,.md" hidden><span class="note" id="rst" aria-live="polite"></span></div>
-<div class="row"><button class="p" id="rs">Save</button><button id="rx">Close</button></div></dialog>
+<section id="about" class="about"><img src="profile.jpg" width="120" height="120" alt="Portrait of Japhette Alec Pulido" loading="lazy"><div><h2>About me</h2><p>I’m Japhette, based in the Philippines. I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep operations organized.</p></div></section>
 
-<dialog id="dt"><h3 id="dtt">Tailor</h3>
-<label>Job description (paste the full posting)</label><textarea id="td" rows="6"></textarea>
-<div class="row"><button class="p" id="tg">Tailor resume</button><button class="p" id="tl">Write cover letter</button><button id="ts" disabled>Stop</button><span class="note" id="tn"></span></div>
-<label>Master resume to use</label><select id="tsel"></select>
-<label>Tailored resume (editable)</label><textarea id="to" rows="12"></textarea>
-<label>Notes: keywords matched, gaps, talking points (private, not part of the resume)</label><textarea id="tnt" rows="7"></textarea>
-<label>Extras</label><div class="row"><select id="xk"><option value="m">Match score + missing keywords</option><option value="i">Interview prep</option><option value="f">Follow-up email (no reply)</option><option value="t">Thank-you email (after interview)</option><option value="r">Reply to a rejection</option></select><button class="p" id="xg">Generate</button></div><textarea id="xo" rows="8"></textarea>
-<label>Cover letter (editable)</label><textarea id="cl" rows="9"></textarea>
-<div class="row"><button class="s" id="c1">Copy resume</button><button class="s" id="c2">Copy letter</button><button class="s" id="d1">Download resume</button><button class="s" id="d2">Download letter</button><button class="s p" id="dw">Download Word</button><button class="s p" id="dp">Download PDF</button><button class="p" id="tsv">Save to job</button><button id="tx">Close</button></div></dialog>
-<footer class="note">© 2026 LoomwellOps™. Your data is private to your account. <span id="sy"></span></footer></main>
+<section id="fit" class="fit"><h2>Who I work best with</h2><ul><li>Gyms, studios, and clinics that book trials or consultations</li><li>Local service businesses that get leads from ads, calls, or referrals</li><li>Small teams whose leads go cold because follow-up depends on someone remembering</li><li>Owners who want one organized system instead of five disconnected tools</li></ul><p class="note">Not sure you fit? Request a free audit and I’ll tell you honestly.</p><p class="note"><a href="#services">See my 3 ways to start →</a></p></section>
+
+<section id="intro" hidden>
+<h2>Meet me</h2>
+<div class="vid"><video id="introv" controls preload="metadata" playsinline></video></div>
+</section>
+
+<section id="work">
+<h2>What I do</h2>
+<div class="grid">
+<div><h3>Lead capture and follow-up</h3><p>Missed-call text-back, instant replies to forms and ad leads, self-booking calendars with reminders, and multi-day nurture sequences.</p></div>
+<div><h3>Funnels and sales</h3><p>Landing pages with payment, memberships and class packs through Stripe and PayPal, upsell sequences, and abandoned-checkout follow-up.</p></div>
+<div><h3>Retention and reviews</h3><p>Onboarding check-ins, win-back messages for inactive members, failed-payment reminders, and automatic review requests.</p></div>
+<div><h3>Reporting and dashboards</h3><p>Lead sources, show rates, and trial-to-member conversion, plus weekly and monthly performance reports.</p></div>
+<div><h3>Executive support</h3><p>Calendar, email, and scheduling for a business owner, inbound and outbound calls, and meeting notes with follow-ups.</p></div>
+<div><h3>Social media</h3><p>Content planning and scheduling for multi-location brands, adapted to each store’s market.</p></div>
+</div>
+</section>
+
+<section id="case-study">
+<h2>Case study: from new lead to member</h2>
+<p class="gd">At Fit Body Boot Camp I built the follow-up in GoHighLevel so every lead gets a quick reply and a clear next step, and nobody has to remember to chase them.</p>
+<div class="grid steps">
+<div><span class="n">1</span><h3>New lead</h3><p>Form and ad leads get an instant reply. Missed calls get an automatic text-back.</p></div>
+<div><span class="n">2</span><h3>Contacted</h3><p>Call follow-up sequences and multi-day nurture messages, with contacts tagged by stage.</p></div>
+<div><span class="n">3</span><h3>Trial booked</h3><p>A self-booking calendar with confirmations and reminders.</p></div>
+<div><span class="n">4</span><h3>Showed up</h3><p>Onboarding check-ins after the first visit.</p></div>
+<div><span class="n">5</span><h3>Member</h3><p>Review requests, failed-payment reminders, and win-back messages if they go quiet.</p></div>
+</div>
+<ul class="stats" id="stats"><li><b>~100</b><span>calls a day, logged in Google Sheets</span></li><li><b>~50</b><span>gym appointments booked a month</span></li><li><b>~90%</b><span>of the monthly appointment quota</span></li><li><b>~20</b><span>discovery meetings a week</span></li><li><b>5 stores</b><span>in 4 states supported</span></li><li><b>3 years</b><span>supporting US-based clients remotely</span></li></ul>
+<h3 style="margin-top:1.5rem">Sample pipeline view</h3>
+<ol class="funnel" aria-label="Sample pipeline for one week, with the share that moves to each next stage"><li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li><li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li><li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li><li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li><li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li></ol>
+<p class="note">Sample data with fictional numbers, to show the format. Percentages show the share of the previous stage. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report</a>.</p>
+<h3 style="margin-top:1.5rem">Example follow-up workflow</h3>
+<ol class="flow" aria-label="Example follow-up workflow"><li><b>New lead</b><span>A form, ad, or call comes in</span></li><li><b>Instant reply</b><span>Email or text with a booking link</span></li><li><b>Booked</b><span>Confirmation, then reminders</span></li><li><b>Show or no-show</b><span>Move the stage, or send a rebooking message</span></li><li><b>Quiet lead</b><span>Short nudge, then a nurture list</span></li></ol>
+<p class="note">Example of the kind of flow I build. Not a real client account.</p>
+<div class="sim"><p class="gd">Try it: pick an event to see what the lead receives.</p><div class="simb" id="simb"><button type="button" data-k="lead" aria-pressed="false">New lead</button><button type="button" data-k="call" aria-pressed="false">Missed call</button><button type="button" data-k="booked" aria-pressed="false">Booked appointment</button><button type="button" data-k="noshow" aria-pressed="false">No-show</button><button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button></div><div class="phone"><div class="ph-head"><span>Example contact</span><span class="ph-badge">Example automation</span></div><ol id="simo" aria-live="polite"></ol></div><p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p></div>
+<figure class="shot" id="shot" hidden><img alt=""><figcaption></figcaption></figure>
+<p class="gd" style="margin-top:1.25rem">I tracked lead sources, show rates, and trial-to-member conversion, and sent weekly and monthly reports. Alongside the automation, I made and took about 100 calls a day, logged in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</p>
+</section>
+
+
+<section id="proof">
+<h2>What clients say</h2>
+<div class="quotes" id="quotes"><blockquote><p>“Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations. He jumped right in, organized our processes, and consistently delivered reliable support without needing to be micromanaged.”</p><cite>Romelle, Assistant, Consulting Company</cite></blockquote><blockquote><p>“Working with Japhette completely elevated our local marketing and store operations. From designing sharp ad creatives and promotional graphics to streamlining our retail compliance and onboarding forms, he brings a rare mix of creativity and operational discipline.”</p><cite>Dom, Store Owner, DHL Express Partner Location</cite></blockquote><blockquote><p>“Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly. He handled everything from CRM automation and social media content to member support with speed, accuracy, and zero drama.”</p><cite>Steve, Owner, Fit Body Boot Camp</cite></blockquote></div>
+</section>
+
+<section id="calculator" class="calc"><h2>What could faster follow-up be worth?</h2>
+<p class="gd">Change the example numbers to yours. Nothing is sent or saved. This is an illustration, not a prediction.</p>
+<div class="cgrid"><label for="c-leads">Leads per month<input type="number" id="c-leads" value="80" min="0" max="100000" step="1" inputmode="decimal"></label><label for="c-book">Leads who book an appointment (%)<input type="number" id="c-book" value="35" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-show">Booked people who show up (%)<input type="number" id="c-show" value="70" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-close">People who show up and become customers (%)<input type="number" id="c-close" value="40" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-ltv">Average customer value ($)<input type="number" id="c-ltv" value="1200" min="0" max="10000000" step="50" inputmode="decimal"></label><label for="c-lift">Improvement from faster follow-up and reminders: <b id="c-lift-v">10%</b><input type="range" id="c-lift" min="0" max="30" value="10"></label></div>
+<div class="cres" id="c-out" aria-live="polite"></div>
+<p class="note">Assumes the improvement applies to both the booking rate and the show rate, each capped at 100%. Your real results depend on your offer, your leads, and your team.</p>
+<p><a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a></p></section>
+
+<section id="services">
+<h2>Services</h2>
+<p class="gd">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
+<h3 style="margin-top:1.25rem">Three ways to start</h3>
+<ol class="tiers"><li><b>1. Free mini audit</b><p class="price">Free</p><p>Send me how you handle leads today. I send back the 3 changes that matter most. <a href="#audit">Request one</a></p></li><li><b>2. Lead-to-booking setup</b><p class="price">Fixed price, from $300</p><p>About two weeks. Pipeline, instant replies, booking calendar, reminders, no-show rebooking, and a checklist your team can follow.</p></li><li><b>3. Ongoing support</b><p class="price">Monthly hours agreed in writing</p><p>Keep the system running and improving, with executive assistant help and a weekly report.</p></li></ol>
+<h3 style="margin-top:1.5rem">All services and starting rates</h3>
+<div class="grid">
+<div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines with automated follow-up, booking calendars and reminders, missed-call text-back, and reporting. A good fit for gyms, studios, and local service businesses.</p><p class="price">From $12 an hour</p></div>
+<div><h3>Social media management</h3><p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p><p class="price">From $350 a month</p></div>
+<div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $8 an hour</p></div>
+</div>
+<details class="fold pkg"><summary>Problems I fix</summary>
+<p class="gd"><b>GoHighLevel and systems</b></p><ul><li>Leads sitting in a spreadsheet or inbox for days: I connect your form to GoHighLevel and set up an instant reply and a text reminder.</li><li>A messy CRM with duplicate contacts: I clean it up and build a simple pipeline so your team knows who to follow up with each morning.</li><li>New inquiries buried in email: I route website forms into GoHighLevel and Slack so someone sees them right away.</li></ul>
+<p class="gd"><b>Executive assistant and admin</b></p><ul><li>An overflowing inbox: I set up filters for invoices and client threads, plus a short daily check-in routine.</li><li>Forgotten contracts and welcome packets: I build an onboarding checklist (for example in Notion) so nothing gets skipped.</li><li>Calendar chaos across time zones: I sort out scheduling and double-bookings.</li></ul>
+<p class="gd"><b>Social media and content</b></p><ul><li>Approvals scattered across Drive and email: I set up one shared content calendar so posts go out on schedule.</li><li>Long recordings you never reuse: I cut them into short clips and graphics.</li></ul></details>
+<details class="fold pkg"><summary>What is in the lead-to-booking setup</summary>
+<p class="gd"><b>Included:</b></p><ul><li>Pipeline stages built around how your business sells</li><li>Instant reply to new leads and missed-call text-back</li><li>Booking calendar with confirmations and reminders</li><li>No-show and follow-up sequences</li><li>A simple report on lead sources and show rates</li><li>A written checklist so your team can run it</li></ul>
+<p class="gd"><b>Timeline:</b> usually about two weeks, depending on scope.</p>
+<p class="gd"><b>What I need from you:</b> access to your CRM or calendar, your offers and prices, and who approves what.</p>
+<p class="note">Final scope and price are confirmed in writing after the intro call.</p></details>
+<p style="margin-top:1.25rem"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="services-book">Book a free intro call</a> <a class="btn alt" href="5-follow-up-automations.pdf" target="_blank" rel="noopener" data-goatcounter-click="services-checklist">Free: 5 follow-up automations (PDF)</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
+<div class="callout" id="audit"><div><h3>Free mini audit</h3><p>Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p></div><div class="aud"><a class="btn main" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A" target="_blank" rel="noopener" data-goatcounter-click="audit-gmail">Request a free audit</a><p class="note">Opens Gmail in a new tab. No Gmail? <a href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit" data-goatcounter-click="audit-mailto">Use your mail app</a> or <button type="button" class="linkbtn" id="cpe">copy my email</button>.</p><p class="note" id="audit-note" hidden>Your calculator numbers are included in the email.</p><p class="note"><a href="sample-audit.pdf" target="_blank" rel="noopener" data-goatcounter-click="sample-audit">See a sample audit (PDF)</a></p></div></div>
+</section>
+
+<section id="design" class="dsg"><h2>Design and brand work</h2><p class="gd">Logo and brand concepts for DR.PPF and Elusive Wraps, plus social graphics and video.</p><a class="dgrid" href="design.html" aria-label="See all design work" data-goatcounter-click="design-thumbs"><img src="work/t/drppf-1.jpg" alt="Chrome blackletter wordmark on black with gold frame" loading="lazy"><img src="work/t/drppf-7.jpg" alt="Geometric panther head over car outline" loading="lazy"><img src="work/t/elusive-60.jpg" alt="Elusive Wraps brand concept" loading="lazy"></a><p><a class="btn main" href="design.html" data-goatcounter-click="design-all">See all design work</a></p></section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="proj">
+<h3>Content Calendar</h3>
+<p>A web app I built to replace my Excel social media content calendar. Posts are planned in one place, stored in a database, and sent to the client for approval.</p>
+<a class="btn main" href="https://japhette-vms.github.io/content-calendar/" target="_blank" rel="noopener">Open the app</a>
+<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://japhette-vms.github.io/content-calendar/" title="Content Calendar live demo" loading="lazy"></iframe><p class="note">If the demo does not load here, open the app in its own tab.</p></details>
+</div>
+<div class="proj" style="margin-top:1rem">
+<h3>Job Application Tracker</h3>
+<p>A web app I built to run my own job search: applications, follow-up reminders, board and calendar views, and tools that tailor a resume to each job. Create a free account to keep your data, or open the demo with sample data. No account needed.</p>
+<a class="btn main" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a>
+<p class="note">On the sign-in screen, click “Try the demo”.</p>
+</div>
+<div class="proj soon" style="margin-top:1rem">
+<h3>Lead and booking system <span class="badge">Coming soon</span></h3>
+<p>A lightweight lead and booking tool built from what I have learned running pipelines, follow-up, and reminders in GoHighLevel. Planned: contacts, a pipeline board you can rename for any business, a booking page with reminders, and simple follow-up automations. It is in development. Tell me what you would want it to do on an intro call.</p>
+<a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-book">Book a call</a>
+</div>
+</section>
+
+<section id="my-work" class="work">
+<h2>Work</h2>
+<p class="gd">Pick a client, then swipe or scroll sideways. Tap an image to enlarge it. Logo and brand design has its own page: <a href="design.html">see the design work</a>.</p>
+<details class="fold" id="work-fold"><summary>Show social media and video samples</summary>
+<div class="tabs" role="group" aria-label="Choose a client"><button type="button" data-g="g-dhl" aria-pressed="false">DHL Partner Shop</button><button type="button" data-g="g-fbbc" aria-pressed="false">Fit Body Boot Camp</button><button type="button" data-g="g-shiputah" aria-pressed="false">Ship Utah</button><button type="button" data-g="g-wj" aria-pressed="false">WJ Construction</button><button type="button" data-g="g-zap" aria-pressed="false">Zapatos</button><button type="button" data-g="g-ai" aria-pressed="false">AI video</button></div>
+<div class="group" id="g-dhl"><h3>DHL Express Partner Shop</h3><p class="gd">Facebook and Instagram posts, carousels, and short videos for a DHL Express partner shop. Some visuals are AI-assisted.</p><h4>Four steps to ship (4)</h4><div class="strip" tabindex="0" role="region" aria-label="DHL Express Partner Shop: Four steps to ship"><button type="button" class="th"><img src="work/t/dhl-01.jpg" data-full="work/dhl-01.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Step 1: Pack it" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-02.jpg" data-full="work/dhl-02.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Step 2: Bring ID and address" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-03.jpg" data-full="work/dhl-03.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Step 3: We handle the paperwork" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-04.jpg" data-full="work/dhl-04.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Step 4: Track it online" loading="lazy" width="886" height="1100"></button></div><h4>The dog carousel (7)</h4><div class="strip" tabindex="0" role="region" aria-label="DHL Express Partner Shop: The dog carousel"><button type="button" class="th"><img src="work/t/dhl-05.jpg" data-full="work/dhl-05.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Don’t swipe" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-06.jpg" data-full="work/dhl-06.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Too late" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-07.jpg" data-full="work/dhl-07.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Express department" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-08.jpg" data-full="work/dhl-08.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Packing department" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-09.jpg" data-full="work/dhl-09.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Customs department" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-10.jpg" data-full="work/dhl-10.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Tracking department" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-11.jpg" data-full="work/dhl-11.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ship the world" loading="lazy" width="886" height="1100"></button></div><h4>Posts (19)</h4><div class="strip" tabindex="0" role="region" aria-label="DHL Express Partner Shop: Posts"><button type="button" class="th"><img src="work/t/dhl-12.jpg" data-full="work/dhl-12.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Halloween at the shop" loading="lazy" width="733" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-13.jpg" data-full="work/dhl-13.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Your mailbox, your business address" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-14.jpg" data-full="work/dhl-14.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ready when you are, globe and parcel" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-15.jpg" data-full="work/dhl-15.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ready when you are, storefront" loading="lazy" width="825" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-16.jpg" data-full="work/dhl-16.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ship more, do more with us banner" loading="lazy" width="1100" height="409"></button><button type="button" class="th"><img src="work/t/dhl-17.jpg" data-full="work/dhl-17.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Need it printed?" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-18.jpg" data-full="work/dhl-18.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ask us anything Thursday" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-19.jpg" data-full="work/dhl-19.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="From our counter to their door" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-20.jpg" data-full="work/dhl-20.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Not sure which service fits?" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-21.jpg" data-full="work/dhl-21.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Track every shipment" loading="lazy" width="1100" height="581"></button><button type="button" class="th"><img src="work/t/dhl-22.jpg" data-full="work/dhl-22.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Holiday gifts going overseas?" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-23.jpg" data-full="work/dhl-23.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Thank you for shipping with us" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-24.jpg" data-full="work/dhl-24.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Veterans Day" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-25.jpg" data-full="work/dhl-25.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Did you know: DHL’s first couriers" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/dhl-26.jpg" data-full="work/dhl-26.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Did you know: the initials in DHL" loading="lazy" width="733" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-27.jpg" data-full="work/dhl-27.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Breast Cancer Awareness Month banner" loading="lazy" width="1100" height="619"></button><button type="button" class="th"><img src="work/t/dhl-28.jpg" data-full="work/dhl-28.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Breast Cancer Awareness Month poster" loading="lazy" width="825" height="1100"></button><button type="button" class="th"><img src="work/t/dhl-29.jpg" data-full="work/dhl-29.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="At the DHL counter" loading="lazy" width="1100" height="733"></button><button type="button" class="th"><img src="work/t/dhl-30.jpg" data-full="work/dhl-30.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Pointing out destinations on the map" loading="lazy" width="1100" height="733"></button></div><h4>Videos (5)</h4><div class="strip" tabindex="0" role="region" aria-label="DHL Express Partner Shop: Videos"><figure><video controls playsinline preload="none" poster="work/t/dhl-31.jpg" class="port"><source src="work/dhl-31.mp4" type="video/mp4"></video><figcaption>Packing peanuts slow motion</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/dhl-32.jpg" class="port"><source src="work/dhl-32.mp4" type="video/mp4"></video><figcaption>Shop montage</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/dhl-33.jpg" class="port"><source src="work/dhl-33.mp4" type="video/mp4"></video><figcaption>Shop montage with kinetic text</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/dhl-34.jpg" class="port"><source src="work/dhl-34.mp4" type="video/mp4"></video><figcaption>AI video: the shop dog dancing</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/dhl-35.jpg" class="port"><source src="work/dhl-35.mp4" type="video/mp4"></video><figcaption>Awareness month video, made in Canva</figcaption></figure></div></div>
+<div class="group" id="g-shiputah"><h3>Ship Utah Consulting</h3><p class="gd">A client testimonial quote and the “Signs of Chaos” mail center series.</p><h4>Posts (4)</h4><div class="strip" tabindex="0" role="region" aria-label="Ship Utah Consulting: Posts"><button type="button" class="th"><img src="work/t/shiputah-36.jpg" data-full="work/shiputah-36.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Client testimonial quote" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/shiputah-37.jpg" data-full="work/shiputah-37.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Signs of Chaos" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/shiputah-38.jpg" data-full="work/shiputah-38.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Sign 1: You’re the only one who knows" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/shiputah-39.jpg" data-full="work/shiputah-39.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Sign 2: Your SOPs live in your head" loading="lazy" width="880" height="1100"></button></div></div>
+<div class="group" id="g-fbbc"><h3>Fit Body Boot Camp</h3><p class="gd">Ad and community post graphics. Visuals are AI-assisted.</p><h4>Posts (4)</h4><div class="strip" tabindex="0" role="region" aria-label="Fit Body Boot Camp: Posts"><button type="button" class="th"><img src="work/t/fbbc-40.jpg" data-full="work/fbbc-40.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="30 minutes, real results ad" loading="lazy" width="882" height="1100"></button><button type="button" class="th"><img src="work/t/fbbc-41.jpg" data-full="work/fbbc-41.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Join the Fit Body family" loading="lazy" width="1100" height="1100"></button><button type="button" class="th"><img src="work/t/fbbc-42.jpg" data-full="work/fbbc-42.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Bring a Friend Friday" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/fbbc-45.jpg" data-full="work/fbbc-45.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Crush the class" loading="lazy" width="886" height="1100"></button></div></div>
+<div class="group" id="g-wj"><h3>WJ Construction and Engr. Services</h3><p class="gd">Social media posts for CCTV and network cabling services. Visuals are AI-assisted.</p><h4>Posts (4)</h4><div class="strip" tabindex="0" role="region" aria-label="WJ Construction and Engr. Services: Posts"><button type="button" class="th"><img src="work/t/wj-47.jpg" data-full="work/wj-47.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="5 signs your CCTV needs an upgrade" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/wj-48.jpg" data-full="work/wj-48.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Connecting the future, one cable at a time" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/wj-49.jpg" data-full="work/wj-49.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Security blind spot detected" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/wj-50.jpg" data-full="work/wj-50.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="How we plan a camera layout" loading="lazy" width="886" height="1100"></button></div></div>
+<div class="group" id="g-zap"><h3>Zapatos</h3><p class="gd">Product posts, lifestyle posts, and logo concepts for my own shoe store. Lifestyle visuals and logo concepts are AI-assisted.</p><h4>Product drops (3)</h4><div class="strip" tabindex="0" role="region" aria-label="Zapatos: Product drops"><button type="button" class="th"><img src="work/t/zap-51.jpg" data-full="work/zap-51.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="AE86 Tofu Shop Edition" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/zap-52.jpg" data-full="work/zap-52.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Patchwork Low" loading="lazy" width="880" height="1100"></button><button type="button" class="th"><img src="work/t/zap-53.jpg" data-full="work/zap-53.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Suede slides, size 42" loading="lazy" width="880" height="1100"></button></div><h4>Lifestyle posts (5)</h4><div class="strip" tabindex="0" role="region" aria-label="Zapatos: Lifestyle posts"><button type="button" class="th"><img src="work/t/zap-54.jpg" data-full="work/zap-54.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Sneaker or loafer?" loading="lazy" width="614" height="1100"></button><button type="button" class="th"><img src="work/t/zap-55.jpg" data-full="work/zap-55.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="New arrivals" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/zap-56.jpg" data-full="work/zap-56.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="One pair, three outfits" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/zap-57.jpg" data-full="work/zap-57.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Unboxing, sole first" loading="lazy" width="886" height="1100"></button><button type="button" class="th"><img src="work/t/zap-58.jpg" data-full="work/zap-58.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Phone, shoebox, and tape measure scene" loading="lazy" width="886" height="1100"></button></div><h4>Logo concepts (13)</h4><div class="strip" tabindex="0" role="region" aria-label="Zapatos: Logo concepts"><button type="button" class="th"><img src="work/t/zaplogo-1.jpg" data-full="work/zaplogo-1.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Graffiti sneakers logo in orange and teal" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-2.jpg" data-full="work/zaplogo-2.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Graffiti sneaker sticker logo" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-3.jpg" data-full="work/zaplogo-3.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Neon retro synthwave sneaker logo" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-4.jpg" data-full="work/zaplogo-4.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Orange Z built from a sneaker" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-5.jpg" data-full="work/zaplogo-5.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Black and yellow beast emblem" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-6.jpg" data-full="work/zaplogo-6.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Ukiyo-e waves sneaker poster" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-7.jpg" data-full="work/zaplogo-7.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Talavera folk-art sneaker poster" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-8.jpg" data-full="work/zaplogo-8.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Holographic chrome sneaker emblem" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-9.jpg" data-full="work/zaplogo-9.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Vintage bootmaker crest on leather" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-10.jpg" data-full="work/zaplogo-10.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Cosmic orbital sneaker emblem" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-11.jpg" data-full="work/zaplogo-11.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Eco-grown sneaker logo with plants" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-12.jpg" data-full="work/zaplogo-12.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Sneaker mascot sticker logo" loading="lazy" width="880" height="880"></button><button type="button" class="th"><img src="work/t/zaplogo-13.jpg" data-full="work/zaplogo-13.jpg" decoding="async" onerror="this.onerror=null;this.src=this.dataset.full" alt="Retro pixel arcade sneaker logo" loading="lazy" width="880" height="880"></button></div></div>
+<div class="group" id="g-ai"><h3>AI video</h3><p class="gd">Short clips made with Higgsfield AI.</p><h4>Videos (6)</h4><div class="strip" tabindex="0" role="region" aria-label="AI video: Videos"><figure><video controls playsinline preload="none" poster="work/t/ai-76.jpg" class="port"><source src="work/ai-76.mp4" type="video/mp4"></video><figcaption>White sports car at night</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/ai-77.jpg" class="port"><source src="work/ai-77.mp4" type="video/mp4"></video><figcaption>Black SUV in the smoke</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/ai-78.jpg" class="land"><source src="work/ai-78.mp4" type="video/mp4"></video><figcaption>Group dance</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/ai-79.jpg" class="port"><source src="work/ai-79.mp4" type="video/mp4"></video><figcaption>Two dancers in a purple studio</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/ai-80.jpg" class="land"><source src="work/ai-80.mp4" type="video/mp4"></video><figcaption>AE86 sneaker spin</figcaption></figure><figure><video controls playsinline preload="none" poster="work/t/ai-81.jpg" class="land"><source src="work/ai-81.mp4" type="video/mp4"></video><figcaption>Blue and white sneaker spin</figcaption></figure></div></div>
+</details>
+</section>
+<section id="experience">
+<h2>Experience</h2>
+<article class="job"><time>Jan 2026 – Oct 2026</time><div><h3>Executive Assistant and Operations Support</h3><div class="co">DHL Express Partner Shop</div><ul>
+<li>Managed the owner’s calendar, email, and scheduling, and handled inbound and outbound calls.</li>
+<li>Ran about 20 discovery meetings a week, with notes and follow-ups.</li>
+<li>Wrote operations handbooks, streamlined compliance and onboarding forms, and advised staff across 5 stores in 4 states (Utah, Colorado, California, and Washington).</li>
+<li>Created social media content for each store’s market.</li></ul></div></article>
+<article class="job"><time>Sep 2023 – Dec 2025</time><div><h3>General Virtual Assistant</h3><div class="co">Fit Body Boot Camp</div><ul>
+<li>Built GoHighLevel funnels and automations (call follow-up sequences, email blasts, contact tagging) so every lead got a quick reply and a clear next step.</li>
+<li>Made and took about 100 calls a day, tracked in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</li>
+<li>Prepared weekly and monthly reports on lead sources, show rates, and trial-to-member conversion.</li>
+<li>Handled billing, refund, and cancellation requests.</li></ul></div></article>
+<article class="job"><time>Sep 2012 – present</time><div><h3>Owner and Operations Manager</h3><div class="co">WJ Construction and Engr. Services</div><ul>
+<li>Run every part of the business, part-time alongside remote work since 2020.</li>
+<!-- TODO: add 2-3 specifics here (e.g. scheduling crews, quotes, clients, CCTV and cabling projects) --></ul></div></article>
+<details class="fold"><summary>Earlier roles and education</summary>
+<article class="job"><time>Mar 2024 – Jan 2026</time><div><h3>Social Media Creative</h3><div class="co">Chicken Chingu (project-based)</div><ul>
+<li>Created and delivered social media content on a project basis.</li></ul></div></article>
+<article class="job"><time>2019 – 2023</time><div><h3>Earlier roles</h3><div class="co">Samsung, TikTok, 1-800-Flowers (via Inspiro)</div><ul>
+<li>Technical Support at Samsung (Feb 2019 – Mar 2020).</li>
+<li>Content Moderator at TikTok (Mar 2020 – Apr 2023).</li>
+<li>Customer Service at 1-800-Flowers via Inspiro (Apr – Aug 2023).</li></ul></div></article>
+<article class="job"><time>2008 – 2012</time><div><h3>BS Information Technology, Major in System Engineering</h3><div class="co">Colegio de San Juan de Letran</div></div></article>
+</details>
+</section>
+
+<section id="how">
+<h2>How I work</h2>
+<div class="grid">
+<div><h3>Your time zone</h3><p>I’m based in the Philippines (PHT) and I adjust my working hours to your time zone, wherever you are. We agree on overlap hours up front. I reply to email and WhatsApp within one business day, and flag anything urgent the same day.</p></div>
+<div><h3>Communication</h3><p>I work in email, Slack, Google Workspace and Microsoft 365, and send notes and follow-ups after meetings.</p></div>
+<div><h3>Reporting</h3><p>Weekly and monthly performance reports, with calls and leads tracked in Google Sheets.</p><p><a href="sample-weekly-report.pdf" target="_blank" rel="noopener">See a sample weekly report (PDF)</a></p></div>
+<div><h3>Documentation</h3><p>I write handbooks and checklists so the work can be repeated, as I did for 5 stores in 4 states.</p></div>
+</div>
+<details class="fold"><summary>Your first two weeks</summary>
+<p class="gd">What working together looks like at the start, so you know what to expect.</p>
+<div class="grid steps">
+<div><span class="n">1</span><h3>Days 1–2: Intake and access</h3><p>One call to learn your goals and how leads, bookings, and customers move today. You share access to your calendar, inbox, CRM, and shared files.</p></div>
+<div><span class="n">2</span><h3>Days 3–5: Map and quick wins</h3><p>I map the path from first contact to booked appointment, tidy the inbox and calendar, and set up the fast fixes first, such as missed-call text-back and instant replies.</p></div>
+<div><span class="n">3</span><h3>Week 2: Build and document</h3><p>I build the pipeline stages and follow-up sequences, test them with real leads, and write the checklist or handbook for everything I set up.</p></div>
+<div><span class="n">4</span><h3>End of week 2: Report and review</h3><p>You get a first report on lead sources, response, and bookings, and we agree on priorities and a weekly check-in.</p></div>
+</div>
+<p style="margin:1rem 0"><a class="btn alt" href="client-onboarding-checklist.pdf" target="_blank" rel="noopener">See the client onboarding checklist (PDF)</a></p>
+</details>
+</section>
+
+<section id="skills" class="skills">
+<h2>Skills and tools</h2>
+<h3>Skills</h3>
+<ul class="chips"><li>GoHighLevel funnels and automation</li><li>Cold calling</li><li>Customer support</li><li>Calendar and inbox management</li><li>Reporting</li><li>Social media management</li><li>Operations documentation</li><li>Workflow automation</li><li>Email marketing</li></ul>
+<h3>Key tools</h3>
+<ul class="chips"><li>GoHighLevel</li><li>HubSpot</li><li>Zapier</li><li>Google Workspace</li><li>Canva</li><li>Slack</li></ul>
+<details class="fold"><summary>See all 30 tools</summary>
+<h4 class="tg">CRM and automation</h4><ul class="chips tools"><li><a href="https://www.gohighlevel.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gohighlevel.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>GoHighLevel</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.salesforce.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=salesforce.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Salesforce</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.zendesk.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zendesk.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zendesk</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.hubspot.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=hubspot.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>HubSpot</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://mailchimp.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=mailchimp.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Mailchimp</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://zapier.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zapier.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zapier</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.make.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=make.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Make</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+<h4 class="tg">Payments and booking</h4><ul class="chips tools"><li><a href="https://stripe.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=stripe.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Stripe</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=paypal.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>PayPal</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://calendly.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=calendly.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Calendly</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+<h4 class="tg">Productivity and communication</h4><ul class="chips tools"><li><a href="https://workspace.google.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=workspace.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Workspace</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://workspace.google.com/products/sheets/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=sheets.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Sheets</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://workspace.google.com/products/meet/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=meet.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Google Meet</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://zoom.us" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zoom.us&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Zoom</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.loom.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=loom.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Loom</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Microsoft 365</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.notion.so" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=notion.so&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Notion</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://asana.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=asana.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Asana</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://trello.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=trello.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Trello</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://slack.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=slack.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Slack</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+<h4 class="tg">Social media and design</h4><ul class="chips tools"><li><a href="https://business.facebook.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=facebook.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Meta Business Suite</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://buffer.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=buffer.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Buffer</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.canva.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Canva</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://www.capcut.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=capcut.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>CapCut</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+<h4 class="tg">Web and data</h4><ul class="chips tools"><li><a href="https://github.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>GitHub</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://supabase.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=supabase.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Supabase</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+<h4 class="tg">AI</h4><ul class="chips tools"><li><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>ChatGPT</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Claude</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Gemini</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://higgsfield.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Higgsfield AI</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
+</details>
+<div id="certs" hidden><h3>Certifications</h3><ul class="chips" id="certlist"></ul></div>
+</section>
+
+<section id="faq" class="faq">
+<h2>FAQ</h2>
+<details><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
+<details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
+<details><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
+<details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
+<details><summary>How does pricing work?</summary><p>I quote after the intro call, based on the size of the work. You get the scope and price in writing before we start.</p></details>
+</section>
+
+<section id="book" class="book">
+<h2>Book a call</h2>
+<p class="gd">A free 30-minute intro call, no prep needed. Times show in your own time zone, and I can adjust my hours to yours.</p>
+<p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="book-section">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="book-email">Email instead</a></p>
+</section>
+
+<footer id="contact">
+<div class="cta-card">
+<img class="cta-photo" src="profile.jpg" width="112" height="112" alt="" loading="lazy" onerror="this.style.display='none'">
+<div>
+<span class="pill">Open to new roles and clients</span>
+<h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
+<p>Tell me how leads reach you today and I’ll tell you what I would fix first.</p>
+<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a><a class="btn alt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Hello" target="_blank" rel="noopener" data-goatcounter-click="footer-email">Email me</a></div>
+</div>
+</div>
+<ul class="contact-row"><li><a href="mailto:loomwellops@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>loomwellops@gmail.com</a></li><li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13a3 3 0 0 1 6 0v4"/></svg>linkedin.com/in/japhette-alec-pulido</a></li><li><a href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20l1.1-5.1A8 8 0 1 1 21 12z"/></svg>WhatsApp</a></li><li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume (PDF)</a></li></ul>
+<p class="more"><a href="design.html">Design work</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
+<p class="up"><a href="#top">Back to top</a></p>
+</footer>
+</main>
+</div>
+<a id="stick" class="btn main off" href="#contact">Contact</a>
+<dialog id="lb" aria-label="Enlarged image"><img alt=""><button type="button" class="x" aria-label="Close">×</button></dialog>
 <script>
-const CFG={SUPABASE_URL:"https://ywowmewfdaalgoqrimyj.supabase.co",SUPABASE_ANON_KEY:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3b3dtZXdmZGFhbGdvcXJpbXlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4ODk4NjAsImV4cCI6MjExMDQ2NTg2MH0.KXXW61f05PyTD-9Jixl9xJNtvqdXrnnuxB2nEf5V4b0",AI_URL:"https://loomwellops-ai.loomwellops.workers.dev"};
-const ST=["To Apply","Applied","Screening","Interviewing","Assessment","Offer Received","Rejected","Ghosted","Withdrawn"];
-const OPEN=["To Apply","Applied","Screening","Interviewing","Assessment"];
-let pendJd="";const K="lw.v3";let S,cur=null,ab=null,sample=null,dl=null,view="list",U=null,sb=null,tm=null;
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const today=()=>new Date().toISOString().slice(0,10);
-const blank=()=>({resume:"",goal:10,apps:[]});
-const key=()=>K+(U?"."+U.id:"");
-function load(){try{const r=localStorage.getItem(key());if(r)return JSON.parse(r)}catch(e){}return blank()}
-function save(){try{localStorage.setItem(key(),JSON.stringify(S))}catch(e){}
-if(sb&&U){clearTimeout(tm);$("sy").textContent="Saving…";tm=setTimeout(async()=>{const r=await sb.from("trackers").upsert({user_id:U.id,data:S,updated_at:new Date().toISOString()});$("sy").textContent=r.error?"Sync failed. Changes are saved on this device.":"Synced"},700)}}
-function msg(t){$("msg").textContent=t;setTimeout(()=>{if($("msg").textContent===t)$("msg").textContent=""},4000)}
-S=load();S.goal=S.goal||10;
-if(window.claude){claude.use("sample").then(x=>sample=x).catch(()=>{});claude.use("downloads").then(x=>dl=x).catch(()=>{})}
-const days=d=>Math.floor((Date.now()-new Date(d+"T00:00:00"))/864e5);
-const host=l=>{try{const h=new URL(l).hostname.split(".");return h[h.length-2]||"other"}catch(e){return"other"}};
-$("f").innerHTML='<option value="">All statuses</option>'+ST.map(s=>`<option>${s}</option>`).join("");
-$("th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark"};
-function bars(rows){const m=Math.max(1,...rows.map(r=>r[1]));return rows.map(r=>`<div class="br"><span>${esc(r[0])}</span><i style="width:${r[1]/m*100}%"></i><b>${r[1]}</b></div>`).join("")}
-function card(a){const age=days(a.d),old=a.s==="Applied"&&age>=14,gh=old&&age>=30,dup=S.apps.filter(x=>x.c===a.c).length,due=a.f&&a.f<=today()&&OPEN.includes(a.s);
-return`<div class="card" data-id="${a.id}" ${view==="board"?'draggable="true"':""}><div><h3>${esc(a.t)}${a.tr?'<span class="dot" title="Tailored resume saved"></span>':""}${gh?'<span class="tag w">Ghosted? '+age+'d</span>':old?'<span class="tag w">Follow up · '+age+'d</span>':""}${due?'<span class="tag w">Due</span>':""}${dup>1?'<span class="tag">'+dup+' roles here</span>':""}</h3><small>${esc(a.c)} · ${esc(a.d)}${a.p?" · "+esc(a.p):""}${a.k?" · "+esc(a.k):""}</small></div>
-<div class="act"><select data-a="st">${ST.map(s=>`<option${s===a.s?" selected":""}>${s}</option>`).join("")}</select><button class="s p" data-a="tl">Tailor</button><button class="s" data-a="ed">Edit</button>${a.l?`<a class="note" href="${esc(a.l)}" target="_blank" rel="noopener noreferrer">Link</a>`:""}</div></div>`}
-function render(){
-const A=S.apps,n=s=>A.filter(a=>a.s===s).length,tot=A.length;
-const resp=A.filter(a=>["Screening","Interviewing","Assessment","Offer Received","Rejected"].includes(a.s)).length;
-const fu=A.filter(a=>a.s==="Applied"&&days(a.d)>=14).length,wk=A.filter(a=>days(a.d)<7).length;
-$("stats").innerHTML=[["Total",tot],["Interviewing",n("Interviewing")],["Offers",n("Offer Received")],["Response rate",tot?Math.round(resp/tot*100)+"%":"0%"],["Need follow-up",fu]].map(x=>`<div class="chip"><b>${x[1]}</b><span>${x[0]}</span></div>`).join("")+`<div class="chip"><b>${wk}/<input id="gl" type="number" min="1" value="${S.goal}" aria-label="Weekly goal"></b><span>Applied this week (goal)</span></div>`;
-$("gl").onchange=e=>{S.goal=Math.max(1,+e.target.value||10);save();render()};
-const wks=[5,4,3,2,1,0].map(i=>[i?i+"w ago":"This week",A.filter(a=>Math.floor(days(a.d)/7)===i).length]);
-const src={};A.forEach(a=>{const h=host(a.l);src[h]=(src[h]||0)+1});
-const top=Object.entries(src).sort((a,b)=>b[1]-a[1]).slice(0,5);
-const RP=["Screening","Interviewing","Assessment","Offer Received","Rejected"];
-const rate=g=>{const m={};A.filter(a=>a.s!=="To Apply").forEach(a=>{const k=g(a);(m[k]=m[k]||[0,0]);m[k][0]++;if(RP.includes(a.s))m[k][1]++});return bars(Object.entries(m).filter(e=>e[1][0]).sort((x,y)=>y[1][0]-x[1][0]).slice(0,5).map(e=>[e[0]+" ("+e[1][1]+"/"+e[1][0]+")",Math.round(e[1][1]/e[1][0]*100)]))||'<p class="note">Add applied jobs to see this.</p>'};
-const stt=ST.map(s=>[s,n(s)]).filter(r=>r[1]);
-$("ch").innerHTML=`<div class="panel"><h4>Applications per week</h4>${bars(wks)}</div><div class="panel"><h4>By status</h4>${bars(stt)}</div><div class="panel"><h4>Top job sites</h4>${bars(top)}</div><div class="panel"><h4>Reply rate by site (%)</h4>${rate(a=>host(a.l))}</div><div class="panel"><h4>Reply rate by resume version (%)</h4>${rate(a=>(RS()[a.ri||0]||{n:"Main"}).n)}</div>`;
-const q=$("q").value.toLowerCase(),f=$("f").value;
-const L=A.filter(a=>(!f||a.s===f)&&(a.t+" "+a.c+" "+(a.n||"")).toLowerCase().includes(q)).sort((a,b)=>b.d.localeCompare(a.d));
-$("vc").setAttribute("aria-pressed",view==="cal");$("vl").setAttribute("aria-pressed",view==="list");$("vb").setAttribute("aria-pressed",view==="board");
-if(view==="cal"){const ev=[];A.forEach(a=>{if(a.i)ev.push([a.i,"Interview",a]);if(a.f&&OPEN.includes(a.s))ev.push([a.f,"Follow up",a])});ev.sort((x,y)=>x[0].localeCompare(y[0]));const t0=today();
-$("list").innerHTML='<div class="row"><button class="s" id="ics">Export .ics (add to phone calendar)</button></div>'+(ev.length?ev.map(e=>`<div class="card" data-id="${e[2].id}"><div><h3>${esc(e[1])}: ${esc(e[2].t)}${e[0].slice(0,10)<t0?'<span class="tag w">Past</span>':e[0].slice(0,10)===t0?'<span class="tag w">Today</span>':""}</h3><small>${esc(e[2].c)} · ${esc(e[0].replace("T"," "))}</small></div><div class="act"><button class="s" data-a="ed">Open</button></div></div>`).join(""):'<p class="note">No dates yet. Add an interview date or follow-up date to a job.</p>');
-const ic=$("ics");if(ic)ic.onclick=()=>{const z=x=>x.replace(/[-:]/g,"").slice(0,15).padEnd(15,"0").replace(/^(.{8})$/,"$1T000000"),L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//LoomwellOps//EN"];ev.forEach(e=>{const d=e[0].includes("T")?z(e[0].length===16?e[0]+":00":e[0]):e[0].replace(/-/g,"");L.push("BEGIN:VEVENT","UID:"+e[2].id+e[1].replace(/\W/g,"")+"@loomwellops","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",e[0].includes("T")?"DTSTART:"+d:"DTSTART;VALUE=DATE:"+d,"SUMMARY:"+e[1]+": "+e[2].t+" @ "+e[2].c,"END:VEVENT")});L.push("END:VCALENDAR");out0("loomwellops-calendar.ics",L.join("\r\n"),"text/calendar")}}
-else if(view==="board")$("list").innerHTML='<div class="kb">'+ST.map(s=>{const c=L.filter(a=>a.s===s);return`<div class="col" data-s="${s}"><h4>${s}<span>${c.length}</span></h4>${c.map(card).join("")}</div>`}).join("")+"</div>";
-else $("list").innerHTML=L.map(card).join("")||(S.apps.length?'<p class="note">No matches.</p>':'<div class="empty"><b>Your tracker is empty.</b><p>Start with <b>Master resume</b> (paste or drop your resume), then click <b>+ Add job</b> for your first application. You can also import a backup file.</p></div>')}
-$("q").oninput=render;$("f").onchange=render;
-$("vl").onclick=()=>{view="list";render()};$("vb").onclick=()=>{view="board";render()};$("vc").onclick=()=>{view="cal";render()};
-const byId=id=>S.apps.find(x=>x.id===id);
-$("list").onchange=e=>{if(e.target.dataset.a!=="st")return;byId(e.target.closest(".card").dataset.id).s=e.target.value;save();render()};
-$("list").onclick=e=>{const b=e.target.closest("button");const c=b&&b.closest(".card");if(!c)return;cur=byId(c.dataset.id);b.dataset.a==="ed"?editJob(cur):openTailor(cur)};
-$("list").ondragstart=e=>{const c=e.target.closest(".card");if(c)e.dataTransfer.setData("text",c.dataset.id)};
-$("list").ondragover=e=>{const c=e.target.closest(".col");if(c){e.preventDefault();document.querySelectorAll(".col.over").forEach(x=>x.classList.remove("over"));c.classList.add("over")}};
-$("list").ondrop=e=>{const c=e.target.closest(".col");if(!c)return;e.preventDefault();const a=byId(e.dataTransfer.getData("text"));if(a){a.s=c.dataset.s;save();render()}};
-function editJob(a){cur=a;$("djt").textContent=a?"Edit job":"Add job";[["jt","t"],["jc","c"],["jp","p"],["jl","l"],["jk","k"],["jn","n"],["jf","f"],["ji","i"],["jlg","lg"]].forEach(p=>$(p[0]).value=a?.[p[1]]||"");pendJd="";$("jam").textContent="";
-$("jd").value=a?.d||today();$("jdel").hidden=!a;$("jdel").textContent="Delete";$("dj").showModal()}
-$("jla").onclick=()=>{const t=$("jlg").value;$("jlg").value=today()+": \n"+t;$("jlg").focus();$("jlg").setSelectionRange(12,12)};
-$("jaf").onclick=async()=>{const u=$("jl").value.trim();if(!u){$("jam").textContent="Paste the posting link first.";return}$("jaf").disabled=true;$("jam").textContent="Reading the posting...";
-try{const tok=(await sb.auth.getSession()).data.session?.access_token;const r=await fetch(CFG.AI_URL,{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+tok},body:JSON.stringify({url:u})});const j=await r.json();if(!r.ok)throw new Error(j.error||"Failed ("+r.status+")");
-if(j.title&&!$("jt").value)$("jt").value=j.title;if(j.company&&!$("jc").value)$("jc").value=j.company;if(j.pay&&!$("jp").value)$("jp").value=j.pay;pendJd=j.description||"";$("jam").textContent="Filled in. Check the details, then Save. The description is saved for tailoring."}
-catch(e){$("jam").textContent=e.message||"Could not read that link."}$("jaf").disabled=false};
-$("add").onclick=()=>editJob(null);$("jx").onclick=()=>$("dj").close();
-$("js").onclick=()=>{if(!$("jt").value.trim())return;const v={t:$("jt").value.trim(),c:$("jc").value.trim(),p:$("jp").value.trim(),d:$("jd").value,l:$("jl").value.trim(),k:$("jk").value.trim(),n:$("jn").value,f:$("jf").value,i:$("ji").value,lg:$("jlg").value};if(pendJd)v.jd=pendJd;
-if(cur)Object.assign(cur,v);else S.apps.push({id:"n"+Date.now(),s:"Applied",jd:"",tr:"",...v});save();render();$("dj").close()};
-$("jdel").onclick=()=>{if($("jdel").textContent==="Delete"){$("jdel").textContent="Click again to confirm";return}S.apps=S.apps.filter(x=>x!==cur);save();render();$("dj").close()};
-const RS=()=>{if(!S.rs||!S.rs.length)S.rs=[{n:"Main",t:S.resume||""}];return S.rs};
-const curRes=()=>(RS()[+$("tsel").value||0]||{t:""}).t;let ri=0;
-function fillRs(){const r=RS();ri=Math.min(ri,r.length-1);$("rsel").innerHTML=r.map((x,i)=>`<option value="${i}">${esc(x.n)}</option>`).join("");$("rsel").value=ri;$("rnm").value=r[ri].n;$("rt").value=r[ri].t}
-function stash(){const r=RS();r[ri].t=$("rt").value;r[ri].n=$("rnm").value.trim()||r[ri].n}
-$("rsel").onchange=()=>{stash();ri=+$("rsel").value;fillRs()};
-$("rnw").onclick=()=>{stash();RS().push({n:"Version "+(RS().length+1),t:""});ri=RS().length-1;fillRs()};
-$("rdl").onclick=()=>{if(RS().length>1&&confirm("Delete this resume version?")){RS().splice(ri,1);ri=0;fillRs()}};
-$("mr").onclick=()=>{ri=0;fillRs();$("dr").showModal()};$("rx").onclick=()=>$("dr").close();
-$("rs").onclick=()=>{stash();S.resume=RS()[0].t;save();$("dr").close()};
-function openTailor(a){$("dtt").textContent=a.t+" @ "+a.c;$("td").value=a.jd||"";$("to").value=a.tr||"";$("cl").value=a.cl||"";
-$("tsel").innerHTML=RS().map((x,i)=>`<option value="${i}">${esc(x.n)}</option>`).join("");$("tsel").value=a.ri<RS().length?a.ri||0:0;$("tnt").value=a.nt||"";$("xo").value="";
-$("tn").textContent=RS().some(x=>x.t.trim())?"":"Add your master resume first (Master resume button).";$("dt").showModal()}
-$("tx").onclick=()=>{ab&&ab.abort();$("dt").close()};$("ts").onclick=()=>ab&&ab.abort();
-async function ask(p,on,sig){
-if(sample)return sample(p,{onText:({text})=>on(text),signal:sig,cache:false});
-const tok=(await sb.auth.getSession()).data.session?.access_token;
-if(!tok)throw{code:"auth",msg:"You are not signed in. Sign out and sign in again."};
-let r;try{r=await fetch(CFG.AI_URL,{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+tok},body:JSON.stringify({prompt:p}),signal:sig})}
-catch(e){if(e&&e.name==="AbortError")throw{code:"aborted"};throw{code:"network",msg:"Could not reach the AI worker (network or CORS)."}}
-if(!r.ok){let b="";try{b=(await r.text()).slice(0,300)}catch(e){}throw{code:r.status===429?"rate_limited":"failed",msg:"AI worker returned "+r.status+(b?": "+b:"")}}
-if((r.headers.get("content-type")||"").includes("text/plain")&&r.body){const rd=r.body.getReader(),dc=new TextDecoder();let acc="";for(;;){const{done,value}=await rd.read();if(done)break;acc+=dc.decode(value,{stream:true});on(acc)}if(!acc.trim())throw{code:"failed",msg:"The AI returned nothing. Try again."};return}
-let j;try{j=await r.json()}catch(e){throw{code:"badjson",msg:"AI worker reply is not JSON."}}
-if(typeof j.text!=="string")throw{code:"badjson",msg:"AI worker reply has no 'text' field."}
-on(j.text)}
-async function gen(kind){
-if(!curRes().trim()){$("tn").textContent="Add your master resume first.";return}
-if(!$("td").value.trim()){$("tn").textContent="Paste the job description first.";return}
-if(!sample&&!(CFG.AI_URL&&sb)){$("tn").textContent="AI is not set up yet. See the README (AI_URL).";return}
-cur.jd=$("td").value;save();ab=new AbortController();$("tg").disabled=$("tl").disabled=true;$("ts").disabled=false;$("tn").textContent="Generating…";
-const ctx=`JOB: ${cur.t} at ${cur.c}\nJOB DESCRIPTION:\n${$("td").value}\nMASTER RESUME:\n${curRes()}`;
-const p=kind==="r"?`You are an expert resume writer. Tailor the MASTER RESUME to the JOB below.
-Rules:
-- Use ONLY facts in the master resume. Never invent employers, titles, dates, metrics, tools or credentials.
-- Reorder and rephrase bullets so the most relevant experience comes first; mirror the job's keywords only where the candidate truly has that experience.
-- Write a 2-3 line summary aimed at this role. ATS-friendly: plain headings, no tables, about one page.
-- Keep every claim exactly as strong as the master: never add words like "consistently", "expert" or "advanced", never add channels (e.g. email), tools or duties the master does not state, and never relabel a role (a moderator is not technical support).
-- Format: "# FULL NAME", a headline line, a contact line, then "## SECTION" headings, "### Job title" lines with "**Company** | dates" beneath, and "- " bullets. Do not put notes inside the resume.
-- After the resume write a line containing only ===NOTES=== and then the notes: keywords matched, honest gaps, and 3 interview talking points.
-${ctx}`:`Write a concise, warm cover letter (under 250 words, 3 short paragraphs) for the JOB below, from the candidate in the MASTER RESUME.
-Rules: use ONLY facts from the resume, never invent achievements; connect 2 or 3 real strengths to what the posting asks for; no clichés; plain text; sign off with the candidate's name from the resume.
-${ctx}`;
-const on=kind==="r"?(x=>{const k=x.indexOf("===NOTES==="),i=k<0?x:x.slice(0,k);$("to").value=i.trim();if(k>=0)$("tnt").value=x.slice(k+10).trim()}):(x=>{$("cl").value=x});
-try{await ask(p,on,ab.signal);$("tn").textContent="Done. Review before sending."}
-catch(e){console.error("Tailor error:",e);$("tn").textContent=e&&e.code==="not_granted"?"Permission was declined.":e&&e.code==="rate_limited"?"Rate limited. Try again shortly.":e&&e.code==="aborted"?"Stopped.":e&&e.msg?e.msg:"Failed: "+(e&&e.message||"unknown error")}
-$("tg").disabled=$("tl").disabled=false;$("ts").disabled=true}
-const LD=u=>new Promise((ok,no)=>{const e=document.createElement("script");e.src=u;e.onload=ok;e.onerror=()=>no(new Error("load"));document.head.appendChild(e)});
-const mdBlocks=md=>md.split("\n").map(l=>{l=l.replace(/\[([^\]]+)\]\([^)]+\)/g,"$1").replace(/\s+$/,"");let m;
-if(m=l.match(/^#\s+(.*)/))return{k:"n",t:m[1]};
-if(m=l.match(/^##\s+(.*)/))return{k:"h",t:m[1].toUpperCase()};
-if(m=l.match(/^###\s+(.*)/))return{k:"r",t:m[1]};
-if(m=l.match(/^\s*[-*\u2022]\s+(.*)/))return{k:"b",t:m[1]};
-return l.trim()?{k:"p",t:l}:null}).filter(Boolean);
-const mdRuns=t=>t.split(/(\*\*[^*]+\*\*)/).filter(Boolean).map(s=>s.startsWith("**")?{t:s.slice(2,-2),b:1}:{t:s.replace(/\*/g,"")});
-function buildDocx(md,D){const{Document,Paragraph,TextRun,AlignmentType,BorderStyle}=D;let top=true;
-const R=(t,o={})=>mdRuns(t).map(r=>new TextRun({text:r.t,bold:!!(r.b||o.b),size:o.s||21,font:"Calibri"}));
-const ch=mdBlocks(md).map(b=>{if(b.k==="h")top=false;
-if(b.k==="n")return new Paragraph({alignment:AlignmentType.CENTER,children:R(b.t,{b:1,s:32})});
-if(b.k==="h")return new Paragraph({spacing:{before:200,after:60},border:{bottom:{style:BorderStyle.SINGLE,size:6,color:"666666",space:1}},children:R(b.t,{b:1,s:23})});
-if(b.k==="r")return new Paragraph({spacing:{before:100},children:R(b.t,{b:1})});
-if(b.k==="b")return new Paragraph({bullet:{level:0},children:R(b.t)});
-return new Paragraph({alignment:top?AlignmentType.CENTER:AlignmentType.LEFT,spacing:{after:60},children:R(b.t)})});
-return new Document({sections:[{properties:{page:{margin:{top:720,bottom:720,left:864,right:864}}},children:ch}]})}
-function buildPdf(md,J){const d=new J({unit:"pt",format:"letter"}),W=612,M=54,TW=W-2*M;let y=M,top=true;
-const fx=s=>s.replace(/[\u2013\u2014]/g,"-").replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/\u2026/g,"...").replace(/[^\x20-\x7E\u00A0-\u00FF]/g,"");
-function put(rs,o){const sz=o.s||10.5,x0=M+(o.i||0),w=TW-(o.i||0);d.setFontSize(sz);const ws=[];
-rs.forEach(r=>fx(r.t).split(/\s+/).filter(Boolean).forEach(t=>ws.push({t,b:r.b||o.b})));let ln=[],lw=0;
-const flush=()=>{if(!ln.length)return;if(y>792-M){d.addPage();y=M}let x=o.c?(W-lw)/2:x0;ln.forEach(k=>{d.setFont("helvetica",k.b?"bold":"normal");d.text(k.t,x,y);x+=k.w});y+=sz*1.35;ln=[];lw=0};
-ws.forEach(k=>{d.setFont("helvetica",k.b?"bold":"normal");k.w=d.getTextWidth(k.t+" ");if(lw+k.w>w+4&&ln.length)flush();ln.push(k);lw+=k.w});flush()}
-mdBlocks(md).forEach(b=>{const r=mdRuns(b.t);
-if(b.k==="n"){put(r,{s:17,b:1,c:1});y+=2}
-else if(b.k==="h"){top=false;y+=7;put(r,{s:11,b:1});d.setDrawColor(120);d.line(M,y-9,W-M,y-9);y+=1}
-else if(b.k==="r"){y+=3;put(r,{b:1})}
-else if(b.k==="b"){const y0=y;put(r,{i:14});d.setFillColor(0);d.circle(M+4,y0-3.3,1.2,"F")}
-else put(r,{c:top})});
-return d}
+(function(){var w=document.getElementById("my-work"),b=[].slice.call(w.querySelectorAll(".tabs button")),g=[].slice.call(w.querySelectorAll(".group"));
+function show(id){b.forEach(function(x){x.setAttribute("aria-pressed",x.dataset.g===id)});g.forEach(function(x){x.hidden=x.id!==id})}
+b.forEach(function(x){x.addEventListener("click",function(){show(x.dataset.g)})});show(b[0].dataset.g);
+var d=document.getElementById("lb"),i=d.querySelector("img");
+w.addEventListener("click",function(e){var t=e.target.closest(".th img");if(t){i.src=t.dataset.full||t.src;i.alt=t.alt;d.showModal()}});
+d.addEventListener("click",function(){d.close()});
+d.addEventListener("close",function(){i.removeAttribute("src")});})();
 
-$("dw").onclick=async()=>{const m=$("to").value;if(!m.trim()){$("tn").textContent="Tailor a resume first.";return}try{$("tn").textContent="Building Word file...";await LD("https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js");const b=await docx.Packer.toBlob(buildDocx(m,docx));await out(fn("resume.docx"),b,"application/vnd.openxmlformats-officedocument.wordprocessingml.document");$("tn").textContent="Word file downloaded."}catch(e){$("tn").textContent="Could not build the Word file. Use Download resume (.md) instead."}};
-$("dp").onclick=async()=>{const m=$("to").value;if(!m.trim()){$("tn").textContent="Tailor a resume first.";return}try{$("tn").textContent="Building PDF...";await LD("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");await out(fn("resume.pdf"),buildPdf(m,window.jspdf.jsPDF).output("blob"),"application/pdf");$("tn").textContent="PDF downloaded."}catch(e){$("tn").textContent="Could not build the PDF."}};
-$("xg").onclick=async()=>{const k=$("xk").value,res=curRes();if(!res.trim()||!$("td").value.trim()){$("tn").textContent="Need a master resume and the job description.";return}
-const T={m:"Score how well the MASTER RESUME fits the JOB. Reply with: Match score /100, Strong matches, Missing keywords or skills (only ones truly absent from the resume), and a one-line verdict on whether to apply. Max 12 lines.",i:"List 8 likely interview questions for this job, each with a short answer outline using ONLY facts from the resume. Where the resume has a gap, say so and suggest an honest way to answer.",f:"Write a short polite follow-up email (under 90 words, subject line first) for an application sent a week ago with no reply.",t:"Write a short thank-you email (under 120 words, subject line first) after an interview. Use [Interviewer name] as a placeholder and mention 1 or 2 real strengths from the resume.",r:"Write a gracious reply (under 70 words, subject line first) to a rejection, asking to be kept in mind for future roles."}[k];
-$("xg").disabled=true;$("tn").textContent="Generating...";ab=new AbortController();
-try{await ask(T+"\nRules: use ONLY facts in the resume; never invent anything.\nJOB: "+cur.t+" at "+cur.c+"\nJOB DESCRIPTION:\n"+$("td").value+"\nMASTER RESUME:\n"+res,x=>{$("xo").value=x},ab.signal);$("tn").textContent="Done."}
-catch(e){$("tn").textContent=e&&e.msg?e.msg:"Stopped or failed."}$("xg").disabled=false};
-$("tg").onclick=()=>gen("r");$("tl").onclick=()=>gen("c");
-const copy=async id=>{try{await navigator.clipboard.writeText($(id).value);$("tn").textContent="Copied."}catch(e){$(id).select();$("tn").textContent="Press Ctrl/Cmd+C to copy."}};
-$("c1").onclick=()=>copy("to");$("c2").onclick=()=>copy("cl");
-async function out(name,text,type){const b=new Blob([text],{type});if(dl){try{await dl.save({filename:name,data:b})}catch(e){}return}
-const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)}
-const out0=out;
-const fn=s=>(cur.c+"-"+cur.t).replace(/[^\w-]+/g,"_")+"-"+s;
-$("d1").onclick=()=>out(fn("resume.md"),$("to").value,"text/markdown");$("d2").onclick=()=>out(fn("cover-letter.txt"),$("cl").value,"text/plain");
-$("tsv").onclick=()=>{cur.tr=$("to").value;cur.nt=$("tnt").value;cur.ri=+$("tsel").value||0;cur.cl=$("cl").value;cur.jd=$("td").value;save();render();$("tn").textContent="Saved."};
-$("bk").onclick=()=>out0("job-tracker-backup.json",JSON.stringify(S),"application/json");
-$("cv").onclick=()=>out0("job-applications.csv","Job,Company,Pay,Date,Status,Contact,Link\n"+S.apps.map(a=>[a.t,a.c,a.p,a.d,a.s,a.k,a.l].map(v=>'"'+String(v||"").replace(/"/g,'""')+'"').join(",")).join("\n"),"text/csv");
-$("im").onclick=()=>$("fi").click();
-$("fi").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.apps))throw 0;
-const ids=new Set(S.apps.map(a=>a.id));let c=0;d.apps.forEach(a=>{if(!ids.has(a.id)){S.apps.push(a);c++}});if(!S.resume&&d.resume)S.resume=d.resume;if(!S.rs&&d.rs)S.rs=d.rs;save();render();msg("Imported "+c+" new jobs.")}catch(x){msg("That file is not a valid backup.")}e.target.value=""};
-async function enter(user){U=user;S=load();
-if(sb){const r=await sb.from("trackers").select("data").eq("user_id",U.id).maybeSingle();if(r.data&&r.data.data)S=r.data.data;else if(r.error)msg("Could not load cloud data. Showing this device's copy.")}
-S.goal=S.goal||10;S.apps=S.apps||[];$("auth").hidden=true;$("app").hidden=false;$("so").hidden=false;$("dd").hidden=false;$("who").textContent=U.email;render()}
-if(CFG.SUPABASE_URL&&window.supabase){
-sb=supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY);$("app").hidden=true;$("auth").hidden=false;
-sb.auth.onAuthStateChange((ev,s)=>{setTimeout(()=>{
-if(ev==="PASSWORD_RECOVERY"){const np=prompt("Enter a new password (8+ characters)");if(np&&np.length>=8)sb.auth.updateUser({password:np})}
-if(s&&s.user){if(!U||U.id!==s.user.id)enter(s.user)}
-else if(U){U=null;S=blank();$("app").hidden=true;$("auth").hidden=false;$("so").hidden=true;$("dd").hidden=true;$("who").textContent=""}},0)});
-const go=async m=>{const email=$("ae").value.trim(),pw=$("ap").value;if(!email||pw.length<8){$("am").textContent="Enter your email and a password of at least 8 characters.";return}
-$("am").textContent="Please wait…";const r=m==="in"?await sb.auth.signInWithPassword({email,password:pw}):await sb.auth.signUp({email,password:pw});
-$("am").textContent=r.error?r.error.message:m==="up"&&!r.data.session?"Check your email to confirm your account, then sign in.":""};
-$("ain").onclick=()=>go("in");$("aup").onclick=()=>go("up");
-$("afg").onclick=async()=>{const email=$("ae").value.trim();if(!email){$("am").textContent="Enter your email first.";return}const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href.split("#")[0]});$("am").textContent=r.error?r.error.message:"Password reset email sent."};
-$("so").onclick=()=>sb.auth.signOut();
-$("dd").onclick=async()=>{if($("dd").textContent==="Delete my cloud data"){$("dd").textContent="Click again to confirm";return}
-await sb.from("trackers").delete().eq("user_id",U.id);S=blank();try{localStorage.removeItem(key())}catch(e){}$("dd").textContent="Delete my cloud data";render();msg("Cloud data deleted.")}
-}else{$("auth").hidden=true;render()}
-</script><script>
-(function(){var g=function(i){return document.getElementById(i)},ta=g("rt"),st=g("rst"),inp=g("rff"),dlg=g("dr");if(!ta||!dlg)return;
-function say(t){st.textContent=t}
-function load(src){return new Promise(function(ok,no){var s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=function(){no(new Error("load"))};document.head.appendChild(s)})}
-async function pdfText(f){if(!window.pdfjsLib)await load("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");
-pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-var d=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,out=[];
-for(var i=1;i<=d.numPages;i++){var p=await d.getPage(i),c=await p.getTextContent(),line="",y=null;
-c.items.forEach(function(it){var yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>2)line+="\n";line+=it.str+" ";y=yy});out.push(line)}
-return out.join("\n\n")}
-async function take(f){if(!f)return;var n=f.name.toLowerCase(),t="";say("Reading "+f.name+"...");
-try{if(/\.pdf$/.test(n))t=await pdfText(f);
-else if(/\.docx$/.test(n)){if(!window.mammoth)await load("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js");t=(await mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()})).value}
-else if(/\.(txt|md)$/.test(n))t=await f.text();
-else{say("Use a PDF, Word (.docx), or text file.");return}}
-catch(e){say("Could not read that file. Paste the text instead.");return}
-t=t.replace(/[ \t]+/g," ").replace(/ ?\n ?/g,"\n").replace(/\n{3,}/g,"\n\n").trim();
-if(!t){say("No text found. A scanned PDF has no text, so paste it instead.");return}
-if(ta.value.trim()&&!confirm("Replace the text in the box with this file?")){say("Kept your current text.");return}
-ta.value=t;say("Loaded "+f.name+". Check that it looks right, then click Save.")}
-["dragenter","dragover"].forEach(function(ev){dlg.addEventListener(ev,function(e){e.preventDefault();dlg.classList.add("drag")})});
-["dragleave","drop"].forEach(function(ev){dlg.addEventListener(ev,function(e){e.preventDefault();dlg.classList.remove("drag")})});
-dlg.addEventListener("drop",function(e){take(e.dataTransfer&&e.dataTransfer.files[0])});
-g("rf").addEventListener("click",function(){inp.click()});
-inp.addEventListener("change",function(){take(inp.files[0]);inp.value=""});
-g("mr").addEventListener("click",function(){say("")})})();
+(function(){
+var $=function(i){return document.getElementById(i)};
+var st=$("stick"),ct=$("contact"),hero=document.querySelector(".hero");
+if("IntersectionObserver" in window){var hid={hero:false,ct:false};
+function upd(){st.classList.toggle("off",hid.hero||hid.ct)}
+new IntersectionObserver(function(e){hid.hero=e[0].isIntersecting;upd()},{threshold:0}).observe(hero);
+new IntersectionObserver(function(e){hid.ct=e[0].isIntersecting;upd()},{threshold:0}).observe(ct);
+hid.hero=true;upd();}else{st.classList.remove("off")}
+function safe(u){return typeof u==="string"&&/^(https:\/\/|[A-Za-z0-9_\-\/.]+$)/.test(u)}
+fetch("site-config.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():{}}).catch(function(){return {}}).then(function(c){c=c||{};
+if(safe(c.intro_video)){var v=$("introv");v.src=c.intro_video;if(safe(c.intro_poster))v.poster=c.intro_poster;$("intro").hidden=false}
+if(c.certifications&&c.certifications.length){var l=$("certlist");c.certifications.forEach(function(x){var li=document.createElement("li");li.textContent=x;l.appendChild(li)});$("certs").hidden=false}
+if(safe(c.workflow_screenshot)){var f=$("shot"),im=f.querySelector("img");im.src=c.workflow_screenshot;im.alt=c.workflow_caption||"GoHighLevel workflow";f.querySelector("figcaption").textContent=c.workflow_caption||"";f.hidden=false}
+});
+})();
 </script>
 <script>
-(function(){var g=function(i){return document.getElementById(i)},pw=g("spw");
-if(pw)pw.addEventListener("change",function(){g("ap").type=pw.checked?"text":"password"});
-var btn=g("demo");if(!btn)return;
-function iso(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
-btn.addEventListener("click",function(){
-var rf=window.fetch;window.fetch=function(u){if(typeof u==="string"&&CFG.AI_URL&&u.indexOf(CFG.AI_URL)===0)return Promise.resolve(new Response(JSON.stringify({error:"The AI tools are off in the demo. Create a free account to use them."}),{status:403,headers:{"content-type":"application/json"}}));return rf.apply(this,arguments)};
-save=function(){};U=null;
-S={resume:"Sample master resume (demo). After you create a free account, paste or drop your own resume here.",goal:5,apps:[
-{id:"d1",s:"Interviewing",t:"GoHighLevel Automation Specialist",c:"Brightpath Fitness (sample)",p:"$12/hr",d:iso(-9),f:iso(2),i:iso(3)+"T10:00",k:"Maya, recruiter",n:"Prepare two example follow-up workflows.",lg:"",jd:"",tr:"",l:""},
-{id:"d2",s:"Screening",t:"Executive Assistant",c:"Northline Logistics (sample)",p:"$9/hr",d:iso(-6),f:iso(1),k:"",n:"",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d3",s:"Applied",t:"Virtual Assistant, Lead Follow-Up",c:"Harbor Dental Group (sample)",p:"",d:iso(-12),f:iso(-1),k:"",n:"No reply yet. Send a short follow-up.",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d4",s:"Applied",t:"Operations Support",c:"Summit Auto Wraps (sample)",p:"",d:iso(-3),f:iso(4),k:"",n:"",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d5",s:"To Apply",t:"CRM Administrator",c:"Clearview Realty (sample)",p:"",d:"",f:"",k:"",n:"Tailor the resume first.",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d6",s:"Offer Received",t:"Social Media Manager",c:"Palm & Pine Studio (sample)",p:"$1,500/mo",d:iso(-20),f:"",k:"",n:"Reply by Friday.",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d7",s:"Rejected",t:"Admin Assistant",c:"Redwood Clinic (sample)",p:"",d:iso(-18),f:"",k:"",n:"",lg:"",jd:"",tr:"",l:"",i:""},
-{id:"d8",s:"Ghosted",t:"Customer Success Associate",c:"Lumen Software (sample)",p:"",d:iso(-30),f:"",k:"",n:"",lg:"",jd:"",tr:"",l:"",i:""}]};
-g("auth").hidden=true;g("app").hidden=false;g("who").textContent="Demo";g("demobar").hidden=false;render()});
-g("demox").addEventListener("click",function(){location.reload()})})();
+(function(){var r=document.documentElement,b=document.getElementById("theme");
+function sys(){return window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}
+function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Light":"Dark";b.setAttribute("aria-pressed",t==="dark");b.setAttribute("aria-label",t==="dark"?"Switch to light mode":"Switch to dark mode")}
+var s=null;try{s=localStorage.getItem("theme")}catch(e){}
+apply(s==="dark"||s==="light"?s:sys());
+b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";apply(t);try{localStorage.setItem("theme",t)}catch(e){}});})();
 </script>
-</body></html>
+<script>
+(function(){var s=[].slice.call(document.querySelectorAll("section"));
+if(!("IntersectionObserver" in window)){return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.05,rootMargin:"0px 0px -4% 0px"});
+s.forEach(function(x){x.classList.add("rv");io.observe(x)});})();
+</script>
+<script>
+(function(){var l=[].slice.call(document.querySelectorAll("#stats b"));if(!l.length||!("IntersectionObserver" in window)||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+l.forEach(function(b){var t=b.textContent,m=t.match(/\d+/);if(!m)return;var n=+m[0],p=t.slice(0,m.index),x=t.slice(m.index+m[0].length);
+var o=new IntersectionObserver(function(e){if(!e[0].isIntersecting)return;o.disconnect();var st=null;(function f(ts){st=st||ts;var k=Math.min((ts-st)/900,1);b.textContent=p+Math.round(n*k)+x;if(k<1)requestAnimationFrame(f);else b.textContent=t})(performance.now())},{threshold:.6});o.observe(b)})})();
+(function(){if(!("IntersectionObserver" in window))return;var a=[].slice.call(document.querySelectorAll('nav a[href^="#"]')),m={};a.forEach(function(x){m[x.getAttribute("href").slice(1)]=x});
+var o=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;a.forEach(function(x){x.classList.remove("on");x.removeAttribute("aria-current")});var x=m[e.target.id];if(x){x.classList.add("on");x.setAttribute("aria-current","location")}})},{rootMargin:"-40% 0px -55% 0px"});
+Object.keys(m).forEach(function(id){var s=document.getElementById(id);if(s)o.observe(s)})})();
+</script>
+<script>
+(function(){var b=document.getElementById("cpe");if(!b)return;var t="loomwellops@gmail.com";b.addEventListener("click",function(){function ok(){b.textContent="copied"}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){window.prompt("Copy this email:",t)})}else{window.prompt("Copy this email:",t)}})})();
+</script>
+<script>
+(function(){var g=function(i){return document.getElementById(i)},out=g("c-out");if(!out)return;
+function n(i,mx){var v=parseFloat(g(i).value);if(!isFinite(v)||v<0)v=0;return Math.min(v,mx)}
+var f=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+function el(t,h){var e=document.createElement(t);e.innerHTML=h;return e}
+function run(){var L=n("c-leads",1e6),b=n("c-book",100)/100,s=n("c-show",100)/100,c=n("c-close",100)/100,v=n("c-ltv",1e8),k=n("c-lift",30)/100;
+g("c-lift-v").textContent=Math.round(k*100)+"%";
+var c0=L*b*s*c,c1=L*Math.min(b*(1+k),1)*Math.min(s*(1+k),1)*c,x=c1-c0,fm=function(q){return q.toFixed(1)};
+out.innerHTML="";
+out.appendChild(el("div","Today: about <b>"+fm(c0)+"</b> new customers a month, worth about <b>"+f.format(c0*v)+"</b>."));
+out.appendChild(el("div","With better follow-up: about <b>"+fm(c1)+"</b> a month, worth about <b>"+f.format(c1*v)+"</b>."));
+out.appendChild(el("div","<span class='big'>Possible gap: about <b>"+fm(x)+"</b> more customers and <b>"+f.format(x*v)+"</b> a month, or <b>"+f.format(x*v*12)+"</b> a year.</span>"))}
+["c-leads","c-book","c-show","c-close","c-ltv","c-lift"].forEach(function(i){g(i).addEventListener("input",run)});run()})();
+(function(){var S={
+lead:[["Within a minute","Text","Hi [First name], thanks for reaching out to [Business]. Pick a time that works for you here: [booking link]. Reply STOP to opt out."],["Within a minute","Email","Hi [First name], thanks for getting in touch. You can book a time here: [booking link], or just reply with any questions."],["Right away","Pipeline","Contact added to New lead and tagged with where they came from."]],
+call:[["About 30 seconds later","Text","Sorry we missed your call! What can we help with? You can also book a time here: [booking link]. Reply STOP to opt out."],["Right away","Pipeline","Contact created if new, and a task added to call them back."]],
+booked:[["Right away","Email and text","You’re booked for [day] at [time]. Add it to your calendar: [link]. Need to change it? Reschedule here: [link]."],["24 hours before","Text","Reminder: you’re booked tomorrow at [time]. Reply C to confirm, or reschedule here: [link]."],["2 hours before","Text","See you at [time]! Address and parking info: [link]."]],
+noshow:[["Same day","Text","We missed you today! Want to pick a new time? [booking link]"],["2 days later","Email","Hi [First name], just checking in. If you’d still like to come in, here’s my calendar: [booking link]."],["If still no reply","Pipeline","Move to the nurture list and stop the sequence."]],
+quiet:[["After 24 to 48 hours","Text","Hi [First name], just checking in. Still interested in [offer]? Happy to answer questions or help you book: [booking link]."],["A few days later","Email","Last note from me. If now isn’t the right time, no problem. Book whenever you’re ready: [booking link]."],["If still no reply","Pipeline","Tag as Nurture and stop. No more chasing."]]};
+var bar=document.getElementById("simb"),o=document.getElementById("simo");if(!bar||!o)return;
+function show(k){[].forEach.call(bar.children,function(b){b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false")});o.innerHTML="";
+S[k].forEach(function(r,i){var li=document.createElement("li");li.className=r[1]==="Pipeline"?"sys":(r[1]==="Email"?"em":"");li.style.animationDelay=(i*0.35)+"s";var a=document.createElement("small");a.textContent=r[0]+" · "+r[1];var m=document.createElement("span");m.textContent=r[2];li.appendChild(a);li.appendChild(m);o.appendChild(li)})}
+bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.k)});show("call")})();
+</script>
+<script>
+(function(){var ul=document.querySelector(".pipe"),pd=document.getElementById("pd");if(!ul||!pd)return;var lis=[].slice.call(ul.children),mq=matchMedia("(max-width:40rem)");
+function set(li,open){lis.forEach(function(x){var on=x===li&&open;x.classList.toggle("on",on);x.querySelector("button").setAttribute("aria-expanded",on?"true":"false")});pd.textContent=li&&open?li.querySelector(".pd-i").textContent:pd.dataset.d}
+set(null,false);
+ul.addEventListener("click",function(e){var li=e.target.closest("li");if(!li)return;set(li,mq.matches?!li.classList.contains("on"):true)});
+lis.forEach(function(li){li.addEventListener("mouseenter",function(){if(!mq.matches&&matchMedia("(hover:hover)").matches)set(li,true)});li.addEventListener("focusin",function(){if(!mq.matches)set(li,true)})});
+ul.addEventListener("mouseleave",function(){if(!mq.matches&&matchMedia("(hover:hover)").matches)set(null,false)})})();
+(function(){var g=function(i){return document.getElementById(i)};if(!g("c-leads"))return;
+var G=document.querySelector('a[data-goatcounter-click="audit-gmail"]'),M=document.querySelector('a[data-goatcounter-click="audit-mailto"]'),note=g("audit-note"),dirty=false,ids=["c-leads","c-book","c-show","c-close","c-ltv"];
+function upd(){var b="Hi Japhette, here is how we handle leads today:";if(dirty)b+="\n- About "+g("c-leads").value+" leads a month\n- "+g("c-book").value+"% book an appointment\n- "+g("c-show").value+"% of those show up\n- "+g("c-close").value+"% become customers\n- Average customer value: $"+g("c-ltv").value;
+b+="\n\nThe biggest follow-up problem we have is: ";var su="Free mini audit";
+if(G)G.href="https://mail.google.com/mail/?view=cm&fs=1&to=loomwellops%40gmail.com&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);
+if(M)M.href="mailto:loomwellops@gmail.com?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);if(note)note.hidden=!dirty}
+ids.forEach(function(i){g(i).addEventListener("input",function(){dirty=true;upd()})});upd()})();
+</script>
+<script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
