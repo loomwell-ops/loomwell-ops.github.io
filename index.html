@@ -200,6 +200,9 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 .tiers{list-style:none;padding:0;margin:.8rem 0 1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.8rem;max-width:56rem}.tiers li{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:.7rem;padding:1rem}.tiers b{display:block;font-size:1.05rem}.tiers p{margin:.2rem 0 0;color:var(--muted);font-size:.92rem}.tiers .price{color:var(--accent);font-weight:700}
 .calc{max-width:44rem;margin:1.75rem 0}.cgrid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}.calc label{display:grid;gap:.3rem;font-size:.9rem}.calc input[type=number]{padding:.55rem .65rem;border-radius:.5rem;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit}.calc input[type=range]{width:100%}.cres{margin-top:1rem;padding:1rem;border:1px solid var(--line);border-radius:.7rem;background:var(--surface);display:grid;gap:.4rem}.cres b{color:var(--accent)}.cres .big{font-size:1.2rem}
 .sim{max-width:44rem;margin:.8rem 0}.simb{display:flex;flex-wrap:wrap;gap:.4rem}.simb button{padding:.5rem .8rem;border-radius:2rem;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;cursor:pointer}.simb button[aria-pressed=true]{border-color:var(--accent);color:var(--accent);font-weight:600}.sim ol{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.5rem}.sim li{display:grid;gap:.15rem;padding:.6rem .8rem;border-left:4px solid var(--accent);border-radius:.5rem;background:var(--surface);animation:fu .4s both}.sim li small{color:var(--muted)}@keyframes fu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.sim li{animation:none}}
+.pipe li{cursor:pointer}.pipe button{background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer}.pipe li:hover,.pipe li.on{border-color:var(--accent)}.pd-i{display:none}.pd{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);min-height:1.5em}
+@media(max-width:40rem){.pipe{flex-direction:column;align-items:stretch;gap:.4rem}.pipe li:not(:last-child)::after{content:none}.pipe li button{width:100%;text-align:left;display:flex;justify-content:space-between}.pipe li button::after{content:"+";color:var(--muted)}.pipe li.on button::after{content:"–"}.pipe li.on .pd-i{display:block;margin:.35rem 0 0;font-weight:400;font-size:.88rem;color:var(--muted)}.pd{display:none}}
+.phone{max-width:24rem;margin:.8rem 0 0;border:1px solid var(--line);border-radius:1.5rem;background:var(--surface);padding:.6rem .8rem .9rem;box-shadow:0 10px 28px var(--glow)}.ph-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted);padding:.2rem .2rem .6rem;border-bottom:1px solid var(--line)}.ph-badge{font-size:.7rem;padding:.15rem .5rem;border-radius:2rem;border:1px solid var(--accent);color:var(--accent)}.phone ol{margin:.7rem 0 0}.phone li{border-left:0;max-width:92%;border-radius:1rem 1rem 1rem .3rem;background:color-mix(in srgb,var(--accent) 16%,var(--bg))}.phone li.em{border-radius:.6rem}.phone li.sys{max-width:100%;background:none;border:1px dashed var(--line);border-radius:.6rem;font-size:.85rem;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -219,9 +222,8 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 </div>
 </header>
 
-<ol class="pipe" aria-label="Example lead pipeline I have built in GoHighLevel">
-<li>New Lead</li><li>Contacted</li><li>Trial Booked</li><li>Showed Up</li><li>Member</li>
-</ol>
+<ol class="pipe" aria-label="Example lead pipeline I have built in GoHighLevel"><li><button type="button" aria-expanded="false">New Lead</button><span class="pd-i">Typically, the lead is tagged by source and gets a quick first reply.</span></li><li><button type="button" aria-expanded="false">Contacted</button><span class="pd-i">Typically, calls and messages are logged, and quiet leads get a nudge.</span></li><li><button type="button" aria-expanded="false">Trial Booked</button><span class="pd-i">Typically, a confirmation goes out, then reminders before the visit.</span></li><li><button type="button" aria-expanded="false">Showed Up</button><span class="pd-i">Typically, the visit is marked and the lead moves on to a membership follow-up.</span></li><li><button type="button" aria-expanded="false">Member</button><span class="pd-i">Typically, the new member is tagged and moved to the member list.</span></li></ol>
+<p class="pd" id="pd" data-d="Hover or tap a stage to see what typically happens there."></p>
 <p class="cap">A pipeline I built in GoHighLevel at Fit Body Boot Camp, with automated follow-up at every stage.</p>
 
 <section id="clients" aria-label="Brands I have worked on">
@@ -233,7 +235,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 
 <section id="about" class="about"><img src="profile.jpg" width="120" height="120" alt="Portrait of Japhette Alec Pulido" loading="lazy"><div><h2>About me</h2><p>I’m Japhette, based in the Philippines. I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep operations organized.</p></div></section>
 
-<section id="fit" class="fit"><h2>Who I work best with</h2><ul><li>Gyms, studios, and clinics that book trials or consultations</li><li>Local service businesses that get leads from ads, calls, or referrals</li><li>Small teams whose leads go cold because follow-up depends on someone remembering</li><li>Owners who want one organized system instead of five disconnected tools</li></ul><p class="note">Not sure you fit? Request a free audit and I’ll tell you honestly.</p></section>
+<section id="fit" class="fit"><h2>Who I work best with</h2><ul><li>Gyms, studios, and clinics that book trials or consultations</li><li>Local service businesses that get leads from ads, calls, or referrals</li><li>Small teams whose leads go cold because follow-up depends on someone remembering</li><li>Owners who want one organized system instead of five disconnected tools</li></ul><p class="note">Not sure you fit? Request a free audit and I’ll tell you honestly.</p><p class="note"><a href="#services">See my 3 ways to start →</a></p></section>
 
 <section id="intro" hidden>
 <h2>Meet me</h2>
@@ -269,7 +271,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <h3 style="margin-top:1.5rem">Example follow-up workflow</h3>
 <ol class="flow" aria-label="Example follow-up workflow"><li><b>New lead</b><span>A form, ad, or call comes in</span></li><li><b>Instant reply</b><span>Email or text with a booking link</span></li><li><b>Booked</b><span>Confirmation, then reminders</span></li><li><b>Show or no-show</b><span>Move the stage, or send a rebooking message</span></li><li><b>Quiet lead</b><span>Short nudge, then a nurture list</span></li></ol>
 <p class="note">Example of the kind of flow I build. Not a real client account.</p>
-<div class="sim"><p class="gd">Try it: pick an event to see what the lead receives.</p><div class="simb" id="simb"><button type="button" data-k="lead" aria-pressed="false">New lead</button><button type="button" data-k="call" aria-pressed="false">Missed call</button><button type="button" data-k="booked" aria-pressed="false">Booked appointment</button><button type="button" data-k="noshow" aria-pressed="false">No-show</button><button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button></div><ol id="simo" aria-live="polite"></ol><p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p></div>
+<div class="sim"><p class="gd">Try it: pick an event to see what the lead receives.</p><div class="simb" id="simb"><button type="button" data-k="lead" aria-pressed="false">New lead</button><button type="button" data-k="call" aria-pressed="false">Missed call</button><button type="button" data-k="booked" aria-pressed="false">Booked appointment</button><button type="button" data-k="noshow" aria-pressed="false">No-show</button><button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button></div><div class="phone"><div class="ph-head"><span>Example contact</span><span class="ph-badge">Example automation</span></div><ol id="simo" aria-live="polite"></ol></div><p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p></div>
 <figure class="shot" id="shot" hidden><img alt=""><figcaption></figcaption></figure>
 <p class="gd" style="margin-top:1.25rem">I tracked lead sources, show rates, and trial-to-member conversion, and sent weekly and monthly reports. Alongside the automation, I made and took about 100 calls a day, logged in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</p>
 </section>
@@ -286,6 +288,30 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <div class="cres" id="c-out" aria-live="polite"></div>
 <p class="note">Assumes the improvement applies to both the booking rate and the show rate, each capped at 100%. Your real results depend on your offer, your leads, and your team.</p>
 <p><a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a></p></section>
+
+<section id="services">
+<h2>Services</h2>
+<p class="gd">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
+<h3 style="margin-top:1.25rem">Three ways to start</h3>
+<ol class="tiers"><li><b>1. Free mini audit</b><p class="price">Free</p><p>Send me how you handle leads today. I send back the 3 changes that matter most. <a href="#audit">Request one</a></p></li><li><b>2. Lead-to-booking setup</b><p class="price">Fixed price, from $300</p><p>About two weeks. Pipeline, instant replies, booking calendar, reminders, no-show rebooking, and a checklist your team can follow.</p></li><li><b>3. Ongoing support</b><p class="price">Monthly hours agreed in writing</p><p>Keep the system running and improving, with executive assistant help and a weekly report.</p></li></ol>
+<h3 style="margin-top:1.5rem">All services and starting rates</h3>
+<div class="grid">
+<div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines with automated follow-up, booking calendars and reminders, missed-call text-back, and reporting. A good fit for gyms, studios, and local service businesses.</p><p class="price">From $12 an hour</p></div>
+<div><h3>Social media management</h3><p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p><p class="price">From $350 a month</p></div>
+<div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $8 an hour</p></div>
+</div>
+<details class="fold pkg"><summary>Problems I fix</summary>
+<p class="gd"><b>GoHighLevel and systems</b></p><ul><li>Leads sitting in a spreadsheet or inbox for days: I connect your form to GoHighLevel and set up an instant reply and a text reminder.</li><li>A messy CRM with duplicate contacts: I clean it up and build a simple pipeline so your team knows who to follow up with each morning.</li><li>New inquiries buried in email: I route website forms into GoHighLevel and Slack so someone sees them right away.</li></ul>
+<p class="gd"><b>Executive assistant and admin</b></p><ul><li>An overflowing inbox: I set up filters for invoices and client threads, plus a short daily check-in routine.</li><li>Forgotten contracts and welcome packets: I build an onboarding checklist (for example in Notion) so nothing gets skipped.</li><li>Calendar chaos across time zones: I sort out scheduling and double-bookings.</li></ul>
+<p class="gd"><b>Social media and content</b></p><ul><li>Approvals scattered across Drive and email: I set up one shared content calendar so posts go out on schedule.</li><li>Long recordings you never reuse: I cut them into short clips and graphics.</li></ul></details>
+<details class="fold pkg"><summary>What is in the lead-to-booking setup</summary>
+<p class="gd"><b>Included:</b></p><ul><li>Pipeline stages built around how your business sells</li><li>Instant reply to new leads and missed-call text-back</li><li>Booking calendar with confirmations and reminders</li><li>No-show and follow-up sequences</li><li>A simple report on lead sources and show rates</li><li>A written checklist so your team can run it</li></ul>
+<p class="gd"><b>Timeline:</b> usually about two weeks, depending on scope.</p>
+<p class="gd"><b>What I need from you:</b> access to your CRM or calendar, your offers and prices, and who approves what.</p>
+<p class="note">Final scope and price are confirmed in writing after the intro call.</p></details>
+<p style="margin-top:1.25rem"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="services-book">Book a free intro call</a> <a class="btn alt" href="5-follow-up-automations.pdf" target="_blank" rel="noopener" data-goatcounter-click="services-checklist">Free: 5 follow-up automations (PDF)</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
+<div class="callout" id="audit"><div><h3>Free mini audit</h3><p>Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p></div><div class="aud"><a class="btn main" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A" target="_blank" rel="noopener" data-goatcounter-click="audit-gmail">Request a free audit</a><p class="note">Opens Gmail in a new tab. No Gmail? <a href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit" data-goatcounter-click="audit-mailto">Use your mail app</a> or <button type="button" class="linkbtn" id="cpe">copy my email</button>.</p><p class="note" id="audit-note" hidden>Your calculator numbers are included in the email.</p><p class="note"><a href="sample-audit.pdf" target="_blank" rel="noopener" data-goatcounter-click="sample-audit">See a sample audit (PDF)</a></p></div></div>
+</section>
 
 <section id="design" class="dsg"><h2>Design and brand work</h2><p class="gd">Logo and brand concepts for DR.PPF and Elusive Wraps, plus social graphics and video.</p><a class="dgrid" href="design.html" aria-label="See all design work" data-goatcounter-click="design-thumbs"><img src="work/t/drppf-1.jpg" alt="Chrome blackletter wordmark on black with gold frame" loading="lazy"><img src="work/t/drppf-7.jpg" alt="Geometric panther head over car outline" loading="lazy"><img src="work/t/elusive-60.jpg" alt="Elusive Wraps brand concept" loading="lazy"></a><p><a class="btn main" href="design.html" data-goatcounter-click="design-all">See all design work</a></p></section>
 
@@ -319,7 +345,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 </section>
 <section id="experience">
 <h2>Experience</h2>
-<article class="job"><time>Jan 2025 – Oct 2026</time><div><h3>Executive Assistant and Operations Support</h3><div class="co">DHL Express Partner Shop</div><ul>
+<article class="job"><time>Jan 2026 – Oct 2026</time><div><h3>Executive Assistant and Operations Support</h3><div class="co">DHL Express Partner Shop</div><ul>
 <li>Managed the owner’s calendar, email, and scheduling, and handled inbound and outbound calls.</li>
 <li>Ran about 20 discovery meetings a week, with notes and follow-ups.</li>
 <li>Wrote operations handbooks, streamlined compliance and onboarding forms, and advised staff across 5 stores in 4 states (Utah, Colorado, California, and Washington).</li>
@@ -341,30 +367,6 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <li>Customer Service at 1-800-Flowers via Inspiro (Apr – Aug 2023).</li></ul></div></article>
 <article class="job"><time>2008 – 2012</time><div><h3>BS Information Technology, Major in System Engineering</h3><div class="co">Colegio de San Juan de Letran</div></div></article>
 </details>
-</section>
-
-<section id="services">
-<h2>Services</h2>
-<p class="gd">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
-<h3 style="margin-top:1.25rem">Three ways to start</h3>
-<ol class="tiers"><li><b>1. Free mini audit</b><p class="price">Free</p><p>Send me how you handle leads today. I send back the 3 changes that matter most. <a href="#audit">Request one</a></p></li><li><b>2. Lead-to-booking setup</b><p class="price">Fixed price, from $300</p><p>About two weeks. Pipeline, instant replies, booking calendar, reminders, no-show rebooking, and a checklist your team can follow.</p></li><li><b>3. Ongoing support</b><p class="price">Monthly hours agreed in writing</p><p>Keep the system running and improving, with executive assistant help and a weekly report.</p></li></ol>
-<h3 style="margin-top:1.5rem">All services and starting rates</h3>
-<div class="grid">
-<div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines with automated follow-up, booking calendars and reminders, missed-call text-back, and reporting. A good fit for gyms, studios, and local service businesses.</p><p class="price">From $12 an hour</p></div>
-<div><h3>Social media management</h3><p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p><p class="price">From $350 a month</p></div>
-<div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $8 an hour</p></div>
-</div>
-<details class="fold pkg"><summary>Problems I fix</summary>
-<p class="gd"><b>GoHighLevel and systems</b></p><ul><li>Leads sitting in a spreadsheet or inbox for days: I connect your form to GoHighLevel and set up an instant reply and a text reminder.</li><li>A messy CRM with duplicate contacts: I clean it up and build a simple pipeline so your team knows who to follow up with each morning.</li><li>New inquiries buried in email: I route website forms into GoHighLevel and Slack so someone sees them right away.</li></ul>
-<p class="gd"><b>Executive assistant and admin</b></p><ul><li>An overflowing inbox: I set up filters for invoices and client threads, plus a short daily check-in routine.</li><li>Forgotten contracts and welcome packets: I build an onboarding checklist (for example in Notion) so nothing gets skipped.</li><li>Calendar chaos across time zones: I sort out scheduling and double-bookings.</li></ul>
-<p class="gd"><b>Social media and content</b></p><ul><li>Approvals scattered across Drive and email: I set up one shared content calendar so posts go out on schedule.</li><li>Long recordings you never reuse: I cut them into short clips and graphics.</li></ul></details>
-<details class="fold pkg"><summary>What is in the lead-to-booking setup</summary>
-<p class="gd"><b>Included:</b></p><ul><li>Pipeline stages built around how your business sells</li><li>Instant reply to new leads and missed-call text-back</li><li>Booking calendar with confirmations and reminders</li><li>No-show and follow-up sequences</li><li>A simple report on lead sources and show rates</li><li>A written checklist so your team can run it</li></ul>
-<p class="gd"><b>Timeline:</b> usually about two weeks, depending on scope.</p>
-<p class="gd"><b>What I need from you:</b> access to your CRM or calendar, your offers and prices, and who approves what.</p>
-<p class="note">Final scope and price are confirmed in writing after the intro call.</p></details>
-<p style="margin-top:1.25rem"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="services-book">Book a free intro call</a> <a class="btn alt" href="5-follow-up-automations.pdf" target="_blank" rel="noopener" data-goatcounter-click="services-checklist">Free: 5 follow-up automations (PDF)</a> <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a></p>
-<div class="callout" id="audit"><div><h3>Free mini audit</h3><p>Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p></div><div class="aud"><a class="btn main" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A" target="_blank" rel="noopener" data-goatcounter-click="audit-gmail">Request a free audit</a><p class="note">Opens Gmail in a new tab. No Gmail? <a href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit" data-goatcounter-click="audit-mailto">Use your mail app</a> or <button type="button" class="linkbtn" id="cpe">copy my email</button>.</p><p class="note"><a href="sample-audit.pdf" target="_blank" rel="noopener" data-goatcounter-click="sample-audit">See a sample audit (PDF)</a></p></div></div>
 </section>
 
 <section id="how">
@@ -426,10 +428,10 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <span class="pill">Open to new roles and clients</span>
 <h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
 <p>Tell me how leads reach you today and I’ll tell you what I would fix first.</p>
-<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a><a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="footer-email">Email me</a><a class="btn alt" href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener" data-goatcounter-click="footer-linkedin">LinkedIn</a><a class="btn alt" href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp">WhatsApp</a></div>
+<div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a><a class="btn alt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Hello" target="_blank" rel="noopener" data-goatcounter-click="footer-email">Email me</a></div>
 </div>
 </div>
-<ul class="contact-row"><li><a href="mailto:loomwellops@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>loomwellops@gmail.com</a></li><li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13a3 3 0 0 1 6 0v4"/></svg>linkedin.com/in/japhette-alec-pulido</a></li><li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume (PDF)</a></li></ul>
+<ul class="contact-row"><li><a href="mailto:loomwellops@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>loomwellops@gmail.com</a></li><li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13a3 3 0 0 1 6 0v4"/></svg>linkedin.com/in/japhette-alec-pulido</a></li><li><a href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20l1.1-5.1A8 8 0 1 1 21 12z"/></svg>WhatsApp</a></li><li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume (PDF)</a></li></ul>
 <p class="more"><a href="design.html">Design work</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
 <p class="up"><a href="#top">Back to top</a></p>
 </footer>
@@ -508,8 +510,23 @@ noshow:[["Same day","Text","We missed you today! Want to pick a new time? [booki
 quiet:[["After 24 to 48 hours","Text","Hi [First name], just checking in. Still interested in [offer]? Happy to answer questions or help you book: [booking link]."],["A few days later","Email","Last note from me. If now isn’t the right time, no problem. Book whenever you’re ready: [booking link]."],["If still no reply","Pipeline","Tag as Nurture and stop. No more chasing."]]};
 var bar=document.getElementById("simb"),o=document.getElementById("simo");if(!bar||!o)return;
 function show(k){[].forEach.call(bar.children,function(b){b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false")});o.innerHTML="";
-S[k].forEach(function(r,i){var li=document.createElement("li");li.style.animationDelay=(i*0.35)+"s";var a=document.createElement("small");a.textContent=r[0]+" · "+r[1];var m=document.createElement("span");m.textContent=r[2];li.appendChild(a);li.appendChild(m);o.appendChild(li)})}
+S[k].forEach(function(r,i){var li=document.createElement("li");li.className=r[1]==="Pipeline"?"sys":(r[1]==="Email"?"em":"");li.style.animationDelay=(i*0.35)+"s";var a=document.createElement("small");a.textContent=r[0]+" · "+r[1];var m=document.createElement("span");m.textContent=r[2];li.appendChild(a);li.appendChild(m);o.appendChild(li)})}
 bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.k)});show("call")})();
+</script>
+<script>
+(function(){var ul=document.querySelector(".pipe"),pd=document.getElementById("pd");if(!ul||!pd)return;var lis=[].slice.call(ul.children),mq=matchMedia("(max-width:40rem)");
+function set(li,open){lis.forEach(function(x){var on=x===li&&open;x.classList.toggle("on",on);x.querySelector("button").setAttribute("aria-expanded",on?"true":"false")});pd.textContent=li&&open?li.querySelector(".pd-i").textContent:pd.dataset.d}
+set(null,false);
+ul.addEventListener("click",function(e){var li=e.target.closest("li");if(!li)return;set(li,mq.matches?!li.classList.contains("on"):true)});
+lis.forEach(function(li){li.addEventListener("mouseenter",function(){if(!mq.matches&&matchMedia("(hover:hover)").matches)set(li,true)});li.addEventListener("focusin",function(){if(!mq.matches)set(li,true)})});
+ul.addEventListener("mouseleave",function(){if(!mq.matches&&matchMedia("(hover:hover)").matches)set(null,false)})})();
+(function(){var g=function(i){return document.getElementById(i)};if(!g("c-leads"))return;
+var G=document.querySelector('a[data-goatcounter-click="audit-gmail"]'),M=document.querySelector('a[data-goatcounter-click="audit-mailto"]'),note=g("audit-note"),dirty=false,ids=["c-leads","c-book","c-show","c-close","c-ltv"];
+function upd(){var b="Hi Japhette, here is how we handle leads today:";if(dirty)b+="\n- About "+g("c-leads").value+" leads a month\n- "+g("c-book").value+"% book an appointment\n- "+g("c-show").value+"% of those show up\n- "+g("c-close").value+"% become customers\n- Average customer value: $"+g("c-ltv").value;
+b+="\n\nThe biggest follow-up problem we have is: ";var su="Free mini audit";
+if(G)G.href="https://mail.google.com/mail/?view=cm&fs=1&to=loomwellops%40gmail.com&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);
+if(M)M.href="mailto:loomwellops@gmail.com?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);if(note)note.hidden=!dirty}
+ids.forEach(function(i){g(i).addEventListener("input",function(){dirty=true;upd()})});upd()})();
 </script>
 <script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
