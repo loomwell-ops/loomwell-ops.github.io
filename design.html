@@ -104,6 +104,15 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 .contact-row a:hover{color:var(--accent);text-decoration:underline}
 .contact-row svg{color:var(--accent);flex:none}
 @media (max-width:40rem){.cta-card{grid-template-columns:1fr;padding:1.5rem}.cta-photo{width:5.5rem;height:5.5rem}}
+
+/* ---- motion polish (all guarded) ---- */
+@media (prefers-reduced-motion:no-preference){
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
+@keyframes lbin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+#lb[open]{animation:lbin .22s ease both}
+}
+#lb::backdrop{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 </style>
 </head>
 <body>
@@ -119,7 +128,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 </section></main>
 <footer id="contact">
 <div class="cta-card">
-<img class="cta-photo" src="profile.png" width="112" height="112" alt="" loading="lazy" onerror="this.style.display='none'">
+<img class="cta-photo" src="profile.jpg" width="112" height="112" alt="" loading="lazy" onerror="this.style.display='none'">
 <div>
 <span class="pill">Open to new roles and clients</span>
 <h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
@@ -157,7 +166,14 @@ function sys(){return window.matchMedia&&matchMedia("(prefers-color-scheme:dark)
 function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Light":"Dark";b.setAttribute("aria-pressed",t==="dark");b.setAttribute("aria-label",t==="dark"?"Switch to light mode":"Switch to dark mode")}
 var s=null;try{s=localStorage.getItem("theme")}catch(e){}
 apply(s==="dark"||s==="light"?s:sys());
-b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";apply(t);try{localStorage.setItem("theme",t)}catch(e){}});})();
+b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";
+function commit(){apply(t);try{localStorage.setItem("theme",t)}catch(e){}}
+var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+if(!document.startViewTransition||calm){commit();return}
+var rc=b.getBoundingClientRect(),x=rc.left+rc.width/2,y=rc.top+rc.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+var vt=document.startViewTransition(commit);
+vt.ready.then(function(){r.animate({clipPath:["circle(0px at "+x+"px "+y+"px)","circle("+R+"px at "+x+"px "+y+"px)"]},{duration:480,easing:"cubic-bezier(.22,1,.36,1)",pseudoElement:"::view-transition-new(root)"})}).catch(function(){});
+});})();
 </script>
 <script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

@@ -4,25 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#4b3fd6">
 <title>Page not found | Japhette Alec Pulido</title>
+<script>(function(){var r=document.documentElement,s=null;try{s=localStorage.getItem("theme")}catch(e){}if(s!=="dark"&&s!=="light"){s=window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}r.setAttribute("data-theme",s)})();</script>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f5fd;--ink:#1a1840;--muted:#5b5a7d;--accent:#4b3fd6;--accent-ink:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#13112b;--ink:#ecebfa;--muted:#a8a6cf;--accent:#9c93ff;--accent-ink:#13112b}}
+:root{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--g2:#c24e17;--glow:rgba(75,63,214,.18);--bgimg:url(/bg-light.webp)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(/bg.jpg)}}
+:root[data-theme="dark"]{--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--g2:#ff9a76;--glow:rgba(156,147,255,.38);--bgimg:url(/bg.jpg)}
+:root[data-theme="light"]{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--g2:#c24e17;--glow:rgba(75,63,214,.18);--bgimg:url(/bg-light.webp)}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:32rem}
-h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;margin:0 0 .75rem}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:1.5rem;position:relative;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg::before{content:"";position:absolute;inset:0;background:var(--bgimg) right top/cover no-repeat}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,transparent 60%)}
+main{max-width:32rem;padding:2.25rem;border-radius:1rem;border:1px solid var(--line);background:var(--surface);background:color-mix(in srgb,var(--surface) 80%,transparent);-webkit-backdrop-filter:blur(12px) saturate(135%);backdrop-filter:blur(12px) saturate(135%);box-shadow:0 18px 50px var(--glow)}
+h1{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-size:clamp(2rem,6vw,3rem);line-height:1.1;margin:0 0 .75rem}
+.grad{color:var(--accent)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.grad{background:linear-gradient(90deg,var(--accent),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}}
 p{color:var(--muted);margin:0 0 1.5rem}
-a{display:inline-block;padding:.7rem 1.3rem;border-radius:.5rem;font-weight:600;text-decoration:none;background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
-a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:.5rem;font-weight:500;text-decoration:none;background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent);box-shadow:0 6px 22px var(--glow)}
+a.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"></div>
 <main>
-<h1>That page doesn’t exist.</h1>
+<h1>That page <span class="grad">doesn’t exist.</span></h1>
 <p>The link may be old or mistyped. The portfolio, resume, and booking page are all on the home page.</p>
-<a href="/">Back to the portfolio</a>
+<a class="btn" href="/">Back to the portfolio</a>
 </main>
 </body>
 </html>

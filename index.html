@@ -236,13 +236,29 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .cleg i{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;margin-right:.5rem;vertical-align:middle}
 .cleg .d0{background:var(--muted)}.cleg .d1{background:var(--accent)}
 @media(prefers-reduced-motion:reduce){.in .bento>div,.rpanel{animation:none}.fb,.cols i,.cviz circle{transition:none}.bento>div:hover,.grid.steps>div:hover{transform:none}}
+
+/* ---- hero portrait, pulse, numerals, lightbox ---- */
+.hero-ph{position:relative;display:grid;place-items:center}
+.hero-ph::before{content:"";position:absolute;inset:-2.2rem;border-radius:50%;background:radial-gradient(circle,var(--glow) 0,transparent 68%);pointer-events:none}
+.hero-ph .photo{position:relative}
+@media (max-width:640px){.hero-ph{order:-1;justify-self:start}.hero-ph::before{inset:-1.2rem}}
+#stats b,.funnel b,.cols b{font-variant-numeric:tabular-nums}
+#lb::backdrop{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,179,107,.55)}70%{box-shadow:0 0 0 .6rem rgba(47,179,107,0)}100%{box-shadow:0 0 0 0 rgba(47,179,107,0)}}
+@media (prefers-reduced-motion:no-preference){
+.pill::before{animation:pulse 2.4s ease-out infinite}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
+@keyframes lbin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+#lb[open]{animation:lbin .22s ease both}
+}
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap" id="top">
-<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#work">What I do</a><a href="#case-study">Case study</a><a href="#design">Design</a><a href="#projects">Projects</a><a href="#my-work">Work</a><a href="#experience">Experience</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="cta" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
+<nav aria-label="Primary"><b>Japhette Alec Pulido</b><div><a href="#case-study">Case study</a><a href="#projects">Projects</a><a href="#my-work">Work</a><a href="#services">Services</a><a class="cta" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a><button id="theme" type="button" aria-pressed="false">Dark</button></div></nav>
 
 <main id="main" tabindex="-1">
 <header class="hero">
@@ -253,6 +269,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <p class="proofline">I booked about 50 gym appointments a month, around 90% of quota, with GoHighLevel follow-up.</p>
 <div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a call ↗</a><a class="btn lnk" href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="resume-download">Download resume</a><a class="btn lnk" href="mailto:loomwellops@gmail.com" data-goatcounter-click="hero-email">Email me</a></div>
 </div>
+<div class="hero-ph"><img class="photo" src="profile.jpg" width="176" height="176" alt="Portrait of Japhette Alec Pulido, smiling, in a dark blazer"></div>
 </header>
 
 <ol class="pipe" aria-label="Example lead pipeline I have built in GoHighLevel"><li><button type="button" aria-expanded="false">New Lead</button><span class="pd-i">Typically, the lead is tagged by source and gets a quick first reply.</span></li><li><button type="button" aria-expanded="false">Contacted</button><span class="pd-i">Typically, calls and messages are logged, and quiet leads get a nudge.</span></li><li><button type="button" aria-expanded="false">Trial Booked</button><span class="pd-i">Typically, a confirmation goes out, then reminders before the visit.</span></li><li><button type="button" aria-expanded="false">Showed Up</button><span class="pd-i">Typically, the visit is marked and the lead moves on to a membership follow-up.</span></li><li><button type="button" aria-expanded="false">Member</button><span class="pd-i">Typically, the new member is tagged and moved to the member list.</span></li></ol>
@@ -354,7 +371,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 <section id="projects">
 <h2>Projects</h2>
-<p class="gd">Two web apps I built and use myself. They work together: plan and approve client content in the calendar, and keep my own job search on track in the tracker.</p>
+<p class="gd">Four web apps I built and use myself: plan and approve client content in the calendar, keep my job search on track in the tracker, manage cash flow in USD and PHP in the budget tracker, and run leads through a contacts and pipeline CRM.</p>
 <div class="proj" id="proj-calendar">
 <h3>Content Calendar</h3>
 <p>A web app I built to replace my Excel social media content calendar. Posts are planned in one place, stored in a database, and sent to the client for approval.</p>
@@ -364,12 +381,23 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <div class="proj" id="proj-tracker" style="margin-top:1rem">
 <h3>Job Application Tracker</h3>
 <p>A web app I built to run my own job search: applications, follow-up reminders, board and calendar views, and tools that tailor a resume to each job. Create a free account to keep your data, or open the demo with sample data. No account needed.</p>
-<a class="btn main" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a> <a class="btn alt" href="#proj-calendar">See the calendar</a>
+<a class="btn main" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a> <a class="btn alt" href="#proj-budget">See the budget tracker</a>
 <details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/tracker/" title="Job Application Tracker live demo" loading="lazy"></iframe><p class="note">On the sign-in screen, click “Try the demo”. If it does not load here, open the tracker in its own tab.</p></details>
 </div>
+<div class="proj" id="proj-budget" style="margin-top:1rem">
+<h3>Budget Tracker</h3>
+<p>A web app I built to track my own money as a remote worker paid in US dollars and spending in pesos. It logs income and expenses in USD or PHP with the exchange rate saved on each entry, and shows a balance chart, a 6-month cash flow comparison, a 30-day forecast, recurring bills and payouts on a calendar, wallets, and monthly budgets per category. Data stays in your browser, and you can export it to CSV.</p>
+<a class="btn main" href="https://loomwell-ops.github.io/budget/" target="_blank" rel="noopener" data-goatcounter-click="project-budget">Open the budget tracker</a> <a class="btn alt" href="#proj-crm">See the CRM</a>
+<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/budget/" title="Budget Tracker live demo" loading="lazy"></iframe><p class="note">It starts empty at ₱0.00. Add a transaction to see the charts fill in. If the demo does not load here, open the app in its own tab.</p></details>
+</div>
+<div class="proj" id="proj-crm" style="margin-top:1rem">
+<h3>Contacts and Pipeline CRM</h3>
+<p>A lightweight CRM I built from what I learned running pipelines in GoHighLevel. It has a drag-and-drop pipeline board, a searchable contacts list with a dated notes timeline for each contact, and settings to rename the pipeline stages for any business. Sign-in is required, and each user only sees their own data.</p>
+<a class="btn main" href="https://loomwell-ops.github.io/crm/" target="_blank" rel="noopener" data-goatcounter-click="project-crm">Open the CRM</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-crm-book">Book a call for a walkthrough</a>
+</div>
 <div class="proj soon" style="margin-top:1rem">
-<h3>Lead and booking system <span class="badge">Coming soon</span></h3>
-<p>A lightweight lead and booking tool built from what I have learned running pipelines, follow-up, and reminders in GoHighLevel. Planned: contacts, a pipeline board you can rename for any business, a booking page with reminders, and simple follow-up automations. It is in development. Tell me what you would want it to do on an intro call.</p>
+<h3>Booking and follow-up automations <span class="badge">Coming soon</span></h3>
+<p>The next step for the CRM: a booking page with reminders and simple follow-up automations, like instant replies and no-show rebooking. It is in development. Tell me what you would want it to do on an intro call.</p>
 <a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-book">Book a call</a>
 </div>
 </section>
@@ -477,7 +505,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </div>
 </div>
 <ul class="contact-row"><li><a href="mailto:loomwellops@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>loomwellops@gmail.com</a></li><li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13a3 3 0 0 1 6 0v4"/></svg>linkedin.com/in/japhette-alec-pulido</a></li><li><a href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20l1.1-5.1A8 8 0 1 1 21 12z"/></svg>WhatsApp</a></li><li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume (PDF)</a></li></ul>
-<p class="more"><a href="design.html">Design work</a><a href="#projects">Projects</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
+<p class="more"><a href="#work">What I do</a><a href="#experience">Experience</a><a href="design.html">Design work</a><a href="#projects">Projects</a><a href="#skills">Skills and tools</a><a href="#how">How I work</a><a href="#faq">FAQ</a></p>
 <p class="up"><a href="#top">Back to top</a></p>
 </footer>
 </main>
@@ -515,7 +543,14 @@ function sys(){return window.matchMedia&&matchMedia("(prefers-color-scheme:dark)
 function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Light":"Dark";b.setAttribute("aria-pressed",t==="dark");b.setAttribute("aria-label",t==="dark"?"Switch to light mode":"Switch to dark mode")}
 var s=null;try{s=localStorage.getItem("theme")}catch(e){}
 apply(s==="dark"||s==="light"?s:sys());
-b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";apply(t);try{localStorage.setItem("theme",t)}catch(e){}});})();
+b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";
+function commit(){apply(t);try{localStorage.setItem("theme",t)}catch(e){}}
+var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+if(!document.startViewTransition||calm){commit();return}
+var rc=b.getBoundingClientRect(),x=rc.left+rc.width/2,y=rc.top+rc.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+var vt=document.startViewTransition(commit);
+vt.ready.then(function(){r.animate({clipPath:["circle(0px at "+x+"px "+y+"px)","circle("+R+"px at "+x+"px "+y+"px)"]},{duration:480,easing:"cubic-bezier(.22,1,.36,1)",pseudoElement:"::view-transition-new(root)"})}).catch(function(){});
+});})();
 </script>
 <script>
 (function(){var s=[].slice.call(document.querySelectorAll("section"));
