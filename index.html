@@ -252,6 +252,47 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 @keyframes lbin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 #lb[open]{animation:lbin .22s ease both}
 }
+
+/* ---- tighter layout: merges, split pane, modal, live frame, hub tabs ---- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2.5rem;align-items:start;margin-top:.5rem}
+.duo>section{padding:0;margin:0}
+.duo .about,.duo .fit{max-width:none;margin:1.25rem 0 0}
+@media (max-width:46rem){.duo{grid-template-columns:1fr}}
+.cta-card .hrs{font-size:.95rem;margin:0 0 1.25rem}
+.calcbar{padding:1.25rem 0 0}
+#roi{width:min(46rem,94vw);max-height:92vh;overflow:auto;padding:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--bg);color:var(--ink);box-shadow:0 24px 64px rgba(0,0,0,.4),0 0 40px var(--glow)}
+#roi::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#roi .calc{margin:0;max-width:none}
+.roi-x{float:right;width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.4rem;line-height:1;cursor:pointer;margin:0 0 .5rem .75rem}
+body:has(#roi[open]){overflow:hidden}
+.live{display:grid;grid-template-columns:1.05fr .95fr;gap:1.5rem 2rem;margin-top:1.5rem;padding:1.25rem;border:1px solid var(--line);border-radius:1rem;background:var(--surface);background:color-mix(in srgb,var(--surface) 70%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.live>div{min-width:0}
+.live h3{margin:0 0 .4rem;font-size:1.15rem}
+.live .sim{margin:0;max-width:none}.live .phone{max-width:none}.live .funnel,.live .cols{max-width:none}
+@media (max-width:62rem){.live{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:16rem minmax(0,1fr);gap:1.25rem;align-items:start;margin-top:1rem}
+.plist{display:flex;flex-direction:column;gap:.5rem}
+.plist button{font:inherit;text-align:left;cursor:pointer;display:grid;gap:.1rem;padding:.75rem .9rem;border-radius:.6rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:border-color .2s ease,box-shadow .2s ease}
+.plist b{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;font-size:1rem}
+.plist span{font-size:.85rem;color:var(--muted)}
+.plist button:hover{border-color:var(--accent)}
+.plist button[aria-selected=true]{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent),0 8px 22px var(--glow)}
+.pdetail .proj{max-width:none;margin:0}
+@media (max-width:46rem){.split{grid-template-columns:1fr}.plist{flex-direction:row;overflow-x:auto;padding-bottom:.4rem}.plist button{flex:none;min-width:11.5rem}}
+#hub{padding-top:3.5rem}
+.hubtabs,.rtabs{align-items:center}
+.hubtabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1.25rem}
+.hubtabs button{font:inherit;font-weight:500;padding:.45rem .95rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.hubtabs button[aria-selected=true]{background:var(--accent);color:var(--accent-ink)}
+.hp.faq details{max-width:46rem}
+.glide{position:relative}
+.glide>.gp{position:absolute;top:0;left:0;border-radius:2rem;background:var(--accent);z-index:0;pointer-events:none;transition:transform .44s cubic-bezier(.34,1.45,.64,1),width .44s cubic-bezier(.34,1.45,.64,1),height .2s}
+.glide>button{position:relative;z-index:1}
+.glide.has-pill>button[aria-selected=true]{background:transparent;color:var(--accent-ink)}
+@keyframes bf{from{opacity:0;filter:blur(4px);transform:translateY(8px)}to{opacity:1;filter:none;transform:none}}
+@media (prefers-reduced-motion:no-preference){.hp:not([hidden]),.pdetail .proj:not([hidden]){animation:bf .35s ease both}}
+@media (prefers-reduced-motion:reduce){.glide>.gp{transition:none!important}}
+@media print{.hp[hidden],.pdetail .proj[hidden]{display:block!important}.hubtabs,.plist,.calcbar,#roi{display:none!important}.split,.live,.duo{display:block}}
 </style>
 </head>
 <body>
@@ -283,9 +324,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </div>
 </section>
 
-<section id="about" class="about"><img src="profile.jpg" width="120" height="120" alt="Portrait of Japhette Alec Pulido" loading="lazy"><div><h2>About me</h2><p>I’m Japhette, based in the Philippines. I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep operations organized.</p></div></section>
-
-<section id="fit" class="fit"><h2>Who I work best with</h2><ul><li>Gyms, studios, and clinics that book trials or consultations</li><li>Local service businesses that get leads from ads, calls, or referrals</li><li>Small teams whose leads go cold because follow-up depends on someone remembering</li><li>Owners who want one organized system instead of five disconnected tools</li></ul><p class="note">Not sure you fit? Request a free audit and I’ll tell you honestly.</p><p class="note"><a href="#services">See my 3 ways to start →</a></p></section>
+<div class="duo"><section id="about" class="about"><div><h2>About me</h2><p>I’m Japhette, based in the Philippines. I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep operations organized.</p></div></section>
+<section id="fit" class="fit"><h2>Who I work best with</h2><ul><li>Gyms, studios, and clinics that book trials or consultations</li><li>Local service businesses that get leads from ads, calls, or referrals</li><li>Small teams whose leads go cold because follow-up depends on someone remembering</li><li>Owners who want one organized system instead of five disconnected tools</li></ul><p class="note">Not sure you fit? Request a free audit and I’ll tell you honestly.</p><p class="note"><a href="#services">See my 3 ways to start →</a></p></section></div>
 
 <section id="intro" hidden>
 <h2>Meet me</h2>
@@ -315,18 +355,16 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <div><span class="n">5</span><h3>Member</h3><p>Review requests, failed-payment reminders, and win-back messages if they go quiet.</p></div>
 </div>
 <ul class="stats" id="stats"><li><b>~100</b><span>calls a day, logged in Google Sheets</span></li><li><b>~50</b><span>gym appointments booked a month</span></li><li><b>~90%</b><span>of the monthly appointment quota</span></li><li><b>~20</b><span>discovery meetings a week</span></li><li><b>5 stores</b><span>in 4 states supported</span></li><li><b>3 years</b><span>supporting US-based clients remotely</span></li></ul>
-<h3 style="margin-top:1.5rem">Sample report</h3>
+<div class="live"><div class="lv-a"><h3>Sample report</h3>
 <div class="rtabs" role="tablist" aria-label="Sample report views"><button type="button" role="tab" id="rt1" aria-selected="true" aria-controls="rp1">Pipeline</button><button type="button" role="tab" id="rt2" aria-selected="false" aria-controls="rp2" tabindex="-1">Lead sources</button><button type="button" role="tab" id="rt3" aria-selected="false" aria-controls="rp3" tabindex="-1">Calls</button></div>
 <div class="rpanel" role="tabpanel" id="rp1" aria-labelledby="rt1"><ol class="funnel" aria-label="Sample pipeline for one week, with the share that moves to each next stage"><li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li><li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li><li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li><li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li><li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li></ol></div>
 <div class="rpanel" role="tabpanel" id="rp2" aria-labelledby="rt2" hidden><ol class="funnel" aria-label="Sample leads by source for one week"><li><span>Facebook ads</span><span class="fb" style="width:100%"><b>38</b></span></li><li><span>Instagram</span><span class="fb" style="width:45%"><b>17</b></span></li><li><span>Google search</span><span class="fb" style="width:37%"><b>14</b></span></li><li><span>Referrals</span><span class="fb" style="width:24%"><b>9</b></span></li><li><span>Website form</span><span class="fb" style="width:16%"><b>6</b></span></li></ol></div>
 <div class="rpanel" role="tabpanel" id="rp3" aria-labelledby="rt3" hidden><div class="cols" role="img" aria-label="Sample calls logged per weekday: Monday 96, Tuesday 104, Wednesday 100, Thursday 108, Friday 92, 500 in total"><div><b>96</b><i style="height:7.1rem"></i><span>Mon</span></div><div><b>104</b><i style="height:7.7rem"></i><span>Tue</span></div><div><b>100</b><i style="height:7.4rem"></i><span>Wed</span></div><div><b>108</b><i style="height:8.0rem"></i><span>Thu</span></div><div><b>92</b><i style="height:6.8rem"></i><span>Fri</span></div></div><p class="note">500 calls logged in the sample week.</p></div>
 <p class="note">Sample data with fictional numbers, to show the format. In the pipeline view, percentages show the share of the previous stage. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report</a>.</p>
-<h3 style="margin-top:1.5rem">Example follow-up workflow</h3>
-<ol class="flow" aria-label="Example follow-up workflow"><li><b>New lead</b><span>A form, ad, or call comes in</span></li><li><b>Instant reply</b><span>Email or text with a booking link</span></li><li><b>Booked</b><span>Confirmation, then reminders</span></li><li><b>Show or no-show</b><span>Move the stage, or send a rebooking message</span></li><li><b>Quiet lead</b><span>Short nudge, then a nurture list</span></li></ol>
-<p class="note">Example of the kind of flow I build. Not a real client account.</p>
-<div class="sim"><p class="gd">Try it: pick an event to see what the lead receives.</p><div class="simb" id="simb"><button type="button" data-k="lead" aria-pressed="false">New lead</button><button type="button" data-k="call" aria-pressed="false">Missed call</button><button type="button" data-k="booked" aria-pressed="false">Booked appointment</button><button type="button" data-k="noshow" aria-pressed="false">No-show</button><button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button></div><div class="phone"><div class="ph-head"><span>Example contact</span><span class="ph-badge">Example automation</span></div><ol id="simo" aria-live="polite"></ol></div><p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p></div>
+</div><div class="lv-b"><h3>Try the automation</h3><div class="sim"><p class="gd">Try it: pick an event to see what the lead receives.</p><div class="simb" id="simb"><button type="button" data-k="lead" aria-pressed="false">New lead</button><button type="button" data-k="call" aria-pressed="false">Missed call</button><button type="button" data-k="booked" aria-pressed="false">Booked appointment</button><button type="button" data-k="noshow" aria-pressed="false">No-show</button><button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button></div><div class="phone"><div class="ph-head"><span>Example contact</span><span class="ph-badge">Example automation</span></div><ol id="simo" aria-live="polite"></ol></div><p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p></div>
+</div></div>
 <figure class="shot" id="shot" hidden><img alt=""><figcaption></figcaption></figure>
-<p class="gd" style="margin-top:1.25rem">I tracked lead sources, show rates, and trial-to-member conversion, and sent weekly and monthly reports. Alongside the automation, I made and took about 100 calls a day, logged in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</p>
+<p class="gd" style="margin-top:1.5rem">I tracked lead sources, show rates, and trial-to-member conversion, and sent weekly and monthly reports. Alongside the automation, I made and took about 100 calls a day, logged in Google Sheets, and booked about 50 gym appointments a month, roughly 90% of the monthly quota.</p>
 </section>
 
 
@@ -335,25 +373,27 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <div class="quotes" id="quotes"><blockquote><p>“Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations. He jumped right in, organized our processes, and consistently delivered reliable support without needing to be micromanaged.”</p><cite>Romelle, Assistant, Consulting Company</cite></blockquote><blockquote><p>“Working with Japhette completely elevated our local marketing and store operations. From designing sharp ad creatives and promotional graphics to streamlining our retail compliance and onboarding forms, he brings a rare mix of creativity and operational discipline.”</p><cite>Dom, Store Owner, DHL Express Partner Location</cite></blockquote><blockquote><p>“Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly. He handled everything from CRM automation and social media content to member support with speed, accuracy, and zero drama.”</p><cite>Steve, Owner, Fit Body Boot Camp</cite></blockquote></div>
 </section>
 
-<section id="calculator" class="calc"><h2>What could faster follow-up be worth?</h2>
+<section id="calculator" class="calcbar"><div class="callout"><div><h3>What could faster follow-up be worth?</h3><p>Plug in your own numbers for a rough monthly and yearly figure. Nothing is sent or saved.</p></div><button type="button" class="btn main" id="roi-open" aria-haspopup="dialog">Open ROI calculator</button></div></section>
+<dialog id="roi" aria-labelledby="roi-h"><button type="button" class="roi-x" aria-label="Close calculator">×</button><div class="calc"><h2 id="roi-h">What could faster follow-up be worth?</h2>
 <p class="gd">Change the example numbers to yours. Nothing is sent or saved. This is an illustration, not a prediction.</p>
 <div class="cgrid"><label for="c-leads">Leads per month<input type="number" id="c-leads" value="80" min="0" max="100000" step="1" inputmode="decimal"></label><label for="c-book">Leads who book an appointment (%)<input type="number" id="c-book" value="35" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-show">Booked people who show up (%)<input type="number" id="c-show" value="70" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-close">People who show up and become customers (%)<input type="number" id="c-close" value="40" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-ltv">Average customer value ($)<input type="number" id="c-ltv" value="1200" min="0" max="10000000" step="50" inputmode="decimal"></label><label for="c-lift">Improvement from faster follow-up and reminders: <b id="c-lift-v">10%</b><input type="range" id="c-lift" min="0" max="30" value="10"></label></div>
 <div class="cviz"><svg viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Ring chart: customers per month today, and the possible gain from faster follow-up"><circle cx="60" cy="60" r="48" fill="none" stroke="var(--line)" stroke-width="14"/><circle id="cv-a" cx="60" cy="60" r="48" fill="none" stroke="var(--muted)" stroke-width="14" transform="rotate(-90 60 60)"/><circle id="cv-b" cx="60" cy="60" r="48" fill="none" stroke="var(--accent)" stroke-width="14" transform="rotate(-90 60 60)"/><text id="cv-t" x="60" y="60" text-anchor="middle" font-size="19" font-weight="700" fill="var(--ink)">+0</text><text x="60" y="76" text-anchor="middle" font-size="9" fill="var(--muted)">more / month</text></svg><ul class="cleg"><li><i class="d0"></i><span id="cv-l0">Today</span></li><li><i class="d1"></i><span id="cv-l1">Possible gain</span></li></ul></div>
 <div class="cres" id="c-out" aria-live="polite"></div>
 <p class="note">Assumes the improvement applies to both the booking rate and the show rate, each capped at 100%. Your real results depend on your offer, your leads, and your team.</p>
-<p><a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a></p></section>
+<p><a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a></p></div></dialog>
 
 <section id="services">
 <h2>Services</h2>
 <p class="gd">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
 <h3 style="margin-top:1.25rem">Three ways to start</h3>
 <ol class="tiers"><li><b>1. Free mini audit</b><p class="price">Free</p><p>Send me how you handle leads today. I send back the 3 changes that matter most. <a href="#audit">Request one</a></p></li><li><b>2. Lead-to-booking setup</b><p class="price">Fixed price, from $300</p><p>About two weeks. Pipeline, instant replies, booking calendar, reminders, no-show rebooking, and a checklist your team can follow.</p></li><li><b>3. Ongoing support</b><p class="price">Monthly hours agreed in writing</p><p>Keep the system running and improving, with executive assistant help and a weekly report.</p></li></ol>
-<h3 style="margin-top:1.5rem">All services and starting rates</h3>
+<details class="fold"><summary>All services and starting rates</summary>
 <div class="grid">
 <div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines with automated follow-up, booking calendars and reminders, missed-call text-back, and reporting. A good fit for gyms, studios, and local service businesses.</p><p class="price">From $12 an hour</p></div>
 <div><h3>Social media management</h3><p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p><p class="price">From $350 a month</p></div>
 <div><h3>Executive assistant and operations</h3><p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p><p class="price">From $8 an hour</p></div>
 </div>
+</details>
 <details class="fold pkg"><summary>Problems I fix</summary>
 <p class="gd"><b>GoHighLevel and systems</b></p><ul><li>Leads sitting in a spreadsheet or inbox for days: I connect your form to GoHighLevel and set up an instant reply and a text reminder.</li><li>A messy CRM with duplicate contacts: I clean it up and build a simple pipeline so your team knows who to follow up with each morning.</li><li>New inquiries buried in email: I route website forms into GoHighLevel and Slack so someone sees them right away.</li></ul>
 <p class="gd"><b>Executive assistant and admin</b></p><ul><li>An overflowing inbox: I set up filters for invoices and client threads, plus a short daily check-in routine.</li><li>Forgotten contracts and welcome packets: I build an onboarding checklist (for example in Notion) so nothing gets skipped.</li><li>Calendar chaos across time zones: I sort out scheduling and double-bookings.</li></ul>
@@ -372,34 +412,36 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <section id="projects">
 <h2>Projects</h2>
 <p class="gd">Four web apps I built and use myself: plan and approve client content in the calendar, keep my job search on track in the tracker, manage cash flow in USD and PHP in the budget tracker, and run leads through a contacts and pipeline CRM.</p>
-<div class="proj" id="proj-calendar">
+<div class="split" id="projsplit"><div class="plist" id="plist" role="tablist" aria-label="Projects" aria-orientation="vertical"><button type="button" role="tab" id="pt-calendar" aria-selected="true" aria-controls="proj-calendar"><b>Content Calendar</b><span>Plan and approve client posts</span></button><button type="button" role="tab" id="pt-tracker" aria-selected="false" aria-controls="proj-tracker"><b>Job Application Tracker</b><span>Run a job search</span></button><button type="button" role="tab" id="pt-budget" aria-selected="false" aria-controls="proj-budget"><b>Budget Tracker</b><span>USD and PHP cash flow</span></button><button type="button" role="tab" id="pt-crm" aria-selected="false" aria-controls="proj-crm"><b>Contacts and Pipeline CRM</b><span>Leads, notes, drag-and-drop stages</span></button><button type="button" role="tab" id="pt-soon" aria-selected="false" aria-controls="proj-soon"><b>Booking and follow-up automations</b><span>Coming soon</span></button></div><div class="pdetail">
+<div class="proj" id="proj-calendar" role="tabpanel" aria-labelledby="pt-calendar">
 <h3>Content Calendar</h3>
 <p>A web app I built to replace my Excel social media content calendar. Posts are planned in one place, stored in a database, and sent to the client for approval.</p>
 <a class="btn main" href="https://loomwell-ops.github.io/smm-calendar/" target="_blank" rel="noopener" data-goatcounter-click="project-calendar">Open the app</a> <a class="btn alt" href="#proj-tracker">See the tracker</a>
 <details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/smm-calendar/" title="Content Calendar live demo" loading="lazy"></iframe><p class="note">If the demo does not load here, open the app in its own tab.</p></details>
 </div>
-<div class="proj" id="proj-tracker" style="margin-top:1rem">
+<div class="proj" id="proj-tracker" role="tabpanel" aria-labelledby="pt-tracker">
 <h3>Job Application Tracker</h3>
 <p>A web app I built to run my own job search: applications, follow-up reminders, board and calendar views, and tools that tailor a resume to each job. Create a free account to keep your data, or open the demo with sample data. No account needed.</p>
 <a class="btn main" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a> <a class="btn alt" href="#proj-budget">See the budget tracker</a>
 <details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/tracker/" title="Job Application Tracker live demo" loading="lazy"></iframe><p class="note">On the sign-in screen, click “Try the demo”. If it does not load here, open the tracker in its own tab.</p></details>
 </div>
-<div class="proj" id="proj-budget" style="margin-top:1rem">
+<div class="proj" id="proj-budget" role="tabpanel" aria-labelledby="pt-budget">
 <h3>Budget Tracker</h3>
 <p>A web app I built to track my own money as a remote worker paid in US dollars and spending in pesos. It logs income and expenses in USD or PHP with the exchange rate saved on each entry, and shows a balance chart, a 6-month cash flow comparison, a 30-day forecast, recurring bills and payouts on a calendar, wallets, and monthly budgets per category. Data stays in your browser, and you can export it to CSV.</p>
 <a class="btn main" href="https://loomwell-ops.github.io/budget/" target="_blank" rel="noopener" data-goatcounter-click="project-budget">Open the budget tracker</a> <a class="btn alt" href="#proj-crm">See the CRM</a>
 <details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/budget/" title="Budget Tracker live demo" loading="lazy"></iframe><p class="note">It starts empty at ₱0.00. Add a transaction to see the charts fill in. If the demo does not load here, open the app in its own tab.</p></details>
 </div>
-<div class="proj" id="proj-crm" style="margin-top:1rem">
+<div class="proj" id="proj-crm" role="tabpanel" aria-labelledby="pt-crm">
 <h3>Contacts and Pipeline CRM</h3>
 <p>A lightweight CRM I built from what I learned running pipelines in GoHighLevel. It has a drag-and-drop pipeline board, a searchable contacts list with a dated notes timeline for each contact, and settings to rename the pipeline stages for any business. Sign-in is required, and each user only sees their own data.</p>
 <a class="btn main" href="https://loomwell-ops.github.io/crm/" target="_blank" rel="noopener" data-goatcounter-click="project-crm">Open the CRM</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-crm-book">Book a call for a walkthrough</a>
 </div>
-<div class="proj soon" style="margin-top:1rem">
+<div class="proj soon" id="proj-soon" role="tabpanel" aria-labelledby="pt-soon">
 <h3>Booking and follow-up automations <span class="badge">Coming soon</span></h3>
 <p>The next step for the CRM: a booking page with reminders and simple follow-up automations, like instant replies and no-show rebooking. It is in development. Tell me what you would want it to do on an intro call.</p>
 <a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="project-book">Book a call</a>
 </div>
+</div></div>
 </section>
 
 <section id="my-work" class="work">
@@ -441,9 +483,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </details>
 </section>
 
-<section id="how">
-<h2>How I work</h2>
-<div class="grid">
+<section id="hub">
+<h2>More about working with me</h2>
+<div class="hubtabs" id="hubtabs" role="tablist" aria-label="More about working with me"><button type="button" role="tab" id="ht-how" aria-selected="true" aria-controls="how">How I work</button><button type="button" role="tab" id="ht-skills" aria-selected="false" aria-controls="skills">Skills and tools</button><button type="button" role="tab" id="ht-faq" aria-selected="false" aria-controls="faq">FAQ</button></div>
+<div id="how" class="hp" role="tabpanel" aria-labelledby="ht-how"><div class="grid">
 <div><h3>Your time zone</h3><p>I’m based in the Philippines (PHT) and I adjust my working hours to your time zone, wherever you are. We agree on overlap hours up front. I reply to email and WhatsApp within one business day, and flag anything urgent the same day.</p></div>
 <div><h3>Communication</h3><p>I work in email, Slack, Google Workspace and Microsoft 365, and send notes and follow-ups after meetings.</p></div>
 <div><h3>Reporting</h3><p>Weekly and monthly performance reports, with calls and leads tracked in Google Sheets.</p><p><a href="sample-weekly-report.pdf" target="_blank" rel="noopener">See a sample weekly report (PDF)</a></p></div>
@@ -459,11 +502,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </div>
 <p style="margin:1rem 0"><a class="btn alt" href="client-onboarding-checklist.pdf" target="_blank" rel="noopener">See the client onboarding checklist (PDF)</a></p>
 </details>
-</section>
-
-<section id="skills" class="skills">
-<h2>Skills and tools</h2>
-<h3>Skills</h3>
+</div>
+<div id="skills" class="hp skills" role="tabpanel" aria-labelledby="ht-skills"><h3>Skills</h3>
 <ul class="chips"><li>GoHighLevel funnels and automation</li><li>Cold calling</li><li>Customer support</li><li>Calendar and inbox management</li><li>Reporting</li><li>Social media management</li><li>Operations documentation</li><li>Workflow automation</li><li>Email marketing</li></ul>
 <h3>Key tools</h3>
 <ul class="chips"><li>GoHighLevel</li><li>HubSpot</li><li>Zapier</li><li>Google Workspace</li><li>Canva</li><li>Slack</li></ul>
@@ -476,22 +516,13 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <h4 class="tg">AI</h4><ul class="chips tools"><li><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>ChatGPT</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Claude</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Gemini</span><span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://higgsfield.ai" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="24" height="24" loading="lazy" onerror="this.remove()"><span>Higgsfield AI</span><span class="sr"> (opens in a new tab)</span></a></li></ul>
 </details>
 <div id="certs" hidden><h3>Certifications</h3><ul class="chips" id="certlist"></ul></div>
-</section>
-
-<section id="faq" class="faq">
-<h2>FAQ</h2>
-<details><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
+</div>
+<div id="faq" class="hp faq" role="tabpanel" aria-labelledby="ht-faq"><details><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
 <details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
 <details><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
 <details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
 <details><summary>How does pricing work?</summary><p>I quote after the intro call, based on the size of the work. You get the scope and price in writing before we start.</p></details>
-</section>
-
-<section id="book" class="book">
-<h2>Book a call</h2>
-<p class="gd">A free 30-minute intro call, no prep needed. Times show in your own time zone, and I can adjust my hours to yours.</p>
-<p class="gd"><strong>My hours:</strong> calls Monday to Friday, about 4–8 pm Pacific and 5–9 pm Mountain (I’m in the Philippines, PHT). I reply within one business day.</p>
-<p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="book-section">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="book-email">Email instead</a></p>
+</div>
 </section>
 
 <footer id="contact">
@@ -501,6 +532,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <span class="pill">Open to new roles and clients</span>
 <h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
 <p>Tell me how leads reach you today and I’ll tell you what I would fix first.</p>
+<p class="hrs"><strong>My hours:</strong> calls Monday to Friday, about 4–8 pm Pacific and 5–9 pm Mountain (I’m in the Philippines, PHT). I reply within one business day.</p>
 <div class="btns"><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a><a class="btn alt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Hello" target="_blank" rel="noopener" data-goatcounter-click="footer-email">Email me</a></div>
 </div>
 </div>
@@ -621,6 +653,32 @@ a.setAttribute("stroke-dasharray",(f*C)+" "+C);a.setAttribute("stroke-dashoffset
 b.setAttribute("stroke-dasharray",((1-f)*C)+" "+C);b.setAttribute("stroke-dashoffset",String(-f*C));
 g("cv-t").textContent="+"+d.toFixed(1);g("cv-l0").textContent="Today: "+c0.toFixed(1)+" customers a month";g("cv-l1").textContent="Possible gain: +"+d.toFixed(1)+" a month"};
 var l=g("c-lift");if(l)l.dispatchEvent(new Event("input"))})();
+</script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function glide(box,sel){if(!box)return;var pill=document.createElement("span");pill.className="gp";pill.setAttribute("aria-hidden","true");box.insertBefore(pill,box.firstChild);box.classList.add("glide","has-pill");
+function pos(anim){var b=box.querySelector(sel);if(!b||!b.offsetWidth)return;pill.style.transition=anim?"":"none";pill.style.width=b.offsetWidth+"px";pill.style.height=b.offsetHeight+"px";pill.style.transform="translate("+b.offsetLeft+"px,"+b.offsetTop+"px)"}
+if("MutationObserver" in window)new MutationObserver(function(){pos(true)}).observe(box,{subtree:true,attributes:true,attributeFilter:["aria-selected"]});
+window.addEventListener("resize",function(){pos(false)});window.addEventListener("load",function(){pos(false)});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){pos(false)});pos(false)}
+function group(box){if(!box)return null;var tabs=[].slice.call(box.querySelectorAll("[role=tab]"));
+function sel(t,focus){tabs.forEach(function(x){var on=x===t;x.setAttribute("aria-selected",on?"true":"false");x.tabIndex=on?0:-1;var p=$(x.getAttribute("aria-controls"));if(p)p.hidden=!on});if(focus)t.focus()}
+tabs.forEach(function(t,i){t.addEventListener("click",function(){sel(t)});t.addEventListener("keydown",function(e){var k=e.key,n=(k==="ArrowRight"||k==="ArrowDown")?i+1:(k==="ArrowLeft"||k==="ArrowUp")?i-1:k==="Home"?0:k==="End"?tabs.length-1:null;if(n===null)return;e.preventDefault();sel(tabs[(n+tabs.length)%tabs.length],true)})});
+sel(tabs.filter(function(t){return t.getAttribute("aria-selected")==="true"})[0]||tabs[0]);
+return {sel:sel,tabs:tabs,ids:tabs.map(function(t){return t.getAttribute("aria-controls")}),box:box}}
+var hub=group($("hubtabs")),prj=group($("plist"));
+glide($("hubtabs"),"[aria-selected=true]");glide(document.querySelector(".rtabs"),"[aria-selected=true]");
+function route(h){var id=(h||"").replace(/^#/,""),g,i;if(!id)return false;
+if(hub&&(i=hub.ids.indexOf(id))>-1){hub.sel(hub.tabs[i]);hub.box.scrollIntoView();return true}
+if(prj&&(i=prj.ids.indexOf(id))>-1){prj.sel(prj.tabs[i]);$("projsplit").scrollIntoView();return true}
+return false}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute("href");if(route(h)){e.preventDefault();try{history.pushState(null,"",h)}catch(x){}}});
+window.addEventListener("hashchange",function(){route(location.hash)});
+if(location.hash)route(location.hash);
+var d=$("roi"),ob=$("roi-open");
+if(d&&ob){ob.addEventListener("click",function(){if(d.showModal)d.showModal()});
+d.addEventListener("click",function(e){if(e.target===d||e.target.closest(".roi-x")){d.close();return}var a=e.target.closest('a[href="#audit"]');if(a){e.preventDefault();d.close();var t=$("audit");if(t)t.scrollIntoView()}})}
+})();
 </script>
 <script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
