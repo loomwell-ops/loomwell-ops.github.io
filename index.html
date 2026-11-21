@@ -24,7 +24,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%234b3fd6%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2756%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27bold%27%3EJP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{--bg:#f6f5fd;--surface:#fff;--ink:#1a1840;--muted:#5b5a7d;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--mark:#f3c76b}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13112b;--surface:#1d1a3f;--ink:#ecebfa;--muted:#a8a6cf;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--mark:#c99a2e}}
@@ -203,6 +204,38 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 .pipe li{cursor:pointer}.pipe button{background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer}.pipe li:hover,.pipe li.on{border-color:var(--accent)}.pd-i{display:none}.pd{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);min-height:1.5em}
 @media(max-width:40rem){.pipe{flex-direction:column;align-items:stretch;gap:.4rem}.pipe li:not(:last-child)::after{content:none}.pipe li button{width:100%;text-align:left;display:flex;justify-content:space-between}.pipe li button::after{content:"+";color:var(--muted)}.pipe li.on button::after{content:"–"}.pipe li.on .pd-i{display:block;margin:.35rem 0 0;font-weight:400;font-size:.88rem;color:var(--muted)}.pd{display:none}}
 .phone{max-width:24rem;margin:.8rem 0 0;border:1px solid var(--line);border-radius:1.5rem;background:var(--surface);padding:.6rem .8rem .9rem;box-shadow:0 10px 28px var(--glow)}.ph-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted);padding:.2rem .2rem .6rem;border-bottom:1px solid var(--line)}.ph-badge{font-size:.7rem;padding:.15rem .5rem;border-radius:2rem;border:1px solid var(--accent);color:var(--accent)}.phone ol{margin:.7rem 0 0}.phone li{border-left:0;max-width:92%;border-radius:1rem 1rem 1rem .3rem;background:color-mix(in srgb,var(--accent) 16%,var(--bg))}.phone li.em{border-radius:.6rem}.phone li.sys{max-width:100%;background:none;border:1px dashed var(--line);border-radius:.6rem;font-size:.85rem;color:var(--muted)}
+
+/* polish: glow, bento, glass, tabs, ring */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(640px circle at 88% 6%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 65%),radial-gradient(500px circle at 70% 22%,rgba(194,78,23,.10),transparent 62%)}
+.bento,.grid.steps{--gl:color-mix(in srgb,var(--accent) 18%,transparent)}
+.bento>div,.grid.steps>div{background-color:color-mix(in srgb,var(--surface) 80%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.bento{grid-template-columns:repeat(6,1fr)}
+.bento>div:nth-child(1),.bento>div:nth-child(4){grid-column:span 4;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),var(--surface) 70%)}
+.bento>div:nth-child(2),.bento>div:nth-child(3){grid-column:span 2}
+.bento>div:nth-child(5),.bento>div:nth-child(6){grid-column:span 3}
+.bento>div:nth-child(1) h3,.bento>div:nth-child(4) h3{font-size:1.4rem}
+@media(max-width:46rem){.bento{grid-template-columns:1fr}.bento>div{grid-column:auto!important}}
+@media(hover:hover){.bento>div:hover,.grid.steps>div:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px var(--gl)}}
+@keyframes bi{from{opacity:0;filter:blur(6px);transform:translateY(10px)}to{opacity:1;filter:none;transform:none}}
+.in .bento>div{animation:bi .6s ease both}.in .bento>div:nth-child(2){animation-delay:.07s}.in .bento>div:nth-child(3){animation-delay:.14s}.in .bento>div:nth-child(4){animation-delay:.21s}.in .bento>div:nth-child(5){animation-delay:.28s}.in .bento>div:nth-child(6){animation-delay:.35s}
+.rtabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 .4rem}
+.rtabs button{font:inherit;font-weight:500;padding:.45rem .95rem;border-radius:2rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.rtabs button[aria-selected=true]{background:var(--accent);color:var(--accent-ink)}
+.rpanel[hidden]{display:none}.rpanel{animation:fi .35s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cols{display:flex;align-items:flex-end;gap:.7rem;height:11rem;max-width:30rem;margin-top:1rem}
+.cols>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.25rem;font-size:.9rem}
+.cols i{display:block;width:100%;border-radius:.4rem .4rem 0 0;background:color-mix(in srgb,var(--accent) 70%,var(--surface));transform-origin:bottom}
+.cols span{color:var(--muted)}
+.fb,.cols i{transition:clip-path .9s ease,transform .9s ease}
+.pre .fb{clip-path:inset(0 100% 0 0)}.pre.cols i{transform:scaleY(0)}
+.go .fb{clip-path:inset(0)}.go.cols i{transform:none}
+.cviz{display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;margin-top:1rem}
+.cviz circle{transition:stroke-dasharray .5s ease,stroke-dashoffset .5s ease}
+.cleg{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;font-size:.95rem}
+.cleg i{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;margin-right:.5rem;vertical-align:middle}
+.cleg .d0{background:var(--muted)}.cleg .d1{background:var(--accent)}
+@media(prefers-reduced-motion:reduce){.in .bento>div,.rpanel{animation:none}.fb,.cols i,.cviz circle{transition:none}.bento>div:hover,.grid.steps>div:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -244,7 +277,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 
 <section id="work">
 <h2>What I do</h2>
-<div class="grid">
+<div class="grid bento">
 <div><h3>Lead capture and follow-up</h3><p>Missed-call text-back, instant replies to forms and ad leads, self-booking calendars with reminders, and multi-day nurture sequences.</p></div>
 <div><h3>Funnels and sales</h3><p>Landing pages with payment, memberships and class packs through Stripe and PayPal, upsell sequences, and abandoned-checkout follow-up.</p></div>
 <div><h3>Retention and reviews</h3><p>Onboarding check-ins, win-back messages for inactive members, failed-payment reminders, and automatic review requests.</p></div>
@@ -265,9 +298,12 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <div><span class="n">5</span><h3>Member</h3><p>Review requests, failed-payment reminders, and win-back messages if they go quiet.</p></div>
 </div>
 <ul class="stats" id="stats"><li><b>~100</b><span>calls a day, logged in Google Sheets</span></li><li><b>~50</b><span>gym appointments booked a month</span></li><li><b>~90%</b><span>of the monthly appointment quota</span></li><li><b>~20</b><span>discovery meetings a week</span></li><li><b>5 stores</b><span>in 4 states supported</span></li><li><b>3 years</b><span>supporting US-based clients remotely</span></li></ul>
-<h3 style="margin-top:1.5rem">Sample pipeline view</h3>
-<ol class="funnel" aria-label="Sample pipeline for one week, with the share that moves to each next stage"><li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li><li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li><li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li><li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li><li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li></ol>
-<p class="note">Sample data with fictional numbers, to show the format. Percentages show the share of the previous stage. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report</a>.</p>
+<h3 style="margin-top:1.5rem">Sample report</h3>
+<div class="rtabs" role="tablist" aria-label="Sample report views"><button type="button" role="tab" id="rt1" aria-selected="true" aria-controls="rp1">Pipeline</button><button type="button" role="tab" id="rt2" aria-selected="false" aria-controls="rp2" tabindex="-1">Lead sources</button><button type="button" role="tab" id="rt3" aria-selected="false" aria-controls="rp3" tabindex="-1">Calls</button></div>
+<div class="rpanel" role="tabpanel" id="rp1" aria-labelledby="rt1"><ol class="funnel" aria-label="Sample pipeline for one week, with the share that moves to each next stage"><li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li><li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li><li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li><li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li><li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li></ol></div>
+<div class="rpanel" role="tabpanel" id="rp2" aria-labelledby="rt2" hidden><ol class="funnel" aria-label="Sample leads by source for one week"><li><span>Facebook ads</span><span class="fb" style="width:100%"><b>38</b></span></li><li><span>Instagram</span><span class="fb" style="width:45%"><b>17</b></span></li><li><span>Google search</span><span class="fb" style="width:37%"><b>14</b></span></li><li><span>Referrals</span><span class="fb" style="width:24%"><b>9</b></span></li><li><span>Website form</span><span class="fb" style="width:16%"><b>6</b></span></li></ol></div>
+<div class="rpanel" role="tabpanel" id="rp3" aria-labelledby="rt3" hidden><div class="cols" role="img" aria-label="Sample calls logged per weekday: Monday 96, Tuesday 104, Wednesday 100, Thursday 108, Friday 92, 500 in total"><div><b>96</b><i style="height:7.1rem"></i><span>Mon</span></div><div><b>104</b><i style="height:7.7rem"></i><span>Tue</span></div><div><b>100</b><i style="height:7.4rem"></i><span>Wed</span></div><div><b>108</b><i style="height:8.0rem"></i><span>Thu</span></div><div><b>92</b><i style="height:6.8rem"></i><span>Fri</span></div></div><p class="note">500 calls logged in the sample week.</p></div>
+<p class="note">Sample data with fictional numbers, to show the format. In the pipeline view, percentages show the share of the previous stage. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report</a>.</p>
 <h3 style="margin-top:1.5rem">Example follow-up workflow</h3>
 <ol class="flow" aria-label="Example follow-up workflow"><li><b>New lead</b><span>A form, ad, or call comes in</span></li><li><b>Instant reply</b><span>Email or text with a booking link</span></li><li><b>Booked</b><span>Confirmation, then reminders</span></li><li><b>Show or no-show</b><span>Move the stage, or send a rebooking message</span></li><li><b>Quiet lead</b><span>Short nudge, then a nurture list</span></li></ol>
 <p class="note">Example of the kind of flow I build. Not a real client account.</p>
@@ -285,6 +321,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <section id="calculator" class="calc"><h2>What could faster follow-up be worth?</h2>
 <p class="gd">Change the example numbers to yours. Nothing is sent or saved. This is an illustration, not a prediction.</p>
 <div class="cgrid"><label for="c-leads">Leads per month<input type="number" id="c-leads" value="80" min="0" max="100000" step="1" inputmode="decimal"></label><label for="c-book">Leads who book an appointment (%)<input type="number" id="c-book" value="35" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-show">Booked people who show up (%)<input type="number" id="c-show" value="70" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-close">People who show up and become customers (%)<input type="number" id="c-close" value="40" min="0" max="100" step="1" inputmode="decimal"></label><label for="c-ltv">Average customer value ($)<input type="number" id="c-ltv" value="1200" min="0" max="10000000" step="50" inputmode="decimal"></label><label for="c-lift">Improvement from faster follow-up and reminders: <b id="c-lift-v">10%</b><input type="range" id="c-lift" min="0" max="30" value="10"></label></div>
+<div class="cviz"><svg viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Ring chart: customers per month today, and the possible gain from faster follow-up"><circle cx="60" cy="60" r="48" fill="none" stroke="var(--line)" stroke-width="14"/><circle id="cv-a" cx="60" cy="60" r="48" fill="none" stroke="var(--muted)" stroke-width="14" transform="rotate(-90 60 60)"/><circle id="cv-b" cx="60" cy="60" r="48" fill="none" stroke="var(--accent)" stroke-width="14" transform="rotate(-90 60 60)"/><text id="cv-t" x="60" y="60" text-anchor="middle" font-size="19" font-weight="700" fill="var(--ink)">+0</text><text x="60" y="76" text-anchor="middle" font-size="9" fill="var(--muted)">more / month</text></svg><ul class="cleg"><li><i class="d0"></i><span id="cv-l0">Today</span></li><li><i class="d1"></i><span id="cv-l1">Possible gain</span></li></ul></div>
 <div class="cres" id="c-out" aria-live="polite"></div>
 <p class="note">Assumes the improvement applies to both the booking rate and the show rate, each capped at 100%. Your real results depend on your offer, your leads, and your team.</p>
 <p><a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a> <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a></p></section>
@@ -425,6 +462,7 @@ footer#contact{border-top:0;margin-top:3rem;padding:1rem 0 3rem}
 <section id="book" class="book">
 <h2>Book a call</h2>
 <p class="gd">A free 30-minute intro call, no prep needed. Times show in your own time zone, and I can adjust my hours to yours.</p>
+<p class="gd"><strong>My hours:</strong> calls Monday to Friday, about 4–8 pm Pacific and 5–9 pm Mountain (I’m in the Philippines, PHT). I reply within one business day.</p>
 <p><a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="book-section">Book a 30-minute call ↗</a> <a class="btn alt" href="mailto:loomwellops@gmail.com" data-goatcounter-click="book-email">Email instead</a></p>
 </section>
 
@@ -507,7 +545,7 @@ var c0=L*b*s*c,c1=L*Math.min(b*(1+k),1)*Math.min(s*(1+k),1)*c,x=c1-c0,fm=functio
 out.innerHTML="";
 out.appendChild(el("div","Today: about <b>"+fm(c0)+"</b> new customers a month, worth about <b>"+f.format(c0*v)+"</b>."));
 out.appendChild(el("div","With better follow-up: about <b>"+fm(c1)+"</b> a month, worth about <b>"+f.format(c1*v)+"</b>."));
-out.appendChild(el("div","<span class='big'>Possible gap: about <b>"+fm(x)+"</b> more customers and <b>"+f.format(x*v)+"</b> a month, or <b>"+f.format(x*v*12)+"</b> a year.</span>"))}
+out.appendChild(el("div","<span class='big'>Possible gap: about <b>"+fm(x)+"</b> more customers and <b>"+f.format(x*v)+"</b> a month, or <b>"+f.format(x*v*12)+"</b> a year.</span>"));if(window.cviz)window.cviz(c0,c1,x)}
 ["c-leads","c-book","c-show","c-close","c-ltv","c-lift"].forEach(function(i){g(i).addEventListener("input",run)});run()})();
 (function(){var S={
 lead:[["Within a minute","Text","Hi [First name], thanks for reaching out to [Business]. Pick a time that works for you here: [booking link]. Reply STOP to opt out."],["Within a minute","Email","Hi [First name], thanks for getting in touch. You can book a time here: [booking link], or just reply with any questions."],["Right away","Pipeline","Contact added to New lead and tagged with where they came from."]],
@@ -534,6 +572,20 @@ b+="\n\nThe biggest follow-up problem we have is: ";var su="Free mini audit";
 if(G)G.href="https://mail.google.com/mail/?view=cm&fs=1&to=loomwellops%40gmail.com&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);
 if(M)M.href="mailto:loomwellops@gmail.com?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(b);if(note)note.hidden=!dirty}
 ids.forEach(function(i){g(i).addEventListener("input",function(){dirty=true;upd()})});upd()})();
+</script>
+<script>
+(function(){var t=[].slice.call(document.querySelectorAll(".rtabs [role=tab]"));
+function sel(b,f){t.forEach(function(x){var on=x===b;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute("aria-controls")).hidden=!on});if(f)b.focus()}
+t.forEach(function(b,i){b.addEventListener("click",function(){sel(b)});b.addEventListener("keydown",function(e){var k=e.key,n=k==="ArrowRight"?i+1:k==="ArrowLeft"?i-1:k==="Home"?0:k==="End"?t.length-1:null;if(n===null)return;e.preventDefault();sel(t[(n+t.length)%t.length],true)})});
+if("IntersectionObserver" in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){var els=[].slice.call(document.querySelectorAll(".funnel,.cols"));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;io.unobserve(el);requestAnimationFrame(function(){el.classList.add("go")})}})},{threshold:.2});
+els.forEach(function(el){el.classList.add("pre");io.observe(el)})}})();
+(function(){var C=2*Math.PI*48,g=function(i){return document.getElementById(i)},a=g("cv-a"),b=g("cv-b");if(!a||!b)return;
+window.cviz=function(c0,c1,x){var f=c1>0?c0/c1:0,d=Math.max(0,c1-c0);
+a.setAttribute("stroke-dasharray",(f*C)+" "+C);a.setAttribute("stroke-dashoffset","0");
+b.setAttribute("stroke-dasharray",((1-f)*C)+" "+C);b.setAttribute("stroke-dashoffset",String(-f*C));
+g("cv-t").textContent="+"+d.toFixed(1);g("cv-l0").textContent="Today: "+c0.toFixed(1)+" customers a month";g("cv-l1").textContent="Possible gain: +"+d.toFixed(1)+" a month"};
+var l=g("c-lift");if(l)l.dispatchEvent(new Event("input"))})();
 </script>
 <script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
