@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS & WEBGL CAUSTIC ENGINE (Zero Dependencies)
+   LOOMWELL OPS — SPATIAL GLASS & WEBGL CAUSTIC ENGINE (Optimized, Zero Deps)
    ========================================================================== */
 (function () {
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -7,11 +7,11 @@
   var pulseLevel = 0;
 
   function triggerPulse(amount) {
-    pulseLevel = Math.min(1.6, pulseLevel + (amount || 0.75));
+    pulseLevel = Math.min(1.4, pulseLevel + (amount || 0.7));
   }
 
   /* ------------------------------------------------------------------------
-     1. Full-Viewport WebGL1 GLSL Caustic Light Shader
+     1. Ultra-Light Full-Viewport WebGL1 Caustic Shader (Capped 512px, 30fps)
      ------------------------------------------------------------------------ */
   function initCausticShader() {
     if (reduced) return;
@@ -20,15 +20,10 @@
     canvas.setAttribute("aria-hidden", "true");
     document.body.insertBefore(canvas, document.body.firstChild);
 
-    var gl = canvas.getContext("webgl", { alpha: false, antialias: false, powerPreference: "low-power" }) ||
-             canvas.getContext("experimental-webgl");
+    var gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: "low-power" });
     if (!gl) { canvas.remove(); return; }
 
-    var vsSrc = [
-      "attribute vec2 a_pos;",
-      "void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }"
-    ].join("\n");
-
+    var vsSrc = "attribute vec2 a_pos; void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }";
     var fsSrc = [
       "precision mediump float;",
       "uniform vec2 u_res;",
@@ -36,46 +31,32 @@
       "uniform vec2 u_mouse;",
       "uniform float u_dark;",
       "uniform float u_pulse;",
-      "float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }",
-      "float noise(vec2 p){",
-      "  vec2 i = floor(p); vec2 f = fract(p);",
-      "  vec2 u = f*f*(3.0 - 2.0*f);",
-      "  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),",
-      "             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);",
-      "}",
-      "float fbm(vec2 p){",
-      "  float v = 0.0; float a = 0.5;",
-      "  mat2 m = mat2(0.80, 0.60, -0.60, 0.80);",
-      "  for(int i=0; i<4; i++){ v += a * noise(p); p = m * p * 2.02; a *= 0.5; }",
-      "  return v;",
-      "}",
       "void main(){",
       "  vec2 uv = gl_FragCoord.xy / u_res;",
       "  vec2 p = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);",
-      "  vec2 m = (u_mouse - 0.5) * 0.45;",
-      "  float t = u_time * 0.14;",
-      "  vec2 q = vec2(fbm(p * 1.45 + vec2(t, -t * 0.7) + m * 0.6),",
-      "                fbm(p * 1.45 + vec2(-t * 0.8, t * 0.9) + vec2(5.2, 1.3)));",
-      "  float f = fbm(p * 1.85 + 2.1 * q + vec2(t * 0.5, -t * 0.4));",
-      "  float ridge = 1.0 - abs(f * 2.0 - 1.0);",
-      "  float caustic = pow(clamp(ridge, 0.0, 1.0), 3.6);",
-      "  float glow = smoothstep(0.25, 0.92, f) * 0.55 + caustic * (0.68 + u_pulse * 0.35);",
-      "  float distM = length(uv - u_mouse);",
-      "  float mouseAura = exp(-distM * 3.4) * (0.18 + u_pulse * 0.16);",
+      "  vec2 m = (u_mouse - 0.5) * 0.35;",
+      "  float t = u_time * 0.28;",
+      "  vec2 q = p * 2.1 + m;",
+      "  float w1 = sin(q.x * 1.4 + t + cos(q.y * 1.6 - t * 0.7));",
+      "  float w2 = cos(q.y * 1.5 - t * 0.8 + sin(q.x * 1.3 + t * 0.6));",
+      "  float w3 = sin((q.x + q.y) * 1.2 - t * 0.5 + w1 * 0.9);",
+      "  float ridge = 1.0 - abs(w1 * 0.45 + w2 * 0.35 + w3 * 0.2);",
+      "  float caustic = pow(clamp(ridge, 0.0, 1.0), 3.2);",
+      "  float glow = smoothstep(-0.4, 0.9, w1 * 0.5 + w2 * 0.5) * 0.45 + caustic * (0.62 + u_pulse * 0.32);",
+      "  float mouseAura = exp(-length(uv - u_mouse) * 3.2) * (0.18 + u_pulse * 0.14);",
       "  vec3 dBase   = vec3(0.068, 0.058, 0.155);",
       "  vec3 dIndigo = vec3(0.320, 0.270, 0.860);",
       "  vec3 dCoral  = vec3(0.950, 0.540, 0.390);",
       "  vec3 dGold   = vec3(0.953, 0.780, 0.420);",
-      "  vec3 darkCol = mix(dBase, dIndigo, clamp(glow * 0.72 + mouseAura, 0.0, 1.0));",
-      "  darkCol = mix(darkCol, dCoral, clamp(caustic * q.x * (0.72 + u_pulse * 0.3), 0.0, 1.0));",
-      "  darkCol += dGold * pow(caustic, 2.2) * (0.16 + u_pulse * 0.14);",
+      "  vec3 darkCol = mix(dBase, dIndigo, clamp(glow * 0.68 + mouseAura, 0.0, 1.0));",
+      "  darkCol = mix(darkCol, dCoral, clamp(caustic * (0.55 + 0.35 * sin(t + p.x)) * (0.7 + u_pulse * 0.3), 0.0, 1.0));",
+      "  darkCol += dGold * pow(caustic, 2.5) * (0.14 + u_pulse * 0.12);",
       "  vec3 lBase   = vec3(0.965, 0.961, 0.992);",
       "  vec3 lLav    = vec3(0.840, 0.820, 0.985);",
       "  vec3 lPeach  = vec3(0.988, 0.878, 0.835);",
-      "  vec3 lightCol = mix(lBase, lLav, clamp(glow * 0.58 + mouseAura * 0.65, 0.0, 1.0));",
-      "  lightCol = mix(lightCol, lPeach, clamp(caustic * q.y * (0.52 + u_pulse * 0.25), 0.0, 1.0));",
-      "  vec3 col = mix(lightCol, darkCol, u_dark);",
-      "  gl_FragColor = vec4(col, 1.0);",
+      "  vec3 lightCol = mix(lBase, lLav, clamp(glow * 0.55 + mouseAura * 0.6, 0.0, 1.0));",
+      "  lightCol = mix(lightCol, lPeach, clamp(caustic * 0.45, 0.0, 1.0));",
+      "  gl_FragColor = vec4(mix(lightCol, darkCol, u_dark), 1.0);",
       "}"
     ].join("\n");
 
@@ -111,11 +92,18 @@
 
     document.documentElement.classList.add("has-gl");
 
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.addEventListener("webglcontextlost", function (e) {
+      e.preventDefault();
+      document.documentElement.classList.remove("has-gl");
+      canvas.remove();
+    });
+
     function resize() {
-      canvas.width = Math.max(1, Math.floor(window.innerWidth * dpr * 0.72));
-      canvas.height = Math.max(1, Math.floor(window.innerHeight * dpr * 0.72));
-      gl.viewport(0, 0, canvas.width, canvas.height);
+      var w = Math.min(512, Math.max(240, Math.floor(window.innerWidth * 0.35)));
+      var h = Math.min(360, Math.max(160, Math.floor(window.innerHeight * 0.35)));
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
     }
     resize();
     window.addEventListener("resize", resize);
@@ -129,22 +117,26 @@
     var isDark = function () { return document.documentElement.getAttribute("data-theme") === "dark" ? 1.0 : 0.0; };
     var darkVal = isDark();
     var startT = performance.now();
+    var lastFrame = 0;
     var raf = null;
 
     function frame(now) {
       if (document.hidden) { raf = null; return; }
-      mx += (tx - mx) * 0.05;
-      my += (ty - my) * 0.05;
-      darkVal += (isDark() - darkVal) * 0.08;
-      pulseLevel *= 0.94;
-      if (pulseLevel < 0.002) pulseLevel = 0;
+      if (now - lastFrame >= 33) { // ~30fps cap
+        lastFrame = now;
+        mx += (tx - mx) * 0.08;
+        my += (ty - my) * 0.08;
+        darkVal += (isDark() - darkVal) * 0.12;
+        pulseLevel *= 0.92;
+        if (pulseLevel < 0.002) pulseLevel = 0;
 
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, (now - startT) * 0.001);
-      gl.uniform2f(uMouse, mx, my);
-      gl.uniform1f(uDark, darkVal);
-      gl.uniform1f(uPulse, pulseLevel);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, (now - startT) * 0.001);
+        gl.uniform2f(uMouse, mx, my);
+        gl.uniform1f(uDark, darkVal);
+        gl.uniform1f(uPulse, pulseLevel);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
       raf = requestAnimationFrame(frame);
     }
     document.addEventListener("visibilitychange", function () {
@@ -154,7 +146,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Floating Spatial Glass Bottom Dock + WAAPI Liquid-Elastic Pill
+     2. Floating Spatial Glass Bottom Dock + Safe MutationObserver
      ------------------------------------------------------------------------ */
   function initDock() {
     var nav = document.querySelector("nav[aria-label='Primary']");
@@ -173,14 +165,14 @@
     function moveDockPill(animate) {
       var active = bar.querySelector("a.on");
       if (!active) {
-        pill.classList.remove("ready");
+        if (pill.classList.contains("ready")) pill.classList.remove("ready");
         return;
       }
       var x = active.offsetLeft, y = active.offsetTop, w = active.offsetWidth, h = active.offsetHeight;
       var from = lastRect;
       lastRect = { x: x, y: y, w: w, h: h };
-      pill.classList.add("ready");
-      pill.getAnimations().forEach(function (a) { a.cancel(); });
+      if (!pill.classList.contains("ready")) pill.classList.add("ready");
+      if (pill.getAnimations) pill.getAnimations().forEach(function (a) { a.cancel(); });
       pill.style.width = w + "px";
       pill.style.height = h + "px";
       pill.style.transform = "translate(" + x + "px," + y + "px)";
@@ -194,14 +186,17 @@
       ], { duration: 480 });
     }
 
+    // Observe ONLY the anchor links directly (never the pill itself)
     if ("MutationObserver" in window) {
-      new MutationObserver(function () { moveDockPill(true); }).observe(bar, {
-        subtree: true, attributes: true, attributeFilter: ["class"]
+      var links = [].slice.call(bar.querySelectorAll('a[href^="#"]'));
+      var mo = new MutationObserver(function () { moveDockPill(true); });
+      links.forEach(function (a) {
+        mo.observe(a, { attributes: true, attributeFilter: ["class"] });
       });
     }
     window.addEventListener("resize", function () { moveDockPill(false); });
     window.addEventListener("load", function () { moveDockPill(false); });
-    setTimeout(function () { moveDockPill(false); }, 120);
+    setTimeout(function () { moveDockPill(false); }, 150);
 
     var themeBtn = document.getElementById("theme");
     if (themeBtn) themeBtn.addEventListener("click", function () { triggerPulse(1.0); });
@@ -278,7 +273,7 @@
       var r = card.getBoundingClientRect();
       var px = (e.clientX - r.left) / Math.max(1, r.width);
       var py = (e.clientY - r.top) / Math.max(1, r.height);
-      var maxDeg = card.classList.contains("proj") ? 3.2 : 5.5;
+      var maxDeg = card.classList.contains("proj") ? 3.0 : 5.0;
       card.style.setProperty("--rx", ((0.5 - py) * maxDeg * 2).toFixed(2) + "deg");
       card.style.setProperty("--ry", ((px - 0.5) * maxDeg * 2).toFixed(2) + "deg");
       card.style.setProperty("--mx", (e.clientX - r.left).toFixed(1) + "px");
@@ -354,7 +349,6 @@
       }
     }
 
-    // Replay staggered bar sweep whenever Sample Report tabs switch
     var rtabs = [].slice.call(document.querySelectorAll(".rtabs [role=tab]"));
     rtabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
@@ -371,7 +365,6 @@
       });
     });
 
-    // Pulse phone + caustic shader when visitor tests automation events
     var simb = document.getElementById("simb");
     var phone = document.querySelector(".phone");
     if (simb) {

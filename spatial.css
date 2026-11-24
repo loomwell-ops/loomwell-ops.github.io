@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS & PRECISION TELEMETRY LAYER
+   LOOMWELL OPS — SPATIAL GLASS & PRECISION TELEMETRY LAYER (Optimized)
    Drop-in visual upgrade for index.html, design.html, and 404.html
    ========================================================================== */
 
@@ -8,16 +8,16 @@
   --monolith-ink: #f4f3ff;
   --monolith-muted: #b8b5df;
   --monolith-line: rgba(156, 147, 255, .28);
-  --glass-bg: color-mix(in srgb, var(--surface) 74%, transparent);
-  --glass-rim: rgba(255, 255, 255, .72);
-  --dock-bg: color-mix(in srgb, var(--surface) 78%, transparent);
+  --glass-bg: color-mix(in srgb, var(--surface) 88%, transparent);
+  --glass-rim: rgba(255, 255, 255, .75);
+  --dock-bg: color-mix(in srgb, var(--surface) 84%, transparent);
   --dock-shadow: 0 20px 50px rgba(26, 24, 64, .18), 0 0 0 1px color-mix(in srgb, var(--line) 85%, transparent), inset 0 1px 0 rgba(255, 255, 255, .85);
 }
 
 :root[data-theme="dark"] {
-  --glass-bg: color-mix(in srgb, var(--surface) 64%, transparent);
+  --glass-bg: color-mix(in srgb, var(--surface) 82%, transparent);
   --glass-rim: rgba(255, 255, 255, .14);
-  --dock-bg: color-mix(in srgb, #161333 76%, transparent);
+  --dock-bg: color-mix(in srgb, #161333 84%, transparent);
   --dock-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(156, 147, 255, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
 }
 
@@ -40,18 +40,6 @@ html.has-gl[data-theme="dark"] .bg {
 }
 html.has-gl body::before {
   opacity: .35;
-}
-
-/* Subtle breathing drift on fallback .bg ribbon */
-@keyframes bgDrift {
-  0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); }
-  50% { transform: scale(1.07) translate3d(-1.2%, 1.4%, 0); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .bg::before {
-    animation: bgDrift 20s ease-in-out infinite;
-    will-change: transform;
-  }
 }
 
 /* ---- 2. Floating Spatial Glass Bottom Dock ---- */
@@ -77,12 +65,11 @@ nav.dock {
   border-radius: 999px;
   border: 0 !important;
   background: var(--dock-bg) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(165%) !important;
-  backdrop-filter: blur(22px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+  backdrop-filter: blur(16px) saturate(145%) !important;
   box-shadow: var(--dock-shadow);
   flex-wrap: nowrap !important;
   gap: .5rem !important;
-  transition: box-shadow .3s ease, transform .35s cubic-bezier(.22, 1, .36, 1);
 }
 nav.dock b {
   font-size: .95rem;
@@ -163,21 +150,10 @@ nav.dock #theme {
     padding: .38rem .45rem !important;
     bottom: max(.65rem, env(safe-area-inset-bottom));
   }
-  nav.dock b {
-    font-size: 0;
-    gap: 0;
-  }
-  nav.dock a {
-    padding: .34rem .62rem;
-    font-size: .84rem;
-  }
-  nav.dock a.cta {
-    padding: .36rem .78rem;
-  }
-  nav.dock #theme {
-    padding: .28rem .62rem;
-    font-size: .82rem;
-  }
+  nav.dock b { font-size: 0; gap: 0; }
+  nav.dock a { padding: .34rem .62rem; font-size: .84rem; }
+  nav.dock a.cta { padding: .36rem .78rem; }
+  nav.dock #theme { padding: .28rem .62rem; font-size: .82rem; }
 }
 
 /* ---- 3. Live-Executing SVG Automation Pipeline ---- */
@@ -211,16 +187,13 @@ nav.dock #theme {
   from { stroke-dashoffset: 308; }
   to { stroke-dashoffset: 0; }
 }
-.pipe-bead {
-  filter: drop-shadow(0 0 6px var(--g2));
-}
 
 .pipe {
   position: relative;
   z-index: 1;
   background: var(--glass-bg) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line)) !important;
   box-shadow: 0 14px 36px color-mix(in srgb, var(--glow) 60%, transparent), inset 0 1px 0 var(--glass-rim);
   justify-content: space-between;
@@ -246,11 +219,8 @@ nav.dock #theme {
   box-shadow: 0 0 10px var(--accent);
   vertical-align: middle;
 }
-.pipe li:not(:last-child)::after {
-  content: none !important;
-}
-.pipe li:hover,
-.pipe li.on {
+.pipe li:not(:last-child)::after { content: none !important; }
+.pipe li:hover, .pipe li.on {
   transform: translateY(-2px);
   border-color: var(--accent) !important;
   box-shadow: 0 10px 24px var(--glow);
@@ -261,16 +231,10 @@ nav.dock #theme {
   border-color: transparent !important;
   box-shadow: 0 8px 24px rgba(243, 199, 107, .42);
 }
-.pipe li:last-child::before {
-  background: #1a1840;
-  box-shadow: none;
-}
+.pipe li:last-child::before { background: #1a1840; box-shadow: none; }
+@media (max-width: 40rem) { .pipe-svg { display: none; } }
 
-@media (max-width: 40rem) {
-  .pipe-svg { display: none; }
-}
-
-/* ---- 4. Open Hairline Architecture (Stats, Clients, Experience) ---- */
+/* ---- 4. Open Hairline Architecture (Stats & Experience) ---- */
 .stats {
   gap: 0 !important;
   border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
@@ -288,10 +252,7 @@ nav.dock #theme {
   padding: 1.15rem 1rem !important;
   position: relative;
 }
-.stats li:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
+.stats li:hover { transform: none !important; box-shadow: none !important; }
 .stats li::after {
   content: "";
   position: absolute;
@@ -310,7 +271,6 @@ nav.dock #theme {
   background-clip: text;
   color: transparent !important;
 }
-
 .job {
   border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent) !important;
   padding: 1.75rem 0 !important;
@@ -323,7 +283,7 @@ nav.dock #theme {
   font-weight: 500;
 }
 
-/* ---- 5. Spatial Glass + 3D Perspective Tilt + Holographic Glare ---- */
+/* ---- 5. Spatial Glass Cards (No heavy per-card backdrop-filter) ---- */
 .bento > div,
 .tiers li,
 .proj,
@@ -335,8 +295,8 @@ nav.dock #theme {
   position: relative;
   overflow: hidden;
   background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(14px) saturate(145%);
-  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   box-shadow: 0 10px 30px rgba(19, 17, 43, .06), inset 0 1px 0 var(--glass-rim);
 }
 :root[data-theme="dark"] .bento > div,
@@ -349,8 +309,6 @@ nav.dock #theme {
 }
 
 .tilt-card {
-  transform-style: preserve-3d;
-  will-change: transform;
   transition: transform .22s cubic-bezier(.22, 1, .36, 1), border-color .25s ease, box-shadow .25s ease !important;
 }
 .tilt-card::after {
@@ -362,15 +320,13 @@ nav.dock #theme {
   opacity: 0;
   transition: opacity .3s ease;
   background: radial-gradient(
-    280px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, .28)),
-    color-mix(in srgb, var(--g2) 10%, transparent) 42%,
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 16%, rgba(255, 255, 255, .24)),
+    color-mix(in srgb, var(--g2) 8%, transparent) 44%,
     transparent 70%
   );
-  mix-blend-mode: screen;
 }
 :root[data-theme="light"] .tilt-card::after {
-  mix-blend-mode: normal;
   background: radial-gradient(
     260px circle at var(--mx, 50%) var(--my, 50%),
     rgba(75, 63, 214, .10),
@@ -384,13 +340,10 @@ nav.dock #theme {
     border-color: color-mix(in srgb, var(--accent) 75%, var(--g2)) !important;
     box-shadow: 0 18px 42px var(--glow), inset 0 1px 0 var(--glass-rim) !important;
   }
-  .tilt-card:hover::after {
-    opacity: 1;
-  }
+  .tilt-card:hover::after { opacity: 1; }
 }
 
 /* ---- 6. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
-/* Anchor A: Flagship Tier #2 (Lead-to-booking setup) */
 .tiers li:nth-child(2) {
   background: var(--monolith-bg) !important;
   color: var(--monolith-ink) !important;
@@ -411,18 +364,10 @@ nav.dock #theme {
   border: 1px solid rgba(243, 199, 107, .45);
   margin-bottom: .55rem;
 }
-.tiers li:nth-child(2) b {
-  color: #fff;
-}
-.tiers li:nth-child(2) p {
-  color: var(--monolith-muted) !important;
-}
-.tiers li:nth-child(2) .price {
-  color: var(--mark) !important;
-  font-size: 1.15rem;
-}
+.tiers li:nth-child(2) b { color: #fff; }
+.tiers li:nth-child(2) p { color: var(--monolith-muted) !important; }
+.tiers li:nth-child(2) .price { color: var(--mark) !important; font-size: 1.15rem; }
 
-/* Anchor B: ROI Calculator Monolith Output + 60-Tick Radial Gauge */
 .cres {
   background: var(--monolith-bg) !important;
   color: var(--monolith-ink) !important;
@@ -431,31 +376,17 @@ nav.dock #theme {
   padding: 1.25rem !important;
   border-radius: .85rem !important;
 }
-.cres b {
-  color: var(--mark) !important;
-}
-.cres .big b {
-  color: #ff9a76 !important;
-}
+.cres b { color: var(--mark) !important; }
+.cres .big b { color: #ff9a76 !important; }
 .roi-gauge-tick {
   stroke: color-mix(in srgb, var(--line) 85%, transparent);
   transition: stroke .22s ease, opacity .22s ease;
   opacity: .55;
 }
-.roi-gauge-tick.on {
-  stroke: var(--accent);
-  opacity: 1;
-}
-.roi-gauge-tick.hot {
-  stroke: var(--g2);
-  opacity: 1;
-}
-.roi-gauge-tick.gold {
-  stroke: var(--mark);
-  opacity: 1;
-}
+.roi-gauge-tick.on { stroke: var(--accent); opacity: 1; }
+.roi-gauge-tick.hot { stroke: var(--g2); opacity: 1; }
+.roi-gauge-tick.gold { stroke: var(--mark); opacity: 1; }
 
-/* Anchor C: VERSO Diagonal-Seam Contact CTA Card */
 .cta-card {
   background: var(--monolith-bg) !important;
   color: var(--monolith-ink) !important;
@@ -497,29 +428,20 @@ nav.dock #theme {
   80% { opacity: .9; }
   100% { transform: skewX(-7deg) translateY(100%); opacity: 0; }
 }
-.cta-card.beam-go .verso-beam {
-  animation: versoSweep .85s cubic-bezier(.22, 1, .36, 1) both;
-}
+.cta-card.beam-go .verso-beam { animation: versoSweep .85s cubic-bezier(.22, 1, .36, 1) both; }
 .cta-card.beam-go::before {
   border-left-color: rgba(255, 154, 118, .78);
   box-shadow: -16px 0 46px rgba(255, 154, 118, .32);
 }
-.cta-card h2 {
-  color: #fff;
-}
+.cta-card h2 { color: #fff; }
 .cta-card .grad {
   background: linear-gradient(90deg, #b6aeff, #ff9a76, #f3c76b) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
 }
-.cta-card p,
-.cta-card .hrs {
-  color: var(--monolith-muted) !important;
-}
-.cta-card .hrs strong {
-  color: #fff;
-}
+.cta-card p, .cta-card .hrs { color: var(--monolith-muted) !important; }
+.cta-card .hrs strong { color: #fff; }
 .cta-card .pill {
   background: rgba(255, 255, 255, .08) !important;
   border-color: rgba(255, 255, 255, .2) !important;
@@ -535,17 +457,11 @@ nav.dock #theme {
   color: #ecebfa !important;
   border-color: rgba(236, 235, 250, .38) !important;
 }
-.cta-card .btn.alt:hover {
-  border-color: #fff !important;
-  background: rgba(255, 255, 255, .08);
-}
+.cta-card .btn.alt:hover { border-color: #fff !important; background: rgba(255, 255, 255, .08); }
 
 /* ---- 7. Fanned Design Showcase Cards (#design .dgrid) ---- */
 @media (hover: hover) and (min-width: 40rem) {
-  .dgrid {
-    gap: 1rem !important;
-    padding: .75rem .25rem;
-  }
+  .dgrid { gap: 1rem !important; padding: .75rem .25rem; }
   .dgrid img {
     transition: transform .38s cubic-bezier(.22, 1, .36, 1), box-shadow .38s ease, border-color .25s ease !important;
     box-shadow: 0 12px 28px rgba(19, 17, 43, .14);
@@ -553,9 +469,7 @@ nav.dock #theme {
   .dgrid img:nth-child(1) { transform: rotate(-2.8deg) translateY(5px); }
   .dgrid img:nth-child(2) { transform: translateY(-2px); z-index: 1; }
   .dgrid img:nth-child(3) { transform: rotate(2.8deg) translateY(5px); }
-  .dgrid:hover img {
-    transform: scale(.98);
-  }
+  .dgrid:hover img { transform: scale(.98); }
   .dgrid img:hover {
     transform: rotate(0deg) translateY(-6px) scale(1.06) !important;
     z-index: 4;
@@ -569,6 +483,8 @@ nav.dock #theme {
   position: relative;
   overflow: hidden;
   background: var(--glass-bg) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)) !important;
   box-shadow: 0 20px 52px color-mix(in srgb, var(--glow) 65%, transparent), inset 0 1px 0 var(--glass-rim);
   padding: 1.5rem !important;
@@ -583,16 +499,12 @@ nav.dock #theme {
   background: linear-gradient(90deg, transparent, var(--accent), var(--g2), var(--mark), transparent);
   pointer-events: none;
 }
-.phone {
-  position: relative;
-  transition: box-shadow .4s ease, border-color .4s ease;
-}
+.phone { position: relative; transition: box-shadow .4s ease, border-color .4s ease; }
 .phone.pulse {
   border-color: var(--accent) !important;
   box-shadow: 0 14px 38px var(--glow), 0 0 24px color-mix(in srgb, var(--g2) 35%, transparent) !important;
 }
 
-/* Staggered replaying chart bars */
 .funnel li:nth-child(1) .fb, .cols > div:nth-child(1) i { transition-delay: .02s; }
 .funnel li:nth-child(2) .fb, .cols > div:nth-child(2) i { transition-delay: .07s; }
 .funnel li:nth-child(3) .fb, .cols > div:nth-child(3) i { transition-delay: .12s; }
@@ -605,7 +517,6 @@ nav.dock #theme {
   .tilt-card:hover { transform: none !important; }
   .dgrid img, .dgrid img:hover { transform: none !important; }
   .cta-card.beam-go .verso-beam { animation: none !important; }
-  .bg::before { animation: none !important; }
 }
 @media print {
   #caustic-gl, nav.dock, .pipe-svg { display: none !important; }
