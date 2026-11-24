@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS DECK & CAUSTIC ENGINE (v3, Zero Deps)
+   LOOMWELL OPS — SPATIAL GLASS DECK & CAUSTIC ENGINE (v4, Zero Deps)
    ========================================================================== */
 (function () {
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -145,7 +145,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Spatial 5-View App Deck (Fixes "Too Scrolly" on index.html)
+     2. Spatial 5-View App Deck + Top Stepper + Highlighted "UP NEXT" Card
      ------------------------------------------------------------------------ */
   function initSpatialDeck() {
     var main = document.getElementById("main");
@@ -155,13 +155,47 @@
     var bar = nav.querySelector("div");
     if (!bar) return false;
 
-    // Group existing top-level children of #main into 5 tight, focused decks
     var deckDefs = [
-      { id: "overview",   label: "Overview",    next: "Case study",      nextId: "case-study" },
-      { id: "case-study", label: "Case study",  next: "Services",        nextId: "services" },
-      { id: "services",   label: "Services",    next: "Projects & Work", nextId: "projects" },
-      { id: "projects",   label: "Projects",    next: "About & Contact", nextId: "contact" },
-      { id: "contact",    label: "Contact",     next: "Back to Overview",nextId: "overview" }
+      {
+        id: "overview",
+        label: "Overview",
+        nextId: "case-study",
+        nextTitle: "Case Study & Live Automation Simulator",
+        nextSub: "See the Fit Body Boot Camp funnel, weekly metrics, and test the interactive SMS/email sequences.",
+        ctaText: "Explore Case Study"
+      },
+      {
+        id: "case-study",
+        label: "Case study",
+        nextId: "services",
+        nextTitle: "Services, Pricing & ROI Calculator",
+        nextSub: "Compare the 3 ways to start, calculate your follow-up revenue gap, or request a free mini audit.",
+        ctaText: "See Services & ROI"
+      },
+      {
+        id: "services",
+        label: "Services",
+        nextId: "projects",
+        nextTitle: "Live Web Apps, Design & Social Media Work",
+        nextSub: "Try the Content Calendar, Job Tracker, Budget Tracker, and CRM live—plus brand boards & videos.",
+        ctaText: "View Projects & Work"
+      },
+      {
+        id: "projects",
+        label: "Projects & Work",
+        nextId: "contact",
+        nextTitle: "Experience, Tools, FAQ & Book a Call",
+        nextSub: "Review work history, 30+ tools, working hours, and book a 30-minute intro call.",
+        ctaText: "About & Contact"
+      },
+      {
+        id: "contact",
+        label: "Contact",
+        nextId: "overview",
+        nextTitle: "Back to Portfolio Overview",
+        nextSub: "Return to the top summary, live pipeline, and core capabilities.",
+        ctaText: "Back to Overview"
+      }
     ];
 
     var decks = {};
@@ -187,19 +221,49 @@
 
     var children = [].slice.call(main.children);
     children.forEach(function (el) {
-      if (el.tagName === "DIALOG") return; // keep #roi modal outside decks
+      if (el.tagName === "DIALOG") return;
       var b = bucketFor(el);
       if (b && decks[b]) decks[b].appendChild(el);
     });
 
-    // Insert decks into #main and add compact "Next View" footer to each
+    // Top Quick-Jump Stepper Bar (so visitors immediately see all 5 portfolio sections)
+    var stepper = document.createElement("div");
+    stepper.className = "deck-stepper";
+    stepper.setAttribute("role", "navigation");
+    stepper.setAttribute("aria-label", "Portfolio sections");
+    var stepBtns = {};
+    deckDefs.forEach(function (d, idx) {
+      var sb = document.createElement("button");
+      sb.type = "button";
+      sb.dataset.deck = d.id;
+      sb.innerHTML = '<em>0' + (idx + 1) + '</em>' + d.label;
+      stepper.appendChild(sb);
+      stepBtns[d.id] = sb;
+    });
+    main.insertBefore(stepper, main.firstChild);
+
+    // Insert decks + High-Contrast "UP NEXT" Spotlight Banner on every view
     var roiDialog = document.getElementById("roi");
     deckDefs.forEach(function (d, idx) {
       var foot = document.createElement("div");
       foot.className = "deck-foot";
+      foot.dataset.go = d.nextId;
+
+      var segs = deckDefs.map(function (item, sIdx) {
+        var cls = sIdx === idx ? "now" : (sIdx < idx ? "done" : "");
+        return '<button type="button" class="' + cls + '" data-jump="' + item.id + '" aria-label="Go to ' + item.label + '" title="' + item.label + '"></button>';
+      }).join("");
+
+      var nextNum = ((idx + 1) % deckDefs.length) + 1;
       foot.innerHTML =
-        '<span class="deck-hint">View ' + (idx + 1) + ' of ' + deckDefs.length + ' · Use dock or keys 1–5</span>' +
-        '<button type="button" class="deck-next" data-go="' + d.nextId + '">Next: <span>' + d.next + ' →</span></button>';
+        '<div class="deck-foot-info">' +
+          '<span class="deck-eyebrow">Up Next · Section 0' + nextNum + ' of 0' + deckDefs.length + '</span>' +
+          '<div class="deck-next-title">' + d.nextTitle + '</div>' +
+          '<div class="deck-next-sub">' + d.nextSub + '</div>' +
+          '<div class="deck-prog" aria-label="Portfolio progress">' + segs + '</div>' +
+        '</div>' +
+        '<button type="button" class="deck-next" data-go="' + d.nextId + '">' + d.ctaText + ' <span class="arr" aria-hidden="true">→</span></button>';
+
       decks[d.id].appendChild(foot);
       if (roiDialog) main.insertBefore(decks[d.id], roiDialog);
       else main.appendChild(decks[d.id]);
@@ -209,7 +273,6 @@
     nav.classList.add("dock");
     document.body.classList.add("has-dock");
 
-    // Rebuild dock tabs cleanly while keeping Book a call + Theme button
     var cta = bar.querySelector("a.cta");
     var themeBtn = document.getElementById("theme");
     [].slice.call(bar.querySelectorAll("a:not(.cta)")).forEach(function (a) { a.remove(); });
@@ -257,13 +320,14 @@
       if (!decks[id]) id = "overview";
       var changed = currentDeck !== id;
       currentDeck = id;
+      var curDef = deckDefs.filter(function (d) { return d.id === id; })[0];
+      var nextId = curDef ? curDef.nextId : null;
 
       Object.keys(decks).forEach(function (k) {
         var on = k === id;
         decks[k].hidden = !on;
         decks[k].classList.toggle("deck-active", on);
         if (on) {
-          // Ensure reveal sections inside this deck are visible immediately
           [].slice.call(decks[k].querySelectorAll("section.rv")).forEach(function (s) {
             s.classList.add("in");
           });
@@ -273,7 +337,12 @@
       Object.keys(tabBtns).forEach(function (k) {
         var on = k === id;
         tabBtns[k].classList.toggle("on", on);
+        tabBtns[k].classList.toggle("is-next", k === nextId && id !== "contact");
         tabBtns[k].setAttribute("aria-current", on ? "page" : "false");
+        if (stepBtns[k]) {
+          stepBtns[k].classList.toggle("on", on);
+          stepBtns[k].setAttribute("aria-current", on ? "page" : "false");
+        }
       });
 
       movePill(tabBtns[id], animate && changed);
@@ -287,30 +356,33 @@
       window.dispatchEvent(new Event("resize"));
     }
 
-    // Wire dock clicks, brand click, and "Next" buttons
+    // Wire dock clicks, top stepper clicks, brand click, and UP NEXT card clicks
     bar.addEventListener("click", function (e) {
       var b = e.target.closest(".dock-tab");
       if (b) showDeck(b.dataset.deck, true);
     });
+    stepper.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-deck]");
+      if (b) showDeck(b.dataset.deck, true);
+    });
     var brand = nav.querySelector("b");
     if (brand) brand.addEventListener("click", function () { showDeck("overview", true); });
+
     main.addEventListener("click", function (e) {
-      var nxt = e.target.closest(".deck-next");
-      if (nxt) showDeck(nxt.dataset.go, true);
+      var seg = e.target.closest(".deck-prog button[data-jump]");
+      if (seg) { e.stopPropagation(); showDeck(seg.dataset.jump, true); return; }
+      var foot = e.target.closest(".deck-foot");
+      if (foot && foot.dataset.go) { showDeck(foot.dataset.go, true); }
     });
 
-    // Keyboard shortcuts 1-5 to jump views instantly
     document.addEventListener("keydown", function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       var tag = (e.target && e.target.tagName) || "";
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       var idx = parseInt(e.key, 10) - 1;
-      if (idx >= 0 && idx < deckDefs.length) {
-        showDeck(deckDefs[idx].id, true);
-      }
+      if (idx >= 0 && idx < deckDefs.length) showDeck(deckDefs[idx].id, true);
     });
 
-    // Intercept all internal #hash links so they switch to the right deck automatically
     function routeHash(hash) {
       var id = (hash || "").replace(/^#/, "");
       if (!id || id === "top") { showDeck("overview", true); return true; }
@@ -318,10 +390,7 @@
       var target = document.getElementById(id);
       if (!target) return false;
       var parentDeck = target.closest(".deck-view");
-      if (parentDeck) {
-        showDeck(parentDeck.dataset.deck, true, target);
-        return true;
-      }
+      if (parentDeck) { showDeck(parentDeck.dataset.deck, true, target); return true; }
       return false;
     }
 
@@ -335,14 +404,10 @@
     window.addEventListener("resize", function () { movePill(tabBtns[currentDeck], false); });
     window.addEventListener("load", function () { movePill(tabBtns[currentDeck], false); });
 
-    // Initial deck
-    if (!location.hash || !routeHash(location.hash)) {
-      showDeck("overview", false);
-    }
+    if (!location.hash || !routeHash(location.hash)) showDeck("overview", false);
     return true;
   }
 
-  /* Fallback dock for design.html (non-deck page) */
   function initSimpleDock() {
     var nav = document.querySelector("nav[aria-label='Primary']");
     if (!nav || nav.classList.contains("dock")) return;

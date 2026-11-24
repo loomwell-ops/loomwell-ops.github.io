@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS DECK (v3: Zero-Scroll App Shell + All-In Craft)
+   LOOMWELL OPS — SPATIAL GLASS DECK (v4: Clear Wayfinding + All-In Craft)
    Drop-in visual & layout engine for index.html, design.html, and 404.html
    ========================================================================== */
 
@@ -35,14 +35,63 @@ html.has-gl .bg { opacity: .22; transition: opacity .6s ease; }
 html.has-gl[data-theme="dark"] .bg { opacity: .16; }
 html.has-gl body::before { opacity: .30; }
 
-/* ---- 2. Spatial App-Deck Mode (Eliminates Endless Scrolling) ---- */
+/* ---- 2. Top Portfolio Quick-Jump Stepper (Instant Clarity Above Fold) ---- */
+.deck-stepper {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: .4rem;
+  margin: .85rem 0 .4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  background: var(--glass-bg);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--glow) 45%, transparent), inset 0 1px 0 var(--glass-rim);
+}
+.deck-stepper::-webkit-scrollbar { display: none; }
+.deck-stepper button {
+  flex: 1 0 auto;
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: .46rem .9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  white-space: nowrap;
+  transition: color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.deck-stepper button em {
+  font-style: normal;
+  font-size: .74rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  opacity: .72;
+}
+.deck-stepper button:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.deck-stepper button.on {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 72%, var(--g2)));
+  box-shadow: 0 6px 18px var(--glow);
+}
+.deck-stepper button.on em { opacity: 1; color: var(--mark); }
+
+/* ---- 3. Spatial App-Deck Mode ---- */
 body.deck-mode main#main {
   min-height: calc(100vh - 6rem);
   padding-bottom: 6.5rem;
 }
-body.deck-mode .deck-view[hidden] {
-  display: none !important;
-}
+body.deck-mode .deck-view[hidden] { display: none !important; }
 @keyframes deckEnter {
   from { opacity: 0; filter: blur(8px); transform: translateY(14px) scale(.988); }
   to   { opacity: 1; filter: none; transform: none; }
@@ -50,61 +99,145 @@ body.deck-mode .deck-view[hidden] {
 body.deck-mode .deck-view.deck-active {
   animation: deckEnter .42s cubic-bezier(.22, 1, .36, 1) both;
 }
-body.deck-mode .deck-view > section:first-child {
-  padding-top: 1.75rem;
-}
-body.deck-mode footer#contact {
-  margin-top: 1.5rem;
-  padding-bottom: 2rem;
-}
+body.deck-mode .deck-view > section:first-child { padding-top: 1.5rem; }
+body.deck-mode footer#contact { margin-top: 1.5rem; padding-bottom: 1.5rem; }
 
-/* Compact "Next View" bar at the bottom of each deck */
+/* ---- 4. UNMISSABLE "UP NEXT" SPOTLIGHT CARD (.deck-foot) ---- */
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+@keyframes nextRimPulse {
+  0%, 100% { box-shadow: 0 22px 54px rgba(19, 17, 43, .36), 0 0 0 1px rgba(243, 199, 107, .42), 0 0 28px var(--glow); }
+  50%      { box-shadow: 0 24px 60px rgba(19, 17, 43, .44), 0 0 0 2px rgba(255, 154, 118, .75), 0 0 42px var(--glow); }
+}
 .deck-foot {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.1rem 1.75rem;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 2.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+  margin-top: 2.75rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1.15rem;
+  background: var(--monolith-bg);
+  color: var(--monolith-ink);
+  border: 1px solid rgba(243, 199, 107, .38);
+  cursor: pointer;
+  animation: nextRimPulse 3.6s ease-in-out infinite;
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1), border-color .25s ease;
 }
-.deck-foot .deck-hint {
-  font-size: .85rem;
-  color: var(--muted);
+.deck-foot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ff9a76, var(--mark), #6ee7b7);
+  pointer-events: none;
 }
+.deck-foot:hover {
+  transform: translateY(-3px);
+  border-color: var(--mark);
+}
+.deck-foot-info {
+  display: grid;
+  gap: .3rem;
+}
+.deck-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--mark);
+}
+.deck-eyebrow::before {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--mark);
+  box-shadow: 0 0 10px var(--mark);
+}
+.deck-next-title {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+}
+.deck-next-sub {
+  font-size: .92rem;
+  color: var(--monolith-muted);
+  max-width: 52ch;
+}
+.deck-prog {
+  display: flex;
+  gap: .4rem;
+  margin-top: .55rem;
+}
+.deck-prog button {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 5px;
+  width: 2rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .2);
+  transition: background .25s ease, width .25s ease;
+}
+.deck-prog button:hover { background: rgba(255, 255, 255, .55); }
+.deck-prog button.done { background: rgba(156, 147, 255, .75); }
+.deck-prog button.now  { width: 3.1rem; background: linear-gradient(90deg, var(--mark), #ff9a76); }
+
 .deck-next {
   font: inherit;
-  font-weight: 600;
-  font-size: .92rem;
+  font-weight: 700;
+  font-size: .98rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
-  padding: .62rem 1.2rem;
+  gap: .55rem;
+  padding: .85rem 1.45rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
-  background: var(--glass-bg);
-  color: var(--ink);
-  box-shadow: 0 8px 24px var(--glow), inset 0 1px 0 var(--glass-rim);
-  transition: transform .22s cubic-bezier(.22, 1, .36, 1), border-color .2s ease, box-shadow .2s ease;
+  border: 0;
+  background: linear-gradient(135deg, var(--mark) 0%, #ff9a76 100%);
+  color: #161333;
+  box-shadow: 0 10px 28px rgba(243, 199, 107, .42);
+  white-space: nowrap;
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease;
 }
 .deck-next:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 30px var(--glow);
+  transform: scale(1.04);
+  box-shadow: 0 14px 34px rgba(255, 154, 118, .55);
 }
-.deck-next span {
-  background: linear-gradient(90deg, var(--accent), var(--g2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.deck-next .arr {
+  display: inline-block;
+  font-size: 1.15em;
+  line-height: 1;
+  animation: arrowNudge 1.5s ease-in-out infinite;
 }
 
-/* ---- 3. Floating Spatial Glass Bottom Dock ---- */
+@media (max-width: 44rem) {
+  .deck-foot {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+  .deck-next {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ---- 5. Floating Spatial Glass Bottom Dock ---- */
 body.has-dock { padding-top: .5rem; }
 body.has-dock footer#contact { padding-bottom: 7rem; }
-body.deck-mode.has-dock footer#contact { padding-bottom: 2rem; }
+body.deck-mode.has-dock footer#contact { padding-bottom: 1.5rem; }
 body.has-dock #stick { display: none !important; }
 
 nav.dock {
@@ -181,6 +314,20 @@ nav.dock a:hover,
 nav.dock .dock-tab:hover { color: var(--accent); }
 nav.dock a.on,
 nav.dock .dock-tab.on { color: var(--accent-ink) !important; }
+
+/* Breathing "Next" highlight dot on the next dock tab */
+nav.dock .dock-tab.is-next::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mark);
+  box-shadow: 0 0 8px var(--mark);
+  margin-left: .4rem;
+  vertical-align: middle;
+}
+
 nav.dock a.cta {
   padding: .42rem 1rem;
   background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 78%, var(--g2)));
@@ -222,15 +369,9 @@ nav.dock #theme {
   nav.dock #theme { padding: .28rem .6rem; font-size: .8rem; }
 }
 
-/* ---- 4. Prismatic Rotating Halo on Hero Portrait ---- */
-@keyframes haloSpin {
-  to { transform: rotate(360deg); }
-}
-.hero-ph {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
+/* ---- 6. Prismatic Rotating Halo on Hero Portrait ---- */
+@keyframes haloSpin { to { transform: rotate(360deg); } }
+.hero-ph { position: relative; display: grid; place-items: center; }
 .hero-ph::after {
   content: "";
   position: absolute;
@@ -248,7 +389,7 @@ nav.dock #theme {
   box-shadow: 0 16px 44px var(--glow) !important;
 }
 
-/* ---- 5. Live-Executing SVG Automation Pipeline ---- */
+/* ---- 7. Live-Executing SVG Automation Pipeline ---- */
 .pipe-wrap { position: relative; margin: 1.25rem 0 0; }
 .pipe-svg {
   position: absolute;
@@ -322,7 +463,7 @@ nav.dock #theme {
 .pipe li:last-child::before { background: #1a1840; box-shadow: none; }
 @media (max-width: 40rem) { .pipe-svg { display: none; } }
 
-/* ---- 6. Open Hairline Architecture (Stats & Experience) ---- */
+/* ---- 8. Open Hairline Architecture (Stats & Experience) ---- */
 .stats {
   gap: 0 !important;
   border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
@@ -371,7 +512,7 @@ nav.dock #theme {
   font-weight: 500;
 }
 
-/* ---- 7. Spatial Glass Cards + 3D Tilt + Holographic Glare ---- */
+/* ---- 9. Spatial Glass Cards + 3D Tilt + Holographic Glare ---- */
 .bento > div,
 .tiers li,
 .proj,
@@ -430,13 +571,11 @@ nav.dock #theme {
   }
   .tilt-card:hover::after { opacity: 1; }
 }
-
-/* Magnetic Primary Buttons */
 .btn.main {
   transition: transform .2s cubic-bezier(.22, 1, .36, 1), box-shadow .25s ease !important;
 }
 
-/* ---- 8. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
+/* ---- 10. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
 .tiers li:nth-child(2) {
   background: var(--monolith-bg) !important;
   color: var(--monolith-ink) !important;
@@ -552,7 +691,7 @@ nav.dock #theme {
 }
 .cta-card .btn.alt:hover { border-color: #fff !important; background: rgba(255, 255, 255, .08); }
 
-/* ---- 9. Fanned Design Showcase Cards (#design .dgrid) ---- */
+/* ---- 11. Fanned Design Showcase Cards (#design .dgrid) ---- */
 @media (hover: hover) and (min-width: 40rem) {
   .dgrid { gap: 1rem !important; padding: .75rem .25rem; }
   .dgrid img {
@@ -571,7 +710,7 @@ nav.dock #theme {
   }
 }
 
-/* ---- 10. Unified Smoked-Glass Telemetry Console (.live) ---- */
+/* ---- 12. Unified Smoked-Glass Telemetry Console (.live) ---- */
 .live {
   position: relative;
   overflow: hidden;
@@ -597,24 +736,23 @@ nav.dock #theme {
   border-color: var(--accent) !important;
   box-shadow: 0 14px 38px var(--glow), 0 0 24px color-mix(in srgb, var(--g2) 35%, transparent) !important;
 }
-
 .funnel li:nth-child(1) .fb, .cols > div:nth-child(1) i { transition-delay: .02s; }
 .funnel li:nth-child(2) .fb, .cols > div:nth-child(2) i { transition-delay: .07s; }
 .funnel li:nth-child(3) .fb, .cols > div:nth-child(3) i { transition-delay: .12s; }
 .funnel li:nth-child(4) .fb, .cols > div:nth-child(4) i { transition-delay: .17s; }
 .funnel li:nth-child(5) .fb, .cols > div:nth-child(5) i { transition-delay: .22s; }
 
-/* ---- 11. Reduced Motion & Print Guardrails ---- */
+/* ---- 13. Reduced Motion & Print Guardrails ---- */
 @media (prefers-reduced-motion: reduce) {
   #caustic-gl, .pipe-track-glow { display: none !important; }
-  .hero-ph::after { animation: none !important; }
+  .hero-ph::after, .deck-foot, .deck-next .arr { animation: none !important; }
   .tilt-card:hover { transform: none !important; }
   .dgrid img, .dgrid img:hover { transform: none !important; }
   .cta-card.beam-go .verso-beam { animation: none !important; }
   body.deck-mode .deck-view.deck-active { animation: none !important; }
 }
 @media print {
-  #caustic-gl, nav.dock, .pipe-svg, .deck-foot { display: none !important; }
+  #caustic-gl, nav.dock, .pipe-svg, .deck-foot, .deck-stepper { display: none !important; }
   body.deck-mode .deck-view[hidden] { display: block !important; }
   body.has-dock footer#contact { padding-bottom: 1rem !important; }
 }
