@@ -294,7 +294,6 @@ body:has(#roi[open]){overflow:hidden}
 @media (prefers-reduced-motion:reduce){.glide>.gp{transition:none!important}}
 @media print{.hp[hidden],.pdetail .proj[hidden]{display:block!important}.hubtabs,.plist,.calcbar,#roi{display:none!important}.split,.live,.duo{display:block}}
 </style>
-<link rel="stylesheet" href="spatial.css">
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
@@ -417,14 +416,14 @@ body:has(#roi[open]){overflow:hidden}
 <div class="proj" id="proj-calendar" role="tabpanel" aria-labelledby="pt-calendar">
 <h3>Content Calendar</h3>
 <p>A web app I built to replace my Excel social media content calendar. Posts are planned in one place, stored in a database, and sent to the client for approval.</p>
-<a class="btn main" href="https://loomwell-ops.github.io/smm-calendar/" target="_blank" rel="noopener" data-goatcounter-click="project-calendar">Open the app</a> <a class="btn alt" href="#proj-tracker">See the tracker</a>
-<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/smm-calendar/" title="Content Calendar live demo" loading="lazy"></iframe><p class="note">If the demo does not load here, open the app in its own tab.</p></details>
+<a class="btn main" href="https://loomwell-ops.github.io/smm-calendar/calendar-demo.html" target="_blank" rel="noopener" data-goatcounter-click="project-calendar-demo">Open the live demo</a> <a class="btn alt" href="https://loomwell-ops.github.io/smm-calendar/" target="_blank" rel="noopener" data-goatcounter-click="project-calendar">Open the app</a> <a class="btn alt" href="#proj-tracker">See the tracker</a>
+<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/smm-calendar/calendar-demo.html" title="Content Calendar live demo" loading="lazy"></iframe><p class="note">Sample data only. Pick the agency view or the client view. If the demo does not load here, open it in its own tab.</p></details>
 </div>
 <div class="proj" id="proj-tracker" role="tabpanel" aria-labelledby="pt-tracker">
 <h3>Job Application Tracker</h3>
 <p>A web app I built to run my own job search: applications, follow-up reminders, board and calendar views, and tools that tailor a resume to each job. Create a free account to keep your data, or open the demo with sample data. No account needed.</p>
-<a class="btn main" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a> <a class="btn alt" href="#proj-budget">See the budget tracker</a>
-<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/tracker/" title="Job Application Tracker live demo" loading="lazy"></iframe><p class="note">On the sign-in screen, click “Try the demo”. If it does not load here, open the tracker in its own tab.</p></details>
+<a class="btn main" href="https://loomwell-ops.github.io/tracker/demo.html" target="_blank" rel="noopener" data-goatcounter-click="project-tracker-demo">Open the live demo</a> <a class="btn alt" href="https://loomwell-ops.github.io/tracker/" target="_blank" rel="noopener" data-goatcounter-click="project-tracker">Open the tracker</a> <a class="btn alt" href="#proj-budget">See the budget tracker</a>
+<details class="fold"><summary>Try the live demo here</summary><iframe class="demo" src="https://loomwell-ops.github.io/tracker/demo.html" title="Job Application Tracker live demo" loading="lazy"></iframe><p class="note">Sample data only. Nothing is saved. If it does not load here, open it in its own tab.</p></details>
 </div>
 <div class="proj" id="proj-budget" role="tabpanel" aria-labelledby="pt-budget">
 <h3>Budget Tracker</h3>
@@ -682,6 +681,5 @@ d.addEventListener("click",function(e){if(e.target===d||e.target.closest(".roi-x
 })();
 </script>
 <script data-goatcounter="https://loomwell-ops.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<script src="spatial.js" defer></script>
 </body>
 </html>
