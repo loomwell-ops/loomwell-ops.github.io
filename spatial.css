@@ -1,0 +1,613 @@
+/* ==========================================================================
+   LOOMWELL OPS — SPATIAL GLASS & PRECISION TELEMETRY LAYER
+   Drop-in visual upgrade for index.html, design.html, and 404.html
+   ========================================================================== */
+
+:root {
+  --monolith-bg: linear-gradient(145deg, #161333 0%, #241e58 55%, #171438 100%);
+  --monolith-ink: #f4f3ff;
+  --monolith-muted: #b8b5df;
+  --monolith-line: rgba(156, 147, 255, .28);
+  --glass-bg: color-mix(in srgb, var(--surface) 74%, transparent);
+  --glass-rim: rgba(255, 255, 255, .72);
+  --dock-bg: color-mix(in srgb, var(--surface) 78%, transparent);
+  --dock-shadow: 0 20px 50px rgba(26, 24, 64, .18), 0 0 0 1px color-mix(in srgb, var(--line) 85%, transparent), inset 0 1px 0 rgba(255, 255, 255, .85);
+}
+
+:root[data-theme="dark"] {
+  --glass-bg: color-mix(in srgb, var(--surface) 64%, transparent);
+  --glass-rim: rgba(255, 255, 255, .14);
+  --dock-bg: color-mix(in srgb, #161333 76%, transparent);
+  --dock-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(156, 147, 255, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+/* ---- 1. Full-Viewport WebGL Caustic Light Canvas ---- */
+#caustic-gl {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  display: block;
+}
+html.has-gl .bg {
+  opacity: .24;
+  transition: opacity .6s ease;
+}
+html.has-gl[data-theme="dark"] .bg {
+  opacity: .18;
+}
+html.has-gl body::before {
+  opacity: .35;
+}
+
+/* Subtle breathing drift on fallback .bg ribbon */
+@keyframes bgDrift {
+  0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); }
+  50% { transform: scale(1.07) translate3d(-1.2%, 1.4%, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bg::before {
+    animation: bgDrift 20s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+/* ---- 2. Floating Spatial Glass Bottom Dock ---- */
+body.has-dock {
+  padding-top: .5rem;
+}
+body.has-dock footer#contact {
+  padding-bottom: 7rem;
+}
+body.has-dock #stick {
+  display: none !important;
+}
+
+nav.dock {
+  position: fixed !important;
+  top: auto !important;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  width: min(calc(100vw - 1.5rem), 52rem);
+  padding: .45rem .55rem .45rem .95rem !important;
+  border-radius: 999px;
+  border: 0 !important;
+  background: var(--dock-bg) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(165%) !important;
+  backdrop-filter: blur(22px) saturate(165%) !important;
+  box-shadow: var(--dock-shadow);
+  flex-wrap: nowrap !important;
+  gap: .5rem !important;
+  transition: box-shadow .3s ease, transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+nav.dock b {
+  font-size: .95rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  letter-spacing: -.01em;
+}
+nav.dock b::before {
+  content: "JP";
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--g2));
+  box-shadow: 0 4px 14px var(--glow);
+  flex: none;
+}
+nav.dock > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: .1rem;
+}
+nav.dock > div::-webkit-scrollbar { display: none; }
+
+nav.dock a {
+  position: relative;
+  z-index: 1;
+  padding: .38rem .78rem;
+  border-radius: 999px;
+  font-size: .9rem;
+  white-space: nowrap;
+  transition: color .2s ease;
+}
+nav.dock a.on {
+  color: var(--accent-ink) !important;
+}
+nav.dock a.cta {
+  padding: .42rem 1rem;
+  box-shadow: 0 6px 20px var(--glow);
+  margin-left: .2rem;
+}
+nav.dock #theme {
+  position: relative;
+  z-index: 1;
+  padding: .34rem .78rem;
+  font-size: .86rem;
+  border-width: 1.5px;
+  white-space: nowrap;
+  margin-left: .15rem;
+}
+.dock-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 72%, var(--g2)));
+  box-shadow: 0 6px 18px var(--glow);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.dock-pill.ready { opacity: 1; }
+
+@media (max-width: 48rem) {
+  nav.dock {
+    width: calc(100vw - 1rem);
+    padding: .38rem .45rem !important;
+    bottom: max(.65rem, env(safe-area-inset-bottom));
+  }
+  nav.dock b {
+    font-size: 0;
+    gap: 0;
+  }
+  nav.dock a {
+    padding: .34rem .62rem;
+    font-size: .84rem;
+  }
+  nav.dock a.cta {
+    padding: .36rem .78rem;
+  }
+  nav.dock #theme {
+    padding: .28rem .62rem;
+    font-size: .82rem;
+  }
+}
+
+/* ---- 3. Live-Executing SVG Automation Pipeline ---- */
+.pipe-wrap {
+  position: relative;
+  margin: 1.25rem 0 0;
+}
+.pipe-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+.pipe-track-base {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 26%, var(--line));
+  stroke-width: 2;
+}
+.pipe-track-glow {
+  fill: none;
+  stroke: url(#pipeGrad);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 48 260;
+  animation: pipeFlow 3.4s linear infinite;
+}
+@keyframes pipeFlow {
+  from { stroke-dashoffset: 308; }
+  to { stroke-dashoffset: 0; }
+}
+.pipe-bead {
+  filter: drop-shadow(0 0 6px var(--g2));
+}
+
+.pipe {
+  position: relative;
+  z-index: 1;
+  background: var(--glass-bg) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line)) !important;
+  box-shadow: 0 14px 36px color-mix(in srgb, var(--glow) 60%, transparent), inset 0 1px 0 var(--glass-rim);
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem !important;
+  border-radius: 1rem !important;
+}
+.pipe li {
+  position: relative;
+  z-index: 2;
+  background: var(--surface) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1), border-color .25s ease, box-shadow .25s ease;
+}
+.pipe li::before {
+  content: "";
+  display: inline-block;
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  margin-right: .45rem;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  vertical-align: middle;
+}
+.pipe li:not(:last-child)::after {
+  content: none !important;
+}
+.pipe li:hover,
+.pipe li.on {
+  transform: translateY(-2px);
+  border-color: var(--accent) !important;
+  box-shadow: 0 10px 24px var(--glow);
+}
+.pipe li:last-child {
+  background: linear-gradient(135deg, var(--mark), #ffd98a) !important;
+  color: #1a1840 !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 24px rgba(243, 199, 107, .42);
+}
+.pipe li:last-child::before {
+  background: #1a1840;
+  box-shadow: none;
+}
+
+@media (max-width: 40rem) {
+  .pipe-svg { display: none; }
+}
+
+/* ---- 4. Open Hairline Architecture (Stats, Clients, Experience) ---- */
+.stats {
+  gap: 0 !important;
+  border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  padding: .35rem 0 !important;
+  background: transparent !important;
+}
+.stats li {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  padding: 1.15rem 1rem !important;
+  position: relative;
+}
+.stats li:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+.stats li::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 1px;
+  background: color-mix(in srgb, var(--line) 75%, transparent);
+}
+.stats li:last-child::after { display: none; }
+.stats b {
+  font-size: clamp(1.85rem, 3.6vw, 2.45rem) !important;
+  letter-spacing: -.03em;
+  background: linear-gradient(120deg, var(--accent), var(--g2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.job {
+  border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent) !important;
+  padding: 1.75rem 0 !important;
+}
+.job time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  font-size: .82rem !important;
+  font-weight: 500;
+}
+
+/* ---- 5. Spatial Glass + 3D Perspective Tilt + Holographic Glare ---- */
+.bento > div,
+.tiers li,
+.proj,
+.quotes blockquote,
+.callout,
+.grid.steps > div,
+.faq details,
+.fold {
+  position: relative;
+  overflow: hidden;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+  backdrop-filter: blur(14px) saturate(145%);
+  box-shadow: 0 10px 30px rgba(19, 17, 43, .06), inset 0 1px 0 var(--glass-rim);
+}
+:root[data-theme="dark"] .bento > div,
+:root[data-theme="dark"] .tiers li,
+:root[data-theme="dark"] .proj,
+:root[data-theme="dark"] .quotes blockquote,
+:root[data-theme="dark"] .callout,
+:root[data-theme="dark"] .grid.steps > div {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .28), inset 0 1px 0 var(--glass-rim);
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1), border-color .25s ease, box-shadow .25s ease !important;
+}
+.tilt-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity .3s ease;
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, .28)),
+    color-mix(in srgb, var(--g2) 10%, transparent) 42%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+}
+:root[data-theme="light"] .tilt-card::after {
+  mix-blend-mode: normal;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(75, 63, 214, .10),
+    rgba(194, 78, 23, .05) 45%,
+    transparent 72%
+  );
+}
+@media (hover: hover) {
+  .tilt-card:hover {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px) !important;
+    border-color: color-mix(in srgb, var(--accent) 75%, var(--g2)) !important;
+    box-shadow: 0 18px 42px var(--glow), inset 0 1px 0 var(--glass-rim) !important;
+  }
+  .tilt-card:hover::after {
+    opacity: 1;
+  }
+}
+
+/* ---- 6. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
+/* Anchor A: Flagship Tier #2 (Lead-to-booking setup) */
+.tiers li:nth-child(2) {
+  background: var(--monolith-bg) !important;
+  color: var(--monolith-ink) !important;
+  border: 1px solid var(--monolith-line) !important;
+  border-top: 3px solid var(--mark) !important;
+  box-shadow: 0 22px 54px rgba(19, 17, 43, .34), 0 0 32px color-mix(in srgb, var(--accent) 26%, transparent), inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+}
+.tiers li:nth-child(2)::before {
+  content: "FLAGSHIP SETUP";
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  padding: .18rem .58rem;
+  border-radius: 999px;
+  background: rgba(243, 199, 107, .16);
+  color: var(--mark);
+  border: 1px solid rgba(243, 199, 107, .45);
+  margin-bottom: .55rem;
+}
+.tiers li:nth-child(2) b {
+  color: #fff;
+}
+.tiers li:nth-child(2) p {
+  color: var(--monolith-muted) !important;
+}
+.tiers li:nth-child(2) .price {
+  color: var(--mark) !important;
+  font-size: 1.15rem;
+}
+
+/* Anchor B: ROI Calculator Monolith Output + 60-Tick Radial Gauge */
+.cres {
+  background: var(--monolith-bg) !important;
+  color: var(--monolith-ink) !important;
+  border: 1px solid var(--monolith-line) !important;
+  box-shadow: 0 18px 44px rgba(19, 17, 43, .32), inset 0 1px 0 rgba(255, 255, 255, .2);
+  padding: 1.25rem !important;
+  border-radius: .85rem !important;
+}
+.cres b {
+  color: var(--mark) !important;
+}
+.cres .big b {
+  color: #ff9a76 !important;
+}
+.roi-gauge-tick {
+  stroke: color-mix(in srgb, var(--line) 85%, transparent);
+  transition: stroke .22s ease, opacity .22s ease;
+  opacity: .55;
+}
+.roi-gauge-tick.on {
+  stroke: var(--accent);
+  opacity: 1;
+}
+.roi-gauge-tick.hot {
+  stroke: var(--g2);
+  opacity: 1;
+}
+.roi-gauge-tick.gold {
+  stroke: var(--mark);
+  opacity: 1;
+}
+
+/* Anchor C: VERSO Diagonal-Seam Contact CTA Card */
+.cta-card {
+  background: var(--monolith-bg) !important;
+  color: var(--monolith-ink) !important;
+  border: 1px solid var(--monolith-line) !important;
+  box-shadow: 0 28px 68px rgba(13, 11, 34, .42), 0 0 46px var(--glow), inset 0 1px 0 rgba(255, 255, 255, .2) !important;
+}
+.cta-card::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12% !important;
+  bottom: -12% !important;
+  right: -6% !important;
+  width: 34% !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  transform: skewX(-7deg);
+  background: linear-gradient(160deg, rgba(156, 147, 255, .14), rgba(255, 154, 118, .12) 55%, rgba(19, 17, 43, .65)) !important;
+  border-left: 2px solid rgba(156, 147, 255, .45);
+  box-shadow: -12px 0 36px rgba(75, 63, 214, .28);
+  pointer-events: none;
+  z-index: 0;
+  transition: border-color .35s ease, box-shadow .35s ease;
+}
+.cta-card .verso-beam {
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  right: 28%;
+  width: 3px;
+  transform: skewX(-7deg);
+  background: linear-gradient(180deg, transparent, #fff, var(--mark), #ff9a76, transparent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes versoSweep {
+  0% { transform: skewX(-7deg) translateY(-100%); opacity: 0; }
+  25% { opacity: 1; }
+  80% { opacity: .9; }
+  100% { transform: skewX(-7deg) translateY(100%); opacity: 0; }
+}
+.cta-card.beam-go .verso-beam {
+  animation: versoSweep .85s cubic-bezier(.22, 1, .36, 1) both;
+}
+.cta-card.beam-go::before {
+  border-left-color: rgba(255, 154, 118, .78);
+  box-shadow: -16px 0 46px rgba(255, 154, 118, .32);
+}
+.cta-card h2 {
+  color: #fff;
+}
+.cta-card .grad {
+  background: linear-gradient(90deg, #b6aeff, #ff9a76, #f3c76b) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.cta-card p,
+.cta-card .hrs {
+  color: var(--monolith-muted) !important;
+}
+.cta-card .hrs strong {
+  color: #fff;
+}
+.cta-card .pill {
+  background: rgba(255, 255, 255, .08) !important;
+  border-color: rgba(255, 255, 255, .2) !important;
+  color: #fff !important;
+}
+.cta-card .btn.main {
+  background: linear-gradient(135deg, #6b5eff, #4b3fd6) !important;
+  border-color: #8b80ff !important;
+  color: #fff !important;
+  box-shadow: 0 10px 28px rgba(107, 94, 255, .45);
+}
+.cta-card .btn.alt {
+  color: #ecebfa !important;
+  border-color: rgba(236, 235, 250, .38) !important;
+}
+.cta-card .btn.alt:hover {
+  border-color: #fff !important;
+  background: rgba(255, 255, 255, .08);
+}
+
+/* ---- 7. Fanned Design Showcase Cards (#design .dgrid) ---- */
+@media (hover: hover) and (min-width: 40rem) {
+  .dgrid {
+    gap: 1rem !important;
+    padding: .75rem .25rem;
+  }
+  .dgrid img {
+    transition: transform .38s cubic-bezier(.22, 1, .36, 1), box-shadow .38s ease, border-color .25s ease !important;
+    box-shadow: 0 12px 28px rgba(19, 17, 43, .14);
+  }
+  .dgrid img:nth-child(1) { transform: rotate(-2.8deg) translateY(5px); }
+  .dgrid img:nth-child(2) { transform: translateY(-2px); z-index: 1; }
+  .dgrid img:nth-child(3) { transform: rotate(2.8deg) translateY(5px); }
+  .dgrid:hover img {
+    transform: scale(.98);
+  }
+  .dgrid img:hover {
+    transform: rotate(0deg) translateY(-6px) scale(1.06) !important;
+    z-index: 4;
+    border-color: var(--accent) !important;
+    box-shadow: 0 20px 44px var(--glow), 0 0 24px color-mix(in srgb, var(--g2) 30%, transparent);
+  }
+}
+
+/* ---- 8. Unified Smoked-Glass Telemetry Console (.live) ---- */
+.live {
+  position: relative;
+  overflow: hidden;
+  background: var(--glass-bg) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)) !important;
+  box-shadow: 0 20px 52px color-mix(in srgb, var(--glow) 65%, transparent), inset 0 1px 0 var(--glass-rim);
+  padding: 1.5rem !important;
+}
+.live::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--g2), var(--mark), transparent);
+  pointer-events: none;
+}
+.phone {
+  position: relative;
+  transition: box-shadow .4s ease, border-color .4s ease;
+}
+.phone.pulse {
+  border-color: var(--accent) !important;
+  box-shadow: 0 14px 38px var(--glow), 0 0 24px color-mix(in srgb, var(--g2) 35%, transparent) !important;
+}
+
+/* Staggered replaying chart bars */
+.funnel li:nth-child(1) .fb, .cols > div:nth-child(1) i { transition-delay: .02s; }
+.funnel li:nth-child(2) .fb, .cols > div:nth-child(2) i { transition-delay: .07s; }
+.funnel li:nth-child(3) .fb, .cols > div:nth-child(3) i { transition-delay: .12s; }
+.funnel li:nth-child(4) .fb, .cols > div:nth-child(4) i { transition-delay: .17s; }
+.funnel li:nth-child(5) .fb, .cols > div:nth-child(5) i { transition-delay: .22s; }
+
+/* ---- 9. Reduced Motion & Print Guardrails ---- */
+@media (prefers-reduced-motion: reduce) {
+  #caustic-gl, .pipe-track-glow { display: none !important; }
+  .tilt-card:hover { transform: none !important; }
+  .dgrid img, .dgrid img:hover { transform: none !important; }
+  .cta-card.beam-go .verso-beam { animation: none !important; }
+  .bg::before { animation: none !important; }
+}
+@media print {
+  #caustic-gl, nav.dock, .pipe-svg { display: none !important; }
+  body.has-dock footer#contact { padding-bottom: 1rem !important; }
+}
