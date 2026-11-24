@@ -1,6 +1,6 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS & PRECISION TELEMETRY LAYER (Optimized)
-   Drop-in visual upgrade for index.html, design.html, and 404.html
+   LOOMWELL OPS — SPATIAL GLASS DECK (v3: Zero-Scroll App Shell + All-In Craft)
+   Drop-in visual & layout engine for index.html, design.html, and 404.html
    ========================================================================== */
 
 :root {
@@ -9,16 +9,16 @@
   --monolith-muted: #b8b5df;
   --monolith-line: rgba(156, 147, 255, .28);
   --glass-bg: color-mix(in srgb, var(--surface) 88%, transparent);
-  --glass-rim: rgba(255, 255, 255, .75);
+  --glass-rim: rgba(255, 255, 255, .76);
   --dock-bg: color-mix(in srgb, var(--surface) 84%, transparent);
-  --dock-shadow: 0 20px 50px rgba(26, 24, 64, .18), 0 0 0 1px color-mix(in srgb, var(--line) 85%, transparent), inset 0 1px 0 rgba(255, 255, 255, .85);
+  --dock-shadow: 0 22px 54px rgba(26, 24, 64, .20), 0 0 0 1px color-mix(in srgb, var(--line) 85%, transparent), inset 0 1px 0 rgba(255, 255, 255, .88);
 }
 
 :root[data-theme="dark"] {
   --glass-bg: color-mix(in srgb, var(--surface) 82%, transparent);
-  --glass-rim: rgba(255, 255, 255, .14);
-  --dock-bg: color-mix(in srgb, #161333 84%, transparent);
-  --dock-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(156, 147, 255, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+  --glass-rim: rgba(255, 255, 255, .15);
+  --dock-bg: color-mix(in srgb, #141130 84%, transparent);
+  --dock-shadow: 0 26px 64px rgba(0, 0, 0, .6), 0 0 0 1px rgba(156, 147, 255, .25), inset 0 1px 0 rgba(255, 255, 255, .16);
 }
 
 /* ---- 1. Full-Viewport WebGL Caustic Light Canvas ---- */
@@ -31,27 +31,81 @@
   pointer-events: none;
   display: block;
 }
-html.has-gl .bg {
-  opacity: .24;
-  transition: opacity .6s ease;
-}
-html.has-gl[data-theme="dark"] .bg {
-  opacity: .18;
-}
-html.has-gl body::before {
-  opacity: .35;
-}
+html.has-gl .bg { opacity: .22; transition: opacity .6s ease; }
+html.has-gl[data-theme="dark"] .bg { opacity: .16; }
+html.has-gl body::before { opacity: .30; }
 
-/* ---- 2. Floating Spatial Glass Bottom Dock ---- */
-body.has-dock {
-  padding-top: .5rem;
+/* ---- 2. Spatial App-Deck Mode (Eliminates Endless Scrolling) ---- */
+body.deck-mode main#main {
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 6.5rem;
 }
-body.has-dock footer#contact {
-  padding-bottom: 7rem;
-}
-body.has-dock #stick {
+body.deck-mode .deck-view[hidden] {
   display: none !important;
 }
+@keyframes deckEnter {
+  from { opacity: 0; filter: blur(8px); transform: translateY(14px) scale(.988); }
+  to   { opacity: 1; filter: none; transform: none; }
+}
+body.deck-mode .deck-view.deck-active {
+  animation: deckEnter .42s cubic-bezier(.22, 1, .36, 1) both;
+}
+body.deck-mode .deck-view > section:first-child {
+  padding-top: 1.75rem;
+}
+body.deck-mode footer#contact {
+  margin-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Compact "Next View" bar at the bottom of each deck */
+.deck-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+}
+.deck-foot .deck-hint {
+  font-size: .85rem;
+  color: var(--muted);
+}
+.deck-next {
+  font: inherit;
+  font-weight: 600;
+  font-size: .92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .62rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: var(--glass-bg);
+  color: var(--ink);
+  box-shadow: 0 8px 24px var(--glow), inset 0 1px 0 var(--glass-rim);
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1), border-color .2s ease, box-shadow .2s ease;
+}
+.deck-next:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px var(--glow);
+}
+.deck-next span {
+  background: linear-gradient(90deg, var(--accent), var(--g2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- 3. Floating Spatial Glass Bottom Dock ---- */
+body.has-dock { padding-top: .5rem; }
+body.has-dock footer#contact { padding-bottom: 7rem; }
+body.deck-mode.has-dock footer#contact { padding-bottom: 2rem; }
+body.has-dock #stick { display: none !important; }
 
 nav.dock {
   position: fixed !important;
@@ -60,31 +114,32 @@ nav.dock {
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
-  width: min(calc(100vw - 1.5rem), 52rem);
-  padding: .45rem .55rem .45rem .95rem !important;
+  width: min(calc(100vw - 1.5rem), 56rem);
+  padding: .45rem .55rem .45rem .85rem !important;
   border-radius: 999px;
   border: 0 !important;
   background: var(--dock-bg) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
-  backdrop-filter: blur(16px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(155%) !important;
+  backdrop-filter: blur(18px) saturate(155%) !important;
   box-shadow: var(--dock-shadow);
   flex-wrap: nowrap !important;
   gap: .5rem !important;
 }
 nav.dock b {
-  font-size: .95rem;
+  font-size: .92rem;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: .45rem;
   letter-spacing: -.01em;
+  cursor: pointer;
 }
 nav.dock b::before {
   content: "JP";
   display: inline-grid;
   place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.8rem;
+  height: 1.8rem;
   border-radius: 50%;
   font-size: .72rem;
   font-weight: 700;
@@ -97,7 +152,7 @@ nav.dock > div {
   position: relative;
   display: flex;
   align-items: center;
-  gap: .25rem;
+  gap: .2rem;
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
@@ -105,28 +160,39 @@ nav.dock > div {
 }
 nav.dock > div::-webkit-scrollbar { display: none; }
 
-nav.dock a {
+nav.dock a,
+nav.dock .dock-tab {
   position: relative;
   z-index: 1;
-  padding: .38rem .78rem;
+  font: inherit;
+  font-weight: 500;
+  font-size: .88rem;
+  padding: .4rem .82rem;
   border-radius: 999px;
-  font-size: .9rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
   transition: color .2s ease;
 }
-nav.dock a.on {
-  color: var(--accent-ink) !important;
-}
+nav.dock a:hover,
+nav.dock .dock-tab:hover { color: var(--accent); }
+nav.dock a.on,
+nav.dock .dock-tab.on { color: var(--accent-ink) !important; }
 nav.dock a.cta {
   padding: .42rem 1rem;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 78%, var(--g2)));
+  color: #fff !important;
   box-shadow: 0 6px 20px var(--glow);
-  margin-left: .2rem;
+  margin-left: .25rem;
 }
 nav.dock #theme {
   position: relative;
   z-index: 1;
   padding: .34rem .78rem;
-  font-size: .86rem;
+  font-size: .84rem;
   border-width: 1.5px;
   white-space: nowrap;
   margin-left: .15rem;
@@ -144,23 +210,46 @@ nav.dock #theme {
 }
 .dock-pill.ready { opacity: 1; }
 
-@media (max-width: 48rem) {
+@media (max-width: 52rem) {
   nav.dock {
     width: calc(100vw - 1rem);
     padding: .38rem .45rem !important;
     bottom: max(.65rem, env(safe-area-inset-bottom));
   }
   nav.dock b { font-size: 0; gap: 0; }
-  nav.dock a { padding: .34rem .62rem; font-size: .84rem; }
+  nav.dock a, nav.dock .dock-tab { padding: .34rem .62rem; font-size: .82rem; }
   nav.dock a.cta { padding: .36rem .78rem; }
-  nav.dock #theme { padding: .28rem .62rem; font-size: .82rem; }
+  nav.dock #theme { padding: .28rem .6rem; font-size: .8rem; }
 }
 
-/* ---- 3. Live-Executing SVG Automation Pipeline ---- */
-.pipe-wrap {
-  position: relative;
-  margin: 1.25rem 0 0;
+/* ---- 4. Prismatic Rotating Halo on Hero Portrait ---- */
+@keyframes haloSpin {
+  to { transform: rotate(360deg); }
 }
+.hero-ph {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.hero-ph::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent), var(--g2), var(--mark), #6ee7b7, var(--accent));
+  z-index: 0;
+  animation: haloSpin 10s linear infinite;
+  opacity: .85;
+}
+.hero-ph .photo {
+  position: relative;
+  z-index: 1;
+  border: 4px solid var(--bg) !important;
+  box-shadow: 0 16px 44px var(--glow) !important;
+}
+
+/* ---- 5. Live-Executing SVG Automation Pipeline ---- */
+.pipe-wrap { position: relative; margin: 1.25rem 0 0; }
 .pipe-svg {
   position: absolute;
   inset: 0;
@@ -185,9 +274,8 @@ nav.dock #theme {
 }
 @keyframes pipeFlow {
   from { stroke-dashoffset: 308; }
-  to { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 0; }
 }
-
 .pipe {
   position: relative;
   z-index: 1;
@@ -197,7 +285,7 @@ nav.dock #theme {
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line)) !important;
   box-shadow: 0 14px 36px color-mix(in srgb, var(--glow) 60%, transparent), inset 0 1px 0 var(--glass-rim);
   justify-content: space-between;
-  padding: 1.1rem 1.25rem !important;
+  padding: 1.05rem 1.25rem !important;
   border-radius: 1rem !important;
 }
 .pipe li {
@@ -234,7 +322,7 @@ nav.dock #theme {
 .pipe li:last-child::before { background: #1a1840; box-shadow: none; }
 @media (max-width: 40rem) { .pipe-svg { display: none; } }
 
-/* ---- 4. Open Hairline Architecture (Stats & Experience) ---- */
+/* ---- 6. Open Hairline Architecture (Stats & Experience) ---- */
 .stats {
   gap: 0 !important;
   border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
@@ -273,7 +361,7 @@ nav.dock #theme {
 }
 .job {
   border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent) !important;
-  padding: 1.75rem 0 !important;
+  padding: 1.5rem 0 !important;
 }
 .job time {
   font-variant-numeric: tabular-nums;
@@ -283,7 +371,7 @@ nav.dock #theme {
   font-weight: 500;
 }
 
-/* ---- 5. Spatial Glass Cards (No heavy per-card backdrop-filter) ---- */
+/* ---- 7. Spatial Glass Cards + 3D Tilt + Holographic Glare ---- */
 .bento > div,
 .tiers li,
 .proj,
@@ -343,7 +431,12 @@ nav.dock #theme {
   .tilt-card:hover::after { opacity: 1; }
 }
 
-/* ---- 6. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
+/* Magnetic Primary Buttons */
+.btn.main {
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1), box-shadow .25s ease !important;
+}
+
+/* ---- 8. Three Dark Metallic Obsidian-Indigo Monolith Anchors ---- */
 .tiers li:nth-child(2) {
   background: var(--monolith-bg) !important;
   color: var(--monolith-ink) !important;
@@ -423,9 +516,9 @@ nav.dock #theme {
   z-index: 1;
 }
 @keyframes versoSweep {
-  0% { transform: skewX(-7deg) translateY(-100%); opacity: 0; }
-  25% { opacity: 1; }
-  80% { opacity: .9; }
+  0%   { transform: skewX(-7deg) translateY(-100%); opacity: 0; }
+  25%  { opacity: 1; }
+  80%  { opacity: .9; }
   100% { transform: skewX(-7deg) translateY(100%); opacity: 0; }
 }
 .cta-card.beam-go .verso-beam { animation: versoSweep .85s cubic-bezier(.22, 1, .36, 1) both; }
@@ -459,7 +552,7 @@ nav.dock #theme {
 }
 .cta-card .btn.alt:hover { border-color: #fff !important; background: rgba(255, 255, 255, .08); }
 
-/* ---- 7. Fanned Design Showcase Cards (#design .dgrid) ---- */
+/* ---- 9. Fanned Design Showcase Cards (#design .dgrid) ---- */
 @media (hover: hover) and (min-width: 40rem) {
   .dgrid { gap: 1rem !important; padding: .75rem .25rem; }
   .dgrid img {
@@ -478,7 +571,7 @@ nav.dock #theme {
   }
 }
 
-/* ---- 8. Unified Smoked-Glass Telemetry Console (.live) ---- */
+/* ---- 10. Unified Smoked-Glass Telemetry Console (.live) ---- */
 .live {
   position: relative;
   overflow: hidden;
@@ -511,14 +604,17 @@ nav.dock #theme {
 .funnel li:nth-child(4) .fb, .cols > div:nth-child(4) i { transition-delay: .17s; }
 .funnel li:nth-child(5) .fb, .cols > div:nth-child(5) i { transition-delay: .22s; }
 
-/* ---- 9. Reduced Motion & Print Guardrails ---- */
+/* ---- 11. Reduced Motion & Print Guardrails ---- */
 @media (prefers-reduced-motion: reduce) {
   #caustic-gl, .pipe-track-glow { display: none !important; }
+  .hero-ph::after { animation: none !important; }
   .tilt-card:hover { transform: none !important; }
   .dgrid img, .dgrid img:hover { transform: none !important; }
   .cta-card.beam-go .verso-beam { animation: none !important; }
+  body.deck-mode .deck-view.deck-active { animation: none !important; }
 }
 @media print {
-  #caustic-gl, nav.dock, .pipe-svg { display: none !important; }
+  #caustic-gl, nav.dock, .pipe-svg, .deck-foot { display: none !important; }
+  body.deck-mode .deck-view[hidden] { display: block !important; }
   body.has-dock footer#contact { padding-bottom: 1rem !important; }
 }

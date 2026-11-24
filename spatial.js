@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOOMWELL OPS — SPATIAL GLASS & WEBGL CAUSTIC ENGINE (Optimized, Zero Deps)
+   LOOMWELL OPS — SPATIAL GLASS DECK & CAUSTIC ENGINE (v3, Zero Deps)
    ========================================================================== */
 (function () {
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -91,7 +91,6 @@
     var uPulse = gl.getUniformLocation(prog, "u_pulse");
 
     document.documentElement.classList.add("has-gl");
-
     canvas.addEventListener("webglcontextlost", function (e) {
       e.preventDefault();
       document.documentElement.classList.remove("has-gl");
@@ -122,7 +121,7 @@
 
     function frame(now) {
       if (document.hidden) { raf = null; return; }
-      if (now - lastFrame >= 33) { // ~30fps cap
+      if (now - lastFrame >= 33) {
         lastFrame = now;
         mx += (tx - mx) * 0.08;
         my += (ty - my) * 0.08;
@@ -146,32 +145,100 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Floating Spatial Glass Bottom Dock + Safe MutationObserver
+     2. Spatial 5-View App Deck (Fixes "Too Scrolly" on index.html)
      ------------------------------------------------------------------------ */
-  function initDock() {
+  function initSpatialDeck() {
+    var main = document.getElementById("main");
     var nav = document.querySelector("nav[aria-label='Primary']");
-    if (!nav) return;
+    if (!main || !nav) return false;
+
+    var bar = nav.querySelector("div");
+    if (!bar) return false;
+
+    // Group existing top-level children of #main into 5 tight, focused decks
+    var deckDefs = [
+      { id: "overview",   label: "Overview",    next: "Case study",      nextId: "case-study" },
+      { id: "case-study", label: "Case study",  next: "Services",        nextId: "services" },
+      { id: "services",   label: "Services",    next: "Projects & Work", nextId: "projects" },
+      { id: "projects",   label: "Projects",    next: "About & Contact", nextId: "contact" },
+      { id: "contact",    label: "Contact",     next: "Back to Overview",nextId: "overview" }
+    ];
+
+    var decks = {};
+    deckDefs.forEach(function (d) {
+      var wrap = document.createElement("div");
+      wrap.className = "deck-view";
+      wrap.id = "deck-" + d.id;
+      wrap.dataset.deck = d.id;
+      decks[d.id] = wrap;
+    });
+
+    function bucketFor(el) {
+      var id = el.id || "";
+      if (el.tagName === "HEADER" || el.classList.contains("pipe") || el.classList.contains("pipe-wrap") ||
+          id === "pd" || el.classList.contains("cap") || id === "clients" || el.classList.contains("duo") ||
+          id === "intro" || id === "work") return "overview";
+      if (id === "case-study" || id === "proof") return "case-study";
+      if (id === "calculator" || id === "services") return "services";
+      if (id === "design" || id === "projects" || id === "my-work") return "projects";
+      if (id === "experience" || id === "hub" || id === "contact") return "contact";
+      return null;
+    }
+
+    var children = [].slice.call(main.children);
+    children.forEach(function (el) {
+      if (el.tagName === "DIALOG") return; // keep #roi modal outside decks
+      var b = bucketFor(el);
+      if (b && decks[b]) decks[b].appendChild(el);
+    });
+
+    // Insert decks into #main and add compact "Next View" footer to each
+    var roiDialog = document.getElementById("roi");
+    deckDefs.forEach(function (d, idx) {
+      var foot = document.createElement("div");
+      foot.className = "deck-foot";
+      foot.innerHTML =
+        '<span class="deck-hint">View ' + (idx + 1) + ' of ' + deckDefs.length + ' · Use dock or keys 1–5</span>' +
+        '<button type="button" class="deck-next" data-go="' + d.nextId + '">Next: <span>' + d.next + ' →</span></button>';
+      decks[d.id].appendChild(foot);
+      if (roiDialog) main.insertBefore(decks[d.id], roiDialog);
+      else main.appendChild(decks[d.id]);
+    });
+
+    document.body.classList.add("deck-mode");
     nav.classList.add("dock");
     document.body.classList.add("has-dock");
 
-    var bar = nav.querySelector("div");
-    if (!bar) return;
+    // Rebuild dock tabs cleanly while keeping Book a call + Theme button
+    var cta = bar.querySelector("a.cta");
+    var themeBtn = document.getElementById("theme");
+    [].slice.call(bar.querySelectorAll("a:not(.cta)")).forEach(function (a) { a.remove(); });
+
     var pill = document.createElement("span");
     pill.className = "dock-pill";
     pill.setAttribute("aria-hidden", "true");
     bar.insertBefore(pill, bar.firstChild);
 
+    var tabBtns = {};
+    deckDefs.forEach(function (d) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "dock-tab";
+      btn.dataset.deck = d.id;
+      btn.textContent = d.label;
+      bar.insertBefore(btn, cta || themeBtn);
+      tabBtns[d.id] = btn;
+    });
+
     var lastRect = null;
-    function moveDockPill(animate) {
-      var active = bar.querySelector("a.on");
-      if (!active) {
-        if (pill.classList.contains("ready")) pill.classList.remove("ready");
-        return;
-      }
-      var x = active.offsetLeft, y = active.offsetTop, w = active.offsetWidth, h = active.offsetHeight;
+    var currentDeck = null;
+
+    function movePill(btn, animate) {
+      if (!btn) return;
+      var x = btn.offsetLeft, y = btn.offsetTop, w = btn.offsetWidth, h = btn.offsetHeight;
       var from = lastRect;
       lastRect = { x: x, y: y, w: w, h: h };
-      if (!pill.classList.contains("ready")) pill.classList.add("ready");
+      pill.classList.add("ready");
       if (pill.getAnimations) pill.getAnimations().forEach(function (a) { a.cancel(); });
       pill.style.width = w + "px";
       pill.style.height = h + "px";
@@ -186,18 +253,101 @@
       ], { duration: 480 });
     }
 
-    // Observe ONLY the anchor links directly (never the pill itself)
-    if ("MutationObserver" in window) {
-      var links = [].slice.call(bar.querySelectorAll('a[href^="#"]'));
-      var mo = new MutationObserver(function () { moveDockPill(true); });
-      links.forEach(function (a) {
-        mo.observe(a, { attributes: true, attributeFilter: ["class"] });
-      });
-    }
-    window.addEventListener("resize", function () { moveDockPill(false); });
-    window.addEventListener("load", function () { moveDockPill(false); });
-    setTimeout(function () { moveDockPill(false); }, 150);
+    function showDeck(id, animate, scrollTarget) {
+      if (!decks[id]) id = "overview";
+      var changed = currentDeck !== id;
+      currentDeck = id;
 
+      Object.keys(decks).forEach(function (k) {
+        var on = k === id;
+        decks[k].hidden = !on;
+        decks[k].classList.toggle("deck-active", on);
+        if (on) {
+          // Ensure reveal sections inside this deck are visible immediately
+          [].slice.call(decks[k].querySelectorAll("section.rv")).forEach(function (s) {
+            s.classList.add("in");
+          });
+        }
+      });
+
+      Object.keys(tabBtns).forEach(function (k) {
+        var on = k === id;
+        tabBtns[k].classList.toggle("on", on);
+        tabBtns[k].setAttribute("aria-current", on ? "page" : "false");
+      });
+
+      movePill(tabBtns[id], animate && changed);
+      if (changed) triggerPulse(0.75);
+
+      if (scrollTarget) {
+        setTimeout(function () { scrollTarget.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); }, 60);
+      } else if (changed) {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+      window.dispatchEvent(new Event("resize"));
+    }
+
+    // Wire dock clicks, brand click, and "Next" buttons
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest(".dock-tab");
+      if (b) showDeck(b.dataset.deck, true);
+    });
+    var brand = nav.querySelector("b");
+    if (brand) brand.addEventListener("click", function () { showDeck("overview", true); });
+    main.addEventListener("click", function (e) {
+      var nxt = e.target.closest(".deck-next");
+      if (nxt) showDeck(nxt.dataset.go, true);
+    });
+
+    // Keyboard shortcuts 1-5 to jump views instantly
+    document.addEventListener("keydown", function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      var idx = parseInt(e.key, 10) - 1;
+      if (idx >= 0 && idx < deckDefs.length) {
+        showDeck(deckDefs[idx].id, true);
+      }
+    });
+
+    // Intercept all internal #hash links so they switch to the right deck automatically
+    function routeHash(hash) {
+      var id = (hash || "").replace(/^#/, "");
+      if (!id || id === "top") { showDeck("overview", true); return true; }
+      if (decks[id]) { showDeck(id, true); return true; }
+      var target = document.getElementById(id);
+      if (!target) return false;
+      var parentDeck = target.closest(".deck-view");
+      if (parentDeck) {
+        showDeck(parentDeck.dataset.deck, true, target);
+        return true;
+      }
+      return false;
+    }
+
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      if (routeHash(a.getAttribute("href"))) e.preventDefault();
+    });
+
+    if (themeBtn) themeBtn.addEventListener("click", function () { triggerPulse(1.0); });
+    window.addEventListener("resize", function () { movePill(tabBtns[currentDeck], false); });
+    window.addEventListener("load", function () { movePill(tabBtns[currentDeck], false); });
+
+    // Initial deck
+    if (!location.hash || !routeHash(location.hash)) {
+      showDeck("overview", false);
+    }
+    return true;
+  }
+
+  /* Fallback dock for design.html (non-deck page) */
+  function initSimpleDock() {
+    var nav = document.querySelector("nav[aria-label='Primary']");
+    if (!nav || nav.classList.contains("dock")) return;
+    nav.classList.add("dock");
+    document.body.classList.add("has-dock");
     var themeBtn = document.getElementById("theme");
     if (themeBtn) themeBtn.addEventListener("click", function () { triggerPulse(1.0); });
   }
@@ -221,16 +371,14 @@
 
     function drawTrack() {
       var items = [].slice.call(pipe.children);
-      if (items.length < 2 || window.innerWidth <= 640) { svg.innerHTML = ""; return; }
+      if (items.length < 2 || window.innerWidth <= 640 || wrap.offsetWidth === 0) { svg.innerHTML = ""; return; }
       var wr = wrap.getBoundingClientRect();
       var pts = items.map(function (li) {
         var r = li.getBoundingClientRect();
         return { x: r.left - wr.left + r.width / 2, y: r.top - wr.top + r.height / 2 };
       });
       var d = "M " + pts[0].x.toFixed(1) + " " + pts[0].y.toFixed(1);
-      for (var i = 1; i < pts.length; i++) {
-        d += " L " + pts[i].x.toFixed(1) + " " + pts[i].y.toFixed(1);
-      }
+      for (var i = 1; i < pts.length; i++) d += " L " + pts[i].x.toFixed(1) + " " + pts[i].y.toFixed(1);
       svg.setAttribute("viewBox", "0 0 " + Math.max(1, wr.width).toFixed(0) + " " + Math.max(1, wr.height).toFixed(0));
       svg.innerHTML =
         '<defs><linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">' +
@@ -248,9 +396,9 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. 3D Perspective Tilt + Cursor-Tracked Holographic Glare
+     4. 3D Perspective Tilt + Holographic Glare + Magnetic CTA Buttons
      ------------------------------------------------------------------------ */
-  function init3DTilt() {
+  function init3DTiltAndMagnetic() {
     if (!hoverCapable || reduced) return;
     var selector = ".bento > div, .tiers li, .proj, .quotes blockquote, .callout, .grid.steps > div";
     var cards = [].slice.call(document.querySelectorAll(selector));
@@ -260,24 +408,40 @@
     }
     cards.forEach(function (el) { el.classList.add("tilt-card"); });
 
-    var active = null;
+    var activeCard = null;
+    var activeBtn = null;
+
     document.addEventListener("pointermove", function (e) {
       var card = e.target.closest && e.target.closest(".tilt-card");
-      if (active && active !== card) {
-        active.style.removeProperty("--rx");
-        active.style.removeProperty("--ry");
-        active = null;
+      if (activeCard && activeCard !== card) {
+        activeCard.style.removeProperty("--rx");
+        activeCard.style.removeProperty("--ry");
+        activeCard = null;
       }
-      if (!card) return;
-      active = card;
-      var r = card.getBoundingClientRect();
-      var px = (e.clientX - r.left) / Math.max(1, r.width);
-      var py = (e.clientY - r.top) / Math.max(1, r.height);
-      var maxDeg = card.classList.contains("proj") ? 3.0 : 5.0;
-      card.style.setProperty("--rx", ((0.5 - py) * maxDeg * 2).toFixed(2) + "deg");
-      card.style.setProperty("--ry", ((px - 0.5) * maxDeg * 2).toFixed(2) + "deg");
-      card.style.setProperty("--mx", (e.clientX - r.left).toFixed(1) + "px");
-      card.style.setProperty("--my", (e.clientY - r.top).toFixed(1) + "px");
+      if (card) {
+        activeCard = card;
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / Math.max(1, r.width);
+        var py = (e.clientY - r.top) / Math.max(1, r.height);
+        var maxDeg = card.classList.contains("proj") ? 3.0 : 5.0;
+        card.style.setProperty("--rx", ((0.5 - py) * maxDeg * 2).toFixed(2) + "deg");
+        card.style.setProperty("--ry", ((px - 0.5) * maxDeg * 2).toFixed(2) + "deg");
+        card.style.setProperty("--mx", (e.clientX - r.left).toFixed(1) + "px");
+        card.style.setProperty("--my", (e.clientY - r.top).toFixed(1) + "px");
+      }
+
+      var btn = e.target.closest && e.target.closest(".btn.main");
+      if (activeBtn && activeBtn !== btn) {
+        activeBtn.style.transform = "";
+        activeBtn = null;
+      }
+      if (btn) {
+        activeBtn = btn;
+        var br = btn.getBoundingClientRect();
+        var dx = (e.clientX - (br.left + br.width / 2)) * 0.14;
+        var dy = (e.clientY - (br.top + br.height / 2)) * 0.18;
+        btn.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
+      }
     }, { passive: true });
   }
 
@@ -319,9 +483,7 @@
       var lit = Math.round((val / 30) * 60);
       ticks.forEach(function (ln, idx) {
         ln.classList.remove("on", "hot", "gold");
-        if (idx < lit) {
-          ln.classList.add(idx > 44 ? "gold" : (idx > 24 ? "hot" : "on"));
-        }
+        if (idx < lit) ln.classList.add(idx > 44 ? "gold" : (idx > 24 ? "hot" : "on"));
       });
     }
     liftInput.addEventListener("input", function () { syncTicks(); triggerPulse(0.25); });
@@ -382,9 +544,9 @@
 
   function boot() {
     initCausticShader();
-    initDock();
     initLivePipeline();
-    init3DTilt();
+    if (!initSpatialDeck()) initSimpleDock();
+    init3DTiltAndMagnetic();
     initRoiGauge60();
     initVersoAndTelemetry();
   }
