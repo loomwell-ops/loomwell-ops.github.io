@@ -353,7 +353,7 @@
       } else if (changed) {
         window.scrollTo({ top: 0, behavior: "instant" });
       }
-      window.dispatchEvent(new Event("resize"));
+      requestAnimationFrame(function () { window.dispatchEvent(new Event("resize")); });
     }
 
     // Wire dock clicks, top stepper clicks, brand click, and UP NEXT card clicks
@@ -371,6 +371,8 @@
     main.addEventListener("click", function (e) {
       var seg = e.target.closest(".deck-prog button[data-jump]");
       if (seg) { e.stopPropagation(); showDeck(seg.dataset.jump, true); return; }
+      var nextBtn = e.target.closest(".deck-next[data-go]");
+      if (nextBtn) { e.stopPropagation(); showDeck(nextBtn.dataset.go, true); return; }
       var foot = e.target.closest(".deck-foot");
       if (foot && foot.dataset.go) { showDeck(foot.dataset.go, true); }
     });
@@ -390,14 +392,37 @@
       var target = document.getElementById(id);
       if (!target) return false;
       var parentDeck = target.closest(".deck-view");
-      if (parentDeck) { showDeck(parentDeck.dataset.deck, true, target); return true; }
+      if (parentDeck) {
+        showDeck(parentDeck.dataset.deck, true, null);
+        // Activate matching tabpanel if target is a project or hub tab
+        var tab = document.querySelector('[role="tab"][aria-controls="' + id + '"]');
+        if (tab) tab.click();
+        // Auto-open work fold if jumping to #my-work
+        if (id === "my-work") {
+          var wf = document.getElementById("work-fold");
+          if (wf) wf.open = true;
+        }
+        setTimeout(function () {
+          var scrollEl = tab ? (tab.closest(".split, #hub") || target) : target;
+          scrollEl.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+        }, 70);
+        return true;
+      }
       return false;
     }
 
     document.addEventListener("click", function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
-      if (routeHash(a.getAttribute("href"))) e.preventDefault();
+      var href = a.getAttribute("href");
+      // Close ROI modal if link is inside it (e.g. "Request a free audit")
+      var openDlg = a.closest && a.closest("dialog[open]");
+      if (openDlg && openDlg.close) openDlg.close();
+      if (routeHash(href)) e.preventDefault();
+    }, true);
+
+    window.addEventListener("hashchange", function () {
+      if (location.hash) routeHash(location.hash);
     });
 
     if (themeBtn) themeBtn.addEventListener("click", function () { triggerPulse(1.0); });
@@ -465,7 +490,7 @@
      ------------------------------------------------------------------------ */
   function init3DTiltAndMagnetic() {
     if (!hoverCapable || reduced) return;
-    var selector = ".bento > div, .tiers li, .proj, .quotes blockquote, .callout, .grid.steps > div";
+    var selector = ".bento > div, .tiers li, .quotes blockquote, .callout, .grid.steps > div";
     var cards = [].slice.call(document.querySelectorAll(selector));
     var notFoundMain = document.querySelector("body > main:only-of-type");
     if (notFoundMain && !document.getElementById("main") && !document.getElementById("design")) {
@@ -474,9 +499,17 @@
     cards.forEach(function (el) { el.classList.add("tilt-card"); });
 
     var activeCard = null;
-    var activeBtn = null;
 
     document.addEventListener("pointermove", function (e) {
+      // Never tilt while hovering interactive controls so clicks never miss
+      if (e.target.closest && e.target.closest("a, button, input, summary, iframe, select, textarea")) {
+        if (activeCard) {
+          activeCard.style.removeProperty("--rx");
+          activeCard.style.removeProperty("--ry");
+          activeCard = null;
+        }
+        return;
+      }
       var card = e.target.closest && e.target.closest(".tilt-card");
       if (activeCard && activeCard !== card) {
         activeCard.style.removeProperty("--rx");
@@ -488,24 +521,11 @@
         var r = card.getBoundingClientRect();
         var px = (e.clientX - r.left) / Math.max(1, r.width);
         var py = (e.clientY - r.top) / Math.max(1, r.height);
-        var maxDeg = card.classList.contains("proj") ? 3.0 : 5.0;
+        var maxDeg = 4.0;
         card.style.setProperty("--rx", ((0.5 - py) * maxDeg * 2).toFixed(2) + "deg");
         card.style.setProperty("--ry", ((px - 0.5) * maxDeg * 2).toFixed(2) + "deg");
         card.style.setProperty("--mx", (e.clientX - r.left).toFixed(1) + "px");
         card.style.setProperty("--my", (e.clientY - r.top).toFixed(1) + "px");
-      }
-
-      var btn = e.target.closest && e.target.closest(".btn.main");
-      if (activeBtn && activeBtn !== btn) {
-        activeBtn.style.transform = "";
-        activeBtn = null;
-      }
-      if (btn) {
-        activeBtn = btn;
-        var br = btn.getBoundingClientRect();
-        var dx = (e.clientX - (br.left + br.width / 2)) * 0.14;
-        var dy = (e.clientY - (br.top + br.height / 2)) * 0.18;
-        btn.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
       }
     }, { passive: true });
   }

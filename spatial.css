@@ -756,3 +756,24 @@ nav.dock #theme {
   body.deck-mode .deck-view[hidden] { display: block !important; }
   body.has-dock footer#contact { padding-bottom: 1rem !important; }
 }
+
+/* ---- 14. Click-Reliability & Tactile Press Guardrails (v5) ---- */
+.btn:active,
+.deck-next:active,
+.deck-stepper button:active,
+nav.dock .dock-tab:active {
+  transform: scale(.97) !important;
+}
+.proj {
+  transform: none !important;
+}
+.proj::after {
+  display: none !important;
+}
+.deck-view .btn,
+.deck-view a,
+.deck-view button,
+.deck-view summary {
+  position: relative;
+  z-index: 2;
+}
