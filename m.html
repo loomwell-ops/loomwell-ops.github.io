@@ -7,7 +7,7 @@
 <meta name="description" content="GoHighLevel automation and executive assistant support. I build the follow-up systems that turn leads into booked customers. Philippines-based, US hours.">
 <meta name="theme-color" content="#13112b">
 <link rel="canonical" href="https://loomwell-ops.github.io/">
-<link rel="icon" href="favicon.png">
+<link rel="icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,246 +16,318 @@
 :root{--bg:#13112b;--band:#1a1738;--surface:#1d1a3f;--ink:#f1f0fc;--muted:#b0aed6;--line:#2f2b5e;--accent:#9c93ff;--accent-ink:#13112b;--warm:#ff9a76;--glow:rgba(156,147,255,.32);--bgimg:url(bg.jpg);--bubble:#2a2660;--grain:.06;--r1:20px;--r2:12px}
 @media (prefers-color-scheme:light){:root{--bg:#f6f5fd;--band:#edebfa;--surface:#fff;--ink:#1a1840;--muted:#55547a;--line:#dedcf2;--accent:#4b3fd6;--accent-ink:#fff;--warm:#c24e17;--glow:rgba(75,63,214,.2);--bgimg:url(bg-light.webp);--bubble:#ebe9fb;--grain:.035}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 "IBM Plex Sans",system-ui,sans-serif;padding-bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.55 "IBM Plex Sans",system-ui,sans-serif;display:flex;flex-direction:column;height:100vh;height:100dvh;position:relative}
 body::before{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:var(--grain);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bgimg) 78% 0/auto 62% no-repeat;opacity:.55}
 ::selection{background:var(--accent);color:var(--accent-ink)}
 h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.08;margin:0;letter-spacing:-.015em;text-wrap:balance}
-h2{font-size:1.85rem;margin-bottom:.7rem}
-p{margin:0 0 1rem;color:var(--muted);max-width:60ch}
-a:not(.btn):not(.dock a){color:var(--accent);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent);text-underline-offset:.2em;text-decoration-thickness:1px}
+h2{font-size:1.6rem;margin-bottom:.35rem}
+p{margin:0 0 .8rem;color:var(--muted)}
+a{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
-section{padding:3.5rem 1.25rem}
-.band{background:var(--band)}
-.prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--accent),var(--warm))}
-.top{display:flex;justify-content:space-between;align-items:center;padding:calc(1rem + env(safe-area-inset-top,0px)) 1.25rem 0;position:relative;z-index:2}
-.top b{font-family:"Bricolage Grotesque",sans-serif}
-.top a{color:var(--ink)!important;font-size:.9rem;text-decoration:none!important;border:1px solid var(--line);border-radius:2rem;padding:.35rem .9rem;background:color-mix(in srgb,var(--surface) 70%,transparent)}
-.hero{position:relative;padding:1.5rem 1.25rem 3rem;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:var(--bgimg) 72% 0/cover no-repeat}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 30%,transparent 40%,color-mix(in srgb,var(--bg) 70%,transparent) 100%),linear-gradient(180deg,transparent 40%,var(--bg) 100%)}
-.hero>*{position:relative;z-index:1}
-.me{display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
-.me img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent),0 10px 30px var(--glow)}
-.me strong{display:block;font:500 1rem "IBM Plex Sans",sans-serif}
-.me span{font-size:.85rem;color:var(--muted)}
-.live{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--ink);background:color-mix(in srgb,var(--surface) 75%,transparent);border:1px solid var(--line);border-radius:2rem;padding:.3rem .8rem;margin-bottom:1.1rem}
-.live i{width:8px;height:8px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 0 var(--warm);animation:ping 2s infinite}
-@keyframes ping{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.hero h1{font-size:2.5rem;font-weight:700;max-width:13ch}
-.hero h1 u{text-decoration:none;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 45%,transparent) 62%)}
-.hero .sub{color:var(--ink);opacity:.88;margin:1rem 0 1.6rem}
-.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.6rem}
-.chips span{font-size:.8rem;padding:.25rem .7rem;border-radius:2rem;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--ink)}
+.top{flex:none;padding:calc(.7rem + env(safe-area-inset-top,0px)) 1rem .5rem;display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.top b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.05rem}
+.pill{font-size:.85rem;text-decoration:none;color:var(--accent-ink);background:var(--accent);border-radius:2rem;padding:.4rem .95rem;font-weight:500;min-height:36px;display:inline-flex;align-items:center}
+.steps{flex:none;display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;margin:0 1rem;padding:.3rem;border-radius:2rem;border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 80%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.steps::-webkit-scrollbar{display:none}
+.steps button{flex:1 0 auto;font:inherit;font-size:.82rem;font-weight:500;color:var(--muted);background:transparent;border:0;border-radius:2rem;padding:.42rem .75rem;white-space:nowrap;min-height:36px}
+.steps button.on{background:var(--accent);color:var(--accent-ink)}
+.deck{flex:1;min-height:0;position:relative}
+.view{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding:1.1rem 1rem 1.2rem;scrollbar-width:none}
+.view::-webkit-scrollbar{display:none}
+.view[hidden]{display:none}
+.view.l{animation:inL .35s ease}.view.r{animation:inR .35s ease}
+@keyframes inL{from{opacity:0;transform:translateX(26px)}}
+@keyframes inR{from{opacity:0;transform:translateX(-26px)}}
 .gb{border:1px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(140deg,var(--accent),transparent 62%) border-box}
-.phone{width:min(17.5rem,88%);margin:0 0 1.9rem auto;border-radius:1.6rem;padding:.9rem;box-shadow:0 22px 56px var(--glow)}
-.phone.gb{background:linear-gradient(color-mix(in srgb,var(--surface) 80%,transparent),color-mix(in srgb,var(--surface) 80%,transparent)) padding-box,linear-gradient(140deg,var(--accent),transparent 62%) border-box;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.phone .pb{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:.7rem}
-.msg{font-size:.85rem;line-height:1.4;padding:.55rem .75rem;border-radius:1rem;margin:.4rem 0;max-width:88%;opacity:0;transform:translateY(8px);animation:pop .5s forwards}
+.me{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem}
+.me img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent),0 8px 24px var(--glow)}
+.me strong{display:block;font-weight:500}
+.live{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;color:var(--ink)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--warm);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px transparent}0%{box-shadow:0 0 0 0 var(--warm)}}
+.hero h1{font-size:2.15rem;font-weight:700;margin:.4rem 0 .7rem}
+.hero h1 u{text-decoration:none;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 45%,transparent) 62%)}
+.hero .sub{color:var(--ink);opacity:.88}
+.btns{display:flex;flex-direction:column;gap:.55rem;margin:.9rem 0}
+.btn{display:block;text-align:center;padding:.85rem 1rem;border-radius:var(--r2);font-weight:500;text-decoration:none;border:2px solid var(--accent);color:var(--accent);min-height:48px;transition:transform .15s,box-shadow .15s}
+.btn.main{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px var(--glow)}
+.btn:active,.foot button:active,.pill:active{transform:scale(.97)}
+.phone{border-radius:1.4rem;padding:.8rem;margin-top:1rem;box-shadow:0 18px 44px var(--glow)}
+.pb{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:.4rem}
+.msg{font-size:.82rem;line-height:1.35;padding:.45rem .7rem;border-radius:1rem;margin:.3rem 0;max-width:88%;opacity:0;transform:translateY(8px);animation:pop .5s forwards}
 .msg.in{background:var(--bubble);color:var(--ink);border-bottom-left-radius:.3rem}
 .msg.out{background:var(--accent);color:var(--accent-ink);margin-left:auto;border-bottom-right-radius:.3rem}
-.msg.ok{border:1px solid var(--warm);color:var(--warm);margin:.6rem auto 0;text-align:center;max-width:100%}
-.m1{animation-delay:.6s}.m2{animation-delay:1.8s}.m3{animation-delay:3.2s}
-.phone small{display:block;text-align:center;color:var(--muted);font-size:.7rem;margin-top:.6rem}
+.msg.ok{border:1px solid var(--warm);color:var(--warm);margin:.5rem auto 0;text-align:center;max-width:100%}
+.m1{animation-delay:.5s}.m2{animation-delay:1.5s}.m3{animation-delay:2.8s}
+.phone small{display:block;text-align:center;color:var(--muted);font-size:.68rem;margin-top:.4rem}
 @keyframes pop{to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.msg{animation:none;opacity:1;transform:none}.live i{animation:none}html{scroll-behavior:auto}.rv{opacity:1!important;transform:none!important}}
-.btns{display:flex;flex-direction:column;gap:.7rem}
-.btn{display:block;text-align:center;padding:.95rem 1.2rem;border-radius:var(--r2);font-weight:500;text-decoration:none;border:2px solid var(--accent);color:var(--accent);min-height:48px;transition:transform .15s,box-shadow .15s}
-.btn.main{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 26px var(--glow)}
-.btn:active,.dock a:active{transform:scale(.97);box-shadow:0 0 22px var(--glow)}
-.avail{font-size:.85rem;color:var(--muted);margin:1rem 0 0}
-.rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}.rv.on{opacity:1;transform:none}
-.stats{display:grid;grid-template-columns:1fr 1fr;margin-top:1.4rem}
-.stats div{padding:1.2rem 0;border-top:1px solid var(--line)}
-.stats div:nth-child(odd){padding-right:1rem}
-.stats b{display:block;font:700 2.6rem/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;color:var(--warm)}
-.stats span{font-size:.88rem;color:var(--muted);display:block;margin-top:.3rem}
-.rail{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;margin:1.3rem -1.25rem 0;padding:0 1.25rem .6rem;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.rail>*{flex:0 0 78%;scroll-snap-align:center}
-.step{padding:1rem 0 0;border-top:2px solid var(--accent)}
-.step em{font:700 .95rem "Bricolage Grotesque",sans-serif;font-style:normal;color:var(--accent)}
-.step h3{font-size:1.3rem;margin:.35rem 0 .4rem}
-.step p{margin:0;font-size:.97rem}
-.step time{display:block;font-size:.8rem;color:var(--warm);margin-top:.6rem}
-.sprint{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 50%,var(--warm)));color:var(--accent-ink);border-radius:var(--r1);padding:1.6rem;margin:1.3rem 0;box-shadow:0 20px 50px var(--glow)}
-.sprint h3{font-size:1.55rem}.sprint p{color:inherit;opacity:.92;margin:.6rem 0 1rem}
-.sprint b{font:700 2.4rem/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.stats{display:grid;grid-template-columns:1fr 1fr;margin:.6rem 0 .8rem}
+.stats div{padding:.8rem 0;border-top:1px solid var(--line)}
+.stats div:nth-child(odd){padding-right:.8rem}
+.stats b{display:block;font:700 2.2rem/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;color:var(--warm)}
+.stats span{font-size:.82rem;color:var(--muted);display:block;margin-top:.25rem}
+.flow{list-style:none;margin:0;padding:0}
+.flow li{display:flex;gap:.8rem;padding:.7rem 0;border-top:1px solid var(--line)}
+.flow em{flex:0 0 1.5rem;font:700 1.1rem "Bricolage Grotesque",sans-serif;font-style:normal;color:var(--accent)}
+.flow b{display:block;font-weight:500;color:var(--ink)}
+.flow span{font-size:.88rem;color:var(--muted)}
+.sprint{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 50%,var(--warm)));color:var(--accent-ink);border-radius:var(--r1);padding:1.2rem;margin:.6rem 0;box-shadow:0 16px 40px var(--glow)}
+.sprint h3{font-size:1.35rem}.sprint p{color:inherit;opacity:.92;margin:.4rem 0 .6rem;font-size:.93rem}
+.sprint b{font:700 1.9rem/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
 .list{list-style:none;margin:0;padding:0}
-.list li{display:flex;gap:.9rem;align-items:flex-start;padding:1.1rem 0;border-bottom:1px solid var(--line)}
-.list li:last-child{border:0}
-.list svg{flex:0 0 28px;width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.list li{display:flex;gap:.8rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.list svg{flex:0 0 26px;width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .list svg .dot{fill:var(--warm);stroke:none}
-.list h3{font-size:1.1rem}.list p{margin:.2rem 0 0;font-size:.92rem}
-.list b{margin-left:auto;white-space:nowrap;color:var(--warm);font-weight:500;font-size:.95rem}
-.docs{display:flex;gap:.8rem;overflow-x:auto;scroll-snap-type:x mandatory;margin:1.2rem -1.25rem 0;padding:.6rem 1.25rem 1.2rem;scrollbar-width:none}
-.docs::-webkit-scrollbar{display:none}
-.docs a{flex:0 0 46%;scroll-snap-align:center;text-decoration:none!important;color:var(--ink)!important;font-size:.85rem}
-.docs img{display:block;width:100%;border-radius:8px;box-shadow:0 14px 30px rgba(0,0,0,.35),0 0 0 1px var(--line);transition:transform .2s}
+.list h3{font-size:1rem}.list p{margin:0;font-size:.85rem}
+.list b{margin-left:auto;white-space:nowrap;color:var(--warm);font-weight:500;font-size:.9rem}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1rem}
+.docs a{text-decoration:none;color:var(--ink);font-size:.75rem;text-align:center}
+.docs img{display:block;width:100%;border-radius:6px;box-shadow:0 10px 22px rgba(0,0,0,.35),0 0 0 1px var(--line)}
 .docs a:nth-child(1) img{transform:rotate(-3deg)}.docs a:nth-child(2) img{transform:rotate(2deg)}.docs a:nth-child(3) img{transform:rotate(-2deg)}
-.docs span{display:block;margin-top:.7rem;text-align:center}
-.dash{border-radius:var(--r1);padding:1.3rem;margin-top:1.2rem}
-.dash h3{font-size:1.05rem;margin-bottom:.9rem}
-.bar{display:grid;grid-template-columns:5.2rem 1fr 1.6rem;align-items:center;gap:.6rem;font-size:.85rem;margin:.5rem 0;color:var(--muted)}
-.bar i{display:block;height:10px;border-radius:6px;background:var(--accent);width:var(--w)}
-.bar.top i{background:var(--warm)}
-.bar b{color:var(--ink);font-weight:500;text-align:right}
-.dash small{display:block;margin-top:.8rem;color:var(--muted);font-size:.75rem}
-blockquote{margin:0;border-radius:var(--r1);padding:1.4rem;font-size:.98rem;position:relative}
-blockquote::before{content:"\201C";position:absolute;top:.4rem;right:1.1rem;font:700 3.6rem/1 "Bricolage Grotesque",sans-serif;color:var(--warm);opacity:.8}
-blockquote p{color:var(--ink);margin:0 0 1rem}
-blockquote footer{display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:var(--muted)}
-blockquote footer i{flex:0 0 38px;height:38px;border-radius:50%;display:grid;place-items:center;font:700 1rem "Bricolage Grotesque",sans-serif;font-style:normal;background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--ink)}
-blockquote footer b{display:block;color:var(--ink)}
-.how{display:grid;gap:1rem;margin-top:1.2rem}
-.how div{padding-left:1rem;border-left:2px solid var(--accent)}
-.how b{display:block;font:500 1rem "IBM Plex Sans",sans-serif;color:var(--ink)}
-.how span{font-size:.93rem;color:var(--muted)}
-.not{margin-top:1.4rem;font-size:.93rem;padding:1rem 1.1rem;border-radius:var(--r2);background:color-mix(in srgb,var(--warm) 11%,transparent);color:var(--ink)}
-details{border-bottom:1px solid var(--line);padding:1.05rem 0}
-summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:1rem;min-height:32px}
+.docs span{display:block;margin-top:.45rem}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:.7rem 0}
+.tiles a{border-radius:var(--r1);padding:.9rem;text-decoration:none;color:var(--ink);min-height:88px;display:flex;flex-direction:column;justify-content:space-between}
+.tiles b{font:500 .98rem "Bricolage Grotesque",sans-serif}
+.tiles span{font-size:.78rem;color:var(--warm)}
+.tiles .wide{grid-column:1/-1;min-height:0;flex-direction:row;align-items:center}
+.q{display:none;border-radius:var(--r1);padding:1.1rem;font-size:.92rem;position:relative}
+.q.on{display:block}
+.q::before{content:"\201C";position:absolute;top:.2rem;right:.9rem;font:700 3rem/1 "Bricolage Grotesque",sans-serif;color:var(--warm);opacity:.8}
+.q p{color:var(--ink);margin:0 0 .8rem}
+.q footer{display:flex;align-items:center;gap:.65rem;font-size:.8rem;color:var(--muted)}
+.q i{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 .95rem "Bricolage Grotesque",sans-serif;font-style:normal;background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--ink)}
+.q b{display:block;color:var(--ink)}
+.dots{display:flex;justify-content:center;gap:.3rem;margin-top:.5rem}
+.dots button{width:30px;height:30px;border:0;background:transparent;position:relative}
+.dots button::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--line)}
+.dots button.on::after{background:var(--accent)}
+.how div{padding-left:.9rem;border-left:2px solid var(--accent);margin:.7rem 0}
+.how b{display:block;font-weight:500;color:var(--ink)}
+.how span{font-size:.9rem;color:var(--muted)}
+details{border-bottom:1px solid var(--line);padding:.8rem 0}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:1rem;min-height:30px;align-items:center}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--accent);font-size:1.4rem;line-height:1}
+summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1}
 details[open] summary::after{content:"\2212"}
-details p{margin:.7rem 0 0}
-.links{display:flex;flex-wrap:wrap;gap:.6rem 1.3rem;font-size:.92rem;margin-top:1.2rem}
-footer.end{padding:1.5rem 1.25rem 0;font-size:.85rem;color:var(--muted)}
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;gap:.6rem;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
-.dock a{flex:1;text-align:center;padding:.85rem .5rem;border-radius:var(--r2);font-weight:500;text-decoration:none;min-height:48px;border:2px solid var(--accent);color:var(--accent);transition:transform .15s}
-.dock a.main{flex:2;background:var(--accent);color:var(--accent-ink)}
+details p{margin:.5rem 0 0;font-size:.92rem}
+.links{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.9rem;margin:1rem 0 .5rem}
+.foot{flex:none;display:flex;align-items:center;gap:.8rem;padding:.65rem 1rem calc(.65rem + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 85%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.seg{display:flex;gap:.3rem;flex:1}
+.seg button{flex:1;height:5px;border:0;border-radius:3px;background:var(--line);padding:0;position:relative}
+.seg button::after{content:"";position:absolute;inset:-14px 0}
+.seg button.done{background:color-mix(in srgb,var(--accent) 70%,transparent)}
+.seg button.on{background:linear-gradient(90deg,var(--accent),var(--warm))}
+.foot .next{font:500 .92rem "IBM Plex Sans",sans-serif;border:0;border-radius:var(--r2);background:var(--accent);color:var(--accent-ink);padding:.7rem 1.1rem;min-height:46px;box-shadow:0 6px 20px var(--glow);flex:none}
+.tabs{display:flex;gap:.3rem;padding:.25rem;border:1px solid var(--line);border-radius:2rem;margin:.5rem 0 .8rem;background:color-mix(in srgb,var(--surface) 80%,transparent)}
+.tabs button{flex:1;font:inherit;font-size:.85rem;font-weight:500;color:var(--muted);background:transparent;border:0;border-radius:2rem;padding:.45rem;min-height:38px}
+.tabs button.on{background:var(--accent);color:var(--accent-ink)}
+.tp[hidden]{display:none}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.8rem}
+.kpis div{text-align:center;padding:.6rem .2rem;border-radius:var(--r2);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.kpis b{display:block;font:700 1.6rem/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.kpis b.c{color:var(--warm)}
+.kpis span{font-size:.68rem;color:var(--muted);line-height:1.2;display:block;margin-top:.25rem}
+.dc{border-radius:var(--r1);padding:.9rem 1rem;margin-bottom:.7rem}
+.dc h3{font-size:.95rem;margin-bottom:.5rem}
+.br{display:grid;grid-template-columns:5.4rem 1fr 1.6rem;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted);margin:.35rem 0}
+.br i{display:block;height:9px;border-radius:5px;background:var(--accent);width:var(--w)}
+.br.top i{background:var(--warm)}
+.br b{color:var(--ink);font-weight:500;text-align:right}
+.cols{display:flex;gap:.5rem;align-items:flex-end;height:96px}
+.cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:.7rem;color:var(--muted)}
+.cols b{font-weight:500;color:var(--ink);font-size:.72rem}
+.cols i{display:block;width:100%;height:calc(var(--h)*.5);margin:.2rem 0;border-radius:6px 6px 3px 3px;background:var(--accent)}
+.cols .top i{background:var(--warm)}
+.upnext{margin-top:1.4rem;border-radius:var(--r1);padding:1.1rem 1.1rem 1.1rem 1.3rem;position:relative;box-shadow:0 14px 36px var(--glow)}
+.upnext::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:linear-gradient(var(--accent),var(--warm))}
+.upnext em{font-style:normal;font-size:.78rem;color:var(--warm);display:block;margin-bottom:.25rem}
+.upnext h3{font-size:1.2rem}
+.upnext p{font-size:.88rem;margin:.35rem 0 .8rem}
+.upnext .btn{margin:0}
+@media (prefers-reduced-motion:reduce){.msg{animation:none;opacity:1;transform:none}.live i{animation:none}.view.l,.view.r{animation:none}}
+@media (max-height:640px){.hero h1{font-size:1.8rem}.phone{display:none}}
 </style>
 </head>
 <body>
-<div class="prog" id="prog"></div>
-<div class="top"><b>Loomwell Ops</b><a href="index.html">Full site</a></div>
+<div class="top"><b>Loomwell Ops</b><a class="pill" href="https://calendly.com/loomwellops/30min">Book a call</a></div>
+<nav class="steps" id="steps" aria-label="Sections"></nav>
 
-<header class="hero">
-<div class="me"><img src="profile.jpg" alt="Japhette Alec Pulido" width="64" height="64"><div><strong>Japhette Alec Pulido</strong><span>Executive assistant &amp; GoHighLevel automation</span></div></div>
-<div class="live"><i></i><span id="clock">Taking new clients · based in Manila</span></div>
+<main class="deck" id="deck">
+
+<section class="view hero" id="overview" aria-label="Overview">
+<div class="me"><img src="profile.jpg" alt="Japhette Alec Pulido" width="56" height="56"><div><strong>Japhette Alec Pulido</strong><span class="live"><i></i><span id="clock">Taking new clients · based in Manila</span></span></div></div>
 <h1>I build the follow-up systems that turn leads into <u>booked customers</u>.</h1>
-<p class="sub">For US businesses that lose leads to slow replies. I work your hours from the Philippines.</p>
-<div class="chips"><span>US hours</span><span>GoHighLevel</span><span>Philippines</span></div>
-<div class="phone gb" aria-label="Example of an automated reply to a new lead">
-<div class="pb"><span>New lead</span><span>9:41 pm</span></div>
-<div class="msg in m1">Hi, do you have trial spots this week?</div>
-<div class="msg out m2">Hi Mia, thanks for reaching out. Pick a time that works and I’ll save your spot.</div>
-<div class="msg ok m3">Trial booked · Thu 6:00 pm</div>
-<small>Example messages. Texting requires the lead’s consent.</small>
-</div>
+<p class="sub">Executive assistant and GoHighLevel automation, working your US hours from the Philippines.</p>
 <div class="btns">
 <a class="btn main" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Get a free 3-fix audit</a>
 <a class="btn" href="https://calendly.com/loomwellops/30min">Book a 30-minute call</a>
 </div>
-<p class="avail">Calls Mon–Fri, about 4–8 pm Pacific / 5–9 pm Mountain. I reply within one business day.</p>
-</header>
+<div class="phone gb" aria-label="Example of an automated reply to a new lead">
+<div class="pb"><span>New lead</span><span>9:41 pm</span></div>
+<div class="msg in m1">Hi, do you have trial spots this week?</div>
+<div class="msg out m2">Hi Mia, thanks for reaching out. Pick a time and I’ll save your spot.</div>
+<div class="msg ok m3">Trial booked · Thu 6:00 pm</div>
+<small>Example messages. Texting requires the lead’s consent.</small>
+</div>
+</section>
 
-<section class="band rv">
-<h2>What it looks like in numbers</h2>
+<section class="view" id="case-study" aria-label="Results" hidden>
+<h2>Results</h2>
+<div class="tabs" id="tabs" role="tablist"><button class="on" data-t="a" role="tab">My results</button><button data-t="b" role="tab">Sample week</button></div>
+<div class="tp" id="tp-a">
 <p>From my work at Fit Body Boot Camp and for a 5-store DHL Express partner network.</p>
 <div class="stats">
 <div><b>~50</b><span>gym appointments booked a month</span></div>
 <div><b>~90%</b><span>of the monthly appointment quota</span></div>
 <div><b>~100</b><span>calls a day, logged in Sheets</span></div>
-<div><b>5</b><span>DHL Express partner stores in 4 US states</span></div>
+<div><b>5</b><span>DHL Express partner stores, 4 states</span></div>
+</div>
+<ol class="flow">
+<li><em>1</em><div><b>New lead</b><span>Instant reply, missed-call text-back</span></div></li>
+<li><em>2</em><div><b>Contacted</b><span>Call follow-up and nurture messages</span></div></li>
+<li><em>3</em><div><b>Trial booked</b><span>Self-booking calendar with reminders</span></div></li>
+<li><em>4</em><div><b>Showed up</b><span>Onboarding check-ins after the first visit</span></div></li>
+<li><em>5</em><div><b>Member</b><span>Review requests and win-back texts</span></div></li>
+</ol>
+</div>
+<div class="tp" id="tp-b" hidden>
+<p>The weekly report you’d get. Sample with fictional data.</p>
+<div class="kpis">
+<div><b>84</b><span>New leads</span></div>
+<div><b>31</b><span>Booked</span></div>
+<div><b>22</b><span>Showed up<br>71%</span></div>
+<div><b class="c">9</b><span>Members<br>41%</span></div>
+</div>
+<div class="dc gb"><h3>Pipeline this week</h3>
+<div class="br"><span>New lead</span><i style="--w:100%"></i><b>84</b></div>
+<div class="br"><span>Contacted</span><i style="--w:85%"></i><b>71</b></div>
+<div class="br"><span>Trial booked</span><i style="--w:37%"></i><b>31</b></div>
+<div class="br"><span>Showed up</span><i style="--w:26%"></i><b>22</b></div>
+<div class="br top"><span>Member</span><i style="--w:11%"></i><b>9</b></div>
+</div>
+<div class="dc gb"><h3>Leads by source</h3>
+<div class="br top"><span>Facebook ads</span><i style="--w:100%"></i><b>38</b></div>
+<div class="br"><span>Instagram</span><i style="--w:45%"></i><b>17</b></div>
+<div class="br"><span>Google search</span><i style="--w:37%"></i><b>14</b></div>
+<div class="br"><span>Referrals</span><i style="--w:24%"></i><b>9</b></div>
+<div class="br"><span>Website form</span><i style="--w:16%"></i><b>6</b></div>
+</div>
+<div class="dc gb"><h3>Calls logged, 500 total</h3>
+<div class="cols"><div style="--h:89%"><b>96</b><i></i><span>Mon</span></div><div style="--h:96%"><b>104</b><i></i><span>Tue</span></div><div style="--h:93%"><b>100</b><i></i><span>Wed</span></div><div class="top" style="--h:100%"><b>108</b><i></i><span>Thu</span></div><div style="--h:85%"><b>92</b><i></i><span>Fri</span></div></div>
+</div>
+<p style="margin-top:.8rem"><a href="sample-weekly-report.pdf">Open the full sample report (PDF)</a></p>
 </div>
 </section>
 
-<section class="rv">
-<h2>One lead, start to finish</h2>
-<p>Swipe through how every new lead gets followed up without anyone having to remember.</p>
-<div class="rail">
-<div class="step"><em>1</em><h3>New lead</h3><p>Form and ad leads get an instant reply. Missed calls get an automatic text-back.</p><time>9:41 pm</time></div>
-<div class="step"><em>2</em><h3>Contacted</h3><p>Call follow-up and multi-day nurture messages, tagged by stage.</p><time>9:41 pm</time></div>
-<div class="step"><em>3</em><h3>Trial booked</h3><p>A self-booking calendar with instant confirmations and reminders.</p><time>Next morning</time></div>
-<div class="step"><em>4</em><h3>Showed up</h3><p>Onboarding check-ins right after the first visit.</p><time>Day of visit</time></div>
-<div class="step"><em>5</em><h3>Member</h3><p>Review requests, failed-payment reminders and win-back texts.</p><time>A week later</time></div>
-</div>
-</section>
-
-<section class="band rv">
+<section class="view" id="services" aria-label="Services" hidden>
 <h2>Start with the 2-week sprint</h2>
 <div class="sprint">
 <h3>Lead-to-booking setup</h3>
-<p>Pipeline stages, instant replies, missed-call text-back, a booking calendar with reminders, no-show rebooking, and a written checklist your team can follow.</p>
+<p>Pipeline stages, instant replies, missed-call text-back, booking with reminders, no-show rebooking, and a written checklist.</p>
 <b>From $300</b> fixed price
 </div>
 <ul class="list">
-<li><svg viewBox="0 0 32 32"><path d="M18 3 7 18h8l-1 11 11-15h-8z"/><circle class="dot" cx="25" cy="7" r="2"/></svg><div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines, booking, weekly reports.</p></div><b>$12/hr</b></li>
-<li><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="19" rx="4"/><path d="M5 13h22M11 4v5M21 4v5"/><circle class="dot" cx="21" cy="20" r="2"/></svg><div><h3>Social media management</h3><p>Monthly plan, client-approved calendar, scheduling.</p></div><b>$350/mo</b></li>
-<li><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="17" rx="4"/><path d="m5 11 11 8 11-8"/><circle class="dot" cx="25" cy="8" r="2"/></svg><div><h3>Executive assistant &amp; ops</h3><p>Calendar, email, calls, handbooks and checklists.</p></div><b>$8/hr</b></li>
+<li><svg viewBox="0 0 32 32"><path d="M18 3 7 18h8l-1 11 11-15h-8z"/><circle class="dot" cx="25" cy="7" r="2"/></svg><div><h3>GoHighLevel automation</h3><p>Lead capture, pipelines, reports</p></div><b>$12/hr</b></li>
+<li><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="19" rx="4"/><path d="M5 13h22M11 4v5M21 4v5"/><circle class="dot" cx="21" cy="20" r="2"/></svg><div><h3>Social media management</h3><p>Plan, approvals, scheduling</p></div><b>$350/mo</b></li>
+<li><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="17" rx="4"/><path d="m5 11 11 8 11-8"/><circle class="dot" cx="25" cy="8" r="2"/></svg><div><h3>Executive assistant &amp; ops</h3><p>Calendar, email, calls, handbooks</p></div><b>$8/hr</b></li>
 </ul>
-</section>
-
-<section class="rv">
-<h2>See what you’d get</h2>
-<p>Real formats, with fictional data. Tap one to open it.</p>
 <div class="docs">
 <a href="sample-audit.pdf"><img src="audit.jpg" alt="Sample free mini audit" loading="lazy"><span>Free audit</span></a>
 <a href="sample-weekly-report.pdf"><img src="report.jpg" alt="Sample weekly report" loading="lazy"><span>Weekly report</span></a>
 <a href="services-and-rates.pdf"><img src="services.jpg" alt="Services and rates sheet" loading="lazy"><span>Services sheet</span></a>
 </div>
-<div class="dash gb">
-<h3>Leads by source, sample week</h3>
-<div class="bar top"><span>Facebook ads</span><i style="--w:100%"></i><b>38</b></div>
-<div class="bar"><span>Instagram</span><i style="--w:45%"></i><b>17</b></div>
-<div class="bar"><span>Google search</span><i style="--w:37%"></i><b>14</b></div>
-<div class="bar"><span>Referrals</span><i style="--w:24%"></i><b>9</b></div>
-<div class="bar"><span>Website form</span><i style="--w:16%"></i><b>6</b></div>
-<small>Sample with fictional data, from the weekly report format.</small>
-</div>
-<div class="links"><a href="5-follow-up-automations.pdf">5 automations (PDF)</a><a href="client-onboarding-checklist.pdf">Onboarding checklist (PDF)</a></div>
 </section>
 
-<section class="band rv">
-<h2>What clients say</h2>
-<div class="rail">
-<blockquote class="gb"><p>Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations.</p><footer><i>R</i><div><b>Romelle</b>Assistant, Consulting Company</div></footer></blockquote>
-<blockquote class="gb"><p>Working with Japhette completely elevated our local marketing and store operations. He brings a rare mix of creativity and operational discipline.</p><footer><i>D</i><div><b>Dom</b>Store Owner, DHL Express Partner Location</div></footer></blockquote>
-<blockquote class="gb"><p>Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly, with speed, accuracy, and zero drama.</p><footer><i>S</i><div><b>Steve</b>Owner, Fit Body Boot Camp</div></footer></blockquote>
+<section class="view" id="work" aria-label="Projects and proof" hidden>
+<h2>Things I’ve built</h2>
+<p>Four live apps. Tap one to try the demo.</p>
+<div class="tiles">
+<a class="gb" href="https://loomwell-ops.github.io/smm-calendar/calendar-demo.html"><b>Content Calendar</b><span>Live demo ↗</span></a>
+<a class="gb" href="https://loomwell-ops.github.io/tracker/demo.html"><b>Job Tracker</b><span>Live demo ↗</span></a>
+<a class="gb" href="https://loomwell-ops.github.io/budget/"><b>Budget Tracker</b><span>Open app ↗</span></a>
+<a class="gb" href="https://loomwell-ops.github.io/contact-pipeline-lead/crm-demo.html"><b>Contacts &amp; CRM</b><span>Live demo ↗</span></a>
+<a class="gb wide" href="md.html"><b>Design &amp; brand work</b><span style="margin-left:auto">See all →</span></a>
+</div>
+<div id="quotes">
+<blockquote class="q gb on" style="margin:0"><p>Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations.</p><footer><i>R</i><div><b>Romelle</b>Assistant, Consulting Company</div></footer></blockquote>
+<blockquote class="q gb" style="margin:0"><p>Working with Japhette completely elevated our local marketing and store operations. He brings a rare mix of creativity and operational discipline.</p><footer><i>D</i><div><b>Dom</b>Store Owner, DHL Express Partner Location</div></footer></blockquote>
+<blockquote class="q gb" style="margin:0"><p>Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly, with speed, accuracy, and zero drama.</p><footer><i>S</i><div><b>Steve</b>Owner, Fit Body Boot Camp</div></footer></blockquote>
+<div class="dots" id="dots"><button class="on" aria-label="Testimonial 1"></button><button aria-label="Testimonial 2"></button><button aria-label="Testimonial 3"></button></div>
 </div>
 </section>
 
-<section class="rv">
-<h2>How I work</h2>
+<section class="view" id="contact" aria-label="Contact" hidden>
+<h2>Let’s talk</h2>
+<div class="btns" style="margin-top:.5rem">
+<a class="btn main" href="https://calendly.com/loomwellops/30min">Book a 30-minute call</a>
+<a class="btn" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Request my free audit</a>
+<a class="btn" href="https://wa.me/639569027896">WhatsApp</a>
+</div>
 <div class="how">
-<div><b>Where we talk</b><span>Email, Slack or WhatsApp, whichever you already use.</span></div>
-<div><b>When you hear back</b><span>Within one business day, and urgent issues by WhatsApp.</span></div>
-<div><b>What you see each week</b><span>A short report on leads, bookings and what I changed.</span></div>
+<div><b>Where we talk</b><span>Email, Slack or WhatsApp, whichever you use.</span></div>
+<div><b>When you hear back</b><span>Within one business day. Calls Mon–Fri, about 4–8 pm Pacific.</span></div>
+<div><b>What you see weekly</b><span>A short report on leads, bookings and changes.</span></div>
 </div>
-<p class="not">Not a fit if you only need a one-off logo or a single post. I’m best for ongoing follow-up and operations.</p>
-</section>
-
-<section class="band rv" id="audit">
-<h2>Send me how you handle leads today</h2>
-<p>I look for slow replies, missed follow-ups and leads that go cold, then send back the 3 changes that matter most. It’s free.</p>
-<div class="btns"><a class="btn main" href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit&body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A">Request my free audit</a></div>
-</section>
-
-<section class="rv">
-<h2>Questions</h2>
 <details><summary>Can you work in my time zone?</summary><p>Yes. I’m in the Philippines and adjust my hours to yours. We agree on the overlap on the intro call.</p></details>
-<details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up, instant replies, missed-call text-back, booking calendars with reminders, email blasts, contact tagging and reporting.</p></details>
 <details><summary>Do you only work with gyms?</summary><p>No. I’ve worked with a DHL Express partner shop network, a construction and engineering business, and fitness studios.</p></details>
-<details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads and bookings work today. I tell you honestly whether I can help. No prep and no cost.</p></details>
-<details><summary>How does pricing work?</summary><p>Rates above are starting points. You get the final scope and price in writing before we start.</p></details>
-<div class="links"><a href="resume.pdf">Resume (PDF)</a><a href="projects.html">Web apps</a><a href="design.html">Design work</a><a href="https://www.linkedin.com/in/japhette-alec-pulido/">LinkedIn</a></div>
+<details><summary>How does pricing work?</summary><p>Rates are starting points. You get the final scope and price in writing before we start.</p></details>
+<div class="links"><a href="resume.pdf">Resume (PDF)</a><a href="https://www.linkedin.com/in/japhette-alec-pulido/">LinkedIn</a><a href="projects.html">All projects</a><a href="index.html?full">Full site</a></div>
 </section>
 
-<footer class="end">Japhette Alec Pulido · loomwellops@gmail.com</footer>
+</main>
 
-<nav class="dock" aria-label="Contact">
-<a class="main" href="https://calendly.com/loomwellops/30min">Book a call</a>
-<a href="https://wa.me/639569027896">WhatsApp</a>
-<a href="mailto:loomwellops@gmail.com">Email</a>
-</nav>
+<div class="foot">
+<div class="seg" id="seg"></div>
+<button class="next" id="next" type="button"></button>
+</div>
+
 <script>
 (function(){
-var p=document.getElementById("prog");
-function sc(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;p.style.width=(m>0?h.scrollTop/m*100:0)+"%"}
-addEventListener("scroll",sc,{passive:true});sc();
-var els=document.querySelectorAll(".rv");
-if("IntersectionObserver"in window){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add("on");o.unobserve(x.target)}})},{threshold:.08});els.forEach(function(e){o.observe(e)})}else{els.forEach(function(e){e.classList.add("on")})}
-try{var c=document.getElementById("clock");var t=new Intl.DateTimeFormat("en-US",{hour:"numeric",minute:"2-digit",timeZone:"Asia/Manila"}).format(new Date());c.textContent="Taking new clients · it’s "+t+" in Manila"}catch(e){}
+var V=[["overview","Overview"],["case-study","Results"],["services","Services"],["work","Work"],["contact","Contact"]];
+var cur=-1,steps=document.getElementById("steps"),seg=document.getElementById("seg"),next=document.getElementById("next");
+var sb=[],gb=[];
+V.forEach(function(v,i){
+ var b=document.createElement("button");b.type="button";b.textContent=v[1];b.onclick=function(){go(i)};steps.appendChild(b);sb.push(b);
+ var s=document.createElement("button");s.type="button";s.setAttribute("aria-label",v[1]);s.onclick=function(){go(i)};seg.appendChild(s);gb.push(s);
+});
+function go(i,keep){
+ if(i<0||i>=V.length||i===cur)return;
+ var dir=i>cur?"l":"r",first=cur<0;
+ V.forEach(function(v,k){var el=document.getElementById(v[0]);var on=k===i;el.hidden=!on;el.classList.remove("l","r");if(on){el.scrollTop=0;if(!first)el.classList.add(dir)}sb[k].classList.toggle("on",on);sb[k].setAttribute("aria-current",on?"true":"false");gb[k].className=on?"on":(k<i?"done":"")});
+ cur=i;
+ next.textContent=i<V.length-1?"Next →":"Start ↺";
+ sb[i].scrollIntoView({inline:"center",block:"nearest"});
+ if(!keep){try{history.replaceState(null,"","#"+V[i][0])}catch(e){}}
+}
+
+var N=[["Results","See the numbers from Fit Body Boot Camp, plus a sample weekly report.","See results"],["Services","The 2-week sprint, 3 ways to start, and sample documents.","See services"],["Apps, design & client words","Try four live apps and read what clients say.","See the work"],["Book a call","Hours, quick answers, and the fastest ways to reach me.","Go to contact"],["Back to the start","Return to the overview and the live text-reply example.","Back to overview"]];
+V.forEach(function(v,i){
+ var d=document.createElement("div");d.className="upnext gb";
+ d.innerHTML="<em>Up next · "+(((i+1)%V.length)+1)+" of "+V.length+"</em><h3></h3><p></p>";
+ d.querySelector("h3").textContent=N[i][0];d.querySelector("p").textContent=N[i][1];
+ var b=document.createElement("button");b.type="button";b.className="btn main";b.textContent=N[i][2]+" →";
+ b.onclick=function(){go((i+1)%V.length)};d.appendChild(b);
+ document.getElementById(v[0]).appendChild(d);
+});
+document.querySelectorAll("#tabs button").forEach(function(t){t.onclick=function(){
+ document.querySelectorAll("#tabs button").forEach(function(o){o.classList.toggle("on",o===t)});
+ document.getElementById("tp-a").hidden=t.dataset.t!=="a";document.getElementById("tp-b").hidden=t.dataset.t!=="b";
+}});
+next.onclick=function(){go(cur<V.length-1?cur+1:0)};
+var x0,y0,t0;
+document.getElementById("deck").addEventListener("touchstart",function(e){var t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=e.target},{passive:true});
+document.getElementById("deck").addEventListener("touchend",function(e){
+ if(x0==null)return;var t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+ if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.6){go(dx<0?cur+1:cur-1)}
+},{passive:true});
+addEventListener("keydown",function(e){if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+var h=(location.hash||"").slice(1),start=0;V.forEach(function(v,i){if(v[0]===h)start=i});
+go(start,true);
+var qs=document.querySelectorAll(".q"),ds=document.querySelectorAll("#dots button");
+ds.forEach(function(d,i){d.onclick=function(){qs.forEach(function(q,k){q.classList.toggle("on",k===i);ds[k].classList.toggle("on",k===i)})}});
+try{var t=new Intl.DateTimeFormat("en-US",{hour:"numeric",minute:"2-digit",timeZone:"Asia/Manila"}).format(new Date());document.getElementById("clock").textContent="Taking clients · it’s "+t+" in Manila"}catch(e){}
 })();
 </script>
 </body>
