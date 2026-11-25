@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Japhette Alec Pulido | Loomwell Ops — Executive Assistant &amp; GoHighLevel Automation</title>
 <meta name="theme-color" content="#0E1330">
-<script>(function(){var r=document.documentElement,s=null;try{s=localStorage.getItem("theme")}catch(e){}if(s==="dark"||s==="light")r.setAttribute("data-theme",s)})();</script>
+<script>(function(){var r=document.documentElement;r.className+=" js";var s=null;try{s=localStorage.getItem("theme")}catch(e){}if(s!=="dark"&&s!=="light"){s=window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}r.setAttribute("data-theme",s)})();</script>
 <meta name="description" content="GoHighLevel automation and executive assistant support. I build the follow-up systems that turn leads into booked customers. Philippines-based, US hours.">
 <meta property="og:title" content="Japhette Alec Pulido | Executive Assistant &amp; GoHighLevel Automation">
 <meta property="og:type" content="website">
@@ -31,407 +31,680 @@
   --deep:#1B2A5E;
   --peach:#F6D9B8;
   --day:#FFF8EE;
+  --accent:#4B3FD6;
+  --accent-soft:#9C93FF;
   --signal:#FF6B3D;
-  --ink-dark:#F3EFE6;
-  --muted-dark:rgba(243,239,230,.74);
-  --line-dark:rgba(243,239,230,.20);
-  --ink-light:#10142B;
-  --muted-light:rgba(16,20,43,.72);
-  --line-light:rgba(16,20,43,.16);
-  --sky:var(--night);
-  --sky-ink:var(--ink-dark);
+  --gold:#F3C76B;
+  --ink:#10142B;
+  --muted:#4D5270;
+  --line:rgba(16,20,43,.14);
+  --glass:rgba(255,250,244,.76);
+  --glass-strong:rgba(255,252,248,.88);
+  --rim:rgba(255,255,255,.85);
+  --glow:rgba(75,63,214,.22);
+  --signal-glow:rgba(255,107,61,.32);
+  --monolith:linear-gradient(145deg,#0E1330 0%,#1B2A5E 56%,#12183A 100%);
   --font-display:"Bricolage Grotesque",system-ui,sans-serif;
   --font-body:"Instrument Sans",system-ui,-apple-system,sans-serif;
   --font-serif:"Newsreader",Georgia,serif;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --day:#12183A;
-    --peach:#1B2A5E;
-    --ink-light:#F3EFE6;
-    --muted-light:rgba(243,239,230,.74);
-    --line-light:rgba(243,239,230,.20);
-  }
-}
 :root[data-theme="dark"]{
-  --day:#12183A;
-  --peach:#1B2A5E;
-  --ink-light:#F3EFE6;
-  --muted-light:rgba(243,239,230,.74);
-  --line-light:rgba(243,239,230,.20);
+  --day:#0E1330;
+  --peach:#151C42;
+  --ink:#F3EFE6;
+  --muted:#B6B8D6;
+  --line:rgba(243,239,230,.16);
+  --glass:rgba(20,27,62,.72);
+  --glass-strong:rgba(22,30,68,.86);
+  --rim:rgba(255,255,255,.16);
+  --glow:rgba(156,147,255,.34);
 }
-:root[data-phase="night"]{--sky:var(--night);--sky-ink:var(--ink-dark)}
-:root[data-phase="deep"]{--sky:var(--deep);--sky-ink:var(--ink-dark)}
-:root[data-phase="peach"]{--sky:var(--peach);--sky-ink:var(--ink-light)}
-:root[data-phase="day"]{--sky:var(--day);--sky-ink:var(--ink-light)}
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:2rem}
 body{
   margin:0;
-  background:var(--sky);
-  color:var(--sky-ink);
-  font:400 1.1rem/1.6 var(--font-body);
-  transition:background-color .7s ease,color .5s ease;
+  background:var(--night);
+  color:var(--ink);
+  font:400 1.06rem/1.62 var(--font-body);
+  padding-bottom:6.5rem;
+  overflow-x:hidden;
 }
 [hidden]{display:none!important}
-a{color:inherit;text-underline-offset:.2em}
+a{color:inherit;text-underline-offset:.22em}
 :focus-visible{outline:3px solid var(--signal);outline-offset:3px}
 .skip{
-  position:absolute;left:-9999px;top:0;z-index:50;
-  background:var(--signal);color:#10142B;font-weight:600;
-  padding:.65rem 1.1rem;text-decoration:none;
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--signal);color:#0E1330;font-weight:700;
+  padding:.65rem 1.1rem;text-decoration:none;border-radius:0 0 .5rem 0;
 }
 .skip:focus{left:0}
 
+/* Full-Viewport WebGL Caustic Canvas */
+#caustic-gl{
+  position:fixed;inset:0;width:100vw;height:100vh;
+  z-index:-2;pointer-events:none;display:block;
+}
+.grain{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.045;
+  background-image:radial-gradient(rgba(255,255,255,.6) 1px,transparent 0);
+  background-size:24px 24px;
+}
+
 .wrap{max-width:74rem;margin:0 auto;padding:0 1.5rem}
-.measure{max-width:65ch}
+.measure{max-width:62ch}
 
-/* Full-bleed bands */
-.band{width:100%;padding:5rem 0}
-.band-night{background:var(--night);color:var(--ink-dark);--muted:var(--muted-dark);--line:var(--line-dark)}
-.band-deep{background:var(--deep);color:var(--ink-dark);--muted:var(--muted-dark);--line:var(--line-dark)}
-.band-peach{background:var(--peach);color:var(--ink-light);--muted:var(--muted-light);--line:var(--line-light)}
-.band-day{background:var(--day);color:var(--ink-light);--muted:var(--muted-light);--line:var(--line-light)}
-.band-sky{background:transparent;color:inherit;--muted:color-mix(in srgb,currentColor 72%,transparent);--line:color-mix(in srgb,currentColor 18%,transparent)}
-
-/* Nav */
-header.site-nav{
-  border-bottom:1px solid var(--line-dark);
-  background:var(--night);
-  color:var(--ink-dark);
-}
-nav{
+/* Top Brand Header (Clean, Editorial) */
+.top-bar{
   display:flex;justify-content:space-between;align-items:center;
-  gap:1rem 2rem;flex-wrap:wrap;padding:1.25rem 0;
+  gap:1rem;padding:1.35rem 0;
+  color:#F3EFE6;
+  border-bottom:1px solid rgba(243,239,230,.14);
 }
-.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.15}
-.brand strong{font-family:var(--font-display);font-size:1.15rem;font-weight:700}
-.brand span{font-size:.88rem;color:var(--muted-dark)}
-.nav-links{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
-.nav-links a{text-decoration:none;font-weight:500;font-size:.98rem}
-.nav-links a:hover{color:var(--signal)}
-#theme{
-  font:inherit;font-size:.92rem;font-weight:500;cursor:pointer;
-  background:transparent;color:inherit;
-  border:1px solid var(--line-dark);border-radius:2rem;padding:.3rem .85rem;
+.brand{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.brand-mark{
+  width:2.35rem;height:2.35rem;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:700;font-size:.88rem;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--signal));
+  box-shadow:0 6px 20px rgba(255,107,61,.35);
 }
-#theme:hover{border-color:var(--signal);color:var(--signal)}
+.brand-text strong{display:block;font-family:var(--font-display);font-size:1.08rem;line-height:1.1}
+.brand-text span{display:block;font-size:.84rem;color:rgba(243,239,230,.68)}
+.top-actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.top-pill{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.86rem;font-weight:500;color:#F3EFE6;
+  padding:.35rem .85rem;border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+}
+.top-pill i{
+  width:7px;height:7px;border-radius:50%;background:#34D399;
+  box-shadow:0 0 10px #34D399;display:inline-block;
+}
+.top-link{
+  font-size:.9rem;font-weight:500;text-decoration:none;
+  padding:.35rem .75rem;border-radius:999px;
+  color:rgba(243,239,230,.85);transition:color .2s,background .2s;
+}
+.top-link:hover{color:#fff;background:rgba(255,255,255,.1)}
 
 /* Typography */
 h1,h2,h3{font-family:var(--font-display);margin:0;font-weight:700}
 h1{
-  font-size:clamp(3.2rem,9vw,7.5rem);
-  line-height:.95;
-  letter-spacing:-.03em;
+  font-size:clamp(2.8rem,6.4vw,5.4rem);
+  line-height:.98;letter-spacing:-.03em;
   font-variation-settings:"opsz" 96;
 }
 h2{
-  font-size:clamp(2rem,4.6vw,3.4rem);
-  line-height:1.05;
-  letter-spacing:-.02em;
-  margin-bottom:1.25rem;
+  font-size:clamp(1.9rem,4.2vw,3rem);
+  line-height:1.06;letter-spacing:-.025em;
+  margin-bottom:.9rem;
 }
-h3{font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.2}
-p{margin:0 0 1.1rem}
-.muted{color:var(--muted)}
+h2::after{
+  content:"";display:block;width:3.2rem;height:3px;border-radius:2px;margin-top:.65rem;
+  background:linear-gradient(90deg,var(--signal),var(--gold));
+}
+h3{font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.2}
+p{margin:0 0 1rem}
+.grad{
+  background:linear-gradient(95deg,#FFB088 0%,#FF6B3D 45%,#F3C76B 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 
 /* Buttons */
-.btns{display:flex;gap:.85rem;flex-wrap:wrap;align-items:center}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
 .btn{
-  display:inline-block;padding:.8rem 1.45rem;border-radius:2rem;
-  font-weight:600;font-size:1rem;text-decoration:none;cursor:pointer;
-  font-family:inherit;border:1.5px solid currentColor;background:transparent;color:inherit;
+  display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+  padding:.78rem 1.45rem;border-radius:999px;
+  font:600 .98rem/1 var(--font-body);text-decoration:none;cursor:pointer;
+  border:1.5px solid currentColor;background:transparent;color:inherit;
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,background .2s ease,border-color .2s ease;
 }
-.btn.main{background:var(--signal);border-color:var(--signal);color:#10142B}
-.btn.main:hover{filter:brightness(1.06)}
+.btn.main{
+  background:linear-gradient(135deg,var(--signal),#E85224);
+  border-color:transparent;color:#fff;
+  box-shadow:0 12px 30px var(--signal-glow),inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn.main:hover{box-shadow:0 16px 38px rgba(255,107,61,.48),inset 0 1px 0 rgba(255,255,255,.45)}
 .btn.alt:hover{border-color:var(--signal);color:var(--signal)}
-.btn.lnk{border-color:transparent;padding-left:.4rem;padding-right:.4rem;text-decoration:underline}
+.btn.lnk{border-color:transparent;padding-left:.45rem;padding-right:.45rem;text-decoration:underline}
 
-/* Hero */
-.hero-band{padding:3.5rem 0 0;position:relative}
+/* Hero Section (Deep Night Atmosphere) */
+.hero-sec{
+  padding:3rem 0 4.5rem;
+  color:#F3EFE6;
+  position:relative;
+}
 .hero-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(18rem,24rem);
+  grid-template-columns:minmax(0,1.22fr) minmax(19rem,24.5rem);
   gap:2.5rem 3rem;
   align-items:start;
 }
-.hero-lead{margin:1.75rem 0 1.5rem;color:var(--muted-dark);max-width:56ch}
-.proofline{font-weight:600;color:var(--ink-dark);margin:0 0 1.5rem;max-width:56ch}
+.hero-lead{margin:1.5rem 0 1.25rem;color:rgba(243,239,230,.78);max-width:52ch;font-size:1.1rem}
+.proofline{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-weight:600;color:#F3EFE6;margin:0 0 1.75rem;
+  padding:.5rem 1rem;border-radius:.75rem;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(243,199,107,.32);
+  font-size:.96rem;
+}
+.proofline::before{content:"★";color:var(--gold)}
 
-/* Dual Live Clocks */
+/* Live Dual Clocks HUD */
 .clocks{
   margin-top:2rem;
-  padding-top:1.25rem;
-  border-top:1px solid var(--line-dark);
+  padding:1.15rem 1.35rem;
+  border-radius:1.15rem;
+  background:rgba(14,19,48,.58);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(243,239,230,.16);
+  box-shadow:0 18px 44px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.16);
   max-width:34rem;
 }
-.clock-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1.5rem;
-}
-.clock-item span{display:block;font-size:.9rem;color:var(--muted-dark)}
+.clock-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.clock-item{position:relative}
+.clock-item:first-child{border-right:1px solid rgba(243,239,230,.14);padding-right:1rem}
+.clock-item span{display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:rgba(243,239,230,.68);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
 .clock-item time{
-  display:block;
-  font-family:var(--font-display);
-  font-size:clamp(1.5rem,3vw,2.1rem);
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-  line-height:1.15;
-  margin-top:.15rem;
+  display:block;font-family:var(--font-display);
+  font-size:clamp(1.55rem,3vw,2.15rem);font-weight:700;
+  font-variant-numeric:tabular-nums;line-height:1.15;margin-top:.2rem;color:#fff;
 }
-.clock-note{margin:.65rem 0 0;font-size:.98rem;color:var(--peach);font-weight:500}
+.clock-note{margin:.75rem 0 0;padding-top:.7rem;border-top:1px solid rgba(243,239,230,.12);font-size:.94rem;color:var(--peach);font-weight:500}
 
-/* Single Framed Object: The Phone */
+/* Sculpted Glass Phone (Hero + Simulator) */
 .phone{
-  border:1px solid rgba(243,239,230,.24);
-  border-radius:1.75rem;
-  background:#131A42;
-  color:var(--ink-dark);
-  padding:1rem 1rem 1.2rem;
-  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  position:relative;overflow:hidden;
+  border-radius:1.85rem;
+  background:linear-gradient(160deg,rgba(24,33,76,.88),rgba(13,18,46,.94));
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  backdrop-filter:blur(18px) saturate(150%);
+  color:#F3EFE6;
+  padding:1.05rem 1.05rem 1.25rem;
+  border:1px solid rgba(243,239,230,.22);
+  box-shadow:0 28px 68px rgba(0,0,0,.45),0 0 40px rgba(75,63,214,.26),inset 0 1px 0 rgba(255,255,255,.28);
+  transition:border-color .35s ease,box-shadow .35s ease;
+}
+.phone::before{
+  content:"";position:absolute;top:0;left:1.5rem;right:1.5rem;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent-soft),var(--signal),var(--gold),transparent);
+}
+.phone.pulse{
+  border-color:var(--signal);
+  box-shadow:0 28px 68px rgba(0,0,0,.45),0 0 38px var(--signal-glow),inset 0 1px 0 rgba(255,255,255,.32);
 }
 .ph-head{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 .25rem .75rem;
-  border-bottom:1px solid rgba(243,239,230,.16);
-  font-size:.88rem;color:var(--muted-dark);
+  display:flex;justify-content:space-between;align-items:center;gap:.5rem;
+  padding:.15rem .25rem .75rem;
+  border-bottom:1px solid rgba(243,239,230,.14);
+  font-size:.82rem;color:rgba(243,239,230,.72);
 }
-.ph-status{color:var(--signal);font-weight:600}
-.thread{list-style:none;margin:.85rem 0 0;padding:0;display:grid;gap:.65rem}
+.ph-status{
+  display:inline-flex;align-items:center;gap:.35rem;
+  color:var(--gold);font-weight:600;
+  padding:.2rem .6rem;border-radius:999px;
+  background:rgba(255,107,61,.16);border:1px solid rgba(255,107,61,.4);
+}
+.ph-replay{
+  background:none;border:0;color:rgba(243,239,230,.65);cursor:pointer;
+  font:500 .78rem var(--font-body);text-decoration:underline;padding:0;
+}
+.ph-replay:hover{color:#fff}
+.thread{list-style:none;margin:.85rem 0 0;padding:0;display:grid;gap:.6rem}
 .msg{
-  padding:.7rem .9rem;
-  border-radius:1rem 1rem 1rem .25rem;
-  background:rgba(243,239,230,.09);
-  font-size:.92rem;line-height:1.45;
-  max-width:94%;
+  padding:.68rem .88rem;border-radius:1rem 1rem 1rem .25rem;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);
+  font-size:.89rem;line-height:1.45;max-width:94%;
+  animation:msgIn .32s cubic-bezier(.22,1,.36,1) both;
 }
 .msg.in{
-  justify-self:end;
-  border-radius:1rem 1rem .25rem 1rem;
-  background:rgba(246,217,184,.16);
+  justify-self:end;border-radius:1rem 1rem .25rem 1rem;
+  background:linear-gradient(135deg,rgba(75,63,214,.42),rgba(156,147,255,.22));
+  border-color:rgba(156,147,255,.35);
 }
 .msg.sig{
-  background:rgba(255,107,61,.16);
-  border-left:3px solid var(--signal);
+  background:linear-gradient(135deg,rgba(255,107,61,.24),rgba(243,199,107,.12));
+  border:1px solid rgba(255,107,61,.5);
 }
-.msg small{display:block;font-size:.78rem;color:var(--muted-dark);margin-bottom:.2rem}
-.msg.sig small{color:var(--signal);font-weight:600}
-.typing{display:inline-flex;gap:4px;align-items:center;padding:.55rem .85rem;border-radius:1rem;background:rgba(243,239,230,.09);width:fit-content}
-.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted-dark);display:block;animation:blink 1s infinite}
-.typing i:nth-child(2){animation-delay:.18s}
-.typing i:nth-child(3){animation-delay:.36s}
+.msg small{display:block;font-size:.74rem;color:rgba(243,239,230,.65);margin-bottom:.2rem}
+.msg.sig small{color:var(--gold);font-weight:600}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:4px;align-items:center;padding:.55rem .85rem;border-radius:1rem;background:rgba(255,255,255,.09);width:fit-content}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--gold);display:block;animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.16s}
+.typing i:nth-child(3){animation-delay:.32s}
 @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
 
-/* Overlapping Hero Portrait */
-.hero-portrait-wrap{
+/* Hero Editorial Portrait + Real Client Strip */
+.hero-lower{
   margin-top:3rem;
   display:grid;
-  grid-template-columns:auto 1fr;
-  gap:2rem 3rem;
-  align-items:end;
+  grid-template-columns:auto 1fr auto;
+  gap:1.75rem 2.25rem;
+  align-items:center;
+  padding:1.5rem 1.75rem;
+  border-radius:1.35rem;
+  background:rgba(14,19,48,.58);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(243,239,230,.16);
+  box-shadow:0 22px 54px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.16);
 }
-.hero-portrait{
-  width:18rem;
-  height:23rem;
-  object-fit:cover;
-  object-position:50% 20%;
-  border-radius:.75rem;
-  display:block;
-  margin-bottom:-5rem;
-  position:relative;
-  z-index:2;
+.portrait-frame{
+  position:relative;border-radius:1rem;padding:3px;
+  background:conic-gradient(from 0deg,var(--accent-soft),var(--signal),var(--gold),#34D399,var(--accent-soft));
+  box-shadow:0 14px 36px rgba(0,0,0,.35);
 }
-.hero-about{padding-bottom:3rem;max-width:52ch}
-.hero-about p{color:var(--muted-dark);margin:0}
-
-/* Proof strip (real clients only, single neutral tray) */
-.proof-band{padding:6.5rem 0 3.5rem}
-.proof-row{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:1.5rem 2.5rem;flex-wrap:wrap;
-  padding:1.5rem 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+.portrait-frame img{
+  display:block;width:9.5rem;height:11.5rem;
+  object-fit:cover;object-position:50% 20%;
+  border-radius:.85rem;
 }
+.hero-bio h3{color:#fff;margin-bottom:.4rem}
+.hero-bio p{color:rgba(243,239,230,.76);margin:0;max-width:46ch;font-size:.98rem}
 .logo-tray{
-  list-style:none;margin:0;padding:.75rem 1.25rem;
-  display:flex;gap:2rem;align-items:center;flex-wrap:wrap;
-  background:#F3EFE6;border-radius:.5rem;
+  list-style:none;margin:0;padding:.75rem 1.15rem;
+  display:flex;gap:1.5rem;align-items:center;
+  background:#FFF8EE;border-radius:.85rem;
+  box-shadow:0 10px 26px rgba(0,0,0,.22);
 }
-.logo-tray img{height:2.6rem;width:auto;display:block;object-fit:contain}
+.logo-tray img{height:2.4rem;width:auto;display:block;object-fit:contain}
 
-/* Horizontal 5-step timeline */
+/* Main Dawn-Light Sections */
+.stage{
+  position:relative;
+  background:linear-gradient(180deg,rgba(255,248,238,.86) 0%,rgba(246,217,184,.58) 38%,rgba(255,248,238,.92) 100%);
+  color:var(--ink);
+  border-top:1px solid var(--rim);
+}
+:root[data-theme="dark"] .stage{
+  background:linear-gradient(180deg,rgba(14,19,48,.76) 0%,rgba(27,42,94,.66) 45%,rgba(14,19,48,.84) 100%);
+}
+section.sec{padding:4.5rem 0}
+section.sec + section.sec{border-top:1px solid var(--line)}
+.sec-sub{color:var(--muted);max-width:60ch;margin:0 0 2rem;font-size:1.06rem}
+
+/* Live-Executing SVG Horizontal 5-Step Timeline */
+.tl-wrap{position:relative;margin:2rem 0 2.75rem}
+.tl-svg{position:absolute;top:2.1rem;left:0;width:100%;height:4px;pointer-events:none;overflow:visible}
+.tl-base{stroke:var(--line);stroke-width:2;fill:none}
+.tl-glow{
+  stroke:url(#tlGrad);stroke-width:3;stroke-linecap:round;fill:none;
+  stroke-dasharray:64 320;animation:tlFlow 3.2s linear infinite;
+}
+@keyframes tlFlow{from{stroke-dashoffset:384}to{stroke-dashoffset:0}}
 .timeline{
-  list-style:none;margin:2.5rem 0 3rem;padding:0;
-  display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;
-  border-top:1px solid var(--line);
-  padding-top:1.75rem;
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;
+  position:relative;z-index:1;
 }
-.timeline li{display:flex;flex-direction:column;gap:.45rem}
-.tl-time{font-size:.9rem;font-weight:600;color:var(--signal);font-variant-numeric:tabular-nums}
-.tl-num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;line-height:1}
-.timeline p{font-size:.98rem;color:var(--muted);margin:0}
+.timeline li{
+  padding:1.15rem 1.1rem;border-radius:1rem;
+  background:var(--glass);
+  border:1px solid var(--line);
+  box-shadow:0 12px 30px rgba(14,19,48,.07),inset 0 1px 0 var(--rim);
+}
+.tl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem}
+.tl-time{font-size:.8rem;font-weight:700;color:var(--signal);font-variant-numeric:tabular-nums}
+.tl-num{
+  width:1.65rem;height:1.65rem;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  background:var(--night);color:var(--gold);
+}
+.timeline h3{font-size:1.05rem;margin-bottom:.35rem}
+.timeline p{font-size:.9rem;color:var(--muted);margin:0;line-height:1.48}
 
-/* Oversized single-row stats */
-.stat-rows{list-style:none;margin:2.5rem 0 0;padding:0;border-top:1px solid var(--line)}
-.stat-rows li{
-  display:grid;grid-template-columns:minmax(10rem,16rem) 1fr;
-  gap:.5rem 2rem;align-items:baseline;
-  padding:1.35rem 0;border-bottom:1px solid var(--line);
+/* Open Hairline Editorial Stats */
+.stat-strip{
+  list-style:none;margin:2rem 0 0;padding:.5rem 0;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
 }
-.stat-rows b{
-  font-family:var(--font-display);
-  font-size:clamp(2.2rem,5vw,3.6rem);
-  line-height:1;font-variant-numeric:tabular-nums;
+.stat-strip li{padding:1.15rem .9rem;position:relative}
+.stat-strip li:not(:last-child)::after{
+  content:"";position:absolute;right:0;top:22%;bottom:22%;width:1px;background:var(--line);
 }
-.stat-rows span{font-size:1.15rem;color:var(--muted)}
+.stat-strip b{
+  display:block;font-family:var(--font-display);
+  font-size:clamp(1.75rem,3.2vw,2.45rem);line-height:1.05;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(120deg,var(--accent),var(--signal));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+:root[data-theme="dark"] .stat-strip b{
+  background:linear-gradient(120deg,#B8B2FF,#FF8B63,#F3C76B);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat-strip span{display:block;font-size:.86rem;color:var(--muted);margin-top:.3rem;line-height:1.35}
 
-/* Interactive sample report & simulator */
-.lab-grid{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;
-  margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);
+/* Unified Smoked-Glass Telemetry Console */
+.console{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.08fr .92fr;gap:2rem 2.5rem;
+  margin-top:2.5rem;padding:1.75rem;border-radius:1.4rem;
+  background:var(--glass-strong);
+  border:1px solid var(--line);
+  box-shadow:0 24px 60px rgba(14,19,48,.12),inset 0 1px 0 var(--rim);
 }
-.rtabs,.simb{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1.25rem}
+.console::before{
+  content:"";position:absolute;top:0;left:1.75rem;right:1.75rem;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--signal),var(--gold),transparent);
+}
+.rtabs,.simb{position:relative;display:inline-flex;gap:.35rem;flex-wrap:wrap;margin:.85rem 0 1.25rem;padding:.28rem;border-radius:999px;background:rgba(14,19,48,.06);border:1px solid var(--line)}
+:root[data-theme="dark"] .rtabs,:root[data-theme="dark"] .simb{background:rgba(255,255,255,.06)}
 .rtabs button,.simb button{
-  font:inherit;font-size:.94rem;font-weight:500;cursor:pointer;
-  padding:.45rem 1rem;border-radius:2rem;
-  border:1px solid var(--line);background:transparent;color:inherit;
+  position:relative;z-index:1;
+  font:600 .88rem var(--font-body);cursor:pointer;
+  padding:.45rem .95rem;border-radius:999px;border:0;
+  background:transparent;color:var(--muted);transition:color .2s;
 }
-.rtabs button[aria-selected="true"],.simb button[aria-pressed="true"]{
-  background:var(--signal);border-color:var(--signal);color:#10142B;font-weight:600;
+.rtabs button[aria-selected="true"],.simb button[aria-pressed="true"]{color:#fff}
+.glide-pill{
+  position:absolute;top:0;left:0;border-radius:999px;z-index:0;pointer-events:none;
+  background:linear-gradient(135deg,var(--accent),var(--signal));
+  box-shadow:0 6px 18px var(--glow);
 }
 .funnel{list-style:none;margin:0;padding:0;display:grid;gap:.65rem}
-.funnel li{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;align-items:center;font-size:.96rem}
+.funnel li{display:grid;grid-template-columns:7.2rem 1fr;gap:.85rem;align-items:center;font-size:.92rem}
 .funnel .fb{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:.45rem .75rem;min-width:4.5rem;
-  background:color-mix(in srgb,var(--signal) 22%,transparent);
-  border-left:3px solid var(--signal);
+  display:flex;justify-content:space-between;align-items:center;gap:.5rem;
+  padding:.48rem .8rem;min-width:4.5rem;border-radius:.55rem;
+  background:linear-gradient(90deg,rgba(75,63,214,.22),rgba(255,107,61,.22));
+  border-left:4px solid var(--signal);
+  font-variant-numeric:tabular-nums;
+  transition:clip-path .75s cubic-bezier(.22,1,.36,1);
 }
-.cols{display:flex;align-items:flex-end;gap:.85rem;height:11rem;max-width:28rem;margin-top:1rem}
-.cols>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.3rem;font-size:.92rem}
-.cols i{display:block;width:100%;background:var(--signal)}
-.note{font-size:.92rem;color:var(--muted);margin-top:.75rem}
-
-/* Open hairline rows (What I do, Services, FAQ) */
-.open-rows{border-top:1px solid var(--line);margin-top:2rem}
-.open-row{
-  display:grid;grid-template-columns:minmax(14rem,22rem) 1fr;
-  gap:.75rem 2.5rem;align-items:baseline;
-  padding:1.75rem 0;border-bottom:1px solid var(--line);
+.pre .fb{clip-path:inset(0 100% 0 0)}
+.go .fb{clip-path:inset(0)}
+.cols{display:flex;align-items:flex-end;gap:.8rem;height:11rem;max-width:26rem;margin-top:.75rem}
+.cols>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.3rem;font-size:.88rem;font-variant-numeric:tabular-nums}
+.cols i{
+  display:block;width:100%;border-radius:.45rem .45rem 0 0;
+  background:linear-gradient(180deg,var(--signal),var(--accent));
+  transform-origin:bottom;transition:transform .75s cubic-bezier(.22,1,.36,1);
 }
-.open-row h3{font-size:clamp(1.35rem,2.5vw,1.85rem)}
-.open-row p{margin:0;color:var(--muted);max-width:65ch}
-.open-row .price{font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--signal);margin-top:.6rem}
+.pre.cols i{transform:scaleY(0)}
+.go.cols i{transform:none}
+.note{font-size:.88rem;color:var(--muted);margin:.75rem 0 0}
 
-/* Testimonials (Serif ONLY here) */
-.quote-list{border-top:1px solid var(--line);margin-top:2rem}
-.quote-list blockquote{
-  margin:0;padding:2.25rem 0;border-bottom:1px solid var(--line);
-  max-width:65ch;
+/* 3D Tilt + Holographic Glare Spatial Glass Cards */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.bento>div{
+  position:relative;overflow:hidden;
+  padding:1.5rem;border-radius:1.15rem;
+  background:var(--glass);
+  border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(14,19,48,.07),inset 0 1px 0 var(--rim);
 }
-.quote-list p{
-  font-family:var(--font-serif);
-  font-size:clamp(1.35rem,2.6vw,1.8rem);
-  line-height:1.45;margin:0 0 .9rem;
+.bento>div:nth-child(1),.bento>div:nth-child(4){grid-column:span 4}
+.bento>div:nth-child(2),.bento>div:nth-child(3){grid-column:span 2}
+.bento>div:nth-child(5),.bento>div:nth-child(6){grid-column:span 3}
+.bento h3{margin-bottom:.45rem}
+.bento p{color:var(--muted);margin:0;font-size:.98rem}
+
+.tilt-card{transition:transform .22s cubic-bezier(.22,1,.36,1),border-color .25s ease,box-shadow .25s ease}
+.tilt-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .3s ease;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,107,61,.13),rgba(75,63,214,.08) 45%,transparent 72%);
 }
-.quote-list cite{font-style:normal;font-family:var(--font-body);font-size:.98rem;color:var(--muted)}
-
-/* FAQ & Details */
-details.line-fold{border-bottom:1px solid var(--line);padding:.25rem 0}
-details.line-fold:first-of-type{border-top:1px solid var(--line)}
-details.line-fold summary{cursor:pointer;font-family:var(--font-display);font-size:1.2rem;font-weight:700;padding:1.1rem 0}
-details.line-fold p,details.line-fold ul{color:var(--muted);max-width:65ch;margin:0 0 1.25rem}
-
-/* Audit & Footer */
-.audit-row{
-  display:grid;grid-template-columns:1.2fr .8fr;gap:2rem 3rem;align-items:start;
-  padding:2.5rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+@media (hover:hover){
+  .tilt-card:hover{
+    transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px);
+    border-color:rgba(255,107,61,.55);
+    box-shadow:0 22px 48px var(--glow),inset 0 1px 0 var(--rim);
+  }
+  .tilt-card:hover::after{opacity:1}
 }
-.linkbtn{background:none;border:0;padding:0;color:inherit;text-decoration:underline;font:inherit;cursor:pointer}
-.contact-row{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem 2rem;margin:2rem 0 0;padding:0}
-.contact-row a{font-weight:500;text-decoration:none}
-.contact-row a:hover{color:var(--signal);text-decoration:underline}
-.foot-links{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.95rem}
 
-/* ROI Modal */
+/* Services: Editorial Rows + Obsidian Monolith Flagship */
+.svc-grid{display:grid;gap:1rem}
+.svc-row{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:minmax(14rem,22rem) 1fr auto;
+  gap:1rem 2rem;align-items:center;
+  padding:1.65rem 1.85rem;border-radius:1.2rem;
+  background:var(--glass);
+  border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(14,19,48,.07),inset 0 1px 0 var(--rim);
+}
+.svc-row p{margin:0;color:var(--muted);max-width:52ch;font-size:.98rem}
+.svc-price{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--signal);white-space:nowrap}
+.svc-row.flagship{
+  background:var(--monolith);color:#F3EFE6;
+  border:1px solid rgba(243,199,107,.45);
+  box-shadow:0 26px 60px rgba(14,19,48,.34),0 0 36px rgba(75,63,214,.25),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.svc-row.flagship p{color:rgba(243,239,230,.78)}
+.svc-row.flagship .svc-price{color:var(--gold);font-size:1.45rem}
+.flag-tag{
+  display:inline-block;margin-bottom:.4rem;font-size:.74rem;font-weight:700;
+  color:var(--gold);letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* ROI Banner Callout */
+.roi-bar{
+  margin-top:1.75rem;
+  display:flex;justify-content:space-between;align-items:center;gap:1.25rem 2rem;flex-wrap:wrap;
+  padding:1.5rem 1.85rem;border-radius:1.2rem;
+  background:var(--glass-strong);border:1px solid var(--line);
+  border-left:5px solid var(--signal);
+  box-shadow:0 16px 40px rgba(14,19,48,.08),inset 0 1px 0 var(--rim);
+}
+.roi-bar h3{margin-bottom:.25rem}
+.roi-bar p{margin:0;color:var(--muted)}
+
+/* Fanned Design Showcase Preview */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:1.5rem 0}
+.dgrid img{
+  width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:1rem;
+  border:1px solid var(--line);box-shadow:0 16px 36px rgba(14,19,48,.16);
+  transition:transform .38s cubic-bezier(.22,1,.36,1),box-shadow .38s ease,border-color .25s ease;
+}
+@media (hover:hover) and (min-width:44rem){
+  .dgrid img:nth-child(1){transform:rotate(-2.5deg) translateY(6px)}
+  .dgrid img:nth-child(2){transform:translateY(-4px);z-index:1}
+  .dgrid img:nth-child(3){transform:rotate(2.5deg) translateY(6px)}
+  .dgrid img:hover{transform:rotate(0) translateY(-8px) scale(1.05)!important;z-index:4;border-color:var(--signal);box-shadow:0 24px 52px var(--glow)}
+}
+
+/* Serif Testimonials (Newsreader ONLY here) */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem}
+.quotes blockquote{
+  position:relative;overflow:hidden;
+  margin:0;padding:1.85rem;border-radius:1.2rem;
+  background:var(--glass-strong);border:1px solid var(--line);
+  box-shadow:0 16px 38px rgba(14,19,48,.08),inset 0 1px 0 var(--rim);
+  display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem;
+}
+.quotes p{font-family:var(--font-serif);font-size:1.22rem;line-height:1.5;margin:0}
+.quotes cite{font-style:normal;font-size:.9rem;color:var(--muted);font-weight:500}
+
+/* Free Audit & FAQ */
+.audit-box{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;
+  padding:2.25rem;border-radius:1.35rem;
+  background:var(--glass-strong);border:1px solid var(--line);
+  box-shadow:0 20px 50px rgba(14,19,48,.10),inset 0 1px 0 var(--rim);
+}
+.linkbtn{background:none;border:0;padding:0;color:var(--signal);text-decoration:underline;font:inherit;cursor:pointer}
+.faq{margin-top:3rem;max-width:52rem}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-of-type{border-top:1px solid var(--line)}
+.faq summary{cursor:pointer;font-family:var(--font-display);font-size:1.18rem;font-weight:700;padding:1.15rem 0}
+.faq details p{color:var(--muted);margin:0 0 1.25rem;max-width:62ch}
+
+/* VERSO Skewed-Blade Contact Monolith */
+footer#contact{padding:4.5rem 0 2rem}
+.cta-card{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:auto 1fr;gap:1.75rem 2.25rem;align-items:center;
+  padding:2.75rem;border-radius:1.5rem;
+  background:var(--monolith);color:#F3EFE6;
+  border:1px solid rgba(156,147,255,.32);
+  box-shadow:0 32px 72px rgba(0,0,0,.42),0 0 50px rgba(75,63,214,.28),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.cta-card::before{
+  content:"";position:absolute;top:-15%;bottom:-15%;right:-6%;width:34%;
+  transform:skewX(-7deg);
+  background:linear-gradient(160deg,rgba(156,147,255,.16),rgba(255,107,61,.16) 55%,rgba(14,19,48,.7));
+  border-left:2px solid rgba(243,199,107,.5);
+  box-shadow:-14px 0 40px rgba(75,63,214,.3);
+  pointer-events:none;
+}
+.verso-beam{
+  position:absolute;top:-15%;bottom:-15%;right:28%;width:3px;
+  transform:skewX(-7deg);
+  background:linear-gradient(180deg,transparent,#fff,var(--gold),var(--signal),transparent);
+  opacity:0;pointer-events:none;
+}
+@keyframes versoSweep{0%{transform:skewX(-7deg) translateY(-100%);opacity:0}25%{opacity:1}80%{opacity:.9}100%{transform:skewX(-7deg) translateY(100%);opacity:0}}
+.cta-card.beam-go .verso-beam{animation:versoSweep .85s cubic-bezier(.22,1,.36,1) both}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{color:#fff}
+.cta-card h2::after{display:none}
+.cta-card p{color:rgba(243,239,230,.78);max-width:52ch}
+.cta-photo{
+  width:7.5rem;height:7.5rem;border-radius:1rem;object-fit:cover;object-position:50% 20%;
+  border:2px solid rgba(243,199,107,.55);box-shadow:0 14px 36px rgba(0,0,0,.38);
+}
+.contact-row{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem 2rem;margin:1.75rem 0 0;padding:0;color:rgba(243,239,230,.84)}
+.contact-row a{text-decoration:none;font-weight:500}
+.contact-row a:hover{color:var(--gold);text-decoration:underline}
+
+/* Floating Spatial Glass Bottom Dock */
+nav.dock{
+  position:fixed;bottom:max(1rem,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  z-index:60;width:min(calc(100vw - 1.5rem),58rem);
+  padding:.42rem .5rem .42rem .75rem;border-radius:999px;
+  display:flex;align-items:center;justify-content:space-between;gap:.4rem;
+  background:rgba(14,19,48,.82);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(243,239,230,.18);
+  box-shadow:0 24px 60px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.22);
+  color:#F3EFE6;
+}
+.dock-items{position:relative;display:flex;align-items:center;gap:.15rem;overflow-x:auto;scrollbar-width:none;padding:.1rem}
+.dock-items::-webkit-scrollbar{display:none}
+nav.dock a,nav.dock button{
+  position:relative;z-index:1;
+  font:500 .86rem var(--font-body);color:rgba(243,239,230,.85);
+  text-decoration:none;white-space:nowrap;cursor:pointer;
+  padding:.42rem .82rem;border-radius:999px;border:0;background:transparent;
+  transition:color .2s;
+}
+nav.dock a:hover,nav.dock button:hover{color:#fff}
+nav.dock a.on{color:#fff}
+.dock-pill{
+  position:absolute;top:0;left:0;border-radius:999px;z-index:0;pointer-events:none;opacity:0;
+  background:linear-gradient(135deg,var(--accent),var(--signal));
+  box-shadow:0 6px 18px rgba(255,107,61,.38);
+}
+.dock-pill.ready{opacity:1}
+nav.dock a.cta{
+  background:linear-gradient(135deg,var(--signal),#E85224);color:#fff;font-weight:600;
+  box-shadow:0 6px 20px var(--signal-glow);
+}
+nav.dock #theme{border:1px solid rgba(243,239,230,.28);padding:.36rem .78rem}
+
+/* ROI Modal + 60-Tick Radial Gauge */
 dialog#roi{
-  width:min(46rem,94vw);max-height:92vh;overflow:auto;
-  padding:2rem;border:1px solid var(--line-light);border-radius:1rem;
-  background:var(--day);color:var(--ink-light);
+  width:min(48rem,94vw);max-height:92vh;overflow:auto;
+  padding:2rem;border:1px solid var(--line);border-radius:1.4rem;
+  background:var(--day);color:var(--ink);
+  box-shadow:0 32px 80px rgba(0,0,0,.5);
 }
-dialog#roi::backdrop{background:rgba(14,19,48,.72)}
-.roi-x{
-  float:right;width:2.4rem;height:2.4rem;border-radius:50%;
-  border:1px solid var(--line-light);background:transparent;color:inherit;
-  font-size:1.3rem;cursor:pointer;
+dialog#roi::backdrop{background:rgba(14,19,48,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.roi-x{float:right;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:transparent;color:inherit;font-size:1.35rem;cursor:pointer}
+.cgrid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin:1.25rem 0}
+.cgrid label{display:grid;gap:.3rem;font-size:.9rem;font-weight:500}
+.cgrid input[type="number"]{padding:.55rem .7rem;border:1px solid var(--line);border-radius:.55rem;background:var(--glass);color:inherit;font:inherit}
+.cviz{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;margin:1rem 0}
+.roi-tick{stroke:var(--line);transition:stroke .2s ease}
+.roi-tick.on{stroke:var(--accent)}
+.roi-tick.hot{stroke:var(--signal)}
+.roi-tick.gold{stroke:var(--gold)}
+.cres{
+  padding:1.35rem;border-radius:1rem;background:var(--monolith);color:#F3EFE6;
+  border:1px solid rgba(243,199,107,.35);display:grid;gap:.45rem;margin:1rem 0;
 }
-.cgrid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin:1.25rem 0}
-.cgrid label{display:grid;gap:.35rem;font-size:.95rem}
-.cgrid input[type="number"]{padding:.55rem .7rem;border:1px solid var(--line-light);border-radius:.4rem;background:transparent;color:inherit;font:inherit}
-.cres{padding:1.25rem 0;border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);margin:1rem 0;display:grid;gap:.45rem}
-.cres b{color:var(--signal)}
+.cres b{color:var(--gold)}
+.cres .big b{color:#FF9A76;font-size:1.15rem}
 
-@media (max-width:58rem){
-  .hero-grid,.lab-grid,.audit-row{grid-template-columns:1fr}
-  .timeline{grid-template-columns:1fr;gap:1.25rem}
-  .hero-portrait-wrap{grid-template-columns:1fr}
-  .hero-portrait{width:100%;max-width:20rem;height:22rem;margin-bottom:0}
-  .hero-about{padding-bottom:2rem}
-  .proof-band{padding-top:3rem}
+/* View Transitions Circular Theme Wipe */
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+  ::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
 }
-@media (max-width:44rem){
-  .open-row,.stat-rows li{grid-template-columns:1fr}
+
+@media (max-width:64rem){
+  .hero-grid,.console,.audit-box,.quotes{grid-template-columns:1fr}
+  .hero-lower{grid-template-columns:1fr;text-align:left}
+  .timeline{grid-template-columns:1fr}
+  .tl-svg{display:none}
+  .stat-strip{grid-template-columns:repeat(3,1fr)}
+  .stat-strip li:nth-child(3)::after{display:none}
+  .svc-row{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .bento>div{grid-column:auto!important}
+  .cta-card{grid-template-columns:1fr;padding:1.85rem}
+  .dgrid{grid-template-columns:1fr}
+}
+@media (max-width:42rem){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
   .clock-row{grid-template-columns:1fr}
+  .clock-item:first-child{border-right:0;padding-right:0}
+  nav.dock{width:calc(100vw - 1rem);padding:.35rem .45rem}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  body{transition:none}
-  .typing i{animation:none}
+  #caustic-gl,.tl-glow{display:none!important}
+  .msg,.typing i,.cta-card.beam-go .verso-beam{animation:none!important}
+  .tilt-card:hover,.dgrid img,.dgrid img:hover{transform:none!important}
 }
 @media print{
-  header.site-nav,#theme,.btns,.sim,.rtabs,#roi-open{display:none!important}
-  body,.band{background:#fff!important;color:#000!important;padding:1rem 0!important}
+  #caustic-gl,.grain,nav.dock,.btns,#roi-open,.ph-replay{display:none!important}
+  body,.stage{background:#fff!important;color:#000!important}
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
 
-<header class="site-nav" id="top">
-  <div class="wrap">
-    <nav aria-label="Primary">
-      <a class="brand" href="#top">
+<div class="wrap" id="top">
+  <header class="top-bar">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">JP</span>
+      <span class="brand-text">
         <strong>Japhette Alec Pulido</strong>
         <span>Loomwell Ops</span>
-      </a>
-      <div class="nav-links">
-        <a href="#case-study">Case study</a>
-        <a href="#work">What I do</a>
-        <a href="#services">Services</a>
-        <a href="projects.html">Projects</a>
-        <a href="design.html">Design</a>
-        <a href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a>
-        <button id="theme" type="button" aria-pressed="false">Dark</button>
-      </div>
-    </nav>
-  </div>
-</header>
+      </span>
+    </a>
+    <div class="top-actions">
+      <span class="top-pill"><i></i>Taking new clients · PHT / US Hours</span>
+      <a class="top-link" href="projects.html">Web Apps</a>
+      <a class="top-link" href="design.html">Design Work</a>
+    </div>
+  </header>
+</div>
 
 <main id="main" tabindex="-1">
 
-  <!-- 1. HERO (Night) -->
-  <section class="band band-night hero-band" data-phase="night">
+  <!-- HERO (Night Atmosphere) -->
+  <section class="hero-sec" id="overview">
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <h1>I build the follow-up systems that turn leads into booked customers.</h1>
+          <h1>I build the follow-up systems that <span class="grad">turn leads into booked customers.</span></h1>
           <p class="hero-lead">Executive Assistant and Operations Support with GoHighLevel funnels and automation. Running my own business since 2012 and supporting US-based clients remotely for three years.</p>
-          <p class="proofline">I booked about 50 gym appointments a month, around 90% of quota, with GoHighLevel follow-up.</p>
+          <p class="proofline">Booked ~50 gym appointments a month (~90% of quota) with GoHighLevel follow-up.</p>
           <div class="btns">
-            <a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a call ↗</a>
+            <a class="btn main" href="https://calendly.com/loomwellops/30min" id="bookbtn" target="_blank" rel="noopener" data-goatcounter-click="hero-book">Book a 30-minute call ↗</a>
             <a class="btn alt" href="#audit">Request a free audit</a>
             <a class="btn lnk" href="mailto:loomwellops@gmail.com" data-goatcounter-click="hero-email">Email me</a>
           </div>
@@ -442,7 +715,7 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
                 <time id="clk-local">--:--</time>
               </div>
               <div class="clock-item">
-                <span>Manila</span>
+                <span>Manila (PHT)</span>
                 <time id="clk-manila">--:--</time>
               </div>
             </div>
@@ -450,289 +723,293 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
           </div>
         </div>
 
-        <aside class="phone" aria-label="Live example of automated lead follow-up">
+        <aside class="phone" id="hero-phone" aria-label="Live example of automated lead follow-up">
           <div class="ph-head">
             <span>New Lead · 9:41 pm</span>
             <span class="ph-status" id="hero-status">Auto-reply active</span>
+            <button type="button" class="ph-replay" id="hero-replay">Replay</button>
           </div>
           <ol class="thread" id="hero-thread" aria-live="polite"></ol>
         </aside>
       </div>
 
-      <div class="hero-portrait-wrap">
-        <img class="hero-portrait" src="profile.jpg" width="288" height="368" alt="Portrait of Japhette Alec Pulido, smiling, in a dark blazer">
-        <div class="hero-about">
-          <p>I’m Japhette, based in the Philippines. I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep operations organized.</p>
+      <div class="hero-lower">
+        <div class="portrait-frame">
+          <img src="profile.jpg" width="152" height="184" alt="Portrait of Japhette Alec Pulido, smiling, in a dark blazer">
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. PROOF STRIP (Deep Blue) -->
-  <section class="band band-deep proof-band" id="clients" data-phase="deep" aria-label="Clients supported">
-    <div class="wrap">
-      <div class="proof-row">
-        <div>
-          <p class="measure" style="margin:0">Trusted by multi-location service businesses and fitness studios across the US.</p>
+        <div class="hero-bio">
+          <h3>Japhette Alec Pulido — Philippines-based, US hours</h3>
+          <p>I’ve run my own business since 2012 and spent the last three years helping US-based clients reply to leads faster, book more appointments, and keep multi-location operations organized.</p>
         </div>
-        <ul class="logo-tray" aria-label="Client logos">
-          <li><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="160" height="60"></li>
-          <li><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="180" height="40"></li>
+        <ul class="logo-tray" aria-label="Clients supported">
+          <li><img src="work/clients/client-1.jpg" alt="Fit Body Boot Camp logo" loading="lazy" width="150" height="58"></li>
+          <li><img src="work/clients/client-2.jpg" alt="DHL logo" loading="lazy" width="160" height="36"></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 3. CASE STUDY (Dawn Peach -> Daylight) -->
-  <section class="band band-peach" id="case-study" data-phase="peach">
-    <div class="wrap">
-      <h2>Case study: from new lead to member</h2>
-      <p class="measure muted">At Fit Body Boot Camp I built the follow-up in GoHighLevel so every lead gets a quick reply and a clear next step, and nobody has to remember to chase them.</p>
+  <!-- DAWN -> DAYLIGHT STAGE -->
+  <div class="stage">
 
-      <ol class="timeline" aria-label="Five-step lead-to-member timeline">
-        <li>
-          <span class="tl-time">9:41 pm</span>
-          <span class="tl-num">01</span>
-          <h3>New lead</h3>
-          <p>Form and ad leads get an instant reply. Missed calls get an automatic text-back.</p>
-        </li>
-        <li>
-          <span class="tl-time">9:41 pm</span>
-          <span class="tl-num">02</span>
-          <h3>Contacted</h3>
-          <p>Call follow-up sequences and multi-day nurture messages, with contacts tagged by stage.</p>
-        </li>
-        <li>
-          <span class="tl-time">Next morning</span>
-          <span class="tl-num">03</span>
-          <h3>Trial booked</h3>
-          <p>A self-booking calendar with confirmations and reminders.</p>
-        </li>
-        <li>
-          <span class="tl-time">Day of visit</span>
-          <span class="tl-num">04</span>
-          <h3>Showed up</h3>
-          <p>Onboarding check-ins after the first visit.</p>
-        </li>
-        <li>
-          <span class="tl-time">Week later</span>
-          <span class="tl-num">05</span>
-          <h3>Member</h3>
-          <p>Review requests, failed-payment reminders, and win-back messages if they go quiet.</p>
-        </li>
-      </ol>
+    <!-- CASE STUDY -->
+    <section class="sec" id="case-study">
+      <div class="wrap">
+        <h2>Case study: from new lead to member</h2>
+        <p class="sec-sub">At Fit Body Boot Camp I built the follow-up in GoHighLevel so every lead gets a quick reply and a clear next step—and nobody has to remember to chase them.</p>
 
-      <ul class="stat-rows" id="stats">
-        <li><b>~100</b><span>calls a day, logged in Google Sheets</span></li>
-        <li><b>~50</b><span>gym appointments booked a month</span></li>
-        <li><b>~90%</b><span>of the monthly appointment quota</span></li>
-        <li><b>~20</b><span>discovery meetings a week</span></li>
-        <li><b>5 stores</b><span>in 4 states supported</span></li>
-        <li><b>3 years</b><span>supporting US-based clients remotely</span></li>
-      </ul>
+        <div class="tl-wrap">
+          <svg class="tl-svg" aria-hidden="true" viewBox="0 0 1000 4" preserveAspectRatio="none">
+            <defs><linearGradient id="tlGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4B3FD6"/><stop offset="50%" stop-color="#FF6B3D"/><stop offset="100%" stop-color="#F3C76B"/></linearGradient></defs>
+            <line class="tl-base" x1="0" y1="2" x2="1000" y2="2"/>
+            <line class="tl-glow" x1="0" y1="2" x2="1000" y2="2"/>
+          </svg>
+          <ol class="timeline" aria-label="Five-step lead-to-member timeline">
+            <li class="tilt-card"><div class="tl-head"><span class="tl-time">9:41 pm</span><span class="tl-num">01</span></div><h3>New lead</h3><p>Form and ad leads get an instant reply. Missed calls get an automatic text-back.</p></li>
+            <li class="tilt-card"><div class="tl-head"><span class="tl-time">9:41 pm</span><span class="tl-num">02</span></div><h3>Contacted</h3><p>Call follow-up sequences and multi-day nurture messages, tagged by stage.</p></li>
+            <li class="tilt-card"><div class="tl-head"><span class="tl-time">Next morning</span><span class="tl-num">03</span></div><h3>Trial booked</h3><p>A self-booking calendar with instant confirmations and reminders.</p></li>
+            <li class="tilt-card"><div class="tl-head"><span class="tl-time">Day of visit</span><span class="tl-num">04</span></div><h3>Showed up</h3><p>Onboarding check-ins right after the first visit.</p></li>
+            <li class="tilt-card"><div class="tl-head"><span class="tl-time">Week later</span><span class="tl-num">05</span></div><h3>Member</h3><p>Review requests, failed-payment reminders, and win-back texts.</p></li>
+          </ol>
+        </div>
 
-      <div class="lab-grid">
-        <div>
-          <h3>Sample report</h3>
-          <div class="rtabs" role="tablist" aria-label="Sample report views">
-            <button type="button" role="tab" id="rt1" aria-selected="true" aria-controls="rp1">Pipeline</button>
-            <button type="button" role="tab" id="rt2" aria-selected="false" aria-controls="rp2" tabindex="-1">Lead sources</button>
-            <button type="button" role="tab" id="rt3" aria-selected="false" aria-controls="rp3" tabindex="-1">Calls</button>
-          </div>
-          <div class="rpanel" role="tabpanel" id="rp1" aria-labelledby="rt1">
-            <ol class="funnel" aria-label="Sample pipeline for one week">
-              <li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li>
-              <li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li>
-              <li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li>
-              <li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li>
-              <li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li>
-            </ol>
-          </div>
-          <div class="rpanel" role="tabpanel" id="rp2" aria-labelledby="rt2" hidden>
-            <ol class="funnel" aria-label="Sample leads by source for one week">
-              <li><span>Facebook ads</span><span class="fb" style="width:100%"><b>38</b></span></li>
-              <li><span>Instagram</span><span class="fb" style="width:45%"><b>17</b></span></li>
-              <li><span>Google search</span><span class="fb" style="width:37%"><b>14</b></span></li>
-              <li><span>Referrals</span><span class="fb" style="width:24%"><b>9</b></span></li>
-              <li><span>Website form</span><span class="fb" style="width:16%"><b>6</b></span></li>
-            </ol>
-          </div>
-          <div class="rpanel" role="tabpanel" id="rp3" aria-labelledby="rt3" hidden>
-            <div class="cols" role="img" aria-label="Sample calls logged per weekday: Mon 96, Tue 104, Wed 100, Thu 108, Fri 92">
-              <div><b>96</b><i style="height:7.1rem"></i><span>Mon</span></div>
-              <div><b>104</b><i style="height:7.7rem"></i><span>Tue</span></div>
-              <div><b>100</b><i style="height:7.4rem"></i><span>Wed</span></div>
-              <div><b>108</b><i style="height:8.0rem"></i><span>Thu</span></div>
-              <div><b>92</b><i style="height:6.8rem"></i><span>Fri</span></div>
+        <ul class="stat-strip" id="stats">
+          <li><b>~100</b><span>calls a day, logged in Sheets</span></li>
+          <li><b>~50</b><span>gym appointments booked / mo</span></li>
+          <li><b>~90%</b><span>of monthly appointment quota</span></li>
+          <li><b>~20</b><span>discovery meetings a week</span></li>
+          <li><b>5 stores</b><span>in 4 US states supported</span></li>
+          <li><b>3 years</b><span>remote US client support</span></li>
+        </ul>
+
+        <div class="console">
+          <div>
+            <h3>Sample weekly report</h3>
+            <div class="rtabs" id="rtabs" role="tablist" aria-label="Sample report views">
+              <button type="button" role="tab" id="rt1" aria-selected="true" aria-controls="rp1">Pipeline</button>
+              <button type="button" role="tab" id="rt2" aria-selected="false" aria-controls="rp2" tabindex="-1">Lead sources</button>
+              <button type="button" role="tab" id="rt3" aria-selected="false" aria-controls="rp3" tabindex="-1">Calls</button>
             </div>
-            <p class="note">500 calls logged in the sample week.</p>
+            <div class="rpanel" role="tabpanel" id="rp1" aria-labelledby="rt1">
+              <ol class="funnel go" aria-label="Sample pipeline for one week">
+                <li><span>New lead</span><span class="fb" style="width:100%"><b>84</b></span></li>
+                <li><span>Contacted</span><span class="fb" style="width:85%"><b>71</b><small>85%</small></span></li>
+                <li><span>Trial booked</span><span class="fb" style="width:37%"><b>31</b><small>44%</small></span></li>
+                <li><span>Showed up</span><span class="fb" style="width:26%"><b>22</b><small>71%</small></span></li>
+                <li><span>Member</span><span class="fb" style="width:11%"><b>9</b><small>41%</small></span></li>
+              </ol>
+            </div>
+            <div class="rpanel" role="tabpanel" id="rp2" aria-labelledby="rt2" hidden>
+              <ol class="funnel go" aria-label="Sample leads by source">
+                <li><span>Facebook ads</span><span class="fb" style="width:100%"><b>38</b></span></li>
+                <li><span>Instagram</span><span class="fb" style="width:45%"><b>17</b></span></li>
+                <li><span>Google search</span><span class="fb" style="width:37%"><b>14</b></span></li>
+                <li><span>Referrals</span><span class="fb" style="width:24%"><b>9</b></span></li>
+                <li><span>Website form</span><span class="fb" style="width:16%"><b>6</b></span></li>
+              </ol>
+            </div>
+            <div class="rpanel" role="tabpanel" id="rp3" aria-labelledby="rt3" hidden>
+              <div class="cols go" role="img" aria-label="Sample calls logged per weekday: 500 total">
+                <div><b>96</b><i style="height:7.1rem"></i><span>Mon</span></div>
+                <div><b>104</b><i style="height:7.7rem"></i><span>Tue</span></div>
+                <div><b>100</b><i style="height:7.4rem"></i><span>Wed</span></div>
+                <div><b>108</b><i style="height:8.0rem"></i><span>Thu</span></div>
+                <div><b>92</b><i style="height:6.8rem"></i><span>Fri</span></div>
+              </div>
+              <p class="note">500 calls logged in the sample week.</p>
+            </div>
+            <p class="note">Sample data with fictional numbers. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report (PDF)</a>.</p>
           </div>
-          <p class="note">Sample data with fictional numbers, to show the format. Same figures as the <a href="sample-weekly-report.pdf" target="_blank" rel="noopener">sample weekly report</a>.</p>
-        </div>
 
-        <div class="sim">
-          <h3>Try the automation</h3>
-          <p class="muted" style="margin:.35rem 0 0">Pick an event to see what the lead receives.</p>
-          <div class="simb" id="simb">
-            <button type="button" data-k="lead" aria-pressed="false">New lead</button>
-            <button type="button" data-k="call" aria-pressed="false">Missed call</button>
-            <button type="button" data-k="booked" aria-pressed="false">Booked appointment</button>
-            <button type="button" data-k="noshow" aria-pressed="false">No-show</button>
-            <button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button>
+          <div>
+            <h3>Try the automation</h3>
+            <div class="simb" id="simb">
+              <button type="button" data-k="lead" aria-pressed="false">New lead</button>
+              <button type="button" data-k="call" aria-pressed="true">Missed call</button>
+              <button type="button" data-k="booked" aria-pressed="false">Booked</button>
+              <button type="button" data-k="noshow" aria-pressed="false">No-show</button>
+              <button type="button" data-k="quiet" aria-pressed="false">Quiet lead</button>
+            </div>
+            <div class="phone" id="sim-phone">
+              <div class="ph-head"><span>Example contact</span><span class="ph-status">GoHighLevel trigger</span></div>
+              <ol class="thread" id="simo" aria-live="polite"></ol>
+            </div>
+            <p class="note">Example messages and timing only. Texting requires the lead’s consent.</p>
           </div>
-          <ol class="thread" id="simo" aria-live="polite" style="border-top:1px solid var(--line);padding-top:1rem"></ol>
-          <p class="note">Example messages and timing only. Real wording and timing are set for each business, and texting needs the lead’s consent.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. WHAT I DO (Daylight) -->
-  <section class="band band-day" id="work" data-phase="day">
-    <div class="wrap">
-      <h2>What I do</h2>
-      <div class="open-rows">
-        <div class="open-row"><h3>Lead capture and follow-up</h3><p>Missed-call text-back, instant replies to forms and ad leads, self-booking calendars with reminders, and multi-day nurture sequences.</p></div>
-        <div class="open-row"><h3>Funnels and sales</h3><p>Landing pages with payment, memberships and class packs through Stripe and PayPal, upsell sequences, and abandoned-checkout follow-up.</p></div>
-        <div class="open-row"><h3>Retention and reviews</h3><p>Onboarding check-ins, win-back messages for inactive members, failed-payment reminders, and automatic review requests.</p></div>
-        <div class="open-row"><h3>Reporting and dashboards</h3><p>Lead sources, show rates, and trial-to-member conversion, plus weekly and monthly performance reports.</p></div>
-        <div class="open-row"><h3>Executive support</h3><p>Calendar, email, and scheduling for a business owner, inbound and outbound calls, and meeting notes with follow-ups.</p></div>
-        <div class="open-row"><h3>Social media</h3><p>Content planning and scheduling for multi-location brands, adapted to each store’s market.</p></div>
+    <!-- WHAT I DO -->
+    <section class="sec" id="work">
+      <div class="wrap">
+        <h2>What I do</h2>
+        <div class="bento">
+          <div class="tilt-card"><h3>Lead capture and follow-up</h3><p>Missed-call text-back, instant replies to forms and ad leads, self-booking calendars with reminders, and multi-day nurture sequences.</p></div>
+          <div class="tilt-card"><h3>Funnels and sales</h3><p>Landing pages with Stripe/PayPal payment, upsell sequences, and abandoned-checkout follow-up.</p></div>
+          <div class="tilt-card"><h3>Retention and reviews</h3><p>Onboarding check-ins, win-back messages, failed-payment reminders, and automatic review requests.</p></div>
+          <div class="tilt-card"><h3>Reporting and dashboards</h3><p>Lead sources, show rates, and trial-to-member conversion, plus weekly and monthly performance reports.</p></div>
+          <div class="tilt-card"><h3>Executive support</h3><p>Calendar, email, and scheduling for a business owner, inbound/outbound calls, and meeting notes with follow-ups.</p></div>
+          <div class="tilt-card"><h3>Social media</h3><p>Content planning, client-approved calendars, and scheduling adapted to each store’s market.</p></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5. SERVICES (Daylight) -->
-  <section class="band band-day" id="services" data-phase="day" style="padding-top:1rem">
-    <div class="wrap">
-      <h2>Services</h2>
-      <p class="measure muted">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
-      <div class="open-rows">
-        <div class="open-row">
-          <h3>Lead-to-booking setup</h3>
-          <div>
-            <p>About two weeks. Pipeline stages, instant replies, missed-call text-back, booking calendar with confirmations and reminders, no-show rebooking, and a written checklist your team can follow.</p>
-            <div class="price">Fixed price, from $300</div>
+    <!-- SERVICES + ROI -->
+    <section class="sec" id="services">
+      <div class="wrap">
+        <h2>Services</h2>
+        <p class="sec-sub">Starting rates are below. I confirm the final scope and price in writing after a short intro call.</p>
+        <div class="svc-grid">
+          <div class="svc-row flagship tilt-card">
+            <div><span class="flag-tag">Flagship 2-week sprint</span><h3>Lead-to-booking setup</h3></div>
+            <p>Pipeline stages, instant replies, missed-call text-back, booking calendar with confirmations and reminders, no-show rebooking, and a written checklist your team can follow.</p>
+            <div class="svc-price">From $300 fixed</div>
           </div>
-        </div>
-        <div class="open-row">
-          <h3>GoHighLevel automation</h3>
-          <div>
-            <p>Lead capture, pipelines with automated follow-up, booking calendars and reminders, missed-call text-back, and reporting. A good fit for gyms, studios, and local service businesses.</p>
-            <div class="price">From $12 an hour</div>
+          <div class="svc-row tilt-card">
+            <h3>GoHighLevel automation</h3>
+            <p>Lead capture, pipelines with automated follow-up, booking calendars, missed-call text-back, and weekly reporting.</p>
+            <div class="svc-price">From $12 / hr</div>
           </div>
-        </div>
-        <div class="open-row">
-          <h3>Social media management</h3>
-          <div>
-            <p>Monthly content planning, a content calendar with client approval, scheduling, and posts adapted to each location or market.</p>
-            <div class="price">From $350 a month</div>
+          <div class="svc-row tilt-card">
+            <h3>Social media management</h3>
+            <p>Monthly content planning, client approval calendar, scheduling, and posts adapted to each location or market.</p>
+            <div class="svc-price">From $350 / mo</div>
           </div>
-        </div>
-        <div class="open-row">
-          <h3>Executive assistant and operations</h3>
-          <div>
+          <div class="svc-row tilt-card">
+            <h3>Executive assistant &amp; ops</h3>
             <p>Calendar, email, and calls, plus handbooks, checklists, compliance tracking, and customer or member support.</p>
-            <div class="price">From $8 an hour</div>
+            <div class="svc-price">From $8 / hr</div>
+          </div>
+        </div>
+
+        <div class="roi-bar tilt-card">
+          <div>
+            <h3>What could faster follow-up be worth?</h3>
+            <p>Plug in your own numbers for a rough monthly and yearly figure. Nothing is sent or saved.</p>
+          </div>
+          <div class="btns">
+            <button type="button" class="btn main" id="roi-open" aria-haspopup="dialog">Open ROI calculator</button>
+            <a class="btn alt" href="5-follow-up-automations.pdf" target="_blank" rel="noopener" data-goatcounter-click="services-checklist">5 automations (PDF)</a>
+            <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Services sheet</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="btns" style="margin-top:2rem">
-        <button type="button" class="btn main" id="roi-open" aria-haspopup="dialog">Open ROI calculator</button>
-        <a class="btn alt" href="5-follow-up-automations.pdf" target="_blank" rel="noopener" data-goatcounter-click="services-checklist">Free: 5 follow-up automations (PDF)</a>
-        <a class="btn alt" href="services-and-rates.pdf" target="_blank" rel="noopener">Download services sheet</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. TESTIMONIALS (Dawn Peach) -->
-  <section class="band band-peach" id="proof" data-phase="peach">
-    <div class="wrap">
-      <h2>What clients say</h2>
-      <div class="quote-list" id="quotes">
-        <blockquote>
-          <p>“Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations. He jumped right in, organized our processes, and consistently delivered reliable support without needing to be micromanaged.”</p>
-          <cite>Romelle, Assistant, Consulting Company</cite>
-        </blockquote>
-        <blockquote>
-          <p>“Working with Japhette completely elevated our local marketing and store operations. From designing sharp ad creatives and promotional graphics to streamlining our retail compliance and onboarding forms, he brings a rare mix of creativity and operational discipline.”</p>
-          <cite>Dom, Store Owner, DHL Express Partner Location</cite>
-        </blockquote>
-        <blockquote>
-          <p>“Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly. He handled everything from CRM automation and social media content to member support with speed, accuracy, and zero drama.”</p>
-          <cite>Steve, Owner, Fit Body Boot Camp</cite>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. FREE AUDIT + FAQ (Daylight) -->
-  <section class="band band-day" id="audit" data-phase="day">
-    <div class="wrap">
-      <div class="audit-row">
-        <div>
-          <h2>Free mini audit</h2>
-          <p class="measure muted">Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p>
-        </div>
-        <div>
-          <a class="btn main" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A" target="_blank" rel="noopener" data-goatcounter-click="audit-gmail">Request a free audit</a>
-          <p class="note">Opens Gmail in a new tab. No Gmail? <a href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit" data-goatcounter-click="audit-mailto">Use your mail app</a> or <button type="button" class="linkbtn" id="cpe">copy my email</button>.</p>
-          <p class="note" id="audit-note" hidden>Your calculator numbers are included in the email.</p>
-          <p class="note"><a href="sample-audit.pdf" target="_blank" rel="noopener" data-goatcounter-click="sample-audit">See a sample audit (PDF)</a></p>
+    <!-- DESIGN & WEB APPS SPOTLIGHT -->
+    <section class="sec" id="showcase">
+      <div class="wrap">
+        <h2>Design &amp; web apps</h2>
+        <p class="sec-sub">Logo and brand concepts for DR.PPF and Elusive Wraps, plus four web apps I built and run myself (Content Calendar, Job Tracker, Budget Tracker, and Contacts &amp; Pipeline CRM).</p>
+        <a class="dgrid" href="design.html" aria-label="See all design work" data-goatcounter-click="design-thumbs">
+          <img src="work/t/drppf-1.jpg" alt="DR.PPF chrome blackletter logo concept" loading="lazy">
+          <img src="work/t/drppf-7.jpg" alt="DR.PPF geometric panther logo concept" loading="lazy">
+          <img src="work/t/elusive-60.jpg" alt="Elusive Wraps speed brand concept" loading="lazy">
+        </a>
+        <div class="btns">
+          <a class="btn main" href="projects.html">Explore 4 live web apps ↗</a>
+          <a class="btn alt" href="design.html" data-goatcounter-click="design-all">See all design work</a>
         </div>
       </div>
+    </section>
 
-      <div id="faq" style="margin-top:3.5rem">
-        <h2>Questions</h2>
-        <details class="line-fold"><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
-        <details class="line-fold"><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
-        <details class="line-fold"><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
-        <details class="line-fold"><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
-        <details class="line-fold"><summary>How does pricing work?</summary><p>I quote after the intro call, based on the size of the work. You get the scope and price in writing before we start.</p></details>
+    <!-- TESTIMONIALS (Newsreader Serif) -->
+    <section class="sec" id="proof">
+      <div class="wrap">
+        <h2>What clients say</h2>
+        <div class="quotes" id="quotes">
+          <blockquote class="tilt-card">
+            <p>“Japhette took a massive weight off our shoulders by building out our employee handbooks, attendance policies, and day-to-day compliance tracking across multiple store locations. He jumped right in, organized our processes, and consistently delivered reliable support without needing to be micromanaged.”</p>
+            <cite>Romelle, Assistant, Consulting Company</cite>
+          </blockquote>
+          <blockquote class="tilt-card">
+            <p>“Working with Japhette completely elevated our local marketing and store operations. From designing sharp ad creatives and promotional graphics to streamlining our retail compliance and onboarding forms, he brings a rare mix of creativity and operational discipline.”</p>
+            <cite>Dom, Store Owner, DHL Express Partner Location</cite>
+          </blockquote>
+          <blockquote class="tilt-card">
+            <p>“Japhette was instrumental in keeping our member accounts, billing, and lead funnels running smoothly. He handled everything from CRM automation and social media content to member support with speed, accuracy, and zero drama.”</p>
+            <cite>Steve, Owner, Fit Body Boot Camp</cite>
+          </blockquote>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 8. FOOTER (Night) -->
-  <footer class="band band-night" id="contact" data-phase="night">
+    <!-- FREE MINI AUDIT & FAQ -->
+    <section class="sec" id="audit">
+      <div class="wrap">
+        <div class="audit-box tilt-card">
+          <div>
+            <h2>Free mini audit</h2>
+            <p class="measure" style="color:var(--muted);margin:0">Send me how you handle leads today. I look for slow replies, missed follow-ups, missing reminders, and leads that go cold, then send back the 3 changes that matter most, free.</p>
+          </div>
+          <div>
+            <a class="btn main" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Free%20mini%20audit&amp;body=Hi%20Japhette%2C%20here%20is%20how%20we%20handle%20leads%20today%3A" target="_blank" rel="noopener" data-goatcounter-click="audit-gmail">Request a free audit ↗</a>
+            <p class="note">Opens Gmail in a new tab. No Gmail? <a href="mailto:loomwellops@gmail.com?subject=Free%20mini%20audit" data-goatcounter-click="audit-mailto">Use your mail app</a> or <button type="button" class="linkbtn" id="cpe">copy my email</button>.</p>
+            <p class="note" id="audit-note" hidden>Your calculator numbers are included in the email.</p>
+            <p class="note"><a href="sample-audit.pdf" target="_blank" rel="noopener" data-goatcounter-click="sample-audit">See a sample audit (PDF)</a></p>
+          </div>
+        </div>
+
+        <div class="faq" id="faq">
+          <h2>Questions</h2>
+          <details><summary>Can you work in my time zone?</summary><p>Yes. I’m based in the Philippines (PHT) and I adjust my hours to yours. We agree on the overlap on the intro call, and messages get a reply within one business day.</p></details>
+          <details><summary>What can you set up in GoHighLevel?</summary><p>Pipelines with automated follow-up at each stage, instant replies to new leads, missed-call text-back, booking calendars with reminders, call follow-up sequences, email blasts, contact tagging, and reporting.</p></details>
+          <details><summary>Do you only work with gyms?</summary><p>No. My work includes a DHL Express partner shop network (5 stores in 4 states), a construction and engineering business, and fitness studios.</p></details>
+          <details><summary>What happens on the intro call?</summary><p>We spend 30 minutes on your goals and how leads, bookings, and social media work today. I tell you honestly whether I can help, and if so, what I would do first. There is no prep and no cost.</p></details>
+          <details><summary>How does pricing work?</summary><p>I quote after the intro call, based on the size of the work. You get the scope and price in writing before we start.</p></details>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- VERSO SKEWED-BLADE CONTACT MONOLITH -->
+  <footer id="contact">
     <div class="wrap">
-      <h2>Let’s turn your leads into booked customers.</h2>
-      <p class="measure muted">Tell me how leads reach you today and I’ll tell you what I would fix first. Calls Monday to Friday, about 4–8 pm Pacific and 5–9 pm Mountain (Philippines, PHT). I reply within one business day.</p>
-      <div class="btns" style="margin-top:1.5rem">
-        <a class="btn main" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a>
-        <a class="btn alt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Hello" target="_blank" rel="noopener" data-goatcounter-click="footer-email">Email me</a>
-      </div>
-      <ul class="contact-row">
-        <li><a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></li>
-        <li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp">WhatsApp</a></li>
-        <li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume">Resume (PDF)</a></li>
-      </ul>
-      <div class="foot-links">
-        <a href="projects.html">Web apps &amp; live demos</a>
-        <a href="design.html">Design &amp; brand work</a>
-        <a href="client-onboarding-checklist.pdf" target="_blank" rel="noopener">Onboarding checklist (PDF)</a>
-        <a href="#top">Back to top</a>
+      <div class="cta-card" id="cta-card">
+        <span class="verso-beam" aria-hidden="true"></span>
+        <img class="cta-photo" src="profile.jpg" width="120" height="120" alt="" loading="lazy">
+        <div>
+          <h2>Let’s turn your leads into <span class="grad">booked customers.</span></h2>
+          <p>Tell me how leads reach you today and I’ll tell you what I would fix first. Calls Mon–Fri, about 4–8 pm Pacific / 5–9 pm Mountain (PHT). I reply within one business day.</p>
+          <div class="btns">
+            <a class="btn main" id="cta-book" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="footer-book">Book a 30-minute call ↗</a>
+            <a class="btn alt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=loomwellops%40gmail.com&amp;su=Hello" target="_blank" rel="noopener" data-goatcounter-click="footer-email">Email me</a>
+          </div>
+          <ul class="contact-row">
+            <li><a href="mailto:loomwellops@gmail.com">loomwellops@gmail.com</a></li>
+            <li><a href="https://www.linkedin.com/in/japhette-alec-pulido/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://wa.me/639569027896" target="_blank" rel="noopener" data-goatcounter-click="footer-whatsapp">WhatsApp</a></li>
+            <li><a href="resume.pdf" target="_blank" rel="noopener" data-goatcounter-click="footer-resume">Resume (PDF)</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="design.html">Design</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ROI Calculator Modal -->
+  <!-- ROI Calculator Modal with 60-Tick SVG Gauge -->
   <dialog id="roi" aria-labelledby="roi-h">
     <button type="button" class="roi-x" aria-label="Close calculator">×</button>
-    <h2 id="roi-h" style="font-size:1.85rem">What could faster follow-up be worth?</h2>
-    <p class="muted" style="margin-top:.4rem">Change the example numbers to yours. Nothing is sent or saved. This is an illustration, not a prediction.</p>
+    <h2 id="roi-h" style="font-size:1.75rem">What could faster follow-up be worth?</h2>
+    <p class="note" style="margin-top:0">Change the example numbers to yours. Nothing is sent or saved.</p>
     <div class="cgrid">
-      <label for="c-leads">Leads per month<input type="number" id="c-leads" value="80" min="0" max="100000" step="1" inputmode="decimal"></label>
-      <label for="c-book">Leads who book (%)<input type="number" id="c-book" value="35" min="0" max="100" step="1" inputmode="decimal"></label>
-      <label for="c-show">Booked who show up (%)<input type="number" id="c-show" value="70" min="0" max="100" step="1" inputmode="decimal"></label>
-      <label for="c-close">Show-ups who buy (%)<input type="number" id="c-close" value="40" min="0" max="100" step="1" inputmode="decimal"></label>
-      <label for="c-ltv">Average customer value ($)<input type="number" id="c-ltv" value="1200" min="0" max="10000000" step="50" inputmode="decimal"></label>
-      <label for="c-lift">Improvement from faster follow-up: <b id="c-lift-v">10%</b><input type="range" id="c-lift" min="0" max="30" value="10"></label>
+      <label for="c-leads">Leads per month<input type="number" id="c-leads" value="80" min="0" max="100000" step="1"></label>
+      <label for="c-book">Leads who book (%)<input type="number" id="c-book" value="35" min="0" max="100" step="1"></label>
+      <label for="c-show">Booked who show up (%)<input type="number" id="c-show" value="70" min="0" max="100" step="1"></label>
+      <label for="c-close">Show-ups who buy (%)<input type="number" id="c-close" value="40" min="0" max="100" step="1"></label>
+      <label for="c-ltv">Avg customer value ($)<input type="number" id="c-ltv" value="1200" min="0" max="10000000" step="50"></label>
+      <label for="c-lift">Follow-up lift: <b id="c-lift-v">10%</b><input type="range" id="c-lift" min="0" max="30" value="10"></label>
     </div>
-    <div class="cres" id="c-out" aria-live="polite"></div>
-    <p class="note">Assumes the improvement applies to both booking rate and show rate, each capped at 100%.</p>
+    <div class="cviz">
+      <svg id="roi-svg" viewBox="-14 -14 148 148" width="136" height="136" role="img" aria-label="60-tick radial lift gauge">
+        <g id="roi-ticks"></g>
+        <text id="cv-t" x="60" y="58" text-anchor="middle" font-size="20" font-weight="700" fill="currentColor">+0</text>
+        <text x="60" y="74" text-anchor="middle" font-size="9" fill="var(--muted)">more / mo</text>
+      </svg>
+      <div class="cres" id="c-out" style="flex:1;min-width:16rem;margin:0" aria-live="polite"></div>
+    </div>
     <div class="btns" style="margin-top:1.25rem">
       <a class="btn main" href="#audit" data-goatcounter-click="calc-audit">Request a free audit</a>
       <a class="btn alt" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="calc-book">Book a 30-minute call</a>
@@ -740,36 +1017,139 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
   </dialog>
 </main>
 
+<!-- Floating Spatial Glass Bottom Dock -->
+<nav class="dock" aria-label="Primary">
+  <div class="dock-items" id="dock-items">
+    <span class="dock-pill" id="dock-pill" aria-hidden="true"></span>
+    <a href="#overview" class="on">Overview</a>
+    <a href="#case-study">Case study</a>
+    <a href="#work">What I do</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Reviews</a>
+    <a href="#audit">Audit</a>
+    <a href="projects.html">Apps</a>
+    <a href="design.html">Design</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.3rem">
+    <a class="cta" href="https://calendly.com/loomwellops/30min" target="_blank" rel="noopener" data-goatcounter-click="nav-book">Book a call</a>
+    <button id="theme" type="button" aria-pressed="false">Dark</button>
+  </div>
+</nav>
+
 <script>
 (function(){
-  /* Theme toggle */
-  var r=document.documentElement,b=document.getElementById("theme");
-  function sys(){return window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}
-  function apply(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"Light":"Dark";b.setAttribute("aria-pressed",t==="dark")}
-  var s=null;try{s=localStorage.getItem("theme")}catch(e){}
-  apply(s==="dark"||s==="light"?s:sys());
-  b.addEventListener("click",function(){var t=r.getAttribute("data-theme")==="dark"?"light":"dark";apply(t);try{localStorage.setItem("theme",t)}catch(e){}});
+  var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var hoverCapable = window.matchMedia && matchMedia("(hover:hover)").matches;
+  var pulseLevel = 0;
+  function pulse(n){ pulseLevel = Math.min(1.4, pulseLevel + (n || 0.7)); }
 
-  /* Live Dual Clocks */
-  var cl=document.getElementById("clk-local"),cm=document.getElementById("clk-manila");
+  /* 1. WebGL1 Night-to-Dawn Caustic Light Shader */
+  if(!reduced){
+    var canvas = document.createElement("canvas");
+    canvas.id = "caustic-gl"; canvas.setAttribute("aria-hidden","true");
+    document.body.insertBefore(canvas, document.body.firstChild);
+    var gl = canvas.getContext("webgl",{alpha:false,antialias:false,depth:false,powerPreference:"low-power"});
+    if(gl){
+      var vs = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vs,"attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}");
+      gl.compileShader(vs);
+      var fs = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fs,[
+        "precision mediump float;",
+        "uniform vec2 u_res;uniform float u_time;uniform vec2 u_mouse;uniform float u_scroll;uniform float u_dark;uniform float u_pulse;",
+        "void main(){",
+        "  vec2 uv=gl_FragCoord.xy/u_res;",
+        "  vec2 p=(gl_FragCoord.xy-.5*u_res)/min(u_res.x,u_res.y);",
+        "  vec2 m=(u_mouse-.5)*.35;float t=u_time*.26;vec2 q=p*2.05+m;",
+        "  float w1=sin(q.x*1.4+t+cos(q.y*1.6-t*.7));",
+        "  float w2=cos(q.y*1.5-t*.8+sin(q.x*1.3+t*.6));",
+        "  float w3=sin((q.x+q.y)*1.2-t*.5+w1*.9);",
+        "  float ridge=1.-abs(w1*.45+w2*.35+w3*.2);",
+        "  float caust=pow(clamp(ridge,0.,1.),3.1);",
+        "  float glow=smoothstep(-.4,.9,w1*.5+w2*.5)*.45+caust*(.62+u_pulse*.32);",
+        "  float aura=exp(-length(uv-u_mouse)*3.2)*(.18+u_pulse*.15);",
+        "  vec3 nightBase=vec3(.055,.075,.188);",
+        "  vec3 indigo=vec3(.294,.247,.839);",
+        "  vec3 coral=vec3(1.,.420,.239);",
+        "  vec3 gold=vec3(.953,.780,.420);",
+        "  vec3 nightCol=mix(nightBase,indigo,clamp(glow*.65+aura,0.,1.));",
+        "  nightCol=mix(nightCol,coral,clamp(caust*(.55+.3*sin(t+p.x))*(.7+u_pulse*.3),0.,1.));",
+        "  nightCol+=gold*pow(caust,2.4)*(.16+u_pulse*.12);",
+        "  vec3 dawnBase=vec3(1.,.972,.933);",
+        "  vec3 dawnPeach=vec3(.965,.851,.722);",
+        "  vec3 dawnCoral=vec3(1.,.65,.50);",
+        "  vec3 dawnCol=mix(dawnBase,dawnPeach,clamp(glow*.6+aura*.5,0.,1.));",
+        "  dawnCol=mix(dawnCol,dawnCoral,clamp(caust*.42,0.,1.));",
+        "  float dawnMix=clamp(u_scroll*1.35,0.,1.)*(1.-u_dark);",
+        "  gl_FragColor=vec4(mix(nightCol,dawnCol,dawnMix),1.);",
+        "}"
+      ].join("\n"));
+      gl.compileShader(fs);
+      var prog = gl.createProgram();
+      gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog);
+      var buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+      var loc = gl.getAttribLocation(prog,"a");
+      gl.useProgram(prog); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+      var uRes=gl.getUniformLocation(prog,"u_res"),uTime=gl.getUniformLocation(prog,"u_time"),
+          uMouse=gl.getUniformLocation(prog,"u_mouse"),uScroll=gl.getUniformLocation(prog,"u_scroll"),
+          uDark=gl.getUniformLocation(prog,"u_dark"),uPulse=gl.getUniformLocation(prog,"u_pulse");
+      function rsz(){
+        canvas.width=Math.min(512,Math.max(240,Math.floor(innerWidth*.35)));
+        canvas.height=Math.min(360,Math.max(160,Math.floor(innerHeight*.35)));
+        gl.viewport(0,0,canvas.width,canvas.height);
+      }
+      rsz(); addEventListener("resize",rsz);
+      var mx=.7,my=.7,tx=.7,ty=.7,dv=document.documentElement.getAttribute("data-theme")==="dark"?1:0,st=performance.now(),last=0;
+      addEventListener("pointermove",function(e){tx=e.clientX/Math.max(1,innerWidth);ty=1-e.clientY/Math.max(1,innerHeight)},{passive:true});
+      (function loop(now){
+        if(!document.hidden && now-last>=33){
+          last=now; mx+=(tx-mx)*.08; my+=(ty-my)*.08;
+          var td=document.documentElement.getAttribute("data-theme")==="dark"?1:0;
+          dv+=(td-dv)*.12; pulseLevel*=.92;
+          var sc=Math.min(1,scrollY/Math.max(1,innerHeight*1.2));
+          gl.uniform2f(uRes,canvas.width,canvas.height); gl.uniform1f(uTime,(now-st)*.001);
+          gl.uniform2f(uMouse,mx,my); gl.uniform1f(uScroll,sc); gl.uniform1f(uDark,dv); gl.uniform1f(uPulse,pulseLevel);
+          gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+        }
+        requestAnimationFrame(loop);
+      })(performance.now());
+    } else canvas.remove();
+  }
+
+  /* 2. Circular View Transitions Theme Wipe */
+  var root = document.documentElement, tbtn = document.getElementById("theme");
+  function applyTheme(t){
+    root.setAttribute("data-theme",t);
+    tbtn.textContent = t==="dark"?"Light":"Dark";
+    tbtn.setAttribute("aria-pressed",t==="dark");
+  }
+  applyTheme(root.getAttribute("data-theme")||"dark");
+  tbtn.addEventListener("click",function(){
+    var next = root.getAttribute("data-theme")==="dark"?"light":"dark";
+    pulse(1.0);
+    function commit(){ applyTheme(next); try{localStorage.setItem("theme",next)}catch(e){} }
+    if(!document.startViewTransition || reduced){ commit(); return; }
+    var rc=tbtn.getBoundingClientRect(), x=rc.left+rc.width/2, y=rc.top+rc.height/2;
+    var R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    var vt=document.startViewTransition(commit);
+    vt.ready.then(function(){
+      root.animate({clipPath:["circle(0px at "+x+"px "+y+"px)","circle("+R+"px at "+x+"px "+y+"px)"]},{duration:480,easing:"cubic-bezier(.22,1,.36,1)",pseudoElement:"::view-transition-new(root)"});
+    }).catch(function(){});
+  });
+
+  /* 3. Live Dual Clocks */
+  var cl=document.getElementById("clk-local"), cm=document.getElementById("clk-manila");
   function tick(){
     var now=new Date();
     cl.textContent=new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit"}).format(now);
     cm.textContent=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Manila",hour:"numeric",minute:"2-digit"}).format(now);
   }
-  tick();setInterval(tick,15000);
+  tick(); setInterval(tick,15000);
 
-  /* Scroll-driven Night -> Dawn phase shift */
-  if("IntersectionObserver" in window){
-    var bands=[].slice.call(document.querySelectorAll("[data-phase]"));
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){if(e.isIntersecting)r.setAttribute("data-phase",e.target.getAttribute("data-phase"))});
-    },{threshold:0.35});
-    bands.forEach(function(x){io.observe(x)});
-  }
-
-  /* One-shot Hero Live Phone Thread */
-  var thread=document.getElementById("hero-thread"),st=document.getElementById("hero-status");
+  /* 4. Hero Live Auto-Playing 9:41 pm Phone Thread */
+  var hThread=document.getElementById("hero-thread"), hStatus=document.getElementById("hero-status"), hPhone=document.getElementById("hero-phone");
   var heroMsgs=[
     {who:"in",time:"9:41 pm · Lead",text:"Hi, saw your ad — do you have any trial spots left this week?"},
     {who:"out",time:"9:41 pm · Instant reply",text:"Hi [First name], thanks for reaching out to [Business]. Pick a time that works for you here: [booking link]. Reply STOP to opt out."},
@@ -777,41 +1157,109 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
     {who:"out",time:"24 hours before · Reminder",text:"Reminder: you’re booked tomorrow at [time]. Reply C to confirm, or reschedule here: [link]."},
     {who:"out",time:"2 hours before · Reminder",text:"See you at [time]! Address and parking info: [link]."}
   ];
-  var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
-  function addMsg(m){
-    var li=document.createElement("li");
-    li.className="msg"+(m.who==="in"?" in":m.who==="sig"?" sig":"");
-    li.innerHTML="<small>"+m.time+"</small>"+m.text;
-    thread.appendChild(li);
-  }
-  if(calm){heroMsgs.forEach(addMsg);st.textContent="Booked · Confirmed";}
-  else{
-    var i=0;
-    function next(){
-      if(i>=heroMsgs.length){st.textContent="Booked · Confirmed";return;}
-      var m=heroMsgs[i++];
-      if(m.who==="in"){addMsg(m);setTimeout(next,650);return;}
-      var tip=document.createElement("li");tip.className="typing";tip.setAttribute("aria-hidden","true");
-      tip.innerHTML="<i></i><i></i><i></i>";thread.appendChild(tip);
-      setTimeout(function(){tip.remove();addMsg(m);if(m.who==="sig")st.textContent="Booked · Confirmed";setTimeout(next,700);},520);
+  var hTimer=null;
+  function playHero(){
+    clearTimeout(hTimer); hThread.innerHTML=""; hStatus.textContent="Auto-reply active";
+    function add(m){
+      var li=document.createElement("li");
+      li.className="msg"+(m.who==="in"?" in":m.who==="sig"?" sig":"");
+      li.innerHTML="<small>"+m.time+"</small>"+m.text;
+      hThread.appendChild(li);
     }
-    setTimeout(next,350);
+    if(reduced){ heroMsgs.forEach(add); hStatus.textContent="Booked · Confirmed"; return; }
+    var idx=0;
+    function step(){
+      if(idx>=heroMsgs.length){ hStatus.textContent="Booked · Confirmed"; return; }
+      var m=heroMsgs[idx++];
+      if(m.who==="in"){ add(m); hTimer=setTimeout(step,580); return; }
+      var tip=document.createElement("li"); tip.className="typing"; tip.setAttribute("aria-hidden","true");
+      tip.innerHTML="<i></i><i></i><i></i>"; hThread.appendChild(tip);
+      hTimer=setTimeout(function(){
+        tip.remove(); add(m); pulse(0.35);
+        if(m.who==="sig"){ hStatus.textContent="Booked · Confirmed"; hPhone.classList.add("pulse"); setTimeout(function(){hPhone.classList.remove("pulse")},850); }
+        hTimer=setTimeout(step,650);
+      },480);
+    }
+    hTimer=setTimeout(step,320);
+  }
+  playHero();
+  document.getElementById("hero-replay").addEventListener("click",function(){ pulse(0.6); playHero(); });
+
+  /* 5. Floating Dock Elastic WAAPI Pill + Scroll Spy */
+  var dockBox=document.getElementById("dock-items"), dockPill=document.getElementById("dock-pill");
+  var dockLinks=[].slice.call(dockBox.querySelectorAll('a[href^="#"]')), lastDock=null;
+  function moveDock(el,anim){
+    if(!el)return;
+    var x=el.offsetLeft,y=el.offsetTop,w=el.offsetWidth,h=el.offsetHeight,from=lastDock;
+    lastDock={x:x,y:y,w:w,h:h};
+    dockPill.classList.add("ready");
+    if(dockPill.getAnimations)dockPill.getAnimations().forEach(function(a){a.cancel()});
+    dockPill.style.width=w+"px"; dockPill.style.height=h+"px"; dockPill.style.transform="translate("+x+"px,"+y+"px)";
+    if(!anim||!from||reduced||!dockPill.animate||(from.x===x&&from.w===w))return;
+    var sx=Math.min(x,from.x), sw=Math.max(x+w,from.x+from.w)-sx;
+    dockPill.animate([
+      {transform:"translate("+from.x+"px,"+y+"px)",width:from.w+"px",easing:"cubic-bezier(.2,.9,.3,1)"},
+      {transform:"translate("+sx+"px,"+y+"px)",width:sw+"px",offset:.4,easing:"cubic-bezier(.34,1.45,.64,1)"},
+      {transform:"translate("+x+"px,"+y+"px)",width:w+"px"}
+    ],{duration:440});
+  }
+  function setDock(a,anim){
+    dockLinks.forEach(function(x){x.classList.toggle("on",x===a)});
+    moveDock(a,anim);
+  }
+  setDock(dockLinks[0],false);
+  addEventListener("resize",function(){moveDock(dockBox.querySelector("a.on"),false)});
+  if("IntersectionObserver" in window){
+    var spy=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return;
+        var a=dockBox.querySelector('a[href="#'+e.target.id+'"]');
+        if(a&&!a.classList.contains("on"))setDock(a,true);
+      });
+    },{rootMargin:"-35% 0px -55% 0px"});
+    dockLinks.forEach(function(a){var s=document.getElementById(a.getAttribute("href").slice(1));if(s)spy.observe(s)});
   }
 
-  /* Sample report tabs with keyboard support */
-  var tabs=[].slice.call(document.querySelectorAll(".rtabs [role=tab]"));
-  function sel(btn,foc){
-    tabs.forEach(function(x){
-      var on=x===btn;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;
-      document.getElementById(x.getAttribute("aria-controls")).hidden=!on;
-    });
-    if(foc)btn.focus();
+  /* 6. Elastic Glide Pill Helper for Report Tabs & Simulator */
+  function makeGlide(box,selAttr){
+    var p=document.createElement("span"); p.className="glide-pill"; p.setAttribute("aria-hidden","true");
+    box.insertBefore(p,box.firstChild); var prev=null;
+    function pos(anim){
+      var b=box.querySelector("["+selAttr+"='true']"); if(!b)return;
+      var x=b.offsetLeft,y=b.offsetTop,w=b.offsetWidth,h=b.offsetHeight,from=prev; prev={x:x,y:y,w:w,h:h};
+      p.style.width=w+"px"; p.style.height=h+"px"; p.style.transform="translate("+x+"px,"+y+"px)";
+      if(!anim||!from||reduced||!p.animate)return;
+      var sx=Math.min(x,from.x), sw=Math.max(x+w,from.x+from.w)-sx;
+      p.animate([
+        {transform:"translate("+from.x+"px,"+from.y+"px)",width:from.w+"px"},
+        {transform:"translate("+sx+"px,"+y+"px)",width:sw+"px",offset:.4},
+        {transform:"translate("+x+"px,"+y+"px)",width:w+"px"}
+      ],{duration:380,easing:"cubic-bezier(.22,1,.36,1)"});
+    }
+    addEventListener("resize",function(){pos(false)});
+    addEventListener("load",function(){pos(false)});
+    return pos;
   }
-  tabs.forEach(function(btn,idx){
-    btn.addEventListener("click",function(){sel(btn)});
-    btn.addEventListener("keydown",function(e){
-      var k=e.key,n=k==="ArrowRight"?idx+1:k==="ArrowLeft"?idx-1:k==="Home"?0:k==="End"?tabs.length-1:null;
-      if(n===null)return;e.preventDefault();sel(tabs[(n+tabs.length)%tabs.length],true);
+
+  /* Report tabs + replaying bar sweeps */
+  var rBox=document.getElementById("rtabs"), rTabs=[].slice.call(rBox.querySelectorAll("[role=tab]"));
+  var posR=makeGlide(rBox,"aria-selected"); posR(false);
+  function selR(btn,foc){
+    rTabs.forEach(function(x){
+      var on=x===btn; x.setAttribute("aria-selected",on); x.tabIndex=on?0:-1;
+      var pan=document.getElementById(x.getAttribute("aria-controls")); pan.hidden=!on;
+      if(on&&!reduced){
+        var ch=pan.querySelector(".funnel,.cols");
+        if(ch){ch.classList.remove("go");ch.classList.add("pre");requestAnimationFrame(function(){requestAnimationFrame(function(){ch.classList.add("go")})})}
+      }
+    });
+    posR(true); pulse(0.45); if(foc)btn.focus();
+  }
+  rTabs.forEach(function(b,i){
+    b.addEventListener("click",function(){selR(b)});
+    b.addEventListener("keydown",function(e){
+      var k=e.key,n=k==="ArrowRight"?i+1:k==="ArrowLeft"?i-1:k==="Home"?0:k==="End"?rTabs.length-1:null;
+      if(n===null)return; e.preventDefault(); selR(rTabs[(n+rTabs.length)%rTabs.length],true);
     });
   });
 
@@ -823,21 +1271,53 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
     noshow:[["Same day","Text","We missed you today! Want to pick a new time? [booking link]"],["2 days later","Email","Hi [First name], just checking in. If you’d still like to come in, here’s my calendar: [booking link]."],["If still no reply","Pipeline","Move to the nurture list and stop the sequence."]],
     quiet:[["After 24 to 48 hours","Text","Hi [First name], just checking in. Still interested in [offer]? Happy to answer questions or help you book: [booking link]."],["A few days later","Email","Last note from me. If now isn’t the right time, no problem. Book whenever you’re ready: [booking link]."],["If still no reply","Pipeline","Tag as Nurture and stop. No more chasing."]]
   };
-  var bar=document.getElementById("simb"),o=document.getElementById("simo");
-  function showSim(k){
-    [].forEach.call(bar.children,function(x){x.setAttribute("aria-pressed",x.dataset.k===k?"true":"false")});
-    o.innerHTML="";
-    S[k].forEach(function(row){
+  var sBar=document.getElementById("simb"), sOut=document.getElementById("simo"), sPhone=document.getElementById("sim-phone");
+  var posS=makeGlide(sBar,"aria-pressed");
+  function showSim(k,anim){
+    [].forEach.call(sBar.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",x.dataset.k===k?"true":"false")});
+    posS(anim); sOut.innerHTML="";
+    S[k].forEach(function(row,i){
       var li=document.createElement("li");
       li.className="msg"+(row[1]==="Pipeline"?" sig":"");
+      li.style.animationDelay=(i*.16)+"s";
       li.innerHTML="<small>"+row[0]+" · "+row[1]+"</small>"+row[2];
-      o.appendChild(li);
+      sOut.appendChild(li);
+    });
+    if(anim){ pulse(0.65); sPhone.classList.add("pulse"); clearTimeout(sPhone._t); sPhone._t=setTimeout(function(){sPhone.classList.remove("pulse")},800); }
+  }
+  sBar.addEventListener("click",function(e){var b=e.target.closest("button");if(b)showSim(b.dataset.k,true)});
+  showSim("call",false);
+
+  /* 7. 3D Tilt + Holographic Glare + Magnetic Buttons + VERSO Beam */
+  if(hoverCapable && !reduced){
+    var activeCard=null, activeBtn=null;
+    document.addEventListener("pointermove",function(e){
+      var c=e.target.closest&&e.target.closest(".tilt-card");
+      if(activeCard&&activeCard!==c){activeCard.style.removeProperty("--rx");activeCard.style.removeProperty("--ry");activeCard=null;}
+      if(c){
+        activeCard=c; var r=c.getBoundingClientRect();
+        var px=(e.clientX-r.left)/Math.max(1,r.width), py=(e.clientY-r.top)/Math.max(1,r.height);
+        c.style.setProperty("--rx",((.5-py)*8).toFixed(2)+"deg");
+        c.style.setProperty("--ry",((px-.5)*8).toFixed(2)+"deg");
+        c.style.setProperty("--mx",(e.clientX-r.left).toFixed(1)+"px");
+        c.style.setProperty("--my",(e.clientY-r.top).toFixed(1)+"px");
+      }
+      var b=e.target.closest&&e.target.closest(".btn.main");
+      if(activeBtn&&activeBtn!==b){activeBtn.style.transform="";activeBtn=null;}
+      if(b){
+        activeBtn=b; var br=b.getBoundingClientRect();
+        b.style.transform="translate("+((e.clientX-(br.left+br.width/2))*.12).toFixed(1)+"px,"+((e.clientY-(br.top+br.height/2))*.16).toFixed(1)+"px)";
+      }
+    },{passive:true});
+  }
+  var ctaCard=document.getElementById("cta-card"), ctaBook=document.getElementById("cta-book");
+  if(ctaCard&&ctaBook){
+    ctaBook.addEventListener("mouseenter",function(){
+      ctaCard.classList.remove("beam-go"); void ctaCard.offsetWidth; ctaCard.classList.add("beam-go"); pulse(0.8);
     });
   }
-  bar.addEventListener("click",function(e){var x=e.target.closest("button");if(x)showSim(x.dataset.k)});
-  showSim("call");
 
-  /* Copy email */
+  /* 8. Copy email + 60-Tick ROI Calculator + Audit Pre-Fill */
   var cpe=document.getElementById("cpe");
   if(cpe)cpe.addEventListener("click",function(){
     var t="loomwellops@gmail.com";
@@ -845,22 +1325,26 @@ dialog#roi::backdrop{background:rgba(14,19,48,.72)}
     else window.prompt("Copy this email:",t);
   });
 
-  /* ROI calculator + audit email pre-fill */
-  var g=function(i){return document.getElementById(i)},out=g("c-out"),dlg=g("roi"),ob=g("roi-open");
-  var G=document.querySelector('a[data-goatcounter-click="audit-gmail"]'),M=document.querySelector('a[data-goatcounter-click="audit-mailto"]'),note=g("audit-note"),dirty=false;
+  var g=function(i){return document.getElementById(i)}, out=g("c-out"), dlg=g("roi"), ob=g("roi-open");
+  var G=document.querySelector('a[data-goatcounter-click="audit-gmail"]'), M=document.querySelector('a[data-goatcounter-click="audit-mailto"]'), note=g("audit-note"), dirty=false;
   var fmt=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+  var tickGroup=g("roi-ticks"), ticks=[];
+  if(tickGroup){
+    var ns="http://www.w3.org/2000/svg";
+    for(var i=0;i<60;i++){
+      var ang=(-90+i*6)*Math.PI/180, r1=i%5===0?50:53, r2=60;
+      var ln=document.createElementNS(ns,"line");
+      ln.setAttribute("x1",(60+r1*Math.cos(ang)).toFixed(1)); ln.setAttribute("y1",(60+r1*Math.sin(ang)).toFixed(1));
+      ln.setAttribute("x2",(60+r2*Math.cos(ang)).toFixed(1)); ln.setAttribute("y2",(60+r2*Math.sin(ang)).toFixed(1));
+      ln.setAttribute("stroke-width",i%5===0?"2.2":"1.3"); ln.setAttribute("stroke-linecap","round");
+      ln.setAttribute("class","roi-tick"); tickGroup.appendChild(ln); ticks.push(ln);
+    }
+  }
   function num(i,mx){var v=parseFloat(g(i).value);if(!isFinite(v)||v<0)v=0;return Math.min(v,mx)}
   function updAudit(){
     var body="Hi Japhette, here is how we handle leads today:";
-    if(dirty)body+="
-- About "+g("c-leads").value+" leads a month
-- "+g("c-book").value+"% book an appointment
-- "+g("c-show").value+"% of those show up
-- "+g("c-close").value+"% become customers
-- Average customer value: $"+g("c-ltv").value;
-    body+="
-
-The biggest follow-up problem we have is: ";
+    if(dirty)body+="\n- About "+g("c-leads").value+" leads a month\n- "+g("c-book").value+"% book an appointment\n- "+g("c-show").value+"% of those show up\n- "+g("c-close").value+"% become customers\n- Average customer value: $"+g("c-ltv").value;
+    body+="\n\nThe biggest follow-up problem we have is: ";
     if(G)G.href="https://mail.google.com/mail/?view=cm&fs=1&to=loomwellops%40gmail.com&su="+encodeURIComponent("Free mini audit")+"&body="+encodeURIComponent(body);
     if(M)M.href="mailto:loomwellops@gmail.com?subject="+encodeURIComponent("Free mini audit")+"&body="+encodeURIComponent(body);
     if(note)note.hidden=!dirty;
@@ -868,18 +1352,21 @@ The biggest follow-up problem we have is: ";
   function runCalc(){
     var L=num("c-leads",1e6),bk=num("c-book",100)/100,sh=num("c-show",100)/100,cl=num("c-close",100)/100,v=num("c-ltv",1e8),k=num("c-lift",30)/100;
     g("c-lift-v").textContent=Math.round(k*100)+"%";
+    var lit=Math.round((k/.3)*60);
+    ticks.forEach(function(ln,idx){ln.setAttribute("class","roi-tick"+(idx<lit?(idx>42?" gold":idx>22?" hot":" on"):""))});
     var c0=L*bk*sh*cl,c1=L*Math.min(bk*(1+k),1)*Math.min(sh*(1+k),1)*cl,x=c1-c0;
-    out.innerHTML="<div>Today: about <b>"+c0.toFixed(1)+"</b> new customers a month, worth about <b>"+fmt.format(c0*v)+"</b>.</div>"+
-      "<div>With better follow-up: about <b>"+c1.toFixed(1)+"</b> a month, worth about <b>"+fmt.format(c1*v)+"</b>.</div>"+
-      "<div>Possible gap: about <b>"+x.toFixed(1)+"</b> more customers and <b>"+fmt.format(x*v)+"</b> a month, or <b>"+fmt.format(x*v*12)+"</b> a year.</div>";
+    g("cv-t").textContent="+"+x.toFixed(1);
+    out.innerHTML="<div>Today: about <b>"+c0.toFixed(1)+"</b> new customers / mo (<b>"+fmt.format(c0*v)+"</b>)</div>"+
+      "<div>With faster follow-up: about <b>"+c1.toFixed(1)+"</b> / mo (<b>"+fmt.format(c1*v)+"</b>)</div>"+
+      "<div class='big'>Possible gap: <b>+"+x.toFixed(1)+"</b> customers &amp; <b>"+fmt.format(x*v)+"/mo</b> (<b>"+fmt.format(x*v*12)+"/yr</b>)</div>";
   }
   ["c-leads","c-book","c-show","c-close","c-ltv","c-lift"].forEach(function(id){
-    g(id).addEventListener("input",function(){if(id!=="c-lift")dirty=true;runCalc();updAudit();});
+    g(id).addEventListener("input",function(){if(id!=="c-lift")dirty=true;runCalc();updAudit();pulse(.2)});
   });
-  runCalc();updAudit();
+  runCalc(); updAudit();
 
   if(dlg&&ob){
-    ob.addEventListener("click",function(){if(dlg.showModal)dlg.showModal()});
+    ob.addEventListener("click",function(){if(dlg.showModal)dlg.showModal();pulse(.5)});
     dlg.addEventListener("click",function(e){
       if(e.target===dlg||e.target.closest(".roi-x")){dlg.close();return;}
       var a=e.target.closest('a[href="#audit"]');
